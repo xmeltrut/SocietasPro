@@ -4,7 +4,7 @@
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
- * @package Admin
+ * @subpackage Admin
  */
 
 class MembersController extends BaseController implements iController {
@@ -22,8 +22,8 @@ class MembersController extends BaseController implements iController {
 		if (varSet("action") == "create") {
 			include_once("models/MembersModel.php");
 			$membersModel = new MembersModel();
-			$member = $membersModel->create($_REQUEST["email"], $_REQUEST["forename"], $_REQUEST["surname"], $msg);
-			$this->engine->assign("msg", $msg);
+			$membersModel->create($_REQUEST["email"], $_REQUEST["forename"], $_REQUEST["surname"]);
+			$this->engine->assign("msg", $membersModel->getMessage());
 		}
 		
 		// build the form
@@ -84,10 +84,19 @@ class MembersController extends BaseController implements iController {
 	 */
 	public function index () {
 	
+		// create a members model
 		include_once("models/MembersModel.php");
 		$membersModel = new MembersModel();
+		
+		// check for actions
+		if (varSet("action") == "delete") {
+			$membersModel->delete($_REQUEST["id"]);
+		}
+		
+		// get a list of members
 		$members = $membersModel->getMembers();
 		
+		// output the page
 		$this->engine->assign("members", $members);
 		$this->engine->display("members/index.tpl");
 	

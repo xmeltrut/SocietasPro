@@ -4,7 +4,7 @@
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
- * @package Admin
+ * @subpackage Admin
  */
 
 class EventsController extends BaseController implements iController {
@@ -22,8 +22,8 @@ class EventsController extends BaseController implements iController {
 		if (varSet("action") == "create") {
 			include_once("models/EventsModel.php");
 			$eventsModel = new EventsModel();
-			$event = $eventsModel->create($_REQUEST["name"], $msg);
-			$this->engine->assign("msg", $msg);
+			$eventsModel->create($_REQUEST["name"], $_REQUEST["date"]);
+			$this->engine->assign("msg", $eventsModel->getMessage());
 		}
 		
 		// build the form

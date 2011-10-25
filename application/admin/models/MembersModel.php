@@ -26,30 +26,44 @@ class MembersModel extends BaseModel {
 	 * @param string $surname Surname
 	 * @param string $msg Return message
 	 */
-	public function create ($email, $forename, $surname, &$msg) {
+	public function create ($email, $forename, $surname) {
 	
 		// basic validation
 		if ($email == "" && $forename == "" && $surname == "") {
-			$msg = "You must enter some details for the member.";
+			$this->setMessage("You must enter some details for the member.");
 			return false;
 		}
 		
-		// execute the query
-		$sql = "INSERT INTO ".DB_PREFIX."members (
-				memberEmail, memberForename, memberSurname
-				) VALUES (
-				'" . escape($email) . "',
-				'" . escape($forename) . "',
-				'" . escape($surname) . "'
-				)";
-		$this->db->query($sql);
+		// create a member object
+		$member = new Member();
 		
-		// return
-		$msg = "The member has been created successfully.";
-		return true;
+		// add data to object
+		if (
+			!$member->setEmailAddress($email) ||
+			!$member->setForename($forename) ||
+			!$member->setSurname($surname)
+		) {
+			$this->setMessage($member->getMessage());
+			return false;
+		}
+		
+		// save object
+		return $this->save($member);
 	
 	}
 	
+	/**
+	 * Delete a member
+	 *
+	 * @param int $id Member ID
+	 * @return boolean
+	 */
+	public function delete ($id) {
+	
+		$sql = "DELETE FROM ".DB_PREFIX."members WHERE memberID = " . intval($id);
+		return $this->db->query($sql);
+	
+	}
 	
 	/**
 	 * List members from the database.
@@ -75,6 +89,7 @@ class MembersModel extends BaseModel {
 	 * Get a specific member
 	 *
 	 * @param int $id Member ID
+	 * @return Member
 	 */
 	public function getMemberById ($id) {
 	

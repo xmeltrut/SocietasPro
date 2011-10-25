@@ -12,7 +12,7 @@ require_once("objects/event.php");
 
 class EventsModel extends BaseModel {
 
-	protected $tableName = "members";
+	protected $tableName = "events";
 	
 	function __construct () {
 		parent::__construct();
@@ -20,22 +20,26 @@ class EventsModel extends BaseModel {
 	
 	/**
 	 * Create a new event
+	 *
+	 * @param string $name Name of event
+	 * @param array Array of date elements
 	 */
-	public function create ($name, &$msg) {
+	public function create ($name, $date) {
 	
-		// validation
-		if ($name == "") {
-			$msg = "You did not enter a name.";
+		// create object
+		$event = new Event();
+		
+		// add data to object
+		if (
+			!$event->setName($name) ||
+			!$event->setDateByArray($date)
+		) {
+			$this->setMessage($event->getMessage());
 			return false;
 		}
 		
-		// database query
-		$sql = "INSERT INTO ".DB_PREFIX."events (
-				eventName
-				) VALUES (
-				'".escape($name)."'
-				)";
-		$this->db->query($sql);
+		// save object
+		return $this->save($event);
 	
 	}
 	

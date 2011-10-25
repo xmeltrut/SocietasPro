@@ -23,7 +23,7 @@ class FormBuilder {
 	 */
 	function __construct ($action = "", $method = "post") {
 	
-		$this->output = '<form action-"'.$action.'" method="'.$method.'">';
+		$this->output = '<form action-"'.$action.'" method="'.$method.'"><ol>';
 	
 	}
 	
@@ -35,37 +35,29 @@ class FormBuilder {
 	 */
 	public function addDateTime ($name, $label) {
 	
+		// build data arrays
+		$days = array();
+		for ($i = 1; $i <= 31; $i++) { $days[$i] = $i; }
+		
+		$months = array();
+		for ($i = 1; $i <= 12; $i++) { $months[$i] = date('F', mktime(0,0,0,$i,1)); }
+		
+		$hours = array();
+		for ($i = 0; $i <= 23; $i++) { $hours[sprintf("%02d", $i)] = sprintf("%02d", $i); }
+		
+		$minutes = array();
+		for ($i = 0; $i <= 60; $i++) { $minutes[sprintf("%02d", $i)] = sprintf("%02d", $i); }
+		
+		$seconds = $minutes;
+		
 		$var = '<li>
 					<label for="'.$name.'">'.$label.'</label>
-					<select>
-						<option>1</option>
-					</select>
-					<select>
-						<option>January</option>
-						<option>February</option>
-						<option>March</option>
-						<option>April</option>
-						<option>May</option>
-						<option>June</option>
-						<option>July</option>
-						<option>August</option>
-						<option>September</option>
-						<option>October</option>
-						<option>November</option>
-						<option>December</option>
-					</select>
-					<select>
-						<option>2011</option>
-					</select>
-					<select>
-						<option>00</option>
-					</select>
-					<select>
-						<option>00</option>
-					</select>
-					<select>
-						<option>00</option>
-					</select>
+					'.$this->returnSelect($name."[day]", $days).'
+					'.$this->returnSelect($name."[month]", $months).'
+					'.$this->returnInput($name."[year]", date("Y"), 4).'
+					'.$this->returnSelect($name."[hour]", $hours).'
+					'.$this->returnSelect($name."[minute]", $minutes).'
+					'.$this->returnSelect($name."[second]", $seconds).'
 				</li>';
 		$this->output .= $var;
 	
@@ -95,7 +87,7 @@ class FormBuilder {
 	
 		$var = '<li>
 					<label for="'.$name.'">'.$label.'</label>
-					<input type="text" name="'.$name.'" id="'.$name.'" value="'.h($default).'" />
+					'.$this->returnInput($name, $default).'
 				</li>';
 		$this->output .= $var;
 	
@@ -137,8 +129,43 @@ class FormBuilder {
 	 */
 	public function build () {
 	
-		$this->output .= '</form>';
+		$this->output .= '</ol></form>';
 		return $this->output;
+	
+	}
+	
+	/**
+	 * Generate a text input box and return it
+	 *
+	 * @param string $name Name to give the element
+	 * @param string $default Default value
+	 * @param int $size Size attribute
+	 * @return string HTML code
+	 */
+	private function returnInput ($name, $default = "", $size = 0) {
+	
+		$sizeCode = ($size > 0) ? 'size="'.$size.'"' : '';
+	
+		$var = '<input type="text" name="'.$name.'" id="'.$name.'" value="'.h($default).'" '.$sizeCode.' />';
+		return $var;
+	
+	}
+	
+	/**
+	 * Generate a select box and return it
+	 *
+	 * @param string $name Name to give the element
+	 * @param array $options Associative array of value => label
+	 * @return string HTML code
+	 */
+	private function returnSelect ($name, $options) {
+	
+		$var  = '<select name="'.$name.'">';
+		foreach ($options as $key => $val) {
+		$var .= '	<option value="'.$key.'">'.h($val).'</option>';
+		}
+		$var .= '</select>';
+		return $var;
 	
 	}
 

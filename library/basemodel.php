@@ -15,6 +15,11 @@ abstract class BaseModel {
 	protected $db;
 	
 	/**
+	 * Variable to hold standard return message
+	 */
+	private $message;
+	
+	/**
 	 * Constructor
 	 */
 	function __construct () {
@@ -22,6 +27,15 @@ abstract class BaseModel {
 		require_once("database.php");
 		$this->db = Database::getInstance();
 	
+	}
+	
+	/**
+	 * Get the return message
+	 *
+	 * @return string Message
+	 */
+	public function getMessage () {
+		return $this->message;
 	}
 	
 	/**
@@ -40,29 +54,57 @@ abstract class BaseModel {
 		// get data from object
 		$data = $obj->getAllData();
 		
-		// remove the identifier
+		// build the identifier
 		$idKey = substr($this->tableName, 0, -1)."ID";
+		
+		// is it set already?
 		if (!isset($data[$idKey])) {
-			return false;
+		
+			// build arrays to implode
+			$keys = array();
+			$vals = array();
+			
+			foreach ($data as $key => $val) {
+				$keys[] = $key;
+				$vals[] = escape($val);
+			}
+			
+			// this is an insert
+			$sql = "INSERT INTO ".DB_PREFIX.$this->tableName." (".implode($keys, ",").") VALUES ('".implode($vals, "','")."')";
+			$rv  = $this->db->query($sql);
+			
+		
 		} else {
-			$identifier = $data[$idKey];
+		
+			// this is an update
 			unset($data[$idKey]);
+			
+			$sql = "UPDATE ".DB_PREFIX.$this->tableName." SET ";
+			$updateSql = "";
+			
+			foreach ($data as $key => $val) {
+				$updateSql .= "$key = '".escape($val)."', ";
+			}
+			
+			$sql .= substr($updateSql, 0, -2) . " ";
+			$sql .= "WHERE $idKey = " . $data[$idKey];
+			
+			$rv = $this->db->query($sql);
+		
 		}
 		
-		// build the SQL
-		$sql = "UPDATE ".DB_PREFIX.$this->tableName." SET ";
-		$updateSql = "";
-		
-		foreach ($data as $key => $val) {
-			$updateSql .= "$key = '".escape($val)."', ";
-		}
-		
-		$sql .= substr($updateSql, 0, -2) . " ";
-		$sql .= "WHERE $idKey = $identifier ";
-		
-		$rv = $this->db->query($sql);
-		return true;
+		// return result
+		return $rv;
 	
+	}
+	
+	/**
+	 * Set a return message
+	 *
+	 * @param string $msg Mssage
+	 */
+	public function setMessage ($msg) {
+		$this->message = $msg;
 	}
 
 }

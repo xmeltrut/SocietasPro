@@ -17,6 +17,11 @@ class BaseObject {
 	protected $data;
 	
 	/**
+	 * Variable to hold a return message.
+	 */
+	private $message;
+	
+	/**
 	 * Constructor.
 	 *
 	 * @param array $data Array of data to populate the object with
@@ -30,6 +35,15 @@ class BaseObject {
 	 */
 	public function getAllData () {
 		return $this->data;
+	}
+	
+	/**
+	 * Standard get return message function
+	 *
+	 * @return string Message
+	 */
+	public function getMessage () {
+		return $this->message;
 	}
 	
 	/**
@@ -55,6 +69,15 @@ class BaseObject {
 	 */
 	protected function setData($key, $value) {
 		$this->data[$key] = $value;
+	}
+	
+	/**
+	 * Set the return message
+	 *
+	 * @param string $msg Message
+	 */
+	protected function setMessage ($msg) {
+		$this->message = $msg;
 	}
 
 }

@@ -4,7 +4,9 @@
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
- * @package Core
+ * @subpackage Core
+ *
+ * @todo Rename the varSet function to reqSet
  */
 
 /**

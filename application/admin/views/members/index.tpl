@@ -9,7 +9,8 @@
 		<th>Email</th>
 		<th>Name</th>
 		<th>Surname</th>
-		<th>Options</th>
+		<th>Edit</th>
+		<th>Delete</th>
 	</tr>
 	{foreach $members as $member}
 	<tr>
@@ -18,6 +19,13 @@
 		<td>{$member->getData("memberForename")}</td>
 		<td>{$member->getData("memberSurname")}</td>
 		<td><a href="{$root}admin/members/edit/{$member->getData("memberID")}">Edit</a></td>
+		<td>
+			<form action="" method="post">
+				<input type="submit" value="Delete" />
+				<input type="hidden" name="action" value="delete" />
+				<input type="hidden" name="id" value="{$member->getData("memberID")}" />
+			</form>
+		</td>
 	</tr>
 	{/foreach}
 </table>

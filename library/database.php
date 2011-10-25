@@ -1,8 +1,6 @@
 <?php
 /**
- * Database object.
- *
- * @todo Re-implement this as a singleton
+ * Database object
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro

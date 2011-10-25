@@ -4,7 +4,7 @@
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
- * @package Core
+ * @subpackage Core
  */
 
 interface iController {
