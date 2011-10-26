@@ -19,25 +19,15 @@ class MembersController extends BaseController implements iController {
 	public function create () {
 	
 		// check for actions
-		if (varSet("action") == "create") {
+		if (reqSet("action") == "create") {
 			include_once("models/MembersModel.php");
 			$membersModel = new MembersModel();
 			$membersModel->create($_REQUEST["email"], $_REQUEST["forename"], $_REQUEST["surname"]);
 			$this->engine->assign("msg", $membersModel->getMessage());
 		}
 		
-		// build the form
-		require("formbuilder.php");
-		
-		$form = new FormBuilder();
-		$form->addInput("email", "Email address");
-		$form->addInput("forename", "Forename");
-		$form->addInput("surname", "Surname");
-		$form->addHidden("action", "create");
-		$form->addSubmit();
-		
 		// output the page
-		$this->engine->assign("form", $form->build());
+		$this->engine->assign("form", $this->standardForm("create"));
 		$this->engine->display("members/create.tpl");
 	
 	}
@@ -55,26 +45,15 @@ class MembersController extends BaseController implements iController {
 		$member = $membersModel->getMemberById($front->getParam(0));
 		
 		// check for actions
-		if (varSet("action") == "edit") {
+		if (reqSet("action") == "edit") {
 			$member->setEmailAddress($_REQUEST["email"]);
 			$member->setForename($_REQUEST["forename"]);
 			$member->setSurname($_REQUEST["surname"]);
 			$membersModel->save($member);
 		}
 		
-		// build the form
-		require("formbuilder.php");
-		
-		$form = new FormBuilder();
-		$form->addInput("email", "Email address", $member->getData("email"));
-		$form->addInput("forename", "Forename", $member->getData("forename"));
-		$form->addInput("surname", "Surname", $member->getData("surname"));
-		$form->addHidden("id", $member->getData("ID"));
-		$form->addHidden("action", "edit");
-		$form->addSubmit();
-		
 		// output page
-		$this->engine->assign("form", $form->build());
+		$this->engine->assign("form", $this->standardForm("edit", $member->getAllData()));
 		$this->engine->display("members/edit.tpl");
 	
 	}
@@ -89,7 +68,7 @@ class MembersController extends BaseController implements iController {
 		$membersModel = new MembersModel();
 		
 		// check for actions
-		if (varSet("action") == "delete") {
+		if (reqSet("action") == "delete") {
 			$membersModel->delete($_REQUEST["id"]);
 		}
 		
@@ -99,6 +78,28 @@ class MembersController extends BaseController implements iController {
 		// output the page
 		$this->engine->assign("members", $members);
 		$this->engine->display("members/index.tpl");
+	
+	}
+	
+	/**
+	 * Create a standard form for editing members
+	 *
+	 * @param string $action Form variable
+	 * @param array $data Default values
+	 */
+	private function standardForm ($action, $data = array()) {
+	
+		require_once("formbuilder.php");
+		
+		$form = new FormBuilder();
+		$form->addInput("email", "Email address", arrSet($data, "memberEmail"));
+		$form->addInput("forename", "Forename", arrSet($data, "memberForename"));
+		$form->addInput("surname", "Surname", arrSet($data, "memberSurname"));
+		$form->addHidden("id", arrSet($data, "memberID"));
+		$form->addHidden("action", $action);
+		$form->addSubmit();
+		
+		return $form->build();
 	
 	}
 

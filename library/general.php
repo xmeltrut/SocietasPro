@@ -5,9 +5,22 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
- *
- * @todo Rename the varSet function to reqSet
  */
+
+/**
+ * Check if an array key exists and if so, return it
+ *
+ * @param array $arr Array
+ * @param string $index Array index
+ * @return mixed
+ */
+function arrSet ($arr, $index) {
+	if (array_key_exists($index, $arr)) {
+		return $arr[$index];
+	} else {
+		return false;
+	}
+}
 
 /**
  * Search include paths for a file
@@ -45,13 +58,28 @@ function redirect ($url) {
 }
 
 /**
- * Use this to avoid PHP notices for unset indexes
+ * Use this to avoid PHP notices for unset indexes with form variables
  *
  * @param string $index Array index
+ * @return mixed
  */
-function varSet ($index) {
+function reqSet ($index) {
 	if (isset($_REQUEST[$index])) {
 		return $_REQUEST[$index];
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Use this to avoid PHP notices for unset variables
+ *
+ * @param string $var Variable name
+ * @return mixed
+ */
+function varSet ($var) {
+	if (isset($var)) {
+		return $var;
 	} else {
 		return false;
 	}

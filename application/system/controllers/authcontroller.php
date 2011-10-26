@@ -22,7 +22,7 @@ class AuthController extends BaseController implements iController {
 	public function login () {
 	
 		// check for actions
-		if (varSet("action") == "login") {
+		if (reqSet("action") == "login") {
 			require("authorisation.php");
 			$auth = Authorisation::getInstance();
 			$rv = $auth->login($_REQUEST["email"], $_REQUEST["password"], $msg);

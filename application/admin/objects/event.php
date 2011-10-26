@@ -16,6 +16,15 @@ class Event extends BaseObject {
 	}
 	
 	/**
+	 * Return a formatted date
+	 *
+	 * @return Formatted date
+	 */
+	public function getFormattedDate () {
+		return date("j F Y H:i:s", strtotime($this->data["eventDate"]));
+	}
+	
+	/**
 	 * Set the date of the event
 	 *
 	 * @param $date Associative array of date elements
@@ -25,7 +34,6 @@ class Event extends BaseObject {
 	
 		$dateString  = $date["day"]." ".date("F",mktime(0,0,0,$date["month"],1))." ".$date["year"]." ";
 		$dateString .= $date["hour"].":".$date["minute"].":".$date["second"];
-		print $dateString;
 		$unixTime = strtotime($dateString);
 		
 		if ($unixTime == false || $unixTime == -1) {
@@ -35,6 +43,19 @@ class Event extends BaseObject {
 			$this->data["eventDate"] = date("Y-m-d H:i:s", $unixTime);
 			return true;
 		}
+	
+	}
+	
+	/**
+	 * Set the description
+	 *
+	 * @param string $description Description of the event
+	 * @return boolean
+	 */
+	public function setDescription ($description) {
+	
+		$this->data["eventDescription"] = $description;
+		return true;
 	
 	}
 	

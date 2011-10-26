@@ -5,6 +5,9 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
+ *
+ * @todo Create a generic delete function
+ * @todo Create a getIdentifier() function
  */
 
 abstract class BaseModel {
@@ -77,6 +80,7 @@ abstract class BaseModel {
 		} else {
 		
 			// this is an update
+			$identifier = $data[$idKey];
 			unset($data[$idKey]);
 			
 			$sql = "UPDATE ".DB_PREFIX.$this->tableName." SET ";
@@ -87,7 +91,7 @@ abstract class BaseModel {
 			}
 			
 			$sql .= substr($updateSql, 0, -2) . " ";
-			$sql .= "WHERE $idKey = " . $data[$idKey];
+			$sql .= "WHERE $idKey = " . $identifier;
 			
 			$rv = $this->db->query($sql);
 		

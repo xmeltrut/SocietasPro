@@ -44,6 +44,38 @@ class EventsModel extends BaseModel {
 	}
 	
 	/**
+	 * Delete an event
+	 *
+	 * @param int $id Event ID
+	 * @return boolean
+	 */
+	public function delete ($id) {
+	
+		$sql = "DELETE FROM ".DB_PREFIX."events WHERE eventID = " . intval($id);
+		return $this->db->query($sql);
+	
+	}
+	
+	/**
+	 * Get a specific event
+	 *
+	 * @param int $id Event ID
+	 * @return Event
+	 */
+	public function getEventById ($id) {
+	
+		$sql = "SELECT * FROM ".DB_PREFIX."events WHERE eventID = " . intval($id);
+		$rec = $this->db->query($sql);
+		
+		if ($row = $rec->fetch()) {
+			return new Event($row);
+		} else {
+			return false;
+		}
+	
+	}
+	
+	/**
 	 * Get a list of events
 	 */
 	public function getEvents () {

@@ -95,8 +95,12 @@ class MembersModel extends BaseModel {
 	
 		$sql = "SELECT * FROM ".DB_PREFIX."members WHERE memberID = " . $id;
 		$rec = $this->db->query($sql);
-		$row = $rec->fetch();
-		return new Member($row);
+		
+		if ($row = $rec->fetch()) {
+			return new Member($row);
+		} else {
+			return false;
+		}
 	
 	}
 

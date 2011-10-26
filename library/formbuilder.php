@@ -32,8 +32,9 @@ class FormBuilder {
 	 *
 	 * @param string $name Name of the element
 	 * @param string $label Label for input
+	 * @param string $default ISO date format string
 	 */
-	public function addDateTime ($name, $label) {
+	public function addDateTime ($name, $label, $default = false) {
 	
 		// build data arrays
 		$days = array();
@@ -50,14 +51,32 @@ class FormBuilder {
 		
 		$seconds = $minutes;
 		
+		// default values
+		if ($default) {
+			$dateString = strtotime($default);
+			$defaultYear = date("Y", $dateString);
+			$defaultMonth = date("n", $dateString);
+			$defaultDay = date("j", $dateString);
+			$defaultHour = date("G", $dateString);
+			$defaultMinute = date("i", $dateString);
+			$defaultSecond = date("s", $dateString);
+		} else {
+			$defaultYear = date("Y");
+			$defaultMonth = date("n");
+			$defaultDay = date("j");
+			$defaultHour = 19;
+			$defaultMinute = $defaultSecond = false;
+		}
+		
+		// build form elements
 		$var = '<li>
 					<label for="'.$name.'">'.$label.'</label>
-					'.$this->returnSelect($name."[day]", $days).'
-					'.$this->returnSelect($name."[month]", $months).'
-					'.$this->returnInput($name."[year]", date("Y"), 4).'
-					'.$this->returnSelect($name."[hour]", $hours).'
-					'.$this->returnSelect($name."[minute]", $minutes).'
-					'.$this->returnSelect($name."[second]", $seconds).'
+					'.$this->returnSelect($name."[day]", $days, $defaultDay).'
+					'.$this->returnSelect($name."[month]", $months, $defaultMonth).'
+					'.$this->returnInput($name."[year]", $defaultYear).'
+					'.$this->returnSelect($name."[hour]", $hours, $defaultHour).'
+					'.$this->returnSelect($name."[minute]", $minutes, $defaultMinute).'
+					'.$this->returnSelect($name."[second]", $seconds, $defaultSecond).'
 				</li>';
 		$this->output .= $var;
 	
@@ -156,13 +175,15 @@ class FormBuilder {
 	 *
 	 * @param string $name Name to give the element
 	 * @param array $options Associative array of value => label
+	 * @param string $default Default value
 	 * @return string HTML code
 	 */
-	private function returnSelect ($name, $options) {
+	private function returnSelect ($name, $options, $default = false) {
 	
 		$var  = '<select name="'.$name.'">';
 		foreach ($options as $key => $val) {
-		$var .= '	<option value="'.$key.'">'.h($val).'</option>';
+			$defaultCode = ($key == $default) ? 'selected="selected"' : '';
+			$var .= '<option value="'.$key.'" '.$defaultCode.'>'.h($val).'</option>';
 		}
 		$var .= '</select>';
 		return $var;
