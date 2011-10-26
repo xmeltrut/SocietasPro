@@ -92,9 +92,9 @@ class MembersController extends BaseController implements iController {
 		require_once("formbuilder.php");
 		
 		$form = new FormBuilder();
-		$form->addInput("email", "Email address", arrSet($data, "memberEmail"));
-		$form->addInput("forename", "Forename", arrSet($data, "memberForename"));
-		$form->addInput("surname", "Surname", arrSet($data, "memberSurname"));
+		$form->addInput("email", LANG_EMAIL, arrSet($data, "memberEmail"));
+		$form->addInput("forename", LANG_FORENAME, arrSet($data, "memberForename"));
+		$form->addInput("surname", LANG_SURNAME, arrSet($data, "memberSurname"));
 		$form->addHidden("id", arrSet($data, "memberID"));
 		$form->addHidden("action", $action);
 		$form->addSubmit();

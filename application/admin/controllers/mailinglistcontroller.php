@@ -1,13 +1,13 @@
 <?php
 /**
- * This is the default page for the admin panel.
+ * Mailing list controller
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
  */
 
-class DefaultController extends BaseController implements iController {
+class MailinglistController extends BaseController implements iController {
 
 	function __construct () {
 		parent::__construct();
@@ -15,7 +15,7 @@ class DefaultController extends BaseController implements iController {
 	
 	public function index () {
 	
-		$this->engine->display("default/index.tpl");
+		$this->engine->display("mailinglist/index.tpl");
 	
 	}
 

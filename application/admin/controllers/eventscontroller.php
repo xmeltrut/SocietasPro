@@ -100,9 +100,9 @@ class EventsController extends BaseController implements iController {
 		
 		$form = new FormBuilder();
 		
-		$form->addInput("name", "Name", arrSet($data, "eventName"));
-		$form->addDateTime("date", "Date", arrSet($data, "eventDate"));
-		$form->addTextArea("description", "Description", arrSet($data, "eventDescription"));
+		$form->addInput("name", LANG_NAME, arrSet($data, "eventName"));
+		$form->addDateTime("date", LANG_DATE, arrSet($data, "eventDate"));
+		$form->addTextArea("description", LANG_DESCRIPTION, arrSet($data, "eventDescription"));
 		$form->addHidden("id", arrSet($data, "memberID"));
 		$form->addHidden("action", $action);
 		$form->addSubmit();

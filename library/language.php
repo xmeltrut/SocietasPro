@@ -60,6 +60,11 @@ class Language {
 		
 		include_once($languageFile);
 		self::$strings = $language_strings;
+		
+		// load strings in as constants
+		foreach ($language_strings as $key => $val) {
+			define("LANG_".strtoupper($key), $val);
+		}
 	
 	}
 
