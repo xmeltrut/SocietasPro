@@ -26,5 +26,6 @@ $language_strings = array (
 	"members" => "Members",
 	"name" => "Name",
 	"password" => "Password",
+	"subscriber" => "Subscriber",
 	"surname" => "Surname"
 );

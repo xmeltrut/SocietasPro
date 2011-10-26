@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
+ *
+ * Convert create to use standardForm() function
  */
 
 class EventsController extends BaseController implements iController {

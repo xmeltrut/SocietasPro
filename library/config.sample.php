@@ -1,6 +1,10 @@
 <?php
 /**
  * Configuration file
+ *
+ * @author Chris Worfolk <chris@societaspro.org>
+ * @package SocietasPro
+ * @subpackage Core
  */
 
 define("DB_HOST", "localhost");

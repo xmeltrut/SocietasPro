@@ -5,6 +5,9 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Database
+ *
+ * @todo Improve error handling of mysql_connect function
+ * @todo Improve error handling of mysql_Select_db function
  */
 
 require_once("recordset.php");
@@ -38,8 +41,8 @@ class Database {
 		if (!isset(self::$instance)) {
 			$className = __CLASS__;
 			self::$instance = new $className;
-			self::$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die("CONNECT: " . mysql_error()); // @todo Tidy this up
-			mysql_select_db(DB_NAME, self::$connection) or die("SELECT: " . mysql_error()); // @todo Tidy this up
+			self::$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die("CONNECT: " . mysql_error());
+			mysql_select_db(DB_NAME, self::$connection) or die("SELECT: " . mysql_error());
 		}
 		return self::$instance;
 	}

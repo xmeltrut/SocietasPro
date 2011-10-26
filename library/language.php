@@ -5,6 +5,9 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
+ *
+ * @todo Reimplement file exists check on load() function
+ * @todo Improve error handling if language file is not found
  */
 
 class Language {
@@ -54,8 +57,8 @@ class Language {
 	private static function load ($languageCode) {
 	
 		$languageFile = "languages/" . $languageCode . ".php";
-		//if (!fileExists($languageCode)) { @todo Reimpment this check
-		//	die("Language file not found."); // @todo Improve error handling
+		//if (!fileExists($languageCode)) {
+		//	die("Language file not found.");
 		//}
 		
 		include_once($languageFile);

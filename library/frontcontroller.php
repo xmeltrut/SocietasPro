@@ -5,6 +5,10 @@
  * @author Chris Worfolk <chris@societaspro.org
  * @package SocietasPro
  * @subpackage Core
+ *
+ * @todo Improve error handling if controller is not found
+ * @todo Improve error handling if page is not found
+ * @todo Add validation to getModule function
  */
 
 class FrontController {
@@ -28,13 +32,6 @@ class FrontController {
 	private function __construct () {
 	}
 	
-	function construct () {
-	
-		set_include_path(get_include_path() . PATH_SEPARATOR . $this->path); // @todo Tidy this up
-		
-		define("MODULE", $this->getModule()); // @todo This isn't an ideal way to do this
-	}
-	
 	/**
 	 * Execute a page request
 	 */
@@ -48,7 +45,6 @@ class FrontController {
 		$controllerPath = $path . "controllers/" . $controllerFile;
 		
 		if (!file_exists($controllerPath)) {
-			// @todo Improve error handling
 			echo($path . "controllers/" . $controllerFile . "<br />");
 			die("Error, controller not found.");
 		}
@@ -59,8 +55,6 @@ class FrontController {
 		$page = $this->getPage();
 		
 		if (!method_exists($controller, $page)) {
-			// @todo Improve error handling
-			print_r($controller);
 			echo("<hr />" . $page . "<br />");
 			die("Error, module not found");
 		}
@@ -97,8 +91,6 @@ class FrontController {
 	
 	/**
 	 * Get the requested module
-	 *
-	 * @todo Add validation
 	 *
 	 * @return string Module
 	 */
