@@ -1,7 +1,7 @@
 {extends file="standard.tpl"}
 
 {block name=body}
-<h2>Create Members</h2>
+<h2>{$lang_create} {$lang_member}</h2>
 
 {$form}
 {/block}

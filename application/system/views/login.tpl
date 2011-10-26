@@ -9,12 +9,12 @@
 
 	<form action="" method="post">
 	
-		Email: <input type="text" name="email" />
+		{$lang_email}: <input type="text" name="email" />
 		
-		Password: <input type="password" name="password" />
+		{$lang_password}: <input type="password" name="password" />
 		
 		<input type="hidden" name="action" value="login" />
-		<input type="submit" value="Login" />
+		<input type="submit" value="{$lang_login}" />
 	
 	</form>
 

@@ -8,7 +8,21 @@
  */
 
 $language_strings = array (
+	"create" => "Create",
+	"date" => "Date",
+	"delete" => "Delete",
+	"edit" => "Edit",
+	"email" => "Email",
+	"event" => "Event",
+	"events" => "Events",
+	"forename" => "Forename",
 	"home" => "Home",
+	"id" => "ID",
+	"login" => "Login",
 	"logout" => "Logout",
-	"members" => "Members"
+	"member" => "Member",
+	"members" => "Members",
+	"name" => "Name",
+	"password" => "Password",
+	"surname" => "Surname"
 );

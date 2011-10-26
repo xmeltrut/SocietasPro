@@ -1,7 +1,7 @@
 {extends file="standard.tpl"}
 
 {block name=body}
-<h2>Create Event</h2>
+<h2>{$lang_create} {$lang_event}</h2>
 
 {$form}
 {/block}
