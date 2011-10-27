@@ -62,7 +62,7 @@ class EventsModel extends BaseModel {
 	 * @param int $id Event ID
 	 * @return Event
 	 */
-	public function getEventById ($id) {
+	public function getById ($id) {
 	
 		$sql = "SELECT * FROM ".DB_PREFIX."events WHERE eventID = " . intval($id);
 		$rec = $this->db->query($sql);

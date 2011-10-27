@@ -6,8 +6,6 @@
  * @package SocietasPro
  * @subpackage Core
  *
- * @todo Improve error handling if controller is not found
- * @todo Improve error handling if page is not found
  * @todo Add validation to getModule function
  */
 
@@ -45,8 +43,8 @@ class FrontController {
 		$controllerPath = $path . "controllers/" . $controllerFile;
 		
 		if (!file_exists($controllerPath)) {
-			echo($path . "controllers/" . $controllerFile . "<br />");
-			die("Error, controller not found.");
+			include_once("exceptions/HttpErrorException.php");
+			throw new HttpErrorException(404);
 		}
 		
 		include($controllerPath);
@@ -55,8 +53,8 @@ class FrontController {
 		$page = $this->getPage();
 		
 		if (!method_exists($controller, $page)) {
-			echo("<hr />" . $page . "<br />");
-			die("Error, module not found");
+			include_once("exceptions/HttpErrorException.php");
+			throw new HttpErrorException(404);
 		}
 		
 		$controller->$page();

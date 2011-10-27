@@ -54,7 +54,7 @@ class EventsController extends BaseController implements iController {
 		
 		require_once("models/EventsModel.php");
 		$eventsModel = new EventsModel();
-		$event = $eventsModel->getEventById($front->getParam(0));
+		$event = $eventsModel->getById($front->getParam(0));
 		
 		// check for actions
 		if (reqSet("action") == "edit") {
