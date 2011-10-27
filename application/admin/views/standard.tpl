@@ -4,6 +4,7 @@
 <title>SocietasPro</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <link rel="stylesheet" type="text/css" href="/style/admin.css" />
+{block name=head}{/block}
 </head>
 <body>
 [ <a href="{$root}admin">{$lang_home}</a> ]

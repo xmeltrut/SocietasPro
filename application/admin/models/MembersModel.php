@@ -53,19 +53,6 @@ class MembersModel extends BaseModel {
 	}
 	
 	/**
-	 * Delete a member
-	 *
-	 * @param int $id Member ID
-	 * @return boolean
-	 */
-	public function delete ($id) {
-	
-		$sql = "DELETE FROM ".DB_PREFIX."members WHERE memberID = " . intval($id);
-		return $this->db->query($sql);
-	
-	}
-	
-	/**
 	 * List members from the database.
 	 *
 	 * @return array Members

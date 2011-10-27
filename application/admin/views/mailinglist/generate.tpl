@@ -1,8 +1,17 @@
 {extends file="standard.tpl"}
 
-{block name=body}
-<h2>{$lang_subscribers}</h2>
+{block name=head}
+<style type="text/css">
+.subscriberList {
+	width: 100%;
+	height: 20em;
+}
+</style>
+{/block}
 
-<textarea>{$subscribers}</textarea>
+{block name=body}
+<h2>{$lang_mailing_list}</h2>
+
+<textarea class="subscriberList">{$subscribers}</textarea>
 
 {/block}

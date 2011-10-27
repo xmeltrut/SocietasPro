@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@buzzsports.com>
  * @package SocietasPro
  * @subpackage Exceptions
- *
- * @todo Need a better default action for unknown status codes
  */
 
 class HttpErrorException extends Exception {

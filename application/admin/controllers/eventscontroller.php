@@ -80,7 +80,7 @@ class EventsController extends BaseController implements iController {
 		
 		// check for actions
 		if (reqSet("action") == "delete") {
-			$eventsModel->delete($_REQUEST["id"]);
+			$eventsModel->deleteById($_REQUEST["id"]);
 		}
 		
 		$events = $eventsModel->getEvents();

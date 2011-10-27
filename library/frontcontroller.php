@@ -7,6 +7,8 @@
  * @subpackage Core
  *
  * @todo Add validation to getModule function
+ * @todo Add validation to all incoming variables
+ * @todo Ensure the page method is public (call we use is_callable?)
  */
 
 class FrontController {
@@ -58,8 +60,6 @@ class FrontController {
 		}
 		
 		$controller->$page();
-		
-		// @todo Use is_callable function
 	
 	}
 	

@@ -54,6 +54,11 @@ class Database {
 	 */
 	public function query ($sql) {
 	
+		// validate we have been passed SQL
+		if ($sql == "") {
+			return false;
+		}
+		
 		$resource = mysql_query($sql, self::$connection) or die("QUERY: " . mysql_error());
 		return new Recordset($resource);
 	

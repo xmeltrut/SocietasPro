@@ -5,9 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
- *
- * @todo Reimplement file exists check on load() function
- * @todo Improve error handling if language file is not found
  */
 
 class Language {
@@ -23,6 +20,11 @@ class Language {
 	private static $strings = array();
 	
 	/**
+	 * If all else fails, we default to English
+	 */
+	const DEFAULT_LANGUAGE = "en";
+	
+	/**
 	 * Prevent instancing
 	 */
 	private function __construct () {
@@ -35,7 +37,7 @@ class Language {
 		if (!isset(self::$instance)) {
 			$className = __CLASS__;
 			self::$instance = new $className;
-			self::load("en");
+			self::load("kr");
 		}
 		return self::$instance;
 	}
@@ -57,9 +59,10 @@ class Language {
 	private static function load ($languageCode) {
 	
 		$languageFile = "languages/" . $languageCode . ".php";
-		//if (!fileExists($languageCode)) {
-		//	die("Language file not found.");
-		//}
+		
+		if (!fileExists($languageFile)) {
+			return self::load(self::DEFAULT_LANGUAGE);
+		}
 		
 		include_once($languageFile);
 		self::$strings = $language_strings;

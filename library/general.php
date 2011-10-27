@@ -30,7 +30,6 @@ function arrSet ($arr, $index) {
  */
 function fileExists ($file) {
   $ps = explode(":", ini_get('include_path'));
-  print_r($ps);
   foreach($ps as $path)
   {
     if(file_exists($path.'/'.$file)) return true;

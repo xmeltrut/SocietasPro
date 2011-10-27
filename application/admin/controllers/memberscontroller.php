@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
+ *
+ * Add privileges to say standard or admin member
  */
 
 class MembersController extends BaseController implements iController {
@@ -69,7 +71,7 @@ class MembersController extends BaseController implements iController {
 		
 		// check for actions
 		if (reqSet("action") == "delete") {
-			$membersModel->delete($_REQUEST["id"]);
+			$membersModel->deleteById($_REQUEST["id"]);
 		}
 		
 		// get a list of members

@@ -5,9 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
- *
- * @todo Create a generic delete function
- * @todo Create a getIdentifier() function
  */
 
 abstract class BaseModel {
@@ -33,6 +30,40 @@ abstract class BaseModel {
 	}
 	
 	/**
+	 * Delete an object in this table by it's ID
+	 *
+	 * @param int ID
+	 * @return boolean
+	 */
+	public function deleteById ($id) {
+	
+		// build the identifier
+		if (!$idKey = $this->getIdentifier()) {
+			return false;
+		}
+		
+		// build the SQL
+		$sql = "DELETE FROM ".DB_PREFIX.$this->tableName." WHERE " . $this->getIdentifier() . " = " . intval($id);
+		return $this->db->query($sql);
+	
+	}
+	
+	/**
+	 * Calculate the identifier column
+	 *
+	 * @return string ID column name
+	 */
+	protected function getIdentifier () {
+	
+		if (!isset($this->tableName)) {
+			return false;
+		}
+		
+		return substr($this->tableName, 0, -1)."ID";
+	
+	}
+	
+	/**
 	 * Get the return message
 	 *
 	 * @return string Message
@@ -49,16 +80,13 @@ abstract class BaseModel {
 	 */
 	public function save ($obj) {
 	
-		// check we have a table name defined
-		if (!isset($this->tableName)) {
+		// build the identifier
+		if (!$idKey = $this->getIdentifier()) {
 			return false;
 		}
 		
 		// get data from object
 		$data = $obj->getAllData();
-		
-		// build the identifier
-		$idKey = substr($this->tableName, 0, -1)."ID";
 		
 		// is it set already?
 		if (!isset($data[$idKey])) {

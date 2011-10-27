@@ -15,6 +15,21 @@ class Subscriber extends BaseObject {
 		parent::__construct($data);
 	}
 	
+	/**
+	 * Return a formatted date
+	 *
+	 * @return Formatted date
+	 */
+	public function getFormattedDate () {
+		return date("j F Y H:i:s", strtotime($this->data["subscriberDate"]));
+	}
+	
+	/**
+	 * Set the email address
+	 *
+	 * @param string $value Email address
+	 * @return boolean Success
+	 */
 	public function setEmail ($value) {
 		$this->data["subscriberEmail"] = $value;
 		return true;

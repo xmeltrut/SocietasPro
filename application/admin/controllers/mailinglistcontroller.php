@@ -20,8 +20,16 @@ class MailinglistController extends BaseController implements iController {
 	 */
 	public function generate () {
 	
-		$subscribers = $subscriberModel->getAsArray();
+		// get a subscribers model
+		include_once("models/SubscriberModel.php");
+		$subscriberModel = new SubscriberModel();
 		
+		// create a list
+		$subscribers = $subscriberModel->getAsArray();
+		$subscriberList = implode("; ", $subscribers);
+		
+		// output page
+		$this->engine->assign("subscribers", $subscriberList);
 		$this->engine->display("mailinglist/generate.tpl");
 	
 	}
@@ -40,9 +48,16 @@ class MailinglistController extends BaseController implements iController {
 			$subscriberModel->create($_REQUEST["email"]);
 			$this->engine->assign("msg", $subscriberModel->getMessage());
 		} elseif (reqSet("action") == "delete") {
+			$subscriberModel->deleteById($_REQUEST["id"]);
+			$this->engine->assign("msg", $subscriberModel->getMessage());
+		} elseif (reqSet("action") == "deleteByEmail") {
 			$subscriberModel->deleteByEmail($_REQUEST["email"]);
 			$this->engine->assign("msg", $subscriberModel->getMessage());
 		}
+		
+		// get list of recent subscribers
+		$recent = $subscriberModel->get();
+		$this->engine->assign("recent", $recent);
 		
 		// output the page
 		$this->engine->display("mailinglist/index.tpl");
