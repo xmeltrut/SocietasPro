@@ -2,13 +2,13 @@
 /**
  * Database object
  *
+ * If an error occurs, we throw a DatabaseException. We need to include this file,
+ * but we don't need to use include_once because it's a one way trip so it won't
+ * have been included before.
+ *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Database
- *
- * @todo Improve error handling of mysql_connect function
- * @todo Improve error handling of mysql_Select_db function
- * @todo Convert encoding to UTF-8
  */
 
 require_once("recordset.php");
@@ -36,16 +36,47 @@ class Database {
 	}
 	
 	/**
+	 * Get the last error message
+	 *
+	 * @return string Error message
+	 */
+	public function getError () {
+		return mysql_error();
+	}
+	
+	/**
+	 * Get the last error code
+	 *
+	 * @return int Error code
+	 */
+	public function getErrorNumber () {
+		return mysql_errno();
+	}
+	
+	/**
 	 * Singleton
 	 */
 	public static function getInstance () {
+	
 		if (!isset(self::$instance)) {
+		
 			$className = __CLASS__;
 			self::$instance = new $className;
-			self::$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die("CONNECT: " . mysql_error());
-			mysql_select_db(DB_NAME, self::$connection) or die("SELECT: " . mysql_error());
+			
+			if (!self::$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS)) {
+				include("exceptions/DatabaseException.php");
+				throw new DatabaseException();
+			}
+			
+			if (!mysql_select_db(DB_NAME, self::$connection)) {
+				include("exceptions/DatabaseException.php");
+				throw new DatabaseException();
+			}
+		
 		}
+		
 		return self::$instance;
+	
 	}
 	
 	/**
@@ -60,7 +91,13 @@ class Database {
 			return false;
 		}
 		
-		$resource = mysql_query($sql, self::$connection) or die("QUERY: " . mysql_error());
+		// run the query
+		if (!$resource = mysql_query($sql, self::$connection)) {
+			include("exceptions/DatabaseException.php");
+			throw new DatabaseException($sql);
+		}
+		
+		// return the recordset
 		return new Recordset($resource);
 	
 	}

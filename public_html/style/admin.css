@@ -19,3 +19,8 @@ form ol li label {
 label {
 	cursor: pointer;
 }
+
+.visualEditor {
+	width: 40em;
+	height: 20em;
+}

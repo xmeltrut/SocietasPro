@@ -162,6 +162,21 @@ class FormBuilder {
 	}
 	
 	/**
+	 * Add a visual editor
+	 *
+	 * @param string $name Nam of element
+	 * @param string $default Default value
+	 */
+	public function addVisualEditor ($name, $default = "") {
+	
+		$var = '<li>
+					<textarea name="'.$name.'" id="'.$name.'" class="visualEditor">'.h($default).'</textarea>
+				</li>';
+		$this->output .= $var;
+	
+	}
+	
+	/**
 	 * Call this once the form is complete.
 	 *
 	 * @return string Form code
