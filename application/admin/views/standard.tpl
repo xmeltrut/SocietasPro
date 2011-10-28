@@ -3,7 +3,8 @@
 <head>
 <title>SocietasPro</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<link rel="stylesheet" type="text/css" href="/style/admin.css" />
+<link rel="stylesheet" type="text/css" href="{$root}style/admin.css" />
+<script type="text/javascript" src="{$root}js/admin.js"></script>
 {block name=head}{/block}
 </head>
 <body>

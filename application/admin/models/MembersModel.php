@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
+ *
+ * @todo Remove term members from functions
  */
 
 require_once("basemodel.php");
@@ -88,6 +90,20 @@ class MembersModel extends BaseModel {
 		} else {
 			return false;
 		}
+	
+	}
+	
+	/**
+	 * Get an array of the possible privileges
+	 *
+	 * @return array Associative array
+	 */
+	public function getPrivileges () {
+	
+		return array (
+			1 => LANG_MEMBER,
+			2 => LANG_ADMINISTRATOR
+		);
 	
 	}
 

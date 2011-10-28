@@ -6,13 +6,22 @@
  * @package SocietasPro
  * @subpackage Admin
  *
- * Add privileges to say standard or admin member
+ * @todo Add privileges to say standard or admin member
+ * @todo Convert controllers to use cased filenames
  */
 
 class MembersController extends BaseController implements iController {
 
+	private $model;
+	
 	function __construct () {
+	
 		parent::__construct();
+		
+		// create a members model
+		include_once("models/MembersModel.php");
+		$this->model = new MembersModel();
+	
 	}
 	
 	/**
@@ -22,9 +31,7 @@ class MembersController extends BaseController implements iController {
 	
 		// check for actions
 		if (reqSet("action") == "create") {
-			include_once("models/MembersModel.php");
-			$membersModel = new MembersModel();
-			$membersModel->create($_REQUEST["email"], $_REQUEST["forename"], $_REQUEST["surname"]);
+			$this->model->create($_REQUEST["email"], $_REQUEST["forename"], $_REQUEST["surname"]);
 			$this->engine->assign("msg", $membersModel->getMessage());
 		}
 		
@@ -42,16 +49,17 @@ class MembersController extends BaseController implements iController {
 		// get the current user's details
 		$front = FrontController::getInstance();
 		
-		require_once("models/MembersModel.php");
-		$membersModel = new MembersModel();
-		$member = $membersModel->getMemberById($front->getParam(0));
+		$member = $this->model->getMemberById($front->getParam(0));
 		
 		// check for actions
 		if (reqSet("action") == "edit") {
 			$member->setEmailAddress($_REQUEST["email"]);
 			$member->setForename($_REQUEST["forename"]);
 			$member->setSurname($_REQUEST["surname"]);
-			$membersModel->save($member);
+			$member->setPrivileges($_REQUEST["privileges"]);
+			print_r($member);
+			$this->model->save($member);
+			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
 		// output page
@@ -65,17 +73,13 @@ class MembersController extends BaseController implements iController {
 	 */
 	public function index () {
 	
-		// create a members model
-		include_once("models/MembersModel.php");
-		$membersModel = new MembersModel();
-		
 		// check for actions
 		if (reqSet("action") == "delete") {
-			$membersModel->deleteById($_REQUEST["id"]);
+			$this->model->deleteById($_REQUEST["id"]);
 		}
 		
 		// get a list of members
-		$members = $membersModel->getMembers();
+		$members = $this->model->getMembers();
 		
 		// output the page
 		$this->engine->assign("members", $members);
@@ -97,6 +101,7 @@ class MembersController extends BaseController implements iController {
 		$form->addInput("email", LANG_EMAIL, arrSet($data, "memberEmail"));
 		$form->addInput("forename", LANG_FORENAME, arrSet($data, "memberForename"));
 		$form->addInput("surname", LANG_SURNAME, arrSet($data, "memberSurname"));
+		$form->addSelect("privileges", LANG_PRIVILEGES, $this->model->getPrivileges(), arrSet($data, "memberPrivileges"));
 		$form->addHidden("id", arrSet($data, "memberID"));
 		$form->addHidden("action", $action);
 		$form->addSubmit();

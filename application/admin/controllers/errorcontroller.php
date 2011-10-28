@@ -7,6 +7,7 @@
  * @subpackage Admin
  *
  * @todo Translate error message pages
+ * @todo Map ErrorDocuments in .htaccess to here
  */
 
 class ErrorController extends BaseController implements iController {

@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage System
+ *
+ * @todo Check if 404 and 500 errors work (they probably won't)
  */
 
 class AuthController extends BaseController implements iController {

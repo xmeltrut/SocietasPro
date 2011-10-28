@@ -7,6 +7,7 @@
  * @subpackage Admin
  *
  * @todo Generate function should look at members' emails too
+ * @todo Convert to use instance variable model
  */
 
 class MailinglistController extends BaseController implements iController {

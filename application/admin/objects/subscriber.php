@@ -21,7 +21,7 @@ class Subscriber extends BaseObject {
 	 * @return Formatted date
 	 */
 	public function getFormattedDate () {
-		return date("j F Y H:i:s", strtotime($this->data["subscriberDate"]));
+		return date("j F Y H:i:s", strtotime($this->getData("subscriberDate")));
 	}
 	
 	/**
@@ -31,7 +31,7 @@ class Subscriber extends BaseObject {
 	 * @return boolean Success
 	 */
 	public function setEmail ($value) {
-		$this->data["subscriberEmail"] = $value;
+		$this->setData("subscriberEmail", $value);
 		return true;
 	}
 

@@ -7,6 +7,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
+ *
+ * @todo Make data private and force use of functions
  */
 
 class BaseObject {
@@ -14,7 +16,7 @@ class BaseObject {
 	/**
 	 * Array to hold generic data for the object.
 	 */
-	protected $data;
+	private $data;
 	
 	/**
 	 * Variable to hold a return message.

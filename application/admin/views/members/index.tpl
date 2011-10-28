@@ -20,7 +20,7 @@
 		<td>{$member->getData("memberSurname")}</td>
 		<td><a href="{$root}admin/members/edit/{$member->getData("memberID")}">{$lang_edit}</a></td>
 		<td>
-			<form action="" method="post">
+			<form action="" method="post" onSubmit="return areYouSure();">
 				<input type="submit" value="{$lang_delete}" />
 				<input type="hidden" name="action" value="delete" />
 				<input type="hidden" name="id" value="{$member->getData("memberID")}" />

@@ -8,6 +8,7 @@
  */
 
 $language_strings = array (
+	"administrator" => "Administrator",
 	"create" => "Create",
 	"date" => "Date",
 	"delete" => "Delete",
@@ -26,6 +27,7 @@ $language_strings = array (
 	"members" => "Members",
 	"name" => "Name",
 	"password" => "Password",
+	"privileges" => "Privileges",
 	"subscriber" => "Subscriber",
 	"surname" => "Surname",
 	"view" => "View"

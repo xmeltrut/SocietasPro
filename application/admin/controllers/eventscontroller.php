@@ -7,6 +7,7 @@
  * @subpackage Admin
  *
  * Convert create to use standardForm() function
+ * @todo Convert to use instance variable model
  */
 
 class EventsController extends BaseController implements iController {

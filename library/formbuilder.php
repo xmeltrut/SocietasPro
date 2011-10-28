@@ -4,7 +4,9 @@
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
- * @subpackage Core
+ * @subpackage Utilities
+ *
+ * @todo Translate submit button
  */
 
 class FormBuilder {
@@ -107,6 +109,24 @@ class FormBuilder {
 		$var = '<li>
 					<label for="'.$name.'">'.$label.'</label>
 					'.$this->returnInput($name, $default).'
+				</li>';
+		$this->output .= $var;
+	
+	}
+	
+	/**
+	 * Add a dropdown menu
+	 *
+	 * @param string $name Name to give the lement
+	 * @param string $label Text for label
+	 * @param array $options Options to populate the select with
+	 * @param string $default Default value
+	 */
+	public function addSelect ($name, $label, $options, $default = false) {
+	
+		$var = '<li>
+					<label for="'.$name.'">'.$label.'</label>
+					'.$this->returnSelect($name, $options, $default).'
 				</li>';
 		$this->output .= $var;
 	

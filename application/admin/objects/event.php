@@ -21,7 +21,7 @@ class Event extends BaseObject {
 	 * @return Formatted date
 	 */
 	public function getFormattedDate () {
-		return date("j F Y H:i:s", strtotime($this->data["eventDate"]));
+		return date("j F Y H:i:s", strtotime($this->getData("eventDate")));
 	}
 	
 	/**
@@ -40,7 +40,7 @@ class Event extends BaseObject {
 			$this->setMessage("Invalid date.");
 			return false;
 		} else {
-			$this->data["eventDate"] = date("Y-m-d H:i:s", $unixTime);
+			$this->setData("eventDate", date("Y-m-d H:i:s", $unixTime));
 			return true;
 		}
 	
@@ -54,7 +54,7 @@ class Event extends BaseObject {
 	 */
 	public function setDescription ($description) {
 	
-		$this->data["eventDescription"] = $description;
+		$this->setData("eventDescription", $description);
 		return true;
 	
 	}
@@ -71,7 +71,7 @@ class Event extends BaseObject {
 			$this->setMessage("You did not enter a name.");
 			return false;
 		} else {
-			$this->data["eventName"] = $name;
+			$this->setData("eventName", $name);
 			return true;
 		}
 	

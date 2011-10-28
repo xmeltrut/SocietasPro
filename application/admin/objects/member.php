@@ -16,13 +16,25 @@ class Member extends BaseObject {
 	}
 	
 	public function setEmailAddress ($value) {
-		$this->data["memberEmail"] = $value;
+		$this->setData("memberEmail", $value);
 		return true;
 	}
 	
 	public function setForename ($value) {
-		$this->data["memberForename"] = $value;
+		$this->setData("memberForename", $value);
 		return true;
+	}
+	
+	public function setPrivileges ($value) {
+		if ($value = intval($value) !== 0) {
+			echo("123");
+			$this->setData("memberPrivileges", $value);
+			return true;
+		} else {
+			echo("abc");
+			$this->setMessage("Invalid privileges.");
+			return false;
+		}
 	}
 	
 	public function setSurname ($value) {
