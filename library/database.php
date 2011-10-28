@@ -8,6 +8,7 @@
  *
  * @todo Improve error handling of mysql_connect function
  * @todo Improve error handling of mysql_Select_db function
+ * @todo Convert encoding to UTF-8
  */
 
 require_once("recordset.php");

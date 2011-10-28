@@ -41,7 +41,7 @@ class FrontController {
 		set_include_path(get_include_path() . PATH_SEPARATOR . $path); // @todo Tidy this up
 		
 		$controllerName = $this->getController();
-		$controllerFile = strtolower($controllerName) . ".php";
+		$controllerFile = $controllerName . ".php";
 		$controllerPath = $path . "controllers/" . $controllerFile;
 		
 		if (!file_exists($controllerPath)) {
@@ -70,7 +70,7 @@ class FrontController {
 	 */
 	private function getController () {
 		if (self::$controller == "") {
-			self::$controller = "default";
+			self::$controller = "Default";
 		}
 		return ucfirst(self::$controller) . "Controller";
 	}
