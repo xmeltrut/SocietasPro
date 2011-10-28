@@ -5,15 +5,20 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * Convert create to use standardForm() function
- * @todo Convert to use instance variable model
  */
 
 class EventsController extends BaseController implements iController {
 
+	private $instance;
+	
 	function __construct () {
+	
 		parent::__construct();
+		
+		// create a model
+		include_once("models/EventsModel.php");
+		$this->model = new EventsModel();
+	
 	}
 	
 	/**
@@ -23,24 +28,12 @@ class EventsController extends BaseController implements iController {
 	
 		// check for actions
 		if (reqSet("action") == "create") {
-			include_once("models/EventsModel.php");
-			$eventsModel = new EventsModel();
-			$eventsModel->create($_REQUEST["name"], $_REQUEST["date"], $_REQUEST["description"]);
-			$this->engine->assign("msg", $eventsModel->getMessage());
+			$this->model->create($_REQUEST["name"], $_REQUEST["date"], $_REQUEST["description"]);
+			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
-		// build the form
-		require("formbuilder.php");
-		
-		$form = new FormBuilder();
-		$form->addInput("name", "Name");
-		$form->addDateTime("date", "Date");
-		$form->addTextArea("description", "Description");
-		$form->addHidden("action", "create");
-		$form->addSubmit();
-		
 		// output the page
-		$this->engine->assign("form", $form->build());
+		$this->engine->assign("form", $this->standardForm("create"));
 		$this->engine->display("events/create.tpl");
 	
 	}
@@ -52,17 +45,14 @@ class EventsController extends BaseController implements iController {
 	
 		// get the current user's details
 		$front = FrontController::getInstance();
-		
-		require_once("models/EventsModel.php");
-		$eventsModel = new EventsModel();
-		$event = $eventsModel->getById($front->getParam(0));
+		$event = $this->model->getById($front->getParam(0));
 		
 		// check for actions
 		if (reqSet("action") == "edit") {
 			$event->setName($_REQUEST["name"]);
 			$event->setDateByArray($_REQUEST["date"]);
 			$event->setDescription($_REQUEST["description"]);
-			$eventsModel->save($event);
+			$this->model->save($event);
 		}
 		
 		// output page
@@ -76,15 +66,12 @@ class EventsController extends BaseController implements iController {
 	 */
 	public function index () {
 	
-		include_once("models/EventsModel.php");
-		$eventsModel = new EventsModel();
-		
 		// check for actions
 		if (reqSet("action") == "delete") {
-			$eventsModel->deleteById($_REQUEST["id"]);
+			$this->model->deleteById($_REQUEST["id"]);
 		}
 		
-		$events = $eventsModel->getEvents();
+		$events = $this->model->get();
 		
 		$this->engine->assign("events", $events);
 		$this->engine->display("events/index.tpl");

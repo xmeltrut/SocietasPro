@@ -61,5 +61,24 @@ class PagesModel extends BaseModel {
 		return $arr;
 	
 	}
+	
+	/**
+	 * Get a specific page
+	 *
+	 * @param int $id Page ID
+	 * @return Page
+	 */
+	public function getById ($id) {
+	
+		$sql = "SELECT * FROM ".DB_PREFIX."pages WHERE pageID = " . intval($id);
+		$rec = $this->db->query($sql);
+		
+		if ($row = $rec->fetch()) {
+			return new Page($row);
+		} else {
+			return false;
+		}
+	
+	}
 
 }

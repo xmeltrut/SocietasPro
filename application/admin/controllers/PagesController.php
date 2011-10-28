@@ -46,8 +46,20 @@ class PagesController extends BaseController implements iController {
 	 */
 	public function edit () {
 	
+		// get the current object
+		$front = FrontController::getInstance();
+		$page = $this->model->getById($front->getParam(0));
+		
+		// check for actions
+		if (reqSet("action") == "edit") {
+			$page->setName($_REQUEST["name"]);
+			$page->setContent($_REQUEST["content"]);
+			$this->model->save($page);
+			$this->engine->assign("msg", $this->model->getMessage());
+		}
+		
 		// output the page
-		$this->engine->assign("form", $this->standardForm("edit"));
+		$this->engine->assign("form", $this->standardForm("edit", $page->getAllData()));
 		$this->engine->display("pages/edit.tpl");
 	
 	}

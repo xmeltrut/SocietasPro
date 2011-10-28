@@ -65,7 +65,7 @@ class EventsModel extends BaseModel {
 	/**
 	 * Get a list of events
 	 */
-	public function getEvents () {
+	public function get () {
 	
 		$events = array();
 		
