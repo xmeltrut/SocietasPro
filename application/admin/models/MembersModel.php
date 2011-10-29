@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo Remove term members from functions
  */
 
 require_once("basemodel.php");
@@ -59,7 +57,7 @@ class MembersModel extends BaseModel {
 	 *
 	 * @return array Members
 	 */
-	public function getMembers () {
+	public function get () {
 	
 		$members = array();
 		
@@ -80,7 +78,7 @@ class MembersModel extends BaseModel {
 	 * @param int $id Member ID
 	 * @return Member
 	 */
-	public function getMemberById ($id) {
+	public function getById ($id) {
 	
 		$sql = "SELECT * FROM ".DB_PREFIX."members WHERE memberID = " . $id;
 		$rec = $this->db->query($sql);

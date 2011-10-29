@@ -1,5 +1,5 @@
 // Javascript
 
 function areYouSure () {
-	return confirm("Are you sure?");
+	return confirm("{$lang_are_you_sure}");
 }

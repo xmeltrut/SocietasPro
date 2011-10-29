@@ -26,12 +26,10 @@ class Member extends BaseObject {
 	}
 	
 	public function setPrivileges ($value) {
-		if ($value = intval($value) !== 0) {
-			echo("123");
+		if (($value = intval($value)) !== 0) {
 			$this->setData("memberPrivileges", $value);
 			return true;
 		} else {
-			echo("abc");
 			$this->setMessage("Invalid privileges.");
 			return false;
 		}

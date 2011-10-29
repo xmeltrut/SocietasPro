@@ -5,9 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo Add privileges to say standard or admin member
- * @todo Convert controllers to use cased filenames
  */
 
 class MembersController extends BaseController implements iController {
@@ -32,7 +29,7 @@ class MembersController extends BaseController implements iController {
 		// check for actions
 		if (reqSet("action") == "create") {
 			$this->model->create($_REQUEST["email"], $_REQUEST["forename"], $_REQUEST["surname"]);
-			$this->engine->assign("msg", $membersModel->getMessage());
+			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
 		// output the page
@@ -48,8 +45,7 @@ class MembersController extends BaseController implements iController {
 	
 		// get the current user's details
 		$front = FrontController::getInstance();
-		
-		$member = $this->model->getMemberById($front->getParam(0));
+		$member = $this->model->getById($front->getParam(0));
 		
 		// check for actions
 		if (reqSet("action") == "edit") {
@@ -57,7 +53,6 @@ class MembersController extends BaseController implements iController {
 			$member->setForename($_REQUEST["forename"]);
 			$member->setSurname($_REQUEST["surname"]);
 			$member->setPrivileges($_REQUEST["privileges"]);
-			print_r($member);
 			$this->model->save($member);
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
@@ -79,7 +74,7 @@ class MembersController extends BaseController implements iController {
 		}
 		
 		// get a list of members
-		$members = $this->model->getMembers();
+		$members = $this->model->get();
 		
 		// output the page
 		$this->engine->assign("members", $members);

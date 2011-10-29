@@ -7,8 +7,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
- *
- * @todo Make data private and force use of functions
  */
 
 class BaseObject {

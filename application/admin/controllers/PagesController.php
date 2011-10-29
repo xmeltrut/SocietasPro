@@ -5,9 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo Add privileges to say standard or admin member
- * @todo Convert controllers to use cased filenames
  */
 
 class PagesController extends BaseController implements iController {

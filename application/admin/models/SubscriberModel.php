@@ -6,7 +6,6 @@
  * @package SocietasPro
  * @subpackage Admin
  *
- * @todo Remove class name from method names on other models
  * @todo Error messages are not multilingual
  */
 

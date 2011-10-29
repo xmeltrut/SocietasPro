@@ -7,6 +7,7 @@
  * @subpackage System
  *
  * @todo Check if 404 and 500 errors work (they probably won't)
+ * @todo Restrict logins to administrators
  */
 
 class AuthController extends BaseController implements iController {

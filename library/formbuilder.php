@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Utilities
- *
- * @todo Translate submit button
  */
 
 class FormBuilder {
@@ -138,7 +136,7 @@ class FormBuilder {
 	public function addSubmit () {
 	
 		$var = '<li>
-					<input type="submit" value="Submit" />
+					<input type="submit" value="'.LANG_SUBMIT.'" />
 				</li>';
 		$this->output .= $var;
 	

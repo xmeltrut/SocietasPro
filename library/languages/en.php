@@ -9,6 +9,7 @@
 
 $language_strings = array (
 	"administrator" => "Administrator",
+	"are_you_sure" => "Are you sure?",
 	"create" => "Create",
 	"date" => "Date",
 	"delete" => "Delete",
@@ -20,6 +21,8 @@ $language_strings = array (
 	"forename" => "Forename",
 	"home" => "Home",
 	"id" => "ID",
+	"location" => "Location",
+	"locations" => "Locations",
 	"login" => "Login",
 	"logout" => "Logout",
 	"mailing_list" => "Mailing List",
@@ -30,6 +33,7 @@ $language_strings = array (
 	"pages" => "Pages",
 	"password" => "Password",
 	"privileges" => "Privileges",
+	"submit" => "Submit",
 	"subscriber" => "Subscriber",
 	"surname" => "Surname",
 	"view" => "View"
