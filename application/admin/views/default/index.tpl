@@ -1,9 +1,16 @@
 {extends file="standard.tpl"}
 
 {block name=body}
-<h2>Welcome</h2>
+<h2>{$lang_control_panel}</h2>
 
-<p>
-	Welcome to SocietasPro administration panel. This paragraph has not been translated because it will eventually be replaced by a control panel.
-</p>
+<table border="1">
+	<tr>
+		<th>{$lang_members}:</th>
+		<td>{$total_members}</td>
+	</tr>
+	<tr>
+		<th>{$lang_mailing_list}:</th>
+		<td>{$total_subscribers}</td>
+	</tr>
+</table>
 {/block}

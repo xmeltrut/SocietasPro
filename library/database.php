@@ -80,6 +80,20 @@ class Database {
 	}
 	
 	/**
+	 * Fetch one single value from the database.
+	 *
+	 * @param string $sql SQL statement
+	 * @return mixed Value
+	 */
+	public function fetchOne ($sql) {
+	
+		$recordset = $this->query($sql);
+		$row = $recordset->fetchArray();
+		return $row[0];
+	
+	}
+	
+	/**
 	 * Query the database.
 	 *
 	 * @param string $sql SQL statement to execute

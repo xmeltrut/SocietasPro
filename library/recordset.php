@@ -25,9 +25,18 @@ class Recordset {
 	
 	/**
 	 * Fetch a result row.
+	 *
+	 * @return array Associative array
 	 */
 	public function fetch () {
 		return mysql_fetch_assoc($this->resource);
+	}
+	
+	/**
+	 * Fetch as an associative array.
+	 */
+	public function fetchArray () {
+		return mysql_fetch_array($this->resource);
 	}
 	
 	/**
@@ -39,6 +48,8 @@ class Recordset {
 	
 	/**
 	 * Count the number of rows.
+	 *
+	 * @return int Number of rows
 	 */
 	public function getRows () {
 		return mysql_num_rows($this->resource);

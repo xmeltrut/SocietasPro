@@ -8,6 +8,17 @@
  */
 
 /**
+ * Take an array and convert it into constants
+ *
+ * @param array $arr Associative arrays
+ */
+function arrayToConstants ($arr) {
+	foreach ($arr as $key => $val) {
+		define($key, $val);
+	}
+}
+
+/**
  * Check if an array key exists and if so, return it
  *
  * @param array $arr Array

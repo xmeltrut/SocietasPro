@@ -26,9 +26,11 @@ class MembersModel extends BaseModel {
 	 * @param string $email Email address
 	 * @param string $forename Forename
 	 * @param string $surname Surname
+	 * @param string $address Address
+	 * @param string $notes Notes
 	 * @param string $msg Return message
 	 */
-	public function create ($email, $forename, $surname) {
+	public function create ($email, $forename, $surname, $address, $notes) {
 	
 		// basic validation
 		if ($email == "" && $forename == "" && $surname == "") {
@@ -43,7 +45,9 @@ class MembersModel extends BaseModel {
 		if (
 			!$member->setEmailAddress($email) ||
 			!$member->setForename($forename) ||
-			!$member->setSurname($surname)
+			!$member->setSurname($surname) ||
+			!$member->setAddress($address) ||
+			!$member->setNotes($notes)
 		) {
 			$this->setMessage($member->getMessage());
 			return false;

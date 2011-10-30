@@ -15,6 +15,15 @@ class DefaultController extends BaseController implements iController {
 	
 	public function index () {
 	
+		// get a database object
+		require_once("database.php");
+		$db = Database::getInstance();
+		
+		// set variables
+		$this->engine->assign("total_members", $db->fetchOne("SELECT COUNT(memberID) FROM ".DB_PREFIX."members"));
+		$this->engine->assign("total_subscribers", $db->fetchOne("SELECT COUNT(subscriberID) FROM ".DB_PREFIX."subscribers"));
+		
+		// output age
 		$this->engine->display("default/index.tpl");
 	
 	}

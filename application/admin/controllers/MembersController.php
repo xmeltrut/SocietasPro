@@ -5,6 +5,9 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
+ *
+ * @todo Finish export as CSV
+ * @todo Implement members_fields table
  */
 
 class MembersController extends BaseController implements iController {
@@ -28,13 +31,22 @@ class MembersController extends BaseController implements iController {
 	
 		// check for actions
 		if (reqSet("action") == "create") {
-			$this->model->create($_REQUEST["email"], $_REQUEST["forename"], $_REQUEST["surname"]);
+			$this->model->create($_REQUEST["email"], $_REQUEST["forename"], $_REQUEST["surname"], $_REQUEST["address"], $_REQUEST["notes"]);
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
 		// output the page
 		$this->engine->assign("form", $this->standardForm("create"));
 		$this->engine->display("members/create.tpl");
+	
+	}
+	
+	/**
+	 * Export as CSV
+	 */
+	public function csv () {
+	
+		$members = $this->model->get();
 	
 	}
 	
@@ -53,6 +65,8 @@ class MembersController extends BaseController implements iController {
 			$member->setForename($_REQUEST["forename"]);
 			$member->setSurname($_REQUEST["surname"]);
 			$member->setPrivileges($_REQUEST["privileges"]);
+			$member->setAddress($_REQUEST["address"]);
+			$member->setNotes($_REQUEST["notes"]);
 			$this->model->save($member);
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
@@ -97,6 +111,8 @@ class MembersController extends BaseController implements iController {
 		$form->addInput("forename", LANG_FORENAME, arrSet($data, "memberForename"));
 		$form->addInput("surname", LANG_SURNAME, arrSet($data, "memberSurname"));
 		$form->addSelect("privileges", LANG_PRIVILEGES, $this->model->getPrivileges(), arrSet($data, "memberPrivileges"));
+		$form->addTextArea("address", LANG_ADDRESS, arrSet($data, "memberAddress"));
+		$form->addTextArea("notes", LANG_NOTES, arrSet($data, "memberNotes"));
 		$form->addHidden("id", arrSet($data, "memberID"));
 		$form->addHidden("action", $action);
 		$form->addSubmit();

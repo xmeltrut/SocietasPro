@@ -15,6 +15,11 @@ class Member extends BaseObject {
 		parent::__construct($data);
 	}
 	
+	public function setAddress ($value) {
+		$this->setData("memberAddress", $value);
+		return true;
+	}
+	
 	public function setEmailAddress ($value) {
 		$this->setData("memberEmail", $value);
 		return true;
@@ -22,6 +27,11 @@ class Member extends BaseObject {
 	
 	public function setForename ($value) {
 		$this->setData("memberForename", $value);
+		return true;
+	}
+	
+	public function setNotes ($value) {
+		$this->setData("memberNotes", $value);
 		return true;
 	}
 	

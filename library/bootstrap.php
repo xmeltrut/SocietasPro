@@ -10,4 +10,5 @@
 require("basecontroller.php");
 require("config.php");
 require("general.php");
+require("constants.php");
 require("icontroller.php");
