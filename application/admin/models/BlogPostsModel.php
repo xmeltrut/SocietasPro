@@ -1,0 +1,86 @@
+<?php
+/**
+ * Blog posts model
+ *
+ * @author Chris Worfolk <chris@societaspro.org>
+ * @package SocietasPro
+ * @subpackage Admin
+ */
+
+require_once("basemodel.php");
+require_once("objects/BlogPost.php");
+
+class BlogPostsModel extends BaseModel {
+
+	protected $tableName = "blog_posts";
+	
+	function __construct () {
+		parent::__construct();
+	}
+	
+	/**
+	 * Create a new post
+	 *
+	 * @param string $name Name
+	 * @param array Array of date elements
+	 * @param string $content Content
+	 * @return boolean Success
+	 */
+	public function create ($name, $date, $content) {
+	
+		// create object
+		$post = new BlogPost();
+		
+		// add data to object
+		if (
+			!$post->setName($name) ||
+			!$post->setDateByArray($date) ||
+			!$post->setContent($content)
+		) {
+			$this->setMessage($post->getMessage());
+			return false;
+		}
+		
+		// save object
+		return $this->save($post);
+	
+	}
+	
+	/**
+	 * Get a list of posts
+	 */
+	public function get () {
+	
+		$arr = array();
+		
+		$sql = "SELECT * FROM ".DB_PREFIX."blog_posts ORDER BY postDate DESC ";
+		$rec = $this->db->query($sql);
+		
+		while ($row = $rec->fetch()) {
+			$arr[] = new BlogPost($row);
+		}
+		
+		return $arr;
+	
+	}
+	
+	/**
+	 * Get a specific post
+	 *
+	 * @param int $id Post ID
+	 * @return BlogPost
+	 */
+	public function getById ($id) {
+	
+		$sql = "SELECT * FROM ".DB_PREFIX."blog_posts WHERE postID = " . intval($id);
+		$rec = $this->db->query($sql);
+		
+		if ($row = $rec->fetch()) {
+			return new BlogPost($row);
+		} else {
+			return false;
+		}
+	
+	}
+
+}

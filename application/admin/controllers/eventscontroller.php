@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
+ *
+ * @todo Finish implmentation of locations
  */
 
 class EventsController extends BaseController implements iController {
@@ -86,11 +88,26 @@ class EventsController extends BaseController implements iController {
 	 */
 	private function standardForm ($action, $data = array()) {
 	
+		// create a form object
 		require_once("formbuilder.php");
-		
 		$form = new FormBuilder();
 		
+		// create a location model
+		include_once("models/LocationsModel.php");
+		$locationsModel = new LocationsModel();
+		
+		// build an array of locations
+		$options = array();
+		$options[0] = LANG_UNKNOWN;
+		$locations = $locationsModel->get();
+		
+		foreach ($locations as $location) {
+			$options[$location->getData("locationID")] = $location->getData("locationName");
+		}
+		
+		// build the form
 		$form->addInput("name", LANG_NAME, arrSet($data, "eventName"));
+		$form->addSelect("location", LANG_LOCATION, $options, arrSet($data, "eventLocation"));
 		$form->addDateTime("date", LANG_DATE, arrSet($data, "eventDate"));
 		$form->addTextArea("description", LANG_DESCRIPTION, arrSet($data, "eventDescription"));
 		$form->addHidden("id", arrSet($data, "memberID"));

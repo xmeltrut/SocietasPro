@@ -8,7 +8,6 @@
  *
  * @todo Add validation to getModule function
  * @todo Add validation to all incoming variables
- * @todo Ensure the page method is public (call we use is_callable?)
  */
 
 class FrontController {
@@ -54,7 +53,7 @@ class FrontController {
 		
 		$page = $this->getPage();
 		
-		if (!method_exists($controller, $page)) {
+		if (!is_callable(array($controller, $page))) {
 			include_once("exceptions/HttpErrorException.php");
 			throw new HttpErrorException(404);
 		}
@@ -146,6 +145,9 @@ class FrontController {
 		self::$module = (isset($vars[1])) ? $vars[1] : "";
 		self::$controller = (isset($vars[2])) ? $vars[2] : "";
 		self::$page = (isset($vars[3])) ? $vars[3] : "";
+		
+		// clean variables
+		self::$module = preg_replace("/([^a-z0-9]+)/i", "", self::$module); // we can do this better
 		
 		// rest are parameters
 		for ($i = 0; $i < count($vars); $i++) {

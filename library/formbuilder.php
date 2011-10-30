@@ -33,8 +33,9 @@ class FormBuilder {
 	 * @param string $name Name of the element
 	 * @param string $label Label for input
 	 * @param string $default ISO date format string
+	 * @param boolean $includeSeconds Set to true to add a seconds box
 	 */
-	public function addDateTime ($name, $label, $default = false) {
+	public function addDateTime ($name, $label, $default = false, $includeSeconds = false) {
 	
 		// build data arrays
 		$days = array();
@@ -65,7 +66,15 @@ class FormBuilder {
 			$defaultMonth = date("n");
 			$defaultDay = date("j");
 			$defaultHour = 19;
-			$defaultMinute = $defaultSecond = false;
+			$defaultMinute = 0;
+			$defaultSecond = 0;
+		}
+		
+		// code for seconds
+		if ($includeSeconds) {
+			$secondsCode = $this->returnSelect($name."[second]", $seconds, $defaultSecond);
+		} else {
+			$secondsCode = $this->returnHidden($name."[second]",$defaultSecond); 
 		}
 		
 		// build form elements
@@ -76,7 +85,7 @@ class FormBuilder {
 					'.$this->returnInput($name."[year]", $defaultYear).'
 					'.$this->returnSelect($name."[hour]", $hours, $defaultHour).'
 					'.$this->returnSelect($name."[minute]", $minutes, $defaultMinute).'
-					'.$this->returnSelect($name."[second]", $seconds, $defaultSecond).'
+					'.$secondsCode.'
 				</li>';
 		$this->output .= $var;
 	
@@ -90,8 +99,7 @@ class FormBuilder {
 	 */
 	public function addHidden ($name, $value) {
 	
-		$var = '<input type="hidden" name="'.$name.'" value="'.$value.'" />';
-		$this->output .= $var;
+		$this->output .= $this->returnHidden($name, $value);
 	
 	}
 	
@@ -183,6 +191,20 @@ class FormBuilder {
 	
 		$this->output .= '</ol></form>';
 		return $this->output;
+	
+	}
+	
+	/**
+	 * Return a hidden input field.
+	 *
+	 * @param string $name Name of the element
+	 * @param string $value Value
+	 * @return string HTML code
+	 */
+	public function returnHidden ($name, $value) {
+	
+		$var = '<input type="hidden" name="'.$name.'" value="'.$value.'" />';
+		return $var;
 	
 	}
 	

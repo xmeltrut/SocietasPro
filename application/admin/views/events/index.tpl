@@ -31,4 +31,8 @@
 <p>
 	<a href="{$root}admin/events/create">{$lang_create} {$lang_event|lower}</a>
 </p>
+
+<p>
+	<a href="{$root}admin/locations">{$lang_manage} {$lang_locations|lower}</a>
+</p>
 {/block}

@@ -26,6 +26,13 @@ class LocationsController extends BaseController implements iController {
 	 */
 	public function create () {
 	
+		// check for actions
+		if (reqSet("action") == "create") {
+			$this->model->create($_REQUEST["name"], $_REQUEST["description"]);
+			$this->engine->assign("msg", $this->model->getMessage());
+		}
+		
+		// output page
 		$this->engine->assign("form", $this->standardForm("create"));
 		$this->engine->display("locations/create.tpl");
 	
@@ -52,6 +59,7 @@ class LocationsController extends BaseController implements iController {
 		$form = new FormBuilder();
 		
 		$form->addInput("name", LANG_NAME, arrSet($data, "locationName"));
+		$form->addTextArea("description", LANG_DESCRIPTION, arrSet($data, "locationDescription"));
 		$form->addHidden("id", arrSet($data, "locationID"));
 		$form->addHidden("action", $action);
 		$form->addSubmit();

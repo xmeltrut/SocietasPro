@@ -84,8 +84,13 @@ class Authorisation {
 			
 			if ($this->encodePassword($password) == $row["memberPassword"]) {
 			
-				// successfully logged in
-				$success = true;
+				// check they are an administrator
+				if ($row["memberPrivileges"] == 2) {
+			
+					// successfully logged in
+					$success = true;
+				
+				}
 			
 			}
 		

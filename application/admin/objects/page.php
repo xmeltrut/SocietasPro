@@ -22,7 +22,7 @@ class Page extends BaseObject {
 	
 	public function setName ($value) {
 		if ($value == "") {
-			$this->setMessage("You did not enter a name.");
+			$this->setMessage(LANG_INVALID." ".strtolower(LANG_NAME));
 			return false;
 		} else {
 			$this->setData("pageName", $value);

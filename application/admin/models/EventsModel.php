@@ -44,6 +44,24 @@ class EventsModel extends BaseModel {
 	}
 	
 	/**
+	 * Get a list of events
+	 */
+	public function get () {
+	
+		$events = array();
+		
+		$sql = "SELECT * FROM ".DB_PREFIX."events ";
+		$rec = $this->db->query($sql);
+		
+		while ($row = $rec->fetch()) {
+			$events[] = new Event($row);
+		}
+		
+		return $events;
+	
+	}
+	
+	/**
 	 * Get a specific event
 	 *
 	 * @param int $id Event ID
@@ -59,24 +77,6 @@ class EventsModel extends BaseModel {
 		} else {
 			return false;
 		}
-	
-	}
-	
-	/**
-	 * Get a list of events
-	 */
-	public function get () {
-	
-		$events = array();
-		
-		$sql = "SELECT * FROM ".DB_PREFIX."events ";
-		$rec = $this->db->query($sql);
-		
-		while ($row = $rec->fetch()) {
-			$events[] = new Event($row);
-		}
-		
-		return $events;
 	
 	}
 

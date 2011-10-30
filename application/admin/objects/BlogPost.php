@@ -1,6 +1,6 @@
 <?php
 /**
- * Event object
+ * Blog post object
  *
  * @author Chris Worfolk <chris@societaspro.org
  * @package SocietasPro
@@ -9,7 +9,7 @@
 
 require_once("baseobject.php");
 
-class Event extends BaseObject {
+class BlogPost extends BaseObject {
 
 	function __construct ($data = array()) {
 		parent::__construct($data);
@@ -21,17 +21,22 @@ class Event extends BaseObject {
 	 * @return Formatted date
 	 */
 	public function getFormattedDate () {
-		return date("j F Y H:i:s", strtotime($this->getData("eventDate")));
+		return date("j F Y H:i:s", strtotime($this->getData("postDate")));
+	}
+	
+	public function setContent ($value) {
+		$this->setData("postContent", $value);
+		return true;
 	}
 	
 	/**
-	 * Set the date of the event
+	 * Set the date of a post
 	 *
 	 * @param $date Associative array of date elements
 	 * @return boolean
 	 */
 	public function setDateByArray ($date) {
-	
+	print_r($date);
 		$dateString  = $date["day"]." ".date("F",mktime(0,0,0,$date["month"],1))." ".$date["year"]." ";
 		$dateString .= $date["hour"].":".$date["minute"].":".$date["second"];
 		$unixTime = strtotime($dateString);
@@ -40,41 +45,20 @@ class Event extends BaseObject {
 			$this->setMessage(LANG_INVALID." ".strtolower(LANG_DATE));
 			return false;
 		} else {
-			$this->setData("eventDate", date("Y-m-d H:i:s", $unixTime));
+			$this->setData("postDate", date("Y-m-d H:i:s", $unixTime));
 			return true;
 		}
 	
 	}
 	
-	/**
-	 * Set the description
-	 *
-	 * @param string $description Description of the event
-	 * @return boolean
-	 */
-	public function setDescription ($description) {
-	
-		$this->setData("eventDescription", $description);
-		return true;
-	
-	}
-	
-	/**
-	 * Set the name of the object
-	 *
-	 * @param string $name Name of event
-	 * @return boolean
-	 */
-	public function setName ($name) {
-	
-		if ($name == "") {
+	public function setName ($value) {
+		if ($value == "") {
 			$this->setMessage(LANG_INVALID." ".strtolower(LANG_NAME));
 			return false;
 		} else {
-			$this->setData("eventName", $name);
+			$this->setData("postName", $value);
 			return true;
 		}
-	
 	}
 
 }

@@ -8,7 +8,7 @@
  */
 
 require_once("basemodel.php");
-require_once("objects/event.php");
+require_once("objects/location.php");
 
 class LocationsModel extends BaseModel {
 
@@ -22,11 +22,25 @@ class LocationsModel extends BaseModel {
 	 * Create a new location
 	 *
 	 * @param string $name Location name
+	 * @param string $description Description
 	 * @return boolean Success
 	 */
-	public function create ($name) {
+	public function create ($name, $description) {
 	
+		// create an object
+		$location = new Location();
 		
+		// add data to object
+		if (
+			!$location->setName($name) ||
+			!$location->setDescription($description)
+		) {
+			$this->setMessage($location->getMessage());
+			return false;
+		}
+		
+		// save object
+		return $this->save($location);
 	
 	}
 	

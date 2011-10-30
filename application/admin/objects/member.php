@@ -30,7 +30,7 @@ class Member extends BaseObject {
 			$this->setData("memberPrivileges", $value);
 			return true;
 		} else {
-			$this->setMessage("Invalid privileges.");
+			$this->setMessage(LANG_INVALID." ".strtolower(LANG_PRIVILEGES));
 			return false;
 		}
 	}
