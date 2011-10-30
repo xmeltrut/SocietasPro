@@ -21,6 +21,7 @@ $language_strings = array (
 	"email" => "Email",
 	"event" => "Event",
 	"events" => "Events",
+	"export_as_csv" => "Export as CSV",
 	"forename" => "Forename",
 	"home" => "Home",
 	"id" => "ID",

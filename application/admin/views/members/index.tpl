@@ -33,4 +33,8 @@
 <p>
 	<a href="{$root}admin/members/create">{$lang_create} {$lang_member|lower}</a>
 </p>
+
+<p>
+	<a href="{$root}admin/members/csv">{$lang_export_as_csv}</a>
+</p>
 {/block}
