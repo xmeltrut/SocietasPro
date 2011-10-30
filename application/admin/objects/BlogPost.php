@@ -36,7 +36,7 @@ class BlogPost extends BaseObject {
 	 * @return boolean
 	 */
 	public function setDateByArray ($date) {
-	print_r($date);
+	
 		$dateString  = $date["day"]." ".date("F",mktime(0,0,0,$date["month"],1))." ".$date["year"]." ";
 		$dateString .= $date["hour"].":".$date["minute"].":".$date["second"];
 		$unixTime = strtotime($dateString);

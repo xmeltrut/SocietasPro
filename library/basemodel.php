@@ -59,7 +59,10 @@ abstract class BaseModel {
 			return false;
 		}
 		
-		return substr($this->tableName, 0, -1)."ID";
+		$parts = explode("_", $this->tableName);
+		$finalPart = $parts[(count($parts) - 1)];
+		
+		return substr($finalPart, 0, -1)."ID";
 	
 	}
 	

@@ -49,10 +49,10 @@ class BlogController extends BaseController implements iController {
 		
 		// check for actions
 		if (reqSet("action") == "edit") {
-			$event->setName($_REQUEST["name"]);
-			$event->setDateByArray($_REQUEST["date"]);
-			$event->setDescription($_REQUEST["description"]);
-			$this->model->save($event);
+			$post->setName($_REQUEST["name"]);
+			$post->setDateByArray($_REQUEST["date"]);
+			$post->setContent($_REQUEST["content"]);
+			$this->model->save($post);
 		}
 		
 		// output page

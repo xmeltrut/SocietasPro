@@ -15,7 +15,7 @@ class PagesController extends BaseController implements iController {
 	
 	public function index () {
 	
-		$this->engine->display("default/homepage.tpl");
+		$this->engine->display("homepage.tpl");
 	
 	}
 
