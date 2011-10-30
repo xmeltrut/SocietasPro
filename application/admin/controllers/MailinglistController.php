@@ -24,6 +24,34 @@ class MailinglistController extends BaseController implements iController {
 	}
 	
 	/**
+	 * Export as CSV
+	 */
+	public function csv () {
+	
+		// csv object
+		require_once("csvbuilder.php");
+		$csv = new CsvBuilder(LANG_MAILING_LIST);
+		
+		// get an array of members
+		$subscribers = $this->model->getAsArray();
+		
+		// begin output
+		$csv->addRow(array(LANG_EMAIL));
+		
+		// loop through subscribers
+		foreach ($subscribers as $subscriber) {
+			$data = array (
+				$subscriber
+			);
+			$csv->addRow($data);
+		}
+		
+		// output the result
+		$csv->output();
+	
+	}
+	
+	/**
 	 * Generate a list of subscribers
 	 */
 	public function generate () {

@@ -48,7 +48,7 @@ class MembersController extends BaseController implements iController {
 	
 		// csv object
 		require_once("csvbuilder.php");
-		$csv = new CsvBuilder("members.csv");
+		$csv = new CsvBuilder(LANG_MEMBERS);
 		
 		// get an array of members
 		$members = $this->model->get();

@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Utilities
+ *
+ * @todo Year input box is now too wide
  */
 
 class FormBuilder {

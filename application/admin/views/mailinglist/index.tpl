@@ -29,6 +29,10 @@
 <h3>{$lang_view} {$lang_mailing_list}</h3>
 <p>
 	<a href="{$root}admin/mailinglist/generate">{$lang_view} {$lang_mailing_list|lower}</a>
+</p>
+<p>
+	<a href="{$root}admin/mailinglist/csv">{$lang_export_as_csv}</a>
+</p>
 
 <h3>{$lang_create} {$lang_subscriber}</h3>
 <p>

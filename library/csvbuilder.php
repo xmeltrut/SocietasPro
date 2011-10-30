@@ -15,10 +15,13 @@ class CsvBuilder {
 	/**
 	 * Constructor
 	 *
-	 * @param string $filename Filename that will be suggested
+	 * @param string $filename Filename that will be suggested, without the .csv
 	 */
-	function __construct ($filename = "data.csv") {
-		$this->filename = $filename;
+	function __construct ($filename = "data") {
+	
+		$filename = str_replace(" ", "_", $filename);
+		$this->filename = strtolower($filename);
+	
 	}
 	
 	/**
@@ -41,7 +44,7 @@ class CsvBuilder {
 	public function output () {
 	
 		header("Content-type: application/csv");
-		header("Content-Disposition: attachment; filename=".$this->filename);
+		header("Content-Disposition: attachment; filename=".$this->filename.".csv");
 		header("Pragma: no-cache");
 		header("Expires: 0");
 		print $this->output;
