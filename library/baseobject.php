@@ -7,8 +7,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
- *
- * @todo Converts objects to used cassed file names
  */
 
 class BaseObject {
