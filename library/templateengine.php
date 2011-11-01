@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
+ *
+ * @todo Put a wrapper on display in case of Smarty exceptions
  */
 
 require("smarty/Smarty.class.php");
@@ -25,7 +27,9 @@ class TemplateEngine extends Smarty {
 		$front = FrontController::getInstance();
 		$module = $front->getModule();
 		
-		if ($module != "") {
+		if ($module == "public") {
+			$this->setTemplateDir("../personalisation/themes/default/");
+		} elseif ($module != "") {
 			$this->setTemplateDir("../application/".$module."/views/");
 		} else {
 			die("Unable to initialise template engine, no module defined.");

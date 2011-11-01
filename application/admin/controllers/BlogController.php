@@ -28,7 +28,7 @@ class BlogController extends BaseController implements iController {
 	
 		// check actions
 		if (reqSet("action") == "create") {
-			$this->model->create($_REQUEST["name"], $_REQUEST["date"], $_REQUEST["content"]);
+			$this->model->create($_REQUEST["name"], $_REQUEST["slug"], $_REQUEST["date"], $_REQUEST["content"]);
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
@@ -50,6 +50,7 @@ class BlogController extends BaseController implements iController {
 		// check for actions
 		if (reqSet("action") == "edit") {
 			$post->setName($_REQUEST["name"]);
+			$post->setSlug($_REQUEST["slug"]);
 			$post->setDateByArray($_REQUEST["date"]);
 			$post->setContent($_REQUEST["content"]);
 			$this->model->save($post);
@@ -84,6 +85,7 @@ class BlogController extends BaseController implements iController {
 		
 		$form = new FormBuilder();
 		$form->addInput("name", LANG_NAME, arrSet($data, "postName"));
+		$form->addInput("slug", LANG_URL, arrSet($data, "postSlug"));
 		$form->addDateTime("date", LANG_DATE, arrSet($data, "postDate"));
 		$form->addVisualEditor("content", arrSet($data, "postContent"));
 		$form->addHidden("id", arrSet($data, "postID"));

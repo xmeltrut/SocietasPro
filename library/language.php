@@ -43,6 +43,15 @@ class Language {
 	}
 	
 	/**
+	 * Return an array of languages available
+	 *
+	 * @return array Associative array
+	 */
+	public function getAsArray () {
+	
+	}
+	
+	/**
 	 * Get an array of language strings
 	 *
 	 * @return array Language strings

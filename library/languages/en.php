@@ -45,5 +45,6 @@ $language_strings = array (
 	"subscriber" => "Subscriber",
 	"surname" => "Surname",
 	"unknown" => "Unknown",
+	"url" => "URL",
 	"view" => "View"
 );

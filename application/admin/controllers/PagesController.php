@@ -28,7 +28,7 @@ class PagesController extends BaseController implements iController {
 	
 		// check for actions
 		if (reqSet("action") == "create") {
-			$this->model->create($_REQUEST["name"], $_REQUEST["content"]);
+			$this->model->create($_REQUEST["name"], $_REQUEST["slug"], $_REQUEST["content"]);
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
@@ -50,6 +50,7 @@ class PagesController extends BaseController implements iController {
 		// check for actions
 		if (reqSet("action") == "edit") {
 			$page->setName($_REQUEST["name"]);
+			$page->setSlug($_REQUEST["slug"]);
 			$page->setContent($_REQUEST["content"]);
 			$this->model->save($page);
 			$this->engine->assign("msg", $this->model->getMessage());
@@ -93,6 +94,7 @@ class PagesController extends BaseController implements iController {
 		
 		$form = new FormBuilder();
 		$form->addInput("name", LANG_NAME, arrSet($data, "pageName"));
+		$form->addInput("slug", LANG_URL, arrSet($data, "pageSlug"));
 		$form->addVisualEditor("content", arrSet($data, "pageContent"));
 		$form->addHidden("id", arrSet($data, "pageID"));
 		$form->addHidden("action", $action);

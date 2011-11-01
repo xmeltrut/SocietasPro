@@ -19,7 +19,7 @@ if ($front->getModule() == "admin") {
 	require("authorisation.php");
 	$auth = Authorisation::getInstance();
 	if (!$auth->isLoggedIn()) {
-		redirect("system/auth/login");
+		redirect(ROOT."system/auth/login");
 	}
 }
 
