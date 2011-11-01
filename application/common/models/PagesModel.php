@@ -8,7 +8,7 @@
  */
 
 require_once("basemodel.php");
-require_once("objects/page.php");
+require_once("objects/Page.php");
 
 class PagesModel extends BaseModel {
 
@@ -22,10 +22,11 @@ class PagesModel extends BaseModel {
 	 * Create a new page
 	 *
 	 * @param string $name Name
+	 * @param string $slug URL
 	 * @param string $content Content
 	 * @return boolean Success
 	 */
-	public function create ($name, $content) {
+	public function create ($name, $slug, $content) {
 	
 		// create object
 		$page = new Page();
@@ -33,6 +34,7 @@ class PagesModel extends BaseModel {
 		// add data to object
 		if (
 			!$page->setName($name) ||
+			!$page->setSlug($slug) ||
 			!$page->setContent($content)
 		) {
 			$this->setMessage($page->getMessage());

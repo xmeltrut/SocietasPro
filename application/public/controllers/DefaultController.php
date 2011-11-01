@@ -7,14 +7,24 @@
  * @subpackage Public
  */
 
-class PagesController extends BaseController implements iController {
+class DefaultController extends BaseController implements iController {
 
+	private $model;
+	
 	function __construct () {
+	
 		parent::__construct();
+		
+		// create a model
+		include_once("models/PagesModel.php");
+		$this->model = new PagesModel();
+	
 	}
 	
 	public function index () {
 	
+		// get posts
+		
 		$this->engine->display("homepage.tpl");
 	
 	}

@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org
  * @package SocietasPro
  * @subpackage Admin
+ *
+ * @todo Enforce unique slugs
  */
 
 require_once("baseobject.php");
@@ -57,6 +59,16 @@ class BlogPost extends BaseObject {
 			return false;
 		} else {
 			$this->setData("postName", $value);
+			return true;
+		}
+	}
+	
+	public function setSlug ($value) {
+		if ($value == "") {
+			$this->setMessage(LANG_INVALID." ".LANG_URL);
+			return false;
+		} else {
+			$this->setData("postSlug", $value);
 			return true;
 		}
 	}

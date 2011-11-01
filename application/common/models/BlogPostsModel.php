@@ -4,7 +4,7 @@
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
- * @subpackage Admin
+ * @subpackage Common
  */
 
 require_once("basemodel.php");
@@ -22,11 +22,12 @@ class BlogPostsModel extends BaseModel {
 	 * Create a new post
 	 *
 	 * @param string $name Name
+	 * @param string $slug URL
 	 * @param array Array of date elements
 	 * @param string $content Content
 	 * @return boolean Success
 	 */
-	public function create ($name, $date, $content) {
+	public function create ($name, $slug, $date, $content) {
 	
 		// create object
 		$post = new BlogPost();
@@ -34,6 +35,7 @@ class BlogPostsModel extends BaseModel {
 		// add data to object
 		if (
 			!$post->setName($name) ||
+			!$post->setSlug($slug) ||
 			!$post->setDateByArray($date) ||
 			!$post->setContent($content)
 		) {
