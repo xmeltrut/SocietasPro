@@ -4,9 +4,7 @@
  *
  * @author Chris Worfolk <chris@societaspro.org
  * @package SocietasPro
- * @subpackage Admin
- *
- * @todo Require slugs to be unique
+ * @subpackage Common
  */
 
 require_once("baseobject.php");
@@ -32,12 +30,21 @@ class Page extends BaseObject {
 		}
 	}
 	
+	/**
+	 * Set the slug of a page
+	 *
+	 * @param string $value Value to set to
+	 * @retun boolean Success
+	 */
 	public function setSlug ($value) {
+	
+		// check for a value
 		if ($value == "") {
 			$this->setMessage(LANG_INVALID." ".LANG_URL);
 			return false;
 		} else {
-			$this->setData("pageSlug", $value);
+			$pageModel = new PagesModel();
+			$this->setData("pageSlug", $pageModel->validateSlug($value));
 			return true;
 		}
 	}

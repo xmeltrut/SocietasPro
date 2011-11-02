@@ -20,9 +20,16 @@ require("bootstrap.php");
 
 	<h1>SocietasPro Installer</h1>
 	
+	<table border="1">
+		<tr>
+			<th>Check</th>
+			<th>Output</th>
+			<th>Result</th>
+		</tr>
 	<?php
 	$checks = array (
-		"PhpVersion"
+		"PhpVersion",
+		"Curl"
 	);
 	
 	require("systemtest.php");
@@ -32,16 +39,17 @@ require("bootstrap.php");
 	
 		$checkName = "check".$check;
 		$getName = "get".$check;
-		echo($check . ": " . $test->$getName() . " - ");
-		if ($test->$checkName()) {
-			echo("OK");
-		} else {
-			echo("FAIL");
-		}
-		echo("<br />");
-	
+		$testResult = ($test->$checkName()) ? "OK" : "FAIL";
+	?>
+		<tr>
+			<td><?=$check?></td>
+			<td><?=$test->$getName()?></td>
+			<td><?=$testResult?></td>
+		</tr>
+	<?php
 	}
 	?>
+	</table>
 
 </body>
 </html>

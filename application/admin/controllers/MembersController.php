@@ -6,7 +6,6 @@
  * @package SocietasPro
  * @subpackage Admin
  *
- * @todo Finish export as CSV
  * @todo Implement members_fields table
  */
 
@@ -54,7 +53,7 @@ class MembersController extends BaseController implements iController {
 		$members = $this->model->get();
 		
 		// begin output
-		$csv->addRow(array(LANG_ID,LANG_EMAIL,LANG_FORENAME,LANG_SURNAME));
+		$csv->addRow(array(LANG_ID,LANG_EMAIL,LANG_FORENAME,LANG_SURNAME,LANG_PRIVILEGES,LANG_ADDRESS,LANG_NOTES));
 		
 		// loop through members
 		foreach ($members as $member) {
@@ -62,7 +61,10 @@ class MembersController extends BaseController implements iController {
 				$member->getData("memberID"),
 				$member->getData("memberEmail"),
 				$member->getData("memberForename"),
-				$member->getData("memberSurname")
+				$member->getData("memberSurname"),
+				$this->model->getPrivilege($member->getData("memberPrivileges")),
+				$member->getData("memberAddress"),
+				$member->getData("memberNotes")
 			);
 			$csv->addRow($data);
 		}

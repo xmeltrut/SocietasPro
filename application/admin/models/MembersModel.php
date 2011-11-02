@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo Translate error messages
  */
 
 require_once("basemodel.php");
@@ -34,7 +32,7 @@ class MembersModel extends BaseModel {
 	
 		// basic validation
 		if ($email == "" && $forename == "" && $surname == "") {
-			$this->setMessage("You must enter some details for the member.");
+			$this->setMessage(strFirst(LANG_INVALID." ".LANG_NAME.", ".LANG_EMAIL));
 			return false;
 		}
 		
@@ -94,6 +92,45 @@ class MembersModel extends BaseModel {
 		} else {
 			return false;
 		}
+	
+	}
+	
+	/**
+	 * Get a list of email addresses as an array
+	 *
+	 * @return array Members' email addresses
+	 */
+	public function getEmailsAsArray () {
+	
+		// initialise array
+		$arr = array();
+		
+		// query the database
+		$sql = "SELECT memberEmail FROM ".DB_PREFIX."members ";
+		$rec = $this->db->query($sql);
+		
+		// loop through results
+		while ($row = $rec->fetch()) {
+			if (!in_array($row["memberEmail"], $arr)) {
+				$arr[] = $row["memberEmail"];
+			}
+		}
+		
+		// and return
+		return $arr;
+	
+	}
+	
+	/**
+	 * Get a specific privilege
+	 *
+	 * @param int $id Privilege ID
+	 * @return string Privilege name
+	 */
+	public function getPrivilege ($id) {
+	
+		$privileges = $this->getPrivileges();
+		return $privileges[$id];
 	
 	}
 	

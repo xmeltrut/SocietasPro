@@ -2,7 +2,7 @@
 	Blog
 </p>
 
-{foreach $posts}
+{foreach $posts as $post}
 <p>
 	Hmm
 </p>

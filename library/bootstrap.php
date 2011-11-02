@@ -9,7 +9,9 @@
 
 require("basecontroller.php");
 require("config.php");
-require("functions/general.php");
+require("configuration.php");
 require("functions/audit.php");
+require("functions/general.php");
+require("functions/strings.php");
 require("constants.php");
 require("icontroller.php");

@@ -60,6 +60,19 @@ class Event extends BaseObject {
 	}
 	
 	/**
+	 * Set the location
+	 *
+	 * @param int $id ID of location
+	 * @return boolean
+	 */
+	public function setLocation ($id) {
+	
+		$this->setData("eventLocation", $id);
+		return true;
+	
+	}
+	
+	/**
 	 * Set the name of the object
 	 *
 	 * @param string $name Name of event

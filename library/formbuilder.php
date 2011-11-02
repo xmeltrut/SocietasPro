@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Utilities
- *
- * @todo Year input box is now too wide
  */
 
 class FormBuilder {
@@ -84,7 +82,7 @@ class FormBuilder {
 					<label for="'.$name.'">'.$label.'</label>
 					'.$this->returnSelect($name."[day]", $days, $defaultDay).'
 					'.$this->returnSelect($name."[month]", $months, $defaultMonth).'
-					'.$this->returnInput($name."[year]", $defaultYear).'
+					'.$this->returnInput($name."[year]", $defaultYear, 4).'
 					'.$this->returnSelect($name."[hour]", $hours, $defaultHour).'
 					'.$this->returnSelect($name."[minute]", $minutes, $defaultMinute).'
 					'.$secondsCode.'
@@ -116,7 +114,7 @@ class FormBuilder {
 	
 		$var = '<li>
 					<label for="'.$name.'">'.$label.'</label>
-					'.$this->returnInput($name, $default).'
+					'.$this->returnInput($name, $default, 0, "stdRow").'
 				</li>';
 		$this->output .= $var;
 	
@@ -163,7 +161,7 @@ class FormBuilder {
 	
 		$var = '<li>
 					<label for="'.$name.'">'.$label.'</label>
-					<textarea name="'.$name.'" id="'.$name.'">'.h($default).'</textarea>
+					<textarea name="'.$name.'" id="'.$name.'" class="stdRow">'.h($default).'</textarea>
 				</li>';
 		$this->output .= $var;
 	
@@ -216,13 +214,14 @@ class FormBuilder {
 	 * @param string $name Name to give the element
 	 * @param string $default Default value
 	 * @param int $size Size attribute
+	 * @param string $class Class name
 	 * @return string HTML code
 	 */
-	private function returnInput ($name, $default = "", $size = 0) {
+	private function returnInput ($name, $default = "", $size = 0, $class = "") {
 	
 		$sizeCode = ($size > 0) ? 'size="'.$size.'"' : '';
 	
-		$var = '<input type="text" name="'.$name.'" id="'.$name.'" value="'.h($default).'" '.$sizeCode.' />';
+		$var = '<input type="text" name="'.$name.'" id="'.$name.'" value="'.h($default).'" class="'.$class.'" '.$sizeCode.' />';
 		return $var;
 	
 	}

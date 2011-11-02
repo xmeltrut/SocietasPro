@@ -16,3 +16,5 @@ define("DB_PREFIX", "tbl_");
 define("PASSWORD_SALT", "");
 
 define("ROOT", "/index.php");
+
+define("MODE", "LIVE");

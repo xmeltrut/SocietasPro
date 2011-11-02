@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo Finish implmentation of locations
  */
 
 class EventsController extends BaseController implements iController {
@@ -30,7 +28,7 @@ class EventsController extends BaseController implements iController {
 	
 		// check for actions
 		if (reqSet("action") == "create") {
-			$this->model->create($_REQUEST["name"], $_REQUEST["date"], $_REQUEST["description"]);
+			$this->model->create($_REQUEST["name"], $_REQUEST["location"], $_REQUEST["date"], $_REQUEST["description"]);
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
@@ -52,6 +50,7 @@ class EventsController extends BaseController implements iController {
 		// check for actions
 		if (reqSet("action") == "edit") {
 			$event->setName($_REQUEST["name"]);
+			$event->setLocation($_REQUEST["location"]);
 			$event->setDateByArray($_REQUEST["date"]);
 			$event->setDescription($_REQUEST["description"]);
 			$this->model->save($event);

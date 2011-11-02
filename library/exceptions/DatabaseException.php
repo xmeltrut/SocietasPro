@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@buzzsports.com>
  * @package SocietasPro
  * @subpackage Exceptions
- *
- * @todo Obviously we shouldn't be showing site users the SQL errors
  */
 
 class DatabaseException extends Exception {
@@ -18,14 +16,23 @@ class DatabaseException extends Exception {
 	 */
 	function __construct ($sql = "") {
 	
-		// get a database instance
-		$db = Database::getInstance();
+		if (MODE == "DEBUG") {
 		
-		$msg = "FATAL DATABASE ERROR<br />
-				SQL: " . $sql . "<br />
-				Message: " . $db->getError() . "<br />
-				Code: " . $db->getErrorNumber();
-		die($msg);
+			// get a database instance
+			$db = Database::getInstance();
+			
+			$msg = "FATAL DATABASE ERROR<br />
+					SQL: " . $sql . "<br />
+					Message: " . $db->getError() . "<br />
+					Code: " . $db->getErrorNumber();
+			die($msg);
+		
+		} else {
+		
+			require("exceptions/HttpErrorException.php");
+			throw new HttpErrorException(500);
+		
+		}
 	
 	}
 

@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo Generate function should look at members' emails too
  */
 
 class MailinglistController extends BaseController implements iController {
@@ -18,8 +16,8 @@ class MailinglistController extends BaseController implements iController {
 		parent::__construct();
 		
 		// create a model
-		include_once("models/SubscriberModel.php");
-		$this->model = new SubScriberModel();
+		include_once("models/SubscribersModel.php");
+		$this->model = new SubScribersModel();
 	
 	}
 	
@@ -56,9 +54,17 @@ class MailinglistController extends BaseController implements iController {
 	 */
 	public function generate () {
 	
+		// create a members model
+		require_once("models/MembersModel.php");
+		$membersModel = new MembersModel();
+		
 		// create a list
 		$subscribers = $this->model->getAsArray();
-		$subscriberList = implode("; ", $subscribers);
+		$members = $membersModel->getEmailsAsArray();
+		$all = array_merge($subscribers, $members);
+		$all = array_unique($all);
+		
+		$subscriberList = implode("; ", $all);
 		
 		// output page
 		$this->engine->assign("subscribers", $subscriberList);

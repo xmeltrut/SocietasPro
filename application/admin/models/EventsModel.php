@@ -22,9 +22,11 @@ class EventsModel extends BaseModel {
 	 * Create a new event
 	 *
 	 * @param string $name Name of event
-	 * @param array Array of date elements
+	 * @param int $location Location ID
+	 * @param array $date Array of date elements
+	 * @param string $description Description
 	 */
-	public function create ($name, $date) {
+	public function create ($name, $location, $date, $description) {
 	
 		// create object
 		$event = new Event();
@@ -32,7 +34,9 @@ class EventsModel extends BaseModel {
 		// add data to object
 		if (
 			!$event->setName($name) ||
-			!$event->setDateByArray($date)
+			!$event->setLocation($location) ||
+			!$event->setDateByArray($date) ||
+			!$event->setDescription($description)
 		) {
 			$this->setMessage($event->getMessage());
 			return false;

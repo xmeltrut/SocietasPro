@@ -1,6 +1,6 @@
 <?php
 /**
- * English language
+ * English
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
@@ -10,8 +10,10 @@
 $language_strings = array (
 	"address" => "Address",
 	"administrator" => "Administrator",
+	"already_exists" => "Already Exists",
 	"are_you_sure" => "Are you sure?",
 	"blog" => "Blog",
+	"configuration" => "Configuration",
 	"control_panel" => "Control Panel",
 	"create" => "Create",
 	"date" => "Date",
@@ -19,6 +21,7 @@ $language_strings = array (
 	"description" => "Description",
 	"edit" => "Edit",
 	"email" => "Email",
+	"email_address" => "Email Address",
 	"event" => "Event",
 	"events" => "Events",
 	"export_as_csv" => "Export as CSV",
@@ -26,6 +29,7 @@ $language_strings = array (
 	"home" => "Home",
 	"id" => "ID",
 	"invalid" => "Invalid",
+	"language" => "Language",
 	"location" => "Location",
 	"locations" => "Locations",
 	"login" => "Login",
@@ -43,6 +47,7 @@ $language_strings = array (
 	"privileges" => "Privileges",
 	"submit" => "Submit",
 	"subscriber" => "Subscriber",
+	"success" => "Success",
 	"surname" => "Surname",
 	"unknown" => "Unknown",
 	"url" => "URL",

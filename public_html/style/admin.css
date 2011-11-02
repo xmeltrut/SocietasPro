@@ -17,7 +17,7 @@ form ol li {
 	list-style-type: none;
 }
 
-form ol li input[type=text] {
+form ol li input[type=text].stdRow {
 	width: 30em;
 }
 
@@ -26,7 +26,7 @@ form ol li label {
 	float: left;
 }
 
-form ol li textarea {
+form ol li textarea.stdRow {
 	width: 30em;
 	height: 5em;
 }

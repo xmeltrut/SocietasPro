@@ -37,18 +37,9 @@ class Language {
 		if (!isset(self::$instance)) {
 			$className = __CLASS__;
 			self::$instance = new $className;
-			self::load("kr");
+			self::load(Configuration::get("language"));
 		}
 		return self::$instance;
-	}
-	
-	/**
-	 * Return an array of languages available
-	 *
-	 * @return array Associative array
-	 */
-	public function getAsArray () {
-	
 	}
 	
 	/**
@@ -58,6 +49,31 @@ class Language {
 	 */
 	public function getStrings () {
 		return self::$strings;
+	}
+	
+	/**
+	 * Return an array of languages available
+	 *
+	 * @return array Associative array
+	 */
+	public function listAsArray () {
+	
+		$languageDir = "../library/languages/";
+		$arr = array();
+		
+		$handle = opendir($languageDir);
+		while (false !== ($file = readdir($handle))) {
+			preg_match("/^([a-z]{2})\.php$/", $file, $matches);
+			if (count($matches) > 0) {
+				$filename = $matches[0];
+				$filedata = file($languageDir.$filename);
+				$language = trim(substr($filedata[2], 3));
+				$arr[$matches[1]] = $language;
+			}
+	    }
+	    
+	    return $arr;
+	
 	}
 	
 	/**

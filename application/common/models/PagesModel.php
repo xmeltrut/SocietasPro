@@ -4,7 +4,7 @@
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
- * @subpackage Admin
+ * @subpackage Common
  */
 
 require_once("basemodel.php");
@@ -79,6 +79,25 @@ class PagesModel extends BaseModel {
 			return new Page($row);
 		} else {
 			return false;
+		}
+	
+	}
+	
+	/**
+	 * Check a slug is unique and if not, generate a new one
+	 *
+	 * @param string $slug Slug
+	 * @return string Unique slug
+	 */
+	public function validateSlug ($slug) {
+	
+		$sql = "SELECT * FROM ".DB_PREFIX."pages WHERE pageSlug = '".escape($slug)."' ";
+		$rec = $this->db->query($sql);
+		
+		if ($rec->getRows() == 0) {
+			return $slug;
+		} else {
+			return $this->validateSlug(strIncrement($slug));
 		}
 	
 	}

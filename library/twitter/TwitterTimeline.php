@@ -6,8 +6,7 @@
  * @package SocietasPro
  * @subpackage Twitter
  *
- * @todo Set a low time out on cURL requesrs
- * @todo Add cURL to system test
+ * @todo This should be called from an AJAX request
  */
 
 class TwitterTimeline {

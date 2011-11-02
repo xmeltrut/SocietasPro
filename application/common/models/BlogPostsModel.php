@@ -84,5 +84,24 @@ class BlogPostsModel extends BaseModel {
 		}
 	
 	}
+	
+	/**
+	 * Check a slug is unique and if not, generate a new one
+	 *
+	 * @param string $slug Slug
+	 * @return string Unique slug
+	 */
+	public function validateSlug ($slug) {
+	
+		$sql = "SELECT * FROM ".DB_PREFIX."blog_posts WHERE postSlug = '".escape($slug)."' ";
+		$rec = $this->db->query($sql);
+		
+		if ($rec->getRows() == 0) {
+			return $slug;
+		} else {
+			return $this->validateSlug(strIncrement($slug));
+		}
+	
+	}
 
 }
