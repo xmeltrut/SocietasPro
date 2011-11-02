@@ -57,6 +57,26 @@ function h ($str) {
 }
 
 /**
+ * Log an error into the error log
+ *
+ * @param int $code Error code
+ * @return boolean Success
+ */
+function logError ($code) {
+
+	$db = Database::getInstance();
+	$sql = "INSERT INTO ".DB_PREFIX."error_logs (
+			logCode, logURL, logDate
+			) VALUES (
+			".$code.",
+			'".escape($_SERVER["REQUEST_URI"])."',
+			NOW()
+			)";
+	return $db->query($sql);
+
+}
+
+/**
  * Clean redirect function.
  *
  * @param string $url URL to redirect to

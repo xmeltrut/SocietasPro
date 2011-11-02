@@ -26,16 +26,23 @@ class BlogController extends BaseController implements iController {
 		// get a list of posts
 		$posts = $this->model->get();
 		
-		print_r($posts);
-		
-		echo("<hr />");
-		
-		$post = $posts[0];
-		echo($post->postName);
-		
+		// output page
 		$this->engine->assign("posts", $posts);
-		
 		$this->engine->display("blog.tpl");
+	
+	}
+	
+	/**
+	 * Display a specific post
+	 */
+	public function post () {
+	
+		// get blog post
+		$front = FrontController::getInstance();
+		$event = $this->model->getById($front->getParam(0));
+		
+		// output page
+		$this->engine->display("blogPost.tpl");
 	
 	}
 

@@ -1,11 +1,14 @@
+{extends file="layout.tpl"}
+
+{block name=body}
 <p>
 	Blog
 </p>
 
 {foreach $posts as $post}
 <p>
-	Hmm
-	{$post->postTitle}
-	{$post->getData("postTitle")}
+	<a href="{$root}blog/{$post->postSlug}">{$post->postName}</a>
 </p>
+{$post->postContent}
 {/foreach}
+{/block}

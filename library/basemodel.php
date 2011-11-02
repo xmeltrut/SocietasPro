@@ -5,6 +5,9 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
+ *
+ * @todo Provide feedback on create() functions
+ * @todo Stack error messages
  */
 
 abstract class BaseModel {

@@ -28,9 +28,11 @@ class HttpErrorException extends Exception {
 		// switch between error codes
 		switch ($code) {
 			case 404:
+				logError(404);
 				$this->notFound();
 				break;
 			default:
+				logError(500);
 				$this->serverError(); // we also default to 500
 		}
 		
