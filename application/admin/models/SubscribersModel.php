@@ -5,14 +5,12 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo Error messages are not multilingual
  */
 
 require_once("basemodel.php");
 require_once("objects/subscriber.php");
 
-class SubscriberModel extends BaseModel {
+class SubscribersModel extends BaseModel {
 
 	protected $tableName = "subscribers";
 	
@@ -30,13 +28,13 @@ class SubscriberModel extends BaseModel {
 	
 		// validate string
 		if ($email == "") {
-			$this->setmessage("No email address entered.");
+			$this->setmessage(strFirst(LANG_INVALID." ".LANG_EMAIL_ADDRESS));
 			return false;
 		}
 		
 		// check they aren't already subscribed
 		if ($this->getByEmail($email)) {
-			$this->setMessage("This email address is already on our mailing list.");
+			$this->setMessage(strFirst(LANG_EMAIL_ADDRESS." ".LANG_ALREADY_EXISTS));
 			return false;
 		}
 		
@@ -51,7 +49,7 @@ class SubscriberModel extends BaseModel {
 		$this->db->query($sql);
 		
 		// and return
-		$this->setMessage("Subscriber added successfully.");
+		$this->setMessage(LANG_SUCCESS);
 		return true;
 	
 	}
@@ -111,7 +109,7 @@ class SubscriberModel extends BaseModel {
 		$arr = array();
 		
 		// query the database
-		$sql = "SELECT * FROM ".DB_PREFIX."subscribers ";
+		$sql = "SELECT subscriberEmail FROM ".DB_PREFIX."subscribers ";
 		$rec = $this->db->query($sql);
 		
 		// loop through results
@@ -136,7 +134,7 @@ class SubscriberModel extends BaseModel {
 	
 		// validate string
 		if ($email == "") {
-			$this->setMessage("No email address supplied.");
+			$this->setMessage(strFirst(LANG_INVALID." ".LANG_EMAIL_ADDRESS));
 			return false;
 		}
 		
@@ -148,7 +146,7 @@ class SubscriberModel extends BaseModel {
 		if ($row = $rec->fetch()) {
 			return new Subscriber($row);
 		} else {
-			$this->setMessage("That email address is not in our database.");
+			$this->setMessage(strFirst(LANG_EMAIL_ADDRESS." ".LANG_ALREADY_EXISTS));
 			return false;
 		}
 	
