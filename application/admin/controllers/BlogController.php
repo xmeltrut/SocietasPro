@@ -16,7 +16,7 @@ class BlogController extends BaseController implements iController {
 		parent::__construct();
 		
 		// create a model
-		include_once("models/BlogPostsModel.php");
+		require_once("models/BlogPostsModel.php");
 		$this->model = new BlogPostsModel();
 	
 	}
@@ -81,7 +81,7 @@ class BlogController extends BaseController implements iController {
 	 */
 	private function standardForm ($action, $data = array()) {
 	
-		require_once("formbuilder.php");
+		require_once("classes/FormBuilder.php");
 		
 		$form = new FormBuilder();
 		$form->addInput("name", LANG_NAME, arrSet($data, "postName"));

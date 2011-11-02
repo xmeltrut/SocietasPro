@@ -16,7 +16,7 @@ class ConfigController extends BaseController implements iController {
 		parent::__construct();
 		
 		// create a model
-		include_once("models/ConfigModel.php");
+		require_once("models/ConfigModel.php");
 		$this->model = new ConfigModel();
 	
 	}
@@ -40,7 +40,7 @@ class ConfigController extends BaseController implements iController {
 		$list = $language->listAsArray();
 		
 		// build a form
-		require_once("formbuilder.php");
+		require_once("classes/FormBuilder.php");
 		$form = new FormBuilder();
 		$form->addSelect("language", LANG_LANGUAGE, $list, Configuration::get("language"));
 		$form->addHidden("action", "update");

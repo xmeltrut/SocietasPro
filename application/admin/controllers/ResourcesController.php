@@ -17,7 +17,7 @@ class ResourcesController extends BaseController implements iController {
 	 * There is no default to access, so throw a 404
 	 */
 	public function index () {
-		include_once("exceptions/HttpErrorException");
+		require_once("exceptions/HttpErrorException");
 		throw new HttpErrorException(404);
 	}
 	

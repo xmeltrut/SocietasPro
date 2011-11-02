@@ -16,7 +16,7 @@ class LocationsController extends BaseController implements iController {
 		parent::__construct();
 		
 		// create a model
-		include_once("models/LocationsModel.php");
+		require_once("models/LocationsModel.php");
 		$this->model = new LocationsModel();
 	
 	}
@@ -54,7 +54,7 @@ class LocationsController extends BaseController implements iController {
 	 */
 	private function standardForm ($action, $data = array()) {
 	
-		require_once("formbuilder.php");
+		require_once("classes/FormBuilder.php");
 		
 		$form = new FormBuilder();
 		

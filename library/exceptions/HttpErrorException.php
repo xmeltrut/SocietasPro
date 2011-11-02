@@ -22,7 +22,7 @@ class HttpErrorException extends Exception {
 	function __construct($code) {
 	
 		// invoke error controller
-		include_once("controllers/errorcontroller.php");
+		require_once("controllers/errorcontroller.php");
 		$this->errorController = new ErrorController();
 		
 		// switch between error codes

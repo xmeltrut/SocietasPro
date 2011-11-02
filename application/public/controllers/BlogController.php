@@ -16,7 +16,7 @@ class BlogController extends BaseController implements iController {
 		parent::__construct();
 		
 		// create a model
-		include_once("models/BlogPostsModel.php");
+		require_once("models/BlogPostsModel.php");
 		$this->model = new BlogPostsModel();
 	
 	}
@@ -25,6 +25,14 @@ class BlogController extends BaseController implements iController {
 	
 		// get a list of posts
 		$posts = $this->model->get();
+		
+		print_r($posts);
+		
+		echo("<hr />");
+		
+		$post = $posts[0];
+		echo($post->postName);
+		
 		$this->engine->assign("posts", $posts);
 		
 		$this->engine->display("blog.tpl");

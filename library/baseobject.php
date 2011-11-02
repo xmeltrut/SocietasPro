@@ -7,6 +7,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
+ *
+ * @todo Make use of the magic getter
  */
 
 class BaseObject {
@@ -28,6 +30,20 @@ class BaseObject {
 	 */
 	function __construct ($data) {
 		$this->data = $data;
+	}
+	
+	/**
+	 * Magic getter
+	 *
+	 * @param string $key Key
+	 * @return mixed
+	 */
+	public function __get ($key) {
+		if (array_key_exists($key, $this->data)) {
+			return $this->data[$key];
+		} else {
+			return false;
+		}
 	}
 	
 	/**

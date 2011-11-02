@@ -16,7 +16,7 @@ class DefaultController extends BaseController implements iController {
 		parent::__construct();
 		
 		// create a model
-		include_once("models/PagesModel.php");
+		require_once("models/PagesModel.php");
 		$this->model = new PagesModel();
 	
 	}

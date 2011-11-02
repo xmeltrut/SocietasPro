@@ -5,6 +5,9 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
+ *
+ * @todo Finish the import page
+ * @todo You should also be able to import by uploading a file
  */
 
 class MailinglistController extends BaseController implements iController {
@@ -16,7 +19,7 @@ class MailinglistController extends BaseController implements iController {
 		parent::__construct();
 		
 		// create a model
-		include_once("models/SubscribersModel.php");
+		require_once("models/SubscribersModel.php");
 		$this->model = new SubScribersModel();
 	
 	}
@@ -27,7 +30,7 @@ class MailinglistController extends BaseController implements iController {
 	public function csv () {
 	
 		// csv object
-		require_once("csvbuilder.php");
+		require_once("classes/CsvBuilder.php");
 		$csv = new CsvBuilder(LANG_MAILING_LIST);
 		
 		// get an array of members
@@ -69,6 +72,25 @@ class MailinglistController extends BaseController implements iController {
 		// output page
 		$this->engine->assign("subscribers", $subscriberList);
 		$this->engine->display("mailinglist/generate.tpl");
+	
+	}
+	
+	/**
+	 * Mass import members
+	 */
+	public function import () {
+	
+		// build a form
+		require_once("classes/FormBuilder.php");
+		
+		$form = new FormBuilder();
+		$form->addTextArea("emails", LANG_SUBSCRIBERS);
+		$form->addHidden("action", "import");
+		$form->addSubmit();
+		
+		// output page
+		$this->engine->assign("form", $form->build());
+		$this->engine->display("mailinglist/import.tpl");
 	
 	}
 	

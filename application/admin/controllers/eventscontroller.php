@@ -16,7 +16,7 @@ class EventsController extends BaseController implements iController {
 		parent::__construct();
 		
 		// create a model
-		include_once("models/EventsModel.php");
+		require_once("models/EventsModel.php");
 		$this->model = new EventsModel();
 	
 	}
@@ -88,7 +88,7 @@ class EventsController extends BaseController implements iController {
 	private function standardForm ($action, $data = array()) {
 	
 		// create a form object
-		require_once("formbuilder.php");
+		require_once("classes/FormBuilder.php");
 		$form = new FormBuilder();
 		
 		// create a location model

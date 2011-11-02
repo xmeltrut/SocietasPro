@@ -18,7 +18,7 @@ class MembersController extends BaseController implements iController {
 		parent::__construct();
 		
 		// create a members model
-		include_once("models/MembersModel.php");
+		require_once("models/MembersModel.php");
 		$this->model = new MembersModel();
 	
 	}
@@ -46,7 +46,7 @@ class MembersController extends BaseController implements iController {
 	public function csv () {
 	
 		// csv object
-		require_once("csvbuilder.php");
+		require_once("classes/CsvBuilder.php");
 		$csv = new CsvBuilder(LANG_MEMBERS);
 		
 		// get an array of members
@@ -128,7 +128,7 @@ class MembersController extends BaseController implements iController {
 	 */
 	private function standardForm ($action, $data = array()) {
 	
-		require_once("formbuilder.php");
+		require_once("classes/FormBuilder.php");
 		
 		$form = new FormBuilder();
 		$form->addInput("email", LANG_EMAIL, arrSet($data, "memberEmail"));

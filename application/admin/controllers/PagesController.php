@@ -16,7 +16,7 @@ class PagesController extends BaseController implements iController {
 		parent::__construct();
 		
 		// create a model
-		include_once("models/PagesModel.php");
+		require_once("models/PagesModel.php");
 		$this->model = new PagesModel();
 	
 	}
@@ -90,7 +90,7 @@ class PagesController extends BaseController implements iController {
 	 */
 	private function standardForm ($action, $data = array()) {
 	
-		require_once("formbuilder.php");
+		require_once("classes/FormBuilder.php");
 		
 		$form = new FormBuilder();
 		$form->addInput("name", LANG_NAME, arrSet($data, "pageName"));
