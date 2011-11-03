@@ -104,6 +104,7 @@ class PagesController extends BaseController implements iController {
 		$form = new FormBuilder();
 		$form->addInput("name", LANG_NAME, arrSet($data, "pageName"));
 		$form->addInput("slug", LANG_URL, arrSet($data, "pageSlug"));
+		$form->addSelect("parent", LANG_PARENT, $this->model->getAsArray());
 		$form->addVisualEditor("content", arrSet($data, "pageContent"));
 		$form->addHidden("id", arrSet($data, "pageID"));
 		$form->addHidden("action", $action);

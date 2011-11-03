@@ -61,6 +61,8 @@ class PagesModel extends BaseModel {
 	
 	/**
 	 * Get a list of pages
+	 *
+	 * @return array Array of Pages objects
 	 */
 	public function get () {
 	
@@ -71,6 +73,26 @@ class PagesModel extends BaseModel {
 		
 		while ($row = $rec->fetch()) {
 			$arr[] = new Page($row);
+		}
+		
+		return $arr;
+	
+	}
+	
+	/**
+	 * Get a list of pages as an array
+	 *
+	 * @return array Associative array of pages
+	 */
+	public function getAsArray () {
+	
+		$arr = array();
+		
+		$sql = "SELECT * FROM ".DB_PREFIX."pages WHERE pageParent = 0 ";
+		$rec = $this->db->query($sql);
+		
+		while ($row = $rec->fetch()) {
+			$arr[$row["pageID"]] = $row["pageName"];
 		}
 		
 		return $arr;

@@ -22,6 +22,8 @@ class FormBuilder {
 	private $action;
 	private $method;
 	
+	private $hasUpload = false;
+	
 	/**
 	 * Constructor.
 	 *
@@ -34,8 +36,6 @@ class FormBuilder {
 		// save to instance variables
 		$this->action = $action;
 		$this->method = $method;
-		
-		$this->output = '<form action-"'.$action.'" method="'.$method.'"><ol>';
 	
 	}
 	
@@ -111,6 +111,10 @@ class FormBuilder {
 	 */
 	public function addFile ($name, $label, $default = "") {
 	
+		// set this form as having an upload component
+		$this->hasUpload = true;
+		
+		// add element to the form
 		$var = '<li>
 					<label for="'.$name.'">'.$label.'</label>
 					'.$this->returnInput($name, $default, 0, "", "file").'
@@ -217,6 +221,9 @@ class FormBuilder {
 	 */
 	public function build () {
 	
+		$enctype = ($this->hasUpload) ? 'enctype="multipart/form-data"' : '';
+		
+		$this->output  = '<form action="'.$this->action.'" method="'.$this->method.'" '.$enctype.'><ol>'.$this->output;
 		$this->output .= '</ol></form>';
 		return $this->output;
 	

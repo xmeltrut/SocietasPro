@@ -6,7 +6,7 @@
  * @package SocietasPro
  * @subpackage Admin
  *
- * @todo You should also be able to import by uploading a file
+ * @todo We should check to ensure an email is well formed
  */
 
 class MailinglistController extends BaseController implements iController {
@@ -83,7 +83,11 @@ class MailinglistController extends BaseController implements iController {
 		if (reqSet("action") == "import") {
 			require_once("classes/ImportSubscribersWizard.php");
 			$wizard = new ImportSubscribersWizard();
-			$wizard->import($_REQUEST["emails"]);
+			if ($_REQUEST["emails"] != "") {
+				$wizard->import($_REQUEST["emails"]);
+			} elseif ($_FILES["upload"]["size"] > 0) {
+				$wizard->import(file_get_contents($_FILES["upload"]["tmp_name"]));
+			}
 		}
 		
 		// build a form
@@ -109,13 +113,13 @@ class MailinglistController extends BaseController implements iController {
 		// check for actions
 		if (reqSet("action") == "create") {
 			$this->model->create($_REQUEST["email"]);
-			$this->engine->assign("msg", $subscriberModel->getMessage());
+			$this->engine->assign("msg", $this->model->getMessage());
 		} elseif (reqSet("action") == "delete") {
 			$this->model->deleteById($_REQUEST["id"]);
-			$this->engine->assign("msg", $subscriberModel->getMessage());
+			$this->engine->assign("msg", $this->model->getMessage());
 		} elseif (reqSet("action") == "deleteByEmail") {
 			$this->model->deleteByEmail($_REQUEST["email"]);
-			$this->engine->assign("msg", $subscriberModel->getMessage());
+			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
 		// get list of recent subscribers
