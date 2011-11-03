@@ -18,6 +18,7 @@ $language_strings = array (
 	"configuration" => "Configuration",
 	"control_panel" => "Control Panel",
 	"create" => "Create",
+	"csv" => "CSV",
 	"date" => "Date",
 	"delete" => "Delete",
 	"description" => "Description",

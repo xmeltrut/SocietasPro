@@ -5,15 +5,35 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Utilities
+ *
+ * @todo This should probably use http://php.net/manual/en/function.fgetcsv.php
  */
 
 class ImportMembersWizard {
 
+	private $data;
+	
 	/**
-	 * This function matches up the actual columns in the database to the possible 
-	 * names that they may have.
+	 * Constructor
+	 *
+	 * @param array $arr Array, usually from a file() read
 	 */
-	public function matchColumns () {
+	function __construct ($arr) {
+	
+		if (is_array($arr)) {
+			$this->data = $arr;
+		} else {
+			return false;
+		}
+	
+	}
+	
+	/**
+	 * Return an array of the column headers
+	 *
+	 * @return array Column headers
+	 */
+	public function getColumnHeaders () {
 	}
 
 }

@@ -100,6 +100,25 @@ class MembersController extends BaseController implements iController {
 	}
 	
 	/**
+	 * Import members
+	 */
+	public function import () {
+	
+		// build a form
+		require_once("classes/FormBuilder.php");
+		
+		$form = new FormBuilder();
+		$form->addFile("upload", LANG_CSV);
+		$form->addHidden("action", "import");
+		$form->addSubmit();
+		
+		// output page
+		$this->engine->assign("form", $form->build());
+		$this->engine->display("members/import.tpl");
+	
+	}
+	
+	/**
 	 * Index page
 	 */
 	public function index () {

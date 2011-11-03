@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Common
+ *
+ * @todo validateSlug() needs to ignore the current post ID
  */
 
 require_once("basemodel.php");

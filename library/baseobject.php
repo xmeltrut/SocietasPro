@@ -47,6 +47,15 @@ class BaseObject {
 	}
 	
 	/**
+	 * We need a toString method so we can record it in the audit trail
+	 *
+	 * @return string Data in object
+	 */
+	public function __toString () {
+		return json_encode($this->data);
+	}
+	
+	/**
 	 * Get all data (used for save functions)
 	 */
 	public function getAllData () {

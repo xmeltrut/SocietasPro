@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
+ *
+ * @todo We need to implement edit functions on models
  */
 
 require_once("basemodel.php");
@@ -52,6 +54,7 @@ class MembersModel extends BaseModel {
 		}
 		
 		// save object
+		auditTrail(1, "", $member);
 		return $this->save($member);
 	
 	}

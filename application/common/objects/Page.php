@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org
  * @package SocietasPro
  * @subpackage Common
+ *
+ * @todo setParent() functions needs to do some validation
  */
 
 require_once("baseobject.php");
@@ -15,11 +17,23 @@ class Page extends BaseObject {
 		parent::__construct($data);
 	}
 	
+	/**
+	 * Set page content
+	 *
+	 * @param string $value Page content
+	 * @return boolean Success
+	 */
 	public function setContent ($value) {
 		$this->setData("pageContent", $value);
 		return true;
 	}
 	
+	/**
+	 * Set the name of the page
+	 *
+	 * @param string $value Page name
+	 * @return boolean Success
+	 */
 	public function setName ($value) {
 		if ($value == "") {
 			$this->setMessage(LANG_INVALID." ".strtolower(LANG_NAME));
@@ -28,6 +42,18 @@ class Page extends BaseObject {
 			$this->setData("pageName", $value);
 			return true;
 		}
+	}
+	
+	/**
+	 * Set the parent page
+	 *
+	 * @param int $value Parent ID
+	 * @return boolean Success
+	 */
+	public function setParent ($value) {
+	
+		$this->setData("pageParent", intval($value));
+	
 	}
 	
 	/**

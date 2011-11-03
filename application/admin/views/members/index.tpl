@@ -41,6 +41,10 @@
 </p>
 
 <p>
+	<a href="{$root}admin/members/import">{$lang_import} {$lang_members|lower}</a>
+</p>
+
+<p>
 	<a href="{$root}admin/members/csv">{$lang_export_as_csv}</a>
 </p>
 {/block}

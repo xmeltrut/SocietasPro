@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Common
+ *
+ * @todo validateSlug() needs to exclude the current page
  */
 
 require_once("basemodel.php");
@@ -36,10 +38,11 @@ class PagesModel extends BaseModel {
 	 *
 	 * @param string $name Name
 	 * @param string $slug URL
+	 * @param int $parent Parent ID
 	 * @param string $content Content
 	 * @return boolean Success
 	 */
-	public function create ($name, $slug, $content) {
+	public function create ($name, $slug, $parent, $content) {
 	
 		// create object
 		$page = new Page();
@@ -48,6 +51,7 @@ class PagesModel extends BaseModel {
 		if (
 			!$page->setName($name) ||
 			!$page->setSlug($slug) ||
+			!$page->setParent($parent) ||
 			!$page->setContent($content)
 		) {
 			$this->setMessage($page->getMessage());
