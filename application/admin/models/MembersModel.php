@@ -65,7 +65,7 @@ class MembersModel extends BaseModel {
 	
 		$members = array();
 		
-		$sql = "SELECT * FROM ".DB_PREFIX."members2 ";
+		$sql = "SELECT * FROM ".DB_PREFIX."members ";
 		$rec = $this->db->query($sql);
 		
 		while ($row = $rec->fetch()) {

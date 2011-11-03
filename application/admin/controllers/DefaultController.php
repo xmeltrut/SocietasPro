@@ -43,6 +43,8 @@ class DefaultController extends BaseController implements iController {
 		$timeline = new TwitterTimeline("SocietasPro");
 		$tweets = $timeline->getAsJsonString();
 		
+		//print_r(json_decode($tweets, true));
+		
 		// output them
 		header("Content-type: application/json");
 		print $tweets;

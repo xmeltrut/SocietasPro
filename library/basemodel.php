@@ -35,18 +35,27 @@ abstract class BaseModel {
 	/**
 	 * Delete an object in this table by it's ID
 	 *
-	 * @param int ID
+	 * @param mixed $ids Integer single ID or array of IDs
 	 * @return boolean
 	 */
-	public function deleteById ($id) {
+	public function deleteById ($ids) {
 	
 		// build the identifier
 		if (!$idKey = $this->getIdentifier()) {
 			return false;
 		}
 		
+		// create an array of IDs
+		if (!is_array($ids)) {
+			$ids = array ( $ids );
+		}
+		
+		// clean the array
+		array_walk($ids, "intval");
+		
 		// build the SQL
-		$sql = "DELETE FROM ".DB_PREFIX.$this->tableName." WHERE " . $this->getIdentifier() . " = " . intval($id);
+		$sql = "DELETE FROM ".DB_PREFIX.$this->tableName."
+				WHERE " . $this->getIdentifier() . " IN (" . implode(",", $ids) . ")";
 		return $this->db->query($sql);
 	
 	}

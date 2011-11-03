@@ -7,9 +7,12 @@
  * @subpackage Twitter
  *
  * @todo This should be called from an AJAX request
+ * @todo Re-examine need for all the get functions
  */
 
-class TwitterTimeline {
+require_once("twitter/Tweet.php");
+
+class TwitterTimeline extends TwitterBase {
 
 	private $response;
 	private $screenName;
@@ -60,6 +63,31 @@ class TwitterTimeline {
 		
 		// save the response
 		$this->response = $response;
+	
+	}
+	
+	/**
+	 * Get the timeline as a series of Tweet objects
+	 *
+	 * @return array Tweets
+	 */
+	public function get () {
+	
+		// check we have a response
+		if ($this->response == "") {
+			$this->call();
+		}
+		
+		// initialise array
+		$arr = array();
+		
+		// loop through building objecrs
+		foreach ($this->response as $data) {
+			$arr[] = new Tweet($data);
+		}
+		
+		// and return
+		return $arr;
 	
 	}
 	

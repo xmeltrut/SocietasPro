@@ -5,10 +5,14 @@
 function loadTweets () {
 	$.getJSON("{$root}admin/default/tweets", function (data) {
 		$.each (data, function (key, val) {
-			$("#tweets").append(val);
+			$("#tweets").append("<p>"+val.text+"</p>");
 		});
 	});
 }
+
+$(document).ready( function () {
+	loadTweets();
+});
 </script>
 {/block}
 

@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Utilities
+ *
+ * @todo Add form tag to build() function and check for multipart/form
  */
 
 class FormBuilder {
@@ -15,6 +17,12 @@ class FormBuilder {
 	private $output;
 	
 	/**
+	 * Form variables we need to save
+	 */
+	private $action;
+	private $method;
+	
+	/**
 	 * Constructor.
 	 *
 	 * @param string $action Form action
@@ -23,6 +31,10 @@ class FormBuilder {
 	 */
 	function __construct ($action = "", $method = "post") {
 	
+		// save to instance variables
+		$this->action = $action;
+		$this-method = $method;
+		
 		$this->output = '<form action-"'.$action.'" method="'.$method.'"><ol>';
 	
 	}
@@ -86,6 +98,22 @@ class FormBuilder {
 					'.$this->returnSelect($name."[hour]", $hours, $defaultHour).'
 					'.$this->returnSelect($name."[minute]", $minutes, $defaultMinute).'
 					'.$secondsCode.'
+				</li>';
+		$this->output .= $var;
+	
+	}
+	
+	/**
+	 * Add a file upload input.
+	 *
+	 * @param string $name Name of the element
+	 * @param string $label Label
+	 */
+	public function addFile ($name, $label, $default = "") {
+	
+		$var = '<li>
+					<label for="'.$name.'">'.$label.'</label>
+					'.$this->returnInput($name, $default, 0, "", "file").'
 				</li>';
 		$this->output .= $var;
 	
@@ -215,13 +243,14 @@ class FormBuilder {
 	 * @param string $default Default value
 	 * @param int $size Size attribute
 	 * @param string $class Class name
+	 * @param string $type Text, password or file
 	 * @return string HTML code
 	 */
-	private function returnInput ($name, $default = "", $size = 0, $class = "") {
+	private function returnInput ($name, $default = "", $size = 0, $class = "", $type = "text") {
 	
 		$sizeCode = ($size > 0) ? 'size="'.$size.'"' : '';
 	
-		$var = '<input type="text" name="'.$name.'" id="'.$name.'" value="'.h($default).'" class="'.$class.'" '.$sizeCode.' />';
+		$var = '<input type="'.$type.'" name="'.$name.'" id="'.$name.'" value="'.h($default).'" class="'.$class.'" '.$sizeCode.' />';
 		return $var;
 	
 	}

@@ -6,7 +6,6 @@
  * @package SocietasPro
  * @subpackage Admin
  *
- * @todo Finish the import page
  * @todo You should also be able to import by uploading a file
  */
 
@@ -80,11 +79,19 @@ class MailinglistController extends BaseController implements iController {
 	 */
 	public function import () {
 	
+		// check for actions
+		if (reqSet("action") == "import") {
+			require_once("classes/ImportSubscribersWizard.php");
+			$wizard = new ImportSubscribersWizard();
+			$wizard->import($_REQUEST["emails"]);
+		}
+		
 		// build a form
 		require_once("classes/FormBuilder.php");
 		
 		$form = new FormBuilder();
 		$form->addTextArea("emails", LANG_SUBSCRIBERS);
+		$form->addFile("upload", LANG_FILE);
 		$form->addHidden("action", "import");
 		$form->addSubmit();
 		
