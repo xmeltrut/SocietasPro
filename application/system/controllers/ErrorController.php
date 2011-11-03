@@ -4,7 +4,9 @@
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
- * @subpackage Public
+ * @subpackage System
+ *
+ * @todo Create templates
  */
 
 class ErrorController extends BaseController implements iController {
@@ -24,14 +26,14 @@ class ErrorController extends BaseController implements iController {
 	 * 404 Page Not Found
 	 */
 	public function notFound () {
-		$this->engine->display("404.tpl");
+		$this->engine->display("errors/404.tpl");
 	}
 	
 	/**
 	 * 500 Server Error
 	 */
 	public function serverError () {
-		$this->engine->display("500.tpl");
+		$this->engine->display("errors/500.tpl");
 	}
 
 }

@@ -60,17 +60,21 @@ function h ($str) {
  * Log an error into the error log
  *
  * @param int $code Error code
+ * @param string $details Error details
+ * @param string $sql SQL statement
  * @return boolean Success
  */
-function logError ($code) {
+function logError ($code, $details = "", $sql = "") {
 
 	$db = Database::getInstance();
 	$sql = "INSERT INTO ".DB_PREFIX."error_logs (
-			logCode, logURL, logDate
+			logCode, logURL, logDate, logDetails, logSQL
 			) VALUES (
 			".$code.",
 			'".escape($_SERVER["REQUEST_URI"])."',
-			NOW()
+			NOW(),
+			'".escape($details)."',
+			'".escape($sql)."'
 			)";
 	return $db->query($sql);
 

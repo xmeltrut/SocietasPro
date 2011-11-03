@@ -15,18 +15,14 @@ class DefaultController extends BaseController implements iController {
 		parent::__construct();
 	}
 	
+	/**
+	 * Control panel
+	 */
 	public function index () {
 	
 		// get a database object
 		require_once("database.php");
 		$db = Database::getInstance();
-		
-		// get tweets
-		require_once("twitter/TwitterTimeline.php");
-		$timeline = new TwitterTimeline("SocietasPro");
-		$tweets = $timeline->getAsArray();
-		
-		//print_r($tweets); die();
 		
 		// set variables
 		$this->engine->assign("total_members", $db->fetchOne("SELECT COUNT(memberID) FROM ".DB_PREFIX."members"));
@@ -34,6 +30,22 @@ class DefaultController extends BaseController implements iController {
 		
 		// output age
 		$this->engine->display("default/index.tpl");
+	
+	}
+	
+	/**
+	 * Get a JSON string of our recent tweets
+	 */
+	public function tweets () {
+	
+		// get the tweets
+		require_once("twitter/TwitterTimeline.php");
+		$timeline = new TwitterTimeline("SocietasPro");
+		$tweets = $timeline->getAsJsonString();
+		
+		// output them
+		header("Content-type: application/json");
+		print $tweets;
 	
 	}
 

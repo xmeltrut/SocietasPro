@@ -16,11 +16,15 @@ class DatabaseException extends Exception {
 	 */
 	function __construct ($sql = "") {
 	
+		// get a database instance
+		$db = Database::getInstance();
+		
+		// log the error here
+		logError($db->getErrorNumber(), $db->getError(), $sql);
+		
+		// output
 		if (MODE == "DEBUG") {
 		
-			// get a database instance
-			$db = Database::getInstance();
-			
 			$msg = "FATAL DATABASE ERROR<br />
 					SQL: " . $sql . "<br />
 					Message: " . $db->getError() . "<br />
@@ -30,7 +34,7 @@ class DatabaseException extends Exception {
 		} else {
 		
 			require("exceptions/HttpErrorException.php");
-			throw new HttpErrorException(500);
+			throw new HttpErrorException(500, false);
 		
 		}
 	

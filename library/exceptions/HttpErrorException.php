@@ -18,8 +18,9 @@ class HttpErrorException extends Exception {
 	 * Override the parent constructor
 	 *
 	 * @param int $code HTTP status code
+	 * @param boolean $log Set to false not to log here
 	 */
-	function __construct($code) {
+	function __construct($code, $log = true) {
 	
 		// invoke error controller
 		require_once("controllers/errorcontroller.php");
@@ -28,11 +29,11 @@ class HttpErrorException extends Exception {
 		// switch between error codes
 		switch ($code) {
 			case 404:
-				logError(404);
+				if ($log) { logError(404); }
 				$this->notFound();
 				break;
 			default:
-				logError(500);
+				if ($log) { logError(500); }
 				$this->serverError(); // we also default to 500
 		}
 		

@@ -79,5 +79,22 @@ class TwitterTimeline {
 		return json_decode($this->response, true);
 	
 	}
+	
+	/**
+	 * Get the timeline as a json string
+	 *
+	 * @return string JSON
+	 */
+	public function getAsJsonString () {
+	
+		// check we have a response
+		if ($this->response == "") {
+			$this->call();
+		}
+		
+		// output response
+		return $this->response;
+	
+	}
 
 }
