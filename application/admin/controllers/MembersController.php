@@ -6,7 +6,7 @@
  * @package SocietasPro
  * @subpackage Admin
  *
- * @todo Implement members_fields table
+ * @todo Reimplement are you sure check on forms
  */
 
 class MembersController extends BaseController implements iController {
@@ -110,8 +110,6 @@ class MembersController extends BaseController implements iController {
 		if (reqSet("action") == "mass") {
 			if ($info = $this->determineMassAction()) {
 				switch ($info["action"]) {
-					case "clone":
-						break;
 					case "delete":
 						$this->model->deleteById($info["ids"]);
 						break;

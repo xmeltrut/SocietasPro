@@ -56,6 +56,7 @@ abstract class BaseModel {
 		// build the SQL
 		$sql = "DELETE FROM ".DB_PREFIX.$this->tableName."
 				WHERE " . $this->getIdentifier() . " IN (" . implode(",", $ids) . ")";
+		echo($sql); return true;
 		return $this->db->query($sql);
 	
 	}

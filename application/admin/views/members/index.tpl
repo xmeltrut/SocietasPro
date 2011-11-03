@@ -3,7 +3,7 @@
 {block name=body}
 <h2>{$lang_members}</h2>
 
-<form action="" method="post"><!--  onSubmit="return areYouSure();" -->
+<form action="" method="post">
 	<table border="1">
 		<tr>
 			<th>&nbsp;</th>

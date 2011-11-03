@@ -70,8 +70,15 @@ class EventsController extends BaseController implements iController {
 	public function index () {
 	
 		// check for actions
-		if (reqSet("action") == "delete") {
-			$this->model->deleteById($_REQUEST["id"]);
+		if (reqSet("action") == "mass") {
+			if ($info = $this->determineMassAction()) {
+				switch ($info["action"]) {
+					case "delete":
+						$this->model->deleteById($info["ids"]);
+						break;
+				}
+			}
+			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
 		$events = $this->model->get();
