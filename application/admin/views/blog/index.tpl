@@ -21,7 +21,7 @@
 			<td>{$post->getFormattedDate()}</td>
 			<td><a href="{$root}admin/blog/edit/{$post->getData("postID")}">{$lang_edit}</a></td>
 			<td>
-				<input type="submit" name="delete_{$post->getData("postID")}" value="{$lang_delete}" />
+				<input type="submit" name="delete_{$post->getData("postID")}" value="{$lang_delete}" onClick="return areYouSure();" />
 			</td>
 		</tr>
 		{/foreach}

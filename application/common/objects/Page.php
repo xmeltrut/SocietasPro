@@ -48,5 +48,14 @@ class Page extends BaseObject {
 			return true;
 		}
 	}
+	
+	/**
+	 * Unset the ID. Used for cloning.
+	 *
+	 * @return boolean Success
+	 */
+	public function unsetID () {
+		return $this->unsetData("pageID");
+	}
 
 }

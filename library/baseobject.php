@@ -95,5 +95,20 @@ class BaseObject {
 	protected function setMessage ($msg) {
 		$this->message = $msg;
 	}
+	
+	/**
+	 * Unset an element from the data array
+	 *
+	 * @param string $key Key to unset
+	 * @return boolean Success
+	 */
+	protected function unsetData ($key) {
+		if (array_key_exists($key, $this->data)) {
+			unset($this->data[$key]);
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 }

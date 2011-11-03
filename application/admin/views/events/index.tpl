@@ -21,7 +21,8 @@
 			<td>{$event->getFormattedDate()}</td>
 			<td><a href="{$root}admin/events/edit/{$event->getData("eventID")}">{$lang_edit}</a></td>
 			<td>
-				<input type="submit" name="delete_{$event->getData("eventID")}" value="{$lang_delete}" />
+				<input type="submit" name="delete_{$event->getData("eventID")}" value="{$lang_delete}" onClick="return areYouSure();" />
+				<input type="submit" name="clone_{$event->getData("eventID")}" value="{$lang_clone}" />
 			</td>
 		</tr>
 		{/foreach}

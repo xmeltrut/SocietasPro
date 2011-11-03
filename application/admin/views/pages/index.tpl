@@ -19,7 +19,8 @@
 			<td>{$page->getData("pageName")}</td>
 			<td><a href="{$root}admin/pages/edit/{$page->getData("pageID")}">{$lang_edit}</a></td>
 			<td>
-				<input type="submit" name="delete_{$page->getData("pageID")}" value="{$lang_delete}" />
+				<input type="submit" name="delete_{$page->getData("pageID")}" value="{$lang_delete}" onClick="return areYouSure();" />
+				<input type="submit" name="clone_{$page->getData("pageID")}" value="{$lang_clone}" />
 			</td>
 		</tr>
 		{/foreach}

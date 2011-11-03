@@ -89,5 +89,14 @@ class Event extends BaseObject {
 		}
 	
 	}
+	
+	/**
+	 * Unset the ID. Used for cloning.
+	 *
+	 * @return boolean Success
+	 */
+	public function unsetID () {
+		return $this->unsetData("eventID");
+	}
 
 }

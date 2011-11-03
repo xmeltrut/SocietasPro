@@ -19,6 +19,19 @@ class EventsModel extends BaseModel {
 	}
 	
 	/**
+	 * Clone an event
+	 *
+	 * @param int $id ID
+	 */
+	public function cloneById ($id) {
+	
+		$event = $this->getById($id);
+		$event->unsetID();
+		return $this->save($event);
+	
+	}
+	
+	/**
 	 * Create a new event
 	 *
 	 * @param string $name Name of event

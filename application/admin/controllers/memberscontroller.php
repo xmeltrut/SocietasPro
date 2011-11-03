@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo Reimplement are you sure check on forms
  */
 
 class MembersController extends BaseController implements iController {

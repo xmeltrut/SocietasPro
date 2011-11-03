@@ -19,6 +19,19 @@ class PagesModel extends BaseModel {
 	}
 	
 	/**
+	 * Clone a page
+	 *
+	 * @param int $id ID
+	 */
+	public function cloneById ($id) {
+	
+		$page = $this->getById($id);
+		$page->unsetID();
+		return $this->save($page);
+	
+	}
+	
+	/**
 	 * Create a new page
 	 *
 	 * @param string $name Name

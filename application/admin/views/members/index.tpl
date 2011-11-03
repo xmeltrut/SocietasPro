@@ -23,7 +23,7 @@
 			<td>{$member->getData("memberSurname")}</td>
 			<td><a href="{$root}admin/members/edit/{$member->getData("memberID")}">{$lang_edit}</a></td>
 			<td>
-				<input type="submit" name="delete_{$member->getData("memberID")}" value="{$lang_delete}" />
+				<input type="submit" name="delete_{$member->getData("memberID")}" value="{$lang_delete}" onClick="return areYouSure();" />
 			</td>
 		</tr>
 		{/foreach}

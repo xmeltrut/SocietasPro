@@ -33,7 +33,7 @@ class FormBuilder {
 	
 		// save to instance variables
 		$this->action = $action;
-		$this-method = $method;
+		$this->method = $method;
 		
 		$this->output = '<form action-"'.$action.'" method="'.$method.'"><ol>';
 	

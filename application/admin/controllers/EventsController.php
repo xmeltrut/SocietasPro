@@ -73,6 +73,9 @@ class EventsController extends BaseController implements iController {
 		if (reqSet("action") == "mass") {
 			if ($info = $this->determineMassAction()) {
 				switch ($info["action"]) {
+					case "clone":
+						$this->model->cloneById($info["ids"]);
+						break;
 					case "delete":
 						$this->model->deleteById($info["ids"]);
 						break;

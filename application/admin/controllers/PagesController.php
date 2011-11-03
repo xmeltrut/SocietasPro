@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo Implement cloning
  */
 
 class PagesController extends BaseController implements iController {
@@ -73,6 +71,9 @@ class PagesController extends BaseController implements iController {
 		if (reqSet("action") == "mass") {
 			if ($info = $this->determineMassAction()) {
 				switch ($info["action"]) {
+					case "clone":
+						$this->model->cloneById($info["ids"]);
+						break;
 					case "delete":
 						$this->model->deleteById($info["ids"]);
 						break;
