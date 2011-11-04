@@ -8,6 +8,7 @@
  *
  * @todo validateSlug() needs to exclude the current page
  * @todo Slug should be automatically generated via JavaScript
+ * @todo Implement new write() method
  */
 
 require_once("basemodel.php");
@@ -30,38 +31,6 @@ class PagesModel extends BaseModel {
 	
 		$page = $this->getById($id);
 		$page->unsetID();
-		return $this->save($page);
-	
-	}
-	
-	/**
-	 * Create a new page
-	 *
-	 * @param string $name Name
-	 * @param string $slug URL
-	 * @param int $parent Parent ID
-	 * @param string $content Content
-	 * @return boolean Success
-	 */
-	public function create ($name, $slug, $parent, $content) {
-	
-		// create object
-		$page = new Page();
-		
-		// add data to object
-		if (
-			!$page->setName($name) ||
-			!$page->setSlug($slug) ||
-			!$page->setParent($parent) ||
-			!$page->setContent($content)
-		) {
-			echo("Failed");
-			$this->setMessage($page->getMessage());
-			return false;
-		}
-		
-		// save object
-		$this->setMessage(LANG_SUCCESS);
 		return $this->save($page);
 	
 	}
@@ -141,6 +110,44 @@ class PagesModel extends BaseModel {
 		} else {
 			return $this->validateSlug(strIncrement($slug));
 		}
+	
+	}
+	
+	/**
+	 * Edit or create a page
+	 *
+	 * @param array $d Data
+	 * @param int $id ID or false if creating
+	 * @return boolean Success
+	 */
+	public function write ($d, $id = false) {
+	
+		// get object
+		if ($id) {
+			$object = $this->getById($id);
+			$auditAction = 10;
+		} else {
+			$object = new Page();
+			$auditAction = 9;
+		}
+		
+		// make modifications
+		if (
+			!$object->setName($d["name"]) ||
+			!$object->setSlug($d["slug"]) ||
+			!$object->setParent($d["parent"]) ||
+			!$object->setContent($d["content"])
+		) {
+			$this->setMessage($object->getMessage());
+			return false;
+		}
+		
+		// record in audit trail
+		auditTrail($auditAction, $object->original(), $object);
+		
+		// save object
+		$this->setMessage(LANG_SUCCESS);
+		return $this->save($object);
 	
 	}
 

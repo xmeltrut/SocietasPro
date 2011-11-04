@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
+ *
+ * @todo There are no edit or delete functions for this controller
  */
 
 require_once("basemodel.php");
@@ -16,32 +18,6 @@ class LocationsModel extends BaseModel {
 	
 	function __construct () {
 		parent::__construct();
-	}
-	
-	/**
-	 * Create a new location
-	 *
-	 * @param string $name Location name
-	 * @param string $description Description
-	 * @return boolean Success
-	 */
-	public function create ($name, $description) {
-	
-		// create an object
-		$location = new Location();
-		
-		// add data to object
-		if (
-			!$location->setName($name) ||
-			!$location->setDescription($description)
-		) {
-			$this->setMessage($location->getMessage());
-			return false;
-		}
-		
-		// save object
-		return $this->save($location);
-	
 	}
 	
 	/**
@@ -65,6 +41,42 @@ class LocationsModel extends BaseModel {
 		
 		// return results
 		return $arr;
+	
+	}
+	
+	/**
+	 * Edit or create a location
+	 *
+	 * @param array $d Data
+	 * @param int $id ID or false if creating
+	 * @return boolean Success
+	 */
+	public function write ($d, $id = false) {
+	
+		// get object
+		if ($id) {
+			$object = $this->getById($id);
+			$auditAction = 4;
+		} else {
+			$object = new Location();
+			$auditAction = 3;
+		}
+		
+		// make modifications
+		if (
+			!$object->setName($d["name"]) ||
+			!$object->setDescription($d["description"])
+		) {
+			$this->setMessage($object->getMessage());
+			return false;
+		}
+		
+		// record in audit trail
+		auditTrail($auditAction, $object->original(), $object);
+		
+		// save object
+		$this->setMessage(LANG_SUCCESS);
+		return $this->save($object);
 	
 	}
 

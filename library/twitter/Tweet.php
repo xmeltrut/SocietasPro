@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Twitter
- *
- * @todo Re-examine this once done
  */
 
 class Tweet {
@@ -36,7 +34,7 @@ class Tweet {
 	
 		if (array_key_exists($key, $this->data)) {
 			return $this->data[$key];
-		} els {
+		} else {
 			return false;
 		}
 	
@@ -60,7 +58,14 @@ class Tweet {
 	 */
 	private function getEncodedText () {
 	
-		return $this->twitterData["text"];
+		$str = $this->twitterData["text"];
+		
+		foreach ($this->twitterData["entities"]["urls"] as $url) {
+			$href = '<a href="'.$url["url"].'">'.$url["display_url"].'</a>';
+			$str = str_replace($url["url"], $href, $str);
+		}
+		
+		return $str;
 	
 	}
 	
@@ -75,7 +80,8 @@ class Tweet {
 		// build array
 		$arr = array (
 			"id" => $this->twitterData["id"],
-			"longDate" => date("j F Y, H:i", $time);
+			"longDate" => date("j F Y, H:i", $time),
+			"userProfileImage" => $this->twitterData["user"]["profile_image_url"],
 			"text" => $this->getEncodedText()
 		);
 		

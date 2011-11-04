@@ -28,7 +28,7 @@ class MembersController extends BaseController implements iController {
 	
 		// check for actions
 		if (reqSet("action") == "create") {
-			$this->model->create($_REQUEST["email"], $_REQUEST["forename"], $_REQUEST["surname"], $_REQUEST["address"], $_REQUEST["notes"]);
+			$this->model->write($_REQUEST);
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
@@ -77,23 +77,17 @@ class MembersController extends BaseController implements iController {
 	 */
 	public function edit () {
 	
-		// get the current user's details
+		// get a front controller
 		$front = FrontController::getInstance();
-		$member = $this->model->getById($front->getParam(0));
 		
 		// check for actions
 		if (reqSet("action") == "edit") {
-			$member->setEmailAddress($_REQUEST["email"]);
-			$member->setForename($_REQUEST["forename"]);
-			$member->setSurname($_REQUEST["surname"]);
-			$member->setPrivileges($_REQUEST["privileges"]);
-			$member->setAddress($_REQUEST["address"]);
-			$member->setNotes($_REQUEST["notes"]);
-			$this->model->save($member);
+			$this->model->write($_REQUEST, $front->getParam(0));
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
 		// output page
+		$member = $this->model->getById($front->getParam(0));
 		$this->engine->assign("form", $this->standardForm("edit", $member->getAllData()));
 		$this->engine->display("members/edit.tpl");
 	
@@ -106,8 +100,30 @@ class MembersController extends BaseController implements iController {
 	
 		// build a form
 		require_once("classes/FormBuilder.php");
-		
 		$form = new FormBuilder();
+		
+		// check for actions
+		if (reqSet("action") == "import") {
+			$file = file($_FILES["upload"]["tmp_name"]);
+			require_once("classes/ImportMembersWizard.php");
+			$wizard = new ImportMembersWizard($file);
+			
+			$headers = $wizard->getColumnHeaders();
+			$options = $wizard->getColumnOptions();
+			
+			foreach ($headers as $key => $val) {
+				$form->addSelect("col".$key, $val, $options, $wizard->matchHeaderToColumn($val));
+			}
+			
+			$form->addSubmit(LANG_IMPORT);
+			
+			$this->engine->assign("form", $form->build());
+			$this->engine->display("members/import2.tpl");
+		} else {
+		
+		
+		
+		
 		$form->addFile("upload", LANG_CSV);
 		$form->addHidden("action", "import");
 		$form->addSubmit();
@@ -115,6 +131,8 @@ class MembersController extends BaseController implements iController {
 		// output page
 		$this->engine->assign("form", $form->build());
 		$this->engine->display("members/import.tpl");
+		
+		}
 	
 	}
 	

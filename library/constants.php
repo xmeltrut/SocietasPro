@@ -8,7 +8,7 @@
  */
 
 $constants = array (
-	"FORM_ELEMENT_INPUT" => 1
+	"ITEMS_PER_PAGE" => 1
 );
 
 arrayToConstants($constants);

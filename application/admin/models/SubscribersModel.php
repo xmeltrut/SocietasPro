@@ -7,6 +7,7 @@
  * @subpackage Admin
  *
  * @todo Should provide feedback on delete
+ * @todo Implement new write() method
  */
 
 require_once("basemodel.php");

@@ -28,7 +28,7 @@ class BlogController extends BaseController implements iController {
 	
 		// check actions
 		if (reqSet("action") == "create") {
-			$this->model->create($_REQUEST["name"], $_REQUEST["slug"], $_REQUEST["date"], $_REQUEST["content"]);
+			$this->model->write($_REQUEST);
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
@@ -43,18 +43,17 @@ class BlogController extends BaseController implements iController {
 	 */
 	public function edit () {
 	
-		// get the object
+		// get a front controller
 		$front = FrontController::getInstance();
-		$post = $this->model->getById($front->getParam(0));
 		
 		// check for actions
 		if (reqSet("action") == "edit") {
-			$post->setName($_REQUEST["name"]);
-			$post->setSlug($_REQUEST["slug"]);
-			$post->setDateByArray($_REQUEST["date"]);
-			$post->setContent($_REQUEST["content"]);
-			$this->model->save($post);
+			$this->model->write($_REQUEST, $front->getParam(0));
+			$this->engine->assign("msg", $this->model->getMessage());
 		}
+		
+		// get the object
+		$post = $this->model->getById($front->getParam(0));
 		
 		// output page
 		$this->engine->assign("form", $this->standardForm("edit", $post->getAllData()));

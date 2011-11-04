@@ -41,13 +41,11 @@ class DefaultController extends BaseController implements iController {
 		// get the tweets
 		require_once("twitter/TwitterTimeline.php");
 		$timeline = new TwitterTimeline("SocietasPro");
-		$tweets = $timeline->getAsJsonString();
+		$tweets = $timeline->get();
 		
-		//print_r(json_decode($tweets, true));
-		
-		// output them
-		header("Content-type: application/json");
-		print $tweets;
+		// output page
+		$this->engine->assign("tweets", $tweets);
+		$this->engine->display("default/tweets.tpl");
 	
 	}
 

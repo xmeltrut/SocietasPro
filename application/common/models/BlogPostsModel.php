@@ -7,6 +7,7 @@
  * @subpackage Common
  *
  * @todo validateSlug() needs to ignore the current post ID
+ * @todo TinyMCE doesn't handle apostrophies properly
  */
 
 require_once("basemodel.php");
@@ -18,37 +19,6 @@ class BlogPostsModel extends BaseModel {
 	
 	function __construct () {
 		parent::__construct();
-	}
-	
-	/**
-	 * Create a new post
-	 *
-	 * @param string $name Name
-	 * @param string $slug URL
-	 * @param array Array of date elements
-	 * @param string $content Content
-	 * @return boolean Success
-	 */
-	public function create ($name, $slug, $date, $content) {
-	
-		// create object
-		$post = new BlogPost();
-		
-		// add data to object
-		if (
-			!$post->setName($name) ||
-			!$post->setSlug($slug) ||
-			!$post->setDateByArray($date) ||
-			!$post->setContent($content)
-		) {
-			$this->setMessage($post->getMessage());
-			return false;
-		}
-		
-		// save object
-		$this->setMessage(LANG_SUCCESS);
-		return $this->save($post);
-	
 	}
 	
 	/**
@@ -104,6 +74,44 @@ class BlogPostsModel extends BaseModel {
 		} else {
 			return $this->validateSlug(strIncrement($slug));
 		}
+	
+	}
+	
+	/**
+	 * Edit or create a blog post
+	 *
+	 * @param array $d Data
+	 * @param int $id ID or false if creating
+	 * @return boolean Success
+	 */
+	public function write ($d, $id = false) {
+	
+		// get object
+		if ($id) {
+			$object = $this->getById($id);
+			$auditAction = 6;
+		} else {
+			$object = new BlogPost();
+			$auditAction = 5;
+		}
+		
+		// make modifications
+		if (
+			!$object->setName($d["name"]) ||
+			!$object->setSlug($d["slug"]) ||
+			!$object->setDateByArray($d["date"]) ||
+			!$object->setContent($d["content"])
+		) {
+			$this->setMessage($object->getMessage());
+			return false;
+		}
+		
+		// record in audit trail
+		auditTrail($auditAction, $object->original(), $object);
+		
+		// save object
+		$this->setMessage(LANG_SUCCESS);
+		return $this->save($object);
 	
 	}
 

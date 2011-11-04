@@ -28,7 +28,7 @@ class LocationsController extends BaseController implements iController {
 	
 		// check for actions
 		if (reqSet("action") == "create") {
-			$this->model->create($_REQUEST["name"], $_REQUEST["description"]);
+			$this->model->write($_REQUEST);
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		

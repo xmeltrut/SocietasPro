@@ -33,11 +33,19 @@ class ConfigModel extends BaseModel {
 	 */
 	public function setOption ($option, $value) {
 	
+		// update the database
 		$sql = "UPDATE ".DB_PREFIX."config SET
 				configValue = '".escape($value)."'
 				WHERE configOption = '".escape($option)."' ";
 		$this->db->query($sql);
 		
+		// log to audit trail
+		auditTrail(11, Configuration::get($option), $value);
+		
+		// reload config
+		Configuration::reload();
+		
+		// return successful
 		$this->setMessage(LANG_SUCCESS);
 		return true;
 	

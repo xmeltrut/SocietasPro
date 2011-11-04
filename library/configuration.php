@@ -8,6 +8,8 @@
  * @author Chris Worfolk <chris@buzzsports.com>
  * @package SocietasPro
  * @subpackage Core
+ *
+ * @todo Do we need to make these functions static?
  */
 
 class Configuration {
@@ -64,6 +66,15 @@ class Configuration {
 		while ($row = $rec->fetch()) {
 			self::$data[$row["configOption"]] = $row["configValue"];
 		}
+	
+	}
+	
+	/**
+	 * Reload the configuration
+	 */
+	public function reload () {
+	
+		self::initialise();
 	
 	}
 

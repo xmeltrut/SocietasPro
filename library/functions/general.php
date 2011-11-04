@@ -106,6 +106,20 @@ function reqSet ($index) {
 }
 
 /**
+ * Get the SQL LIMIT statement for paging
+ *
+ * @param int $pageNum Page number
+ * @param int $perPage Results per page
+ * @return string SQL LIMIT statement
+ */
+function sqlLimit ($pageNum, $perPage) {
+
+	$str = "LIMIT " . (($pageNum * $perPage) - $perPage) . ", " . $perPage . " ";
+	return $str;
+
+}
+
+/**
  * Use this to avoid PHP notices for unset variables
  *
  * @param string $var Variable name

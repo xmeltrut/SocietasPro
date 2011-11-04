@@ -6,12 +6,13 @@
  * @package SocietasPro
  * @subpackage Utilities
  *
- * @todo This should probably use http://php.net/manual/en/function.fgetcsv.php
+ * @todo Finish this
  */
 
 class ImportMembersWizard {
 
 	private $data;
+	private $columns;
 	
 	/**
 	 * Constructor
@@ -20,11 +21,24 @@ class ImportMembersWizard {
 	 */
 	function __construct ($arr) {
 	
+		// save data array
 		if (is_array($arr)) {
 			$this->data = $arr;
 		} else {
 			return false;
 		}
+		
+		// build columns array
+		$arr = array (
+			"DROP" => LANG_DISCARD,
+			"Address" => LANG_ADDRESS,
+			"Email" => LANG_EMAIL,
+			"Forename" => LANG_FORENAME,
+			"Notes" => LANG_NOTES,
+			"Surname" => LANG_SURNAME
+		);
+		
+		$this->columns = $arr;
 	
 	}
 	
@@ -34,6 +48,33 @@ class ImportMembersWizard {
 	 * @return array Column headers
 	 */
 	public function getColumnHeaders () {
+	
+		$headers = str_getcsv($this->data[0]);
+		return $headers;
+	
+	}
+	
+	/**
+	 * Get column options
+	 *
+	 * @return array Column options
+	 */
+	public function getColumnOptions () {
+	
+		return $this->columns;
+	
+	}
+	
+	/**
+	 * Try and match the column header to a database column
+	 *
+	 * @param string $header Column header
+	 * @return string Array key
+	 */
+	public function matchHeaderToColumn ($header) {
+	
+		return array_search($header, $this->columns);
+	
 	}
 
 }

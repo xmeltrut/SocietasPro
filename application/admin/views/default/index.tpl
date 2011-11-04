@@ -3,10 +3,8 @@
 {block name=head}
 <script type="text/javascript">
 function loadTweets () {
-	$.getJSON("{$root}admin/default/tweets", function (data) {
-		$.each (data, function (key, val) {
-			$("#tweets").append("<p>"+val.text+"</p>");
-		});
+	$.get("{$root}admin/default/tweets", function (data) {
+		$("#tweets").html(data);
 	});
 }
 
@@ -30,6 +28,12 @@ $(document).ready( function () {
 	</tr>
 </table>
 
+<p>
+	<strong>Twitter</strong>
+</p>
 <div id="tweets">
+	<p>
+		<img src="{$root}images/admin/loader1.gif" alt="" />
+	</p>
 </div>
 {/block}

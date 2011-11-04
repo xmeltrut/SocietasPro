@@ -28,7 +28,7 @@ class PagesController extends BaseController implements iController {
 	
 		// check for actions
 		if (reqSet("action") == "create") {
-			$this->model->create($_REQUEST["name"], $_REQUEST["slug"], $_REQUEST["parent"], $_REQUEST["content"]);
+			$this->model->write($_REQUEST);
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
@@ -43,19 +43,17 @@ class PagesController extends BaseController implements iController {
 	 */
 	public function edit () {
 	
-		// get the current object
+		// get a front controller
 		$front = FrontController::getInstance();
-		$page = $this->model->getById($front->getParam(0));
 		
 		// check for actions
 		if (reqSet("action") == "edit") {
-			$page->setName($_REQUEST["name"]);
-			$page->setSlug($_REQUEST["slug"]);
-			$page->setParent($_REQUEST["parent"]);
-			$page->setContent($_REQUEST["content"]);
-			$this->model->save($page);
+			$this->model->write($_REQUEST, $front->getParam(0));
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
+		
+		// get the object
+		$page = $this->model->getById($front->getParam(0));
 		
 		// output the page
 		$this->engine->assign("form", $this->standardForm("edit", $page->getAllData()));
@@ -102,10 +100,13 @@ class PagesController extends BaseController implements iController {
 	
 		require_once("classes/FormBuilder.php");
 		
+		$pageParent = $this->model->getAsArray();
+		$pageParent[0] = LANG_NONE;
+		
 		$form = new FormBuilder();
 		$form->addInput("name", LANG_NAME, arrSet($data, "pageName"));
 		$form->addInput("slug", LANG_URL, arrSet($data, "pageSlug"));
-		$form->addSelect("parent", LANG_PARENT, $this->model->getAsArray());
+		$form->addSelect("parent", LANG_PARENT, $pageParent);
 		$form->addVisualEditor("content", arrSet($data, "pageContent"));
 		$form->addHidden("id", arrSet($data, "pageID"));
 		$form->addHidden("action", $action);

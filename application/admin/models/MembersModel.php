@@ -22,61 +22,29 @@ class MembersModel extends BaseModel {
 	}
 	
 	/**
-	 * Create a member
-	 *
-	 * @param string $email Email address
-	 * @param string $forename Forename
-	 * @param string $surname Surname
-	 * @param string $address Address
-	 * @param string $notes Notes
-	 * @param string $msg Return message
-	 */
-	public function create ($email, $forename, $surname, $address, $notes) {
-	
-		// basic validation
-		if ($email == "" && $forename == "" && $surname == "") {
-			$this->setMessage(strFirst(LANG_INVALID." ".LANG_NAME.", ".LANG_EMAIL));
-			return false;
-		}
-		
-		// create a member object
-		$member = new Member();
-		
-		// add data to object
-		if (
-			!$member->setEmailAddress($email) ||
-			!$member->setForename($forename) ||
-			!$member->setSurname($surname) ||
-			!$member->setAddress($address) ||
-			!$member->setNotes($notes)
-		) {
-			$this->setMessage($member->getMessage());
-			return false;
-		}
-		
-		// save object
-		auditTrail(1, "", $member);
-		$this->setMessage(LANG_SUCCESS);
-		return $this->save($member);
-	
-	}
-	
-	/**
 	 * List members from the database.
 	 *
+	 * @param int $pageNum Page number
+	 * @param int $perPage Items per page
 	 * @return array Members
 	 */
-	public function get () {
+	public function get ($pageNum = 1, $perPage = ITEMS_PER_PAGE) {
 	
+		// initialise an array
 		$members = array();
 		
-		$sql = "SELECT * FROM ".DB_PREFIX."members ";
+		// build SQL
+		$sql = "SELECT * FROM ".DB_PREFIX."members ".sqlLimit($pageNum, $perPage);
+		
+		// query database
 		$rec = $this->db->query($sql);
 		
+		// build array
 		while ($row = $rec->fetch()) {
 			$members[] = new Member($row);
 		}
 		
+		// return results
 		return $members;
 	
 	}
@@ -150,6 +118,45 @@ class MembersModel extends BaseModel {
 			1 => LANG_MEMBER,
 			2 => LANG_ADMINISTRATOR
 		);
+	
+	}
+	
+	/**
+	 * Edit or create a member
+	 *
+	 * @param array $d Data
+	 * @param int $id ID or false if creating
+	 * @return boolean Success
+	 */
+	public function write ($d, $id = false) {
+	
+		// get object
+		if ($id) {
+			$object = $this->getById($id);
+			$auditAction = 2;
+		} else {
+			$object = new Member();
+			$auditAction = 1;
+		}
+		
+		// make modifications
+		if (
+			!$object->setEmailAddress($d["email"]) ||
+			!$object->setForename($d["forename"]) ||
+			!$object->setSurname($d["surname"]) ||
+			!$object->setAddress($d["address"]) ||
+			!$object->setNotes($d["notes"])
+		) {
+			$this->setMessage($object->getMessage());
+			return false;
+		}
+		
+		// record in audit trail
+		auditTrail($auditAction, $object->original(), $object);
+		
+		// save object
+		$this->setMessage(LANG_SUCCESS);
+		return $this->save($object);
 	
 	}
 

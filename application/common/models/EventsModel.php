@@ -32,36 +32,6 @@ class EventsModel extends BaseModel {
 	}
 	
 	/**
-	 * Create a new event
-	 *
-	 * @param string $name Name of event
-	 * @param int $location Location ID
-	 * @param array $date Array of date elements
-	 * @param string $description Description
-	 */
-	public function create ($name, $location, $date, $description) {
-	
-		// create object
-		$event = new Event();
-		
-		// add data to object
-		if (
-			!$event->setName($name) ||
-			!$event->setLocation($location) ||
-			!$event->setDateByArray($date) ||
-			!$event->setDescription($description)
-		) {
-			$this->setMessage($event->getMessage());
-			return false;
-		}
-		
-		// save object
-		$this->setMessage(LANG_SUCCESS);
-		return $this->save($event);
-	
-	}
-	
-	/**
 	 * Get a list of events
 	 */
 	public function get () {
@@ -95,6 +65,44 @@ class EventsModel extends BaseModel {
 		} else {
 			return false;
 		}
+	
+	}
+	
+	/**
+	 * Edit or create an event
+	 *
+	 * @param array $d Data
+	 * @param int $id ID or false if creating
+	 * @return boolean Success
+	 */
+	public function write ($d, $id = false) {
+	
+		// get object
+		if ($id) {
+			$object = $this->getById($id);
+			$auditAction = 8;
+		} else {
+			$object = new Event();
+			$auditAction = 7;
+		}
+		
+		// make modifications
+		if (
+			!$object->setName($d["name"]) ||
+			!$object->setLocation($d["location"]) ||
+			!$object->setDateByArray($d["date"]) ||
+			!$object->setDescription($d["description"])
+		) {
+			$this->setMessage($object->getMessage());
+			return false;
+		}
+		
+		// record in audit trail
+		auditTrail($auditAction, $object->original(), $object);
+		
+		// save object
+		$this->setMessage(LANG_SUCCESS);
+		return $this->save($object);
 	
 	}
 

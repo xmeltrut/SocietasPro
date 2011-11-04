@@ -170,11 +170,13 @@ class FormBuilder {
 	
 	/**
 	 * Add a submit button.
+	 *
+	 * @param string $text Text for button
 	 */
-	public function addSubmit () {
+	public function addSubmit ($text = LANG_SUBMIT) {
 	
 		$var = '<li>
-					<input type="submit" value="'.LANG_SUBMIT.'" />
+					<input type="submit" value="'.$text.'" />
 				</li>';
 		$this->output .= $var;
 	

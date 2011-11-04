@@ -5,14 +5,11 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Twitter
- *
- * @todo This should be called from an AJAX request
- * @todo Re-examine need for all the get functions
  */
 
 require_once("twitter/Tweet.php");
 
-class TwitterTimeline extends TwitterBase {
+class TwitterTimeline {
 
 	private $response;
 	private $screenName;
@@ -82,8 +79,10 @@ class TwitterTimeline extends TwitterBase {
 		$arr = array();
 		
 		// loop through building objecrs
-		foreach ($this->response as $data) {
-			$arr[] = new Tweet($data);
+		$data = json_decode($this->response, true);
+		
+		foreach ($data as $tweet) {
+			$arr[] = new Tweet($tweet);
 		}
 		
 		// and return

@@ -11,12 +11,14 @@
  * @todo Make use of the magic getter is admin module
  */
 
-class BaseObject {
+abstract class BaseObject {
 
 	/**
-	 * Array to hold generic data for the object.
+	 * Array to hold generic data for the object. We also need to hold
+	 * the original data so we can compare in the audit logs.
 	 */
 	private $data;
+	private $originalData;
 	
 	/**
 	 * Variable to hold a return message.
@@ -29,7 +31,7 @@ class BaseObject {
 	 * @param array $data Array of data to populate the object with
 	 */
 	function __construct ($data) {
-		$this->data = $data;
+		$this->data = $this->originalData = $data;
 	}
 	
 	/**
@@ -84,6 +86,21 @@ class BaseObject {
 		} else {
 			return false;
 		}
+	}
+	
+	/**
+	 * Returns a string representation of the data as it was when the object
+	 * was originally created - perfect for audit trails.
+	 *
+	 * @return string Data
+	 */
+	public function original () {
+		if (is_array($this->originalData)) {
+			if (count($this->originalData) > 0) {
+				return json_encode($this->originalData);
+			}
+		}
+		return "";
 	}
 	
 	/**
