@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
- *
- * @todo Audit trail should include user
  */
 
 /**
@@ -26,14 +24,18 @@ function auditTrail ($actionID, $oldData = "", $newData = "") {
 		}
 	}
 	
+	// grab the user ID
+	$memberID = intval($_SESSION["sp_user_id"]);
+	
 	// get database
 	$db = Database::getInstance();
 	
 	// build SQL statement
 	$sql = "INSERT INTO ".DB_PREFIX."audit_entries (
-			entryAction, entryDate, entryOldData, entryNewData
+			entryAction, entryMember, entryDate, entryOldData, entryNewData
 			) VALUES (
 			".$actionID.",
+			".$memberID.",
 			NOW(),
 			'".escape($oldData)."',
 			'".escape($newData)."'

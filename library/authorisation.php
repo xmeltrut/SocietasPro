@@ -101,6 +101,7 @@ class Authorisation {
 		// check for success
 		if ($success) {
 			$_SESSION["sp_logged_in"] = "true";
+			$_SESSION["sp_user_id"] = $row["memberID"];
 			return true;
 		} else {
 			$msg = "There was no match for the username and password.";
