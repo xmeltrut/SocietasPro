@@ -7,6 +7,7 @@
  * @subpackage Common
  *
  * @todo validateSlug() needs to exclude the current page
+ * @todo Slug should be automatically generated via JavaScript
  */
 
 require_once("basemodel.php");
@@ -54,11 +55,13 @@ class PagesModel extends BaseModel {
 			!$page->setParent($parent) ||
 			!$page->setContent($content)
 		) {
+			echo("Failed");
 			$this->setMessage($page->getMessage());
 			return false;
 		}
 		
 		// save object
+		$this->setMessage(LANG_SUCCESS);
 		return $this->save($page);
 	
 	}

@@ -7,6 +7,7 @@
  * @subpackage Admin
  *
  * @todo We need to implement edit functions on models
+ * @todo Check if email addresses are well formed (create and edit)
  */
 
 require_once("basemodel.php");
@@ -55,6 +56,7 @@ class MembersModel extends BaseModel {
 		
 		// save object
 		auditTrail(1, "", $member);
+		$this->setMessage(LANG_SUCCESS);
 		return $this->save($member);
 	
 	}

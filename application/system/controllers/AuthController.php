@@ -5,9 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage System
- *
- * @todo Restrict logins to administrators
- * @todo Authentication doesn't seem to be working
  */
 
 class AuthController extends BaseController implements iController {
@@ -48,7 +45,7 @@ class AuthController extends BaseController implements iController {
 		require("authorisation.php");
 		$auth = Authorisation::getInstance();
 		$auth->logout();
-		redirect("");
+		redirect(ROOT);
 	
 	}
 

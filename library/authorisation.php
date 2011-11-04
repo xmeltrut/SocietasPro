@@ -48,10 +48,12 @@ class Authorisation {
 	public function isLoggedIn () {
 	
 		if (isset($_SESSION["sp_logged_in"])) {
-			return true;
-		} else {
-			return false;
+			if ($_SESSION["sp_logged_in"] == "true") {
+				return true;
+			}
 		}
+		
+		return false;
 	
 	}
 	

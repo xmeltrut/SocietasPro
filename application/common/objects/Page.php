@@ -53,6 +53,7 @@ class Page extends BaseObject {
 	public function setParent ($value) {
 	
 		$this->setData("pageParent", intval($value));
+		return true;
 	
 	}
 	

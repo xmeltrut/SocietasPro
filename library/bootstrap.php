@@ -13,5 +13,6 @@ require("configuration.php");
 require("functions/audit.php");
 require("functions/general.php");
 require("functions/strings.php");
+require("functions/validation.php");
 require("constants.php");
 require("icontroller.php");

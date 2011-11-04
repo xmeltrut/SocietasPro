@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
+ *
+ * @todo Should provide feedback on delete
  */
 
 require_once("basemodel.php");

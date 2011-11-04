@@ -20,9 +20,25 @@ class Member extends BaseObject {
 		return true;
 	}
 	
+	/**
+	 * Set email address. It can be blank, but if it isn't, it must
+	 * be a well formed email address.
+	 *
+	 * @param string $value Email address
+	 * @return boolean Success
+	 */
 	public function setEmailAddress ($value) {
+	
+		if ($value != "") {
+			if (validateEmail($value) === false) {
+				$this->setMessage(LANG_INVALID." ".LANG_EMAIL_ADDRESS);
+				return false;
+			}
+		}
+		
 		$this->setData("memberEmail", $value);
 		return true;
+	
 	}
 	
 	public function setForename ($value) {

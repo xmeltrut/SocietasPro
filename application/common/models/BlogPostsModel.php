@@ -46,6 +46,7 @@ class BlogPostsModel extends BaseModel {
 		}
 		
 		// save object
+		$this->setMessage(LANG_SUCCESS);
 		return $this->save($post);
 	
 	}

@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Utilities
- *
- * @todo Add form tag to build() function and check for multipart/form
  */
 
 class FormBuilder {

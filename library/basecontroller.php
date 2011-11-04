@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
- *
- * @todo Roll out new mass action system
  */
 
 require("classes/TemplateEngine.php");
