@@ -78,9 +78,15 @@ class BlogController extends BaseController implements iController {
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
+		// gather page variables
+		$pageNum = FrontController::getParam(0);
+		$totalPages = totalPages($this->model->count());
+		$posts = $this->model->get($pageNum);
+		
 		// output page
-		$posts = $this->model->get();
+		
 		$this->engine->assign("posts", $posts);
+		$this->engine->assign("totalPages", $totalPages);
 		$this->engine->display("blog/index.tpl");
 	
 	}

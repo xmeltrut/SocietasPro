@@ -157,8 +157,9 @@ class MembersController extends BaseController implements iController {
 		}
 		
 		// gather variables for page
-		$members = $this->model->get();
+		$pageNum = FrontController::getParam(0);
 		$totalPages = totalPages($this->model->count());
+		$members = $this->model->get($pageNum);
 		
 		// output the page
 		$this->engine->assign("members", $members);

@@ -118,7 +118,13 @@ function reqSet ($index) {
  * @return string SQL LIMIT statement
  */
 function sqlLimit ($pageNum = 1, $perPage = ITEMS_PER_PAGE) {
-
+	
+	// check for a valid page number
+	if ($pageNum < 1 || $pageNum === false) {
+		$pageNum = 1;
+	}
+	
+	// return string
 	$str = "LIMIT " . (($pageNum * $perPage) - $perPage) . ", " . $perPage . " ";
 	return $str;
 

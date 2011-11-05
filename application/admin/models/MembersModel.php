@@ -37,13 +37,13 @@ class MembersModel extends BaseModel {
 	 * @param int $perPage Items per page
 	 * @return array Members
 	 */
-	public function get ($pageNum = 1, $perPage = ITEMS_PER_PAGE) {
+	public function get ($pageNum = 1) {
 	
 		// initialise an array
 		$members = array();
 		
 		// build SQL
-		$sql = "SELECT * FROM ".DB_PREFIX."members ".sqlLimit($pageNum, $perPage);
+		$sql = "SELECT * FROM ".DB_PREFIX."members ".sqlLimit($pageNum);
 		
 		// query database
 		$rec = $this->db->query($sql);

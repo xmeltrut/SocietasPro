@@ -83,9 +83,14 @@ class EventsController extends BaseController implements iController {
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
-		$events = $this->model->get();
+		// gather page variables
+		$pageNum = FrontController::getParam(0);
+		$totalPages = totalPages($this->model->count());
+		$events = $this->model->get($pageNum);
 		
+		// output the page
 		$this->engine->assign("events", $events);
+		$this->engine->assign("totalPages", $totalPages);
 		$this->engine->display("events/index.tpl");
 	
 	}

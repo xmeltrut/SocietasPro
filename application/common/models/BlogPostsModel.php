@@ -19,13 +19,28 @@ class BlogPostsModel extends BaseModel {
 	}
 	
 	/**
-	 * Get a list of posts
+	 * Count the number of blog posts
+	 *
+	 * @return int Number of blog posts
 	 */
-	public function get () {
+	public function count () {
+	
+		$sql = "SELECT COUNT(postID) FROM ".DB_PREFIX."blog_posts ";
+		return $this->db->fetchOne($sql);
+	
+	}
+	
+	/**
+	 * Get a list of posts
+	 *
+	 * @param int $pageNum Page number
+	 * @return array Array of posts
+	 */
+	public function get ($pageNum = 1) {
 	
 		$arr = array();
 		
-		$sql = "SELECT * FROM ".DB_PREFIX."blog_posts ORDER BY postDate DESC ";
+		$sql = "SELECT * FROM ".DB_PREFIX."blog_posts ORDER BY postDate DESC ".sqlLimit($pageNum);
 		$rec = $this->db->query($sql);
 		
 		while ($row = $rec->fetch()) {

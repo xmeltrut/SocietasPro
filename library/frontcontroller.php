@@ -8,6 +8,7 @@
  *
  * @todo If you mispell the module name, it needs to throw an error
  * @todo Need to add validation to the controller variable
+ * @todo Controllers shouldn't instance this to get params, just use the static reference
  */
 
 class FrontController {

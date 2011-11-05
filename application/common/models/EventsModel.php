@@ -32,13 +32,28 @@ class EventsModel extends BaseModel {
 	}
 	
 	/**
-	 * Get a list of events
+	 * Count the number of events
+	 *
+	 * @return int Number of events
 	 */
-	public function get () {
+	public function count () {
+	
+		$sql = "SELECT COUNT(eventID) FROM ".DB_PREFIX."events ";
+		return $this->db->fetchOne($sql);
+	
+	}
+	
+	/**
+	 * Get a list of events
+	 *
+	 * @param int $pageNum Page number
+	 * @return array Array of events
+	 */
+	public function get ($pageNum = 1) {
 	
 		$events = array();
 		
-		$sql = "SELECT * FROM ".DB_PREFIX."events ";
+		$sql = "SELECT * FROM ".DB_PREFIX."events ".sqlLimit($pageNum);
 		$rec = $this->db->query($sql);
 		
 		while ($row = $rec->fetch()) {

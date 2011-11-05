@@ -19,18 +19,31 @@ class ErrorLogsModel extends BaseModel {
 	}
 	
 	/**
+	 * Count the number of log entries
+	 *
+	 * @return int Log entries
+	 */
+	public function count () {
+	
+		$sql = "SELECT COUNT(logID) FROM ".DB_PREFIX."error_logs ";
+		return $this->db->fetchOne($sql);
+	
+	}
+	
+	/**
 	 * Get the most recent error logs.
 	 *
+	 * $param int $pageNum Page number
 	 * @return Associative array
 	 */
-	public function get () {
+	public function get ($pageNum = 1) {
 	
 		// initialise array
 		$arr = array();
 		
 		// query database
 		$sql = "SELECT * FROM ".DB_PREFIX."error_logs
-				ORDER BY logDate DESC LIMIT 0, 100";
+				ORDER BY logDate DESC ".sqlLimit($pageNum);
 		$rec = $this->db->query($sql);
 		
 		// loop through results

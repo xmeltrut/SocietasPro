@@ -26,6 +26,15 @@
 			</td>
 		</tr>
 		{/foreach}
+		{if $totalPages > 1}
+		<tr>
+			<td colspan="7">
+				{$lang_page}: {for $i=1 to $totalPages}
+				<a href="{$root}admin/events/index/{$i}">{$i}</a>
+				{/for}
+			</td>
+		</tr>
+		{/if}
 	</table>
 	<select name="option">
 		<option value="">{$lang_select_action}</option>
