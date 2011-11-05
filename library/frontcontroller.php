@@ -6,8 +6,8 @@
  * @package SocietasPro
  * @subpackage Core
  *
- * @todo Add validation to getModule function
- * @todo Add validation to all incoming variables
+ * @todo If you mispell the module name, it needs to throw an error
+ * @todo Need to add validation to the controller variable
  */
 
 class FrontController {
@@ -93,7 +93,7 @@ class FrontController {
 	 */
 	public function getModule () {
 		if (self::$module == "") {
-			self::$module = "admin";
+			self::$module = "public";
 		}
 		return self::$module;
 	}
@@ -142,12 +142,11 @@ class FrontController {
 		$vars = explode("/", $url);
 		
 		// assign variables
-		self::$module = (isset($vars[1])) ? $vars[1] : "";
+		$module = (isset($vars[1])) ? $vars[1] : "";
+		self::setModule($module);
+		
 		self::$controller = (isset($vars[2])) ? $vars[2] : "";
 		self::$page = (isset($vars[3])) ? $vars[3] : "";
-		
-		// clean variables
-		self::$module = preg_replace("/([^a-z0-9]+)/i", "", self::$module); // we can do this better
 		
 		// rest are parameters
 		for ($i = 0; $i < count($vars); $i++) {
@@ -155,6 +154,27 @@ class FrontController {
 				self::$params[] = $vars[$i];
 			}
 		}
+	
+	}
+	
+	/**
+	 * Set the module. There are only three modules, so we might
+	 * as well just hard code this as an array to check against
+	 * for performance reasons.
+	 *
+	 * @param string $name Module name
+	 * @return boolean Success
+	 */
+	private function setModule ($name) {
+	
+		$validModules = array ("admin", "public", "system");
+		
+		if ($name == "" || in_array($name, $validModules)) {
+			self::$module = $name;
+			return true;
+		}
+		
+		return false;
 	
 	}
 

@@ -6,8 +6,7 @@
  * @package SocietasPro
  * @subpackage Core
  *
- * @todo Provide feedback on create() functions
- * @todo Stack error messages
+ * @todo Stack error messages (PHP doesn't check all conditions of if statements)
  */
 
 abstract class BaseModel {
@@ -118,7 +117,6 @@ abstract class BaseModel {
 			// this is an insert
 			$sql = "INSERT INTO ".DB_PREFIX.$this->tableName." (".implode($keys, ",").") VALUES ('".implode($vals, "','")."')";
 			$rv  = $this->db->query($sql);
-			
 		
 		} else {
 		

@@ -66,26 +66,31 @@ function h ($str) {
  */
 function logError ($code, $details = "", $sql = "") {
 
-	$db = Database::getInstance();
-	$sql = "INSERT INTO ".DB_PREFIX."error_logs (
-			logCode, logURL, logDate, logDetails, logSQL
-			) VALUES (
-			".$code.",
-			'".escape($_SERVER["REQUEST_URI"])."',
-			NOW(),
-			'".escape($details)."',
-			'".escape($sql)."'
-			)";
-	return $db->query($sql);
+	require_once("models/ErrorLogsModel.php");
+	$errorLogsModel = new ErrorLogsModel();
+	return $errorLogsModel->insert($code, $details, $sql);
 
 }
 
 /**
- * Clean redirect function.
+ * Rebuild the incoming $_REQUEST array, if required
+ */
+function rebuildRequestArray () {
+	if (get_magic_quotes_gpc() == 1) {
+		function stripFromRequest (&$val, $key) {
+			$val = stripslashes($val);
+		}
+		array_walk_recursive($_REQUEST, "stripFromRequest");
+	}
+}
+
+/**
+ * Clean redirect function. You can leave the parameter blank to
+ * simply redirect to the root page.
  *
  * @param string $url URL to redirect to
  */
-function redirect ($url) {
+function redirect ($url = "") {
 	Header("Location: ".ROOT.$url);
 	echo('<a href="$url">'.ROOT.$url.'</a>');
 	die();
@@ -112,11 +117,21 @@ function reqSet ($index) {
  * @param int $perPage Results per page
  * @return string SQL LIMIT statement
  */
-function sqlLimit ($pageNum, $perPage) {
+function sqlLimit ($pageNum = 1, $perPage = ITEMS_PER_PAGE) {
 
 	$str = "LIMIT " . (($pageNum * $perPage) - $perPage) . ", " . $perPage . " ";
 	return $str;
 
+}
+
+/**
+ * Calculate the total number of pages for a view
+ *
+ * @param int $totalRecords Total number of records
+ * @param int $perPage Results per page
+ */
+function totalPages ($totalRecords, $perPage = ITEMS_PER_PAGE) {
+	return ceil($totalRecords / $perPage);
 }
 
 /**

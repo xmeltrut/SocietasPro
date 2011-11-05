@@ -5,9 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo Should provide feedback on delete
- * @todo Implement new write() method
  */
 
 require_once("basemodel.php");
@@ -31,7 +28,10 @@ class SubscribersModel extends BaseModel {
 	
 		// validate string
 		if ($email == "") {
-			$this->setmessage(strFirst(LANG_INVALID." ".LANG_EMAIL_ADDRESS));
+			$this->setMessage(strFirst(LANG_INVALID." ".LANG_EMAIL_ADDRESS));
+			return false;
+		} elseif (!validateEmail($email)) {
+			$this->setMessage(strFirst(LANG_INVALID." ".LANG_EMAIL_ADDRESS));
 			return false;
 		}
 		
@@ -51,6 +51,9 @@ class SubscribersModel extends BaseModel {
 				)";
 		$this->db->query($sql);
 		
+		// log to audit trail
+		auditTrail(14, "", $email);
+		
 		// and return
 		$this->setMessage(LANG_SUCCESS);
 		return true;
@@ -69,8 +72,15 @@ class SubscribersModel extends BaseModel {
 		
 		if ($subscriber) {
 			$sql = "DELETE FROM ".DB_PREFIX."subscribers WHERE subscriberEmail = '".escape($email)."' ";
-			return $this->db->query($sql);
+			if ($this->db->query($sql)) {
+				$this->setMessage(LANG_SUCCESS);
+				return true;
+			} else {
+				$this->setMessage(LANG_FAILED);
+				return false;
+			}
 		} else {
+			$this->setMessage(strFirst(LANG_EMAIL_ADDRESS." ".LANG_NOT_FOUND));
 			return false;
 		}
 	

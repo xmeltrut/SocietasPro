@@ -29,7 +29,8 @@ require("bootstrap.php");
 	<?php
 	$checks = array (
 		"PhpVersion",
-		"Curl"
+		"Curl",
+		"MagicQuotes"
 	);
 	
 	require("systemtest.php");

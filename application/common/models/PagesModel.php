@@ -5,10 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Common
- *
- * @todo validateSlug() needs to exclude the current page
- * @todo Slug should be automatically generated via JavaScript
- * @todo Implement new write() method
  */
 
 require_once("basemodel.php");
@@ -29,28 +25,52 @@ class PagesModel extends BaseModel {
 	 */
 	public function cloneById ($id) {
 	
+		// get the page and unset it's ID
 		$page = $this->getById($id);
 		$page->unsetID();
-		return $this->save($page);
+		
+		if ($this->save($page)) {
+			auditTrail(15, $page->original(), $page);
+			$this->setMessage(LANG_SUCCESS);
+			return true;
+		} else {
+			$this->setMessage(LANG_FAIL);
+			return false;
+		}
 	
 	}
 	
 	/**
 	 * Get a list of pages
 	 *
+	 * @param int $parentID Page ID, used for recursion
+	 * @param int $layer Count of the layers we've recursed into
 	 * @return array Array of Pages objects
 	 */
-	public function get () {
+	public function get ($parentID = 0, $layer = 0) {
 	
+		// initialse an array
 		$arr = array();
 		
-		$sql = "SELECT * FROM ".DB_PREFIX."pages WHERE pageParent = 0 ";
+		// query the database
+		$sql = "SELECT * FROM ".DB_PREFIX."pages
+				WHERE pageParent = " . $parentID;
 		$rec = $this->db->query($sql);
 		
+		// loop through results
 		while ($row = $rec->fetch()) {
-			$arr[] = new Page($row);
+	
+			$prefix = str_repeat("-- ", $layer);
+			$pageObject = new Page($row);
+			$pageObject->setName($prefix.$row["pageName"]);
+			$arr[] = $pageObject;
+			
+			$children = $this->get($row["pageID"], ($layer+1));
+			$arr = array_merge($arr, $children);
+		
 		}
 		
+		// return array
 		return $arr;
 	
 	}
@@ -58,19 +78,31 @@ class PagesModel extends BaseModel {
 	/**
 	 * Get a list of pages as an array
 	 *
+	 * @param int $excludedID If you want to exclude a page, pass its ID
+	 * @param int $parentID Page ID, used for recursion
+	 * @param int $layer Count of the layers we've recursed into
 	 * @return array Associative array of pages
 	 */
-	public function getAsArray () {
+	public function getAsArray ($excludedID = 0, $parentID = 0, $layer = 0) {
 	
+		// initialise an array
 		$arr = array();
 		
-		$sql = "SELECT * FROM ".DB_PREFIX."pages WHERE pageParent = 0 ";
+		// query the database
+		$sql = "SELECT * FROM ".DB_PREFIX."pages
+				WHERE pageParent = ".$parentID."
+				AND pageID != ".$excludedID;
 		$rec = $this->db->query($sql);
 		
+		// loop through results
 		while ($row = $rec->fetch()) {
-			$arr[$row["pageID"]] = $row["pageName"];
+			$prefix = str_repeat("-- ", $layer);
+			$arr[$row["pageID"]] = $prefix.$row["pageName"];
+			$children = $this->getAsArray($excludedID, $row["pageID"], ($layer+1));
+			$arr += $children;
 		}
 		
+		// return array
 		return $arr;
 	
 	}
@@ -95,14 +127,44 @@ class PagesModel extends BaseModel {
 	}
 	
 	/**
+	 * Get an array of child page IDs
+	 *
+	 * @param int $id Page ID
+	 * @return array Array of page IDs
+	 */
+	public function getChildrenAsArray ($id) {
+	
+		// initialise an array
+		$arr = array();
+		
+		// query database
+		$sql = "SELECT pageID FROM ".DB_PREFIX."pages WHERE pageParent = ".$id;
+		$rec = $this->db->query($sql);
+		
+		// loop through results
+		while ($row = $rec->fetch()) {
+			$arr[] = $row["pageID"];
+			$children = $this->getChildrenAsArray($row["pageID"]);
+			$arr = array_merge($arr, $children);
+		}
+		
+		// return results
+		return $arr;
+	
+	}
+	
+	/**
 	 * Check a slug is unique and if not, generate a new one
 	 *
 	 * @param string $slug Slug
+	 * @param int $id ID of current page
 	 * @return string Unique slug
 	 */
-	public function validateSlug ($slug) {
+	public function validateSlug ($slug, $id = 0) {
 	
-		$sql = "SELECT * FROM ".DB_PREFIX."pages WHERE pageSlug = '".escape($slug)."' ";
+		$sql = "SELECT * FROM ".DB_PREFIX."pages
+				WHERE pageSlug = '".escape($slug)."'
+				AND pageID != " . $id;
 		$rec = $this->db->query($sql);
 		
 		if ($rec->getRows() == 0) {

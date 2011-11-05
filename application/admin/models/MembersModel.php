@@ -5,9 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo We need to implement edit functions on models
- * @todo Check if email addresses are well formed (create and edit)
  */
 
 require_once("basemodel.php");
@@ -19,6 +16,18 @@ class MembersModel extends BaseModel {
 	
 	function __construct () {
 		parent::__construct();
+	}
+	
+	/**
+	 * Count the total number of members
+	 *
+	 * @return int Number of members
+	 */
+	public function count () {
+	
+		$sql = "SELECT COUNT(memberID) FROM ".DB_PREFIX."members ";
+		return $this->db->fetchOne($sql);
+	
 	}
 	
 	/**

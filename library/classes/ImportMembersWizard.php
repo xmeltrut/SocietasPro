@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Utilities
- *
- * @todo Finish this
  */
 
 class ImportMembersWizard {

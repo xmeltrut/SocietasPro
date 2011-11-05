@@ -67,6 +67,9 @@ class MembersController extends BaseController implements iController {
 			$csv->addRow($data);
 		}
 		
+		// log as an action in the audit trail
+		auditTrail(12);
+		
 		// output the result
 		$csv->output();
 	
@@ -153,11 +156,13 @@ class MembersController extends BaseController implements iController {
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
-		// get a list of members
+		// gather variables for page
 		$members = $this->model->get();
+		$totalPages = totalPages($this->model->count());
 		
 		// output the page
 		$this->engine->assign("members", $members);
+		$this->engine->assign("totalPages", $totalPages);
 		$this->engine->display("members/index.tpl");
 	
 	}

@@ -68,8 +68,9 @@ class BlogPost extends BaseObject {
 			$this->setMessage(LANG_INVALID." ".LANG_URL);
 			return false;
 		} else {
+			$id = ($this->getData("postID")) ? $this->getData("postID") : 0;
 			$postsModel = new BlogPostsModel();
-			$this->setData("postSlug", $postsModel->validateSlug($value));
+			$this->setData("postSlug", $postsModel->validateSlug($value, $id));
 			return true;
 		}
 	}

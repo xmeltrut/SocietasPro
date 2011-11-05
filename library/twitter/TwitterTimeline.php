@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Twitter
+ *
+ * @todo Build a RemoteRequest object
  */
 
 require_once("twitter/Tweet.php");

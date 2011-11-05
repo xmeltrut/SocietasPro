@@ -2,6 +2,14 @@
 
 {block name=head}
 {include file="visualeditor.tpl"}
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#name").keyup(function(){
+		$("#slug").val(generateSlug($("#name").val()));
+	});
+});
+</script>
 {/block}
 
 {block name=body}

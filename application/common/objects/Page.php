@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org
  * @package SocietasPro
  * @subpackage Common
- *
- * @todo setParent() functions needs to do some validation
  */
 
 require_once("baseobject.php");
@@ -52,6 +50,26 @@ class Page extends BaseObject {
 	 */
 	public function setParent ($value) {
 	
+		// validation
+		if ($this->getData("pageID")) {
+		
+			// check IDs aren't identical
+			if ($this->getData("pageID") == $value) {
+				$this->setMessage(strFirst(LANG_INVALID." ".LANG_PARENT));
+				return false;
+			}
+			
+			// check this parent isn't a child of this page
+			$pagesModel = new PagesModel();
+			$ids = $pagesModel->getChildrenAsArray($this->getData("pageID"));
+			
+			if (in_array($value, $ids)) {
+				$this->setMessage(strFirst(LANG_INVALID." ".LANG_PARENT));
+				return false;
+			}
+		
+		}
+		
 		$this->setData("pageParent", intval($value));
 		return true;
 	
@@ -70,8 +88,9 @@ class Page extends BaseObject {
 			$this->setMessage(LANG_INVALID." ".LANG_URL);
 			return false;
 		} else {
+			$id = ($this->getData("pageID")) ? $this->getData("pageID") : 0;
 			$pageModel = new PagesModel();
-			$this->setData("pageSlug", $pageModel->validateSlug($value));
+			$this->setData("pageSlug", $pageModel->validateSlug($value, $id));
 			return true;
 		}
 	}

@@ -25,14 +25,21 @@ class Subscriber extends BaseObject {
 	}
 	
 	/**
-	 * Set the email address
+	 * Set email address
 	 *
 	 * @param string $value Email address
 	 * @return boolean Success
 	 */
-	public function setEmail ($value) {
+	public function setEmailAddress ($value) {
+	
+		if (validateEmail($value) === false) {
+			$this->setMessage(LANG_INVALID." ".LANG_EMAIL_ADDRESS);
+			return false;
+		}
+		
 		$this->setData("subscriberEmail", $value);
 		return true;
+	
 	}
 
 }

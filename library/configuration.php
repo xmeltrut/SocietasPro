@@ -8,8 +8,6 @@
  * @author Chris Worfolk <chris@buzzsports.com>
  * @package SocietasPro
  * @subpackage Core
- *
- * @todo Do we need to make these functions static?
  */
 
 class Configuration {
@@ -50,7 +48,7 @@ class Configuration {
 	/**
 	 * Initalise the data array
 	 */
-	private function initialise () {
+	private static function initialise () {
 	
 		// create a database object
 		require_once("database.php");
@@ -72,7 +70,7 @@ class Configuration {
 	/**
 	 * Reload the configuration
 	 */
-	public function reload () {
+	public static function reload () {
 	
 		self::initialise();
 	

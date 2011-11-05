@@ -1,4 +1,12 @@
 <?php
+/**
+ * Test the member object
+ *
+ * @author Chris Worfolk <chris@societaspro.org>
+ * @package Unit Tests
+ * @subpackage Objects
+ */
+
 class MemberObjectTest extends PHPUnit_Framework_TestCase {
 
 	private $object;

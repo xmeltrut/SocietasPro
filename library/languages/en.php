@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Languages
+ *
+ * @todo Replace word "fail" with "failed"
  */
 
 $language_strings = array (
@@ -31,6 +33,8 @@ $language_strings = array (
 	"event" => "Event",
 	"events" => "Events",
 	"export_as_csv" => "Export as CSV",
+	"fail" => "Fail",
+	"failed" => "Failed",
 	"file" => "File",
 	"forename" => "Forename",
 	"home" => "Home",
@@ -48,6 +52,7 @@ $language_strings = array (
 	"members" => "Members",
 	"name" => "Name",
 	"none" => "None",
+	"not_found" => "Not Found",
 	"notes" => "Notes",
 	"page" => "Page",
 	"pages" => "Pages",

@@ -38,8 +38,44 @@ class LocationsController extends BaseController implements iController {
 	
 	}
 	
+	/**
+	 * Edit a location
+	 */
+	public function edit () {
+	
+		// get a front controller
+		$front = FrontController::getInstance();
+		
+		// check for actions
+		if (reqSet("action") == "edit") {
+			$this->model->write($_REQUEST, $front->getParam(0));
+			$this->engine->assign("msg", $this->model->getMessage());
+		}
+		
+		// get the object
+		$location = $this->model->getById($front->getParam(0));
+		
+		// output page
+		$this->engine->assign("form", $this->standardForm("edit", $location->getAllData()));
+		$this->engine->display("locations/edit.tpl");
+	
+	}
+	
 	public function index () {
 	
+		// check for actions
+		if (reqSet("action") == "mass") {
+			if ($info = $this->determineMassAction()) {
+				switch ($info["action"]) {
+					case "delete":
+						$this->model->deleteById($info["ids"]);
+						break;
+				}
+			}
+			$this->engine->assign("msg", $this->model->getMessage());
+		}
+		
+		// output page
 		$locations = $this->model->get();
 		$this->engine->assign("locations", $locations);
 		$this->engine->display("locations/index.tpl");

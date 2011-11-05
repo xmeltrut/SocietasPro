@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo We should check to ensure an email is well formed
  */
 
 class MailinglistController extends BaseController implements iController {
@@ -46,6 +44,9 @@ class MailinglistController extends BaseController implements iController {
 			$csv->addRow($data);
 		}
 		
+		// log as an action in the audit trail
+		auditTrail(13);
+		
 		// output the result
 		$csv->output();
 	
@@ -81,13 +82,20 @@ class MailinglistController extends BaseController implements iController {
 	
 		// check for actions
 		if (reqSet("action") == "import") {
+		
 			require_once("classes/ImportSubscribersWizard.php");
 			$wizard = new ImportSubscribersWizard();
+			
 			if ($_REQUEST["emails"] != "") {
-				$wizard->import($_REQUEST["emails"]);
+				$result = $wizard->import($_REQUEST["emails"]);
 			} elseif ($_FILES["upload"]["size"] > 0) {
-				$wizard->import(file_get_contents($_FILES["upload"]["tmp_name"]));
+				$result = $wizard->import(file_get_contents($_FILES["upload"]["tmp_name"]));
 			}
+			
+			if (isset($result)) {
+				$this->engine->assign("msg", $result);
+			}
+		
 		}
 		
 		// build a form

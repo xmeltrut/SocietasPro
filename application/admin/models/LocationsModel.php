@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo There are no edit or delete functions for this controller
  */
 
 require_once("basemodel.php");
@@ -41,6 +39,25 @@ class LocationsModel extends BaseModel {
 		
 		// return results
 		return $arr;
+	
+	}
+	
+	/**
+	 * Get a specific location
+	 *
+	 * @param int $id Location ID
+	 * @return Location
+	 */
+	public function getById ($id) {
+	
+		$sql = "SELECT * FROM ".DB_PREFIX."locations WHERE locationID = " . $id;
+		$rec = $this->db->query($sql);
+		
+		if ($row = $rec->fetch()) {
+			return new Location($row);
+		} else {
+			return false;
+		}
 	
 	}
 	

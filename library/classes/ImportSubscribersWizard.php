@@ -9,8 +9,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Utilities
- *
- * @todo This needs to give feedback on how many imports were successful
  */
 
 class ImportSubscribersWizard {
@@ -19,6 +17,7 @@ class ImportSubscribersWizard {
 	 * Import subscribers
 	 *
 	 * @param string $data List of data
+	 * @return string Results
 	 */
 	public function import ($data) {
 	
@@ -35,10 +34,20 @@ class ImportSubscribersWizard {
 		$subscribersModel = new SubscribersModel();
 		
 		// loop through entries
+		$successCount = 0;
+		$failCount = 0;
+		
 		foreach ($subscribers as $subscriber) {
 			$subscriber = trim($subscriber);
-			$subscribersModel->create($subscriber);
+			if ($subscribersModel->create($subscriber)) {
+				$successCount++;
+			} else {
+				$failCount++;
+			}
 		}
+		
+		// return result
+		return LANG_SUCCESS.": ".$successCount.", ".LANG_FAILED.": ".$failCount;
 	
 	}
 

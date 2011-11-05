@@ -7,6 +7,7 @@
  * @subpackage Core
  *
  * @todo Put a wrapper on display in case of Smarty exceptions
+ * @todo Turn on caching on production systems
  */
 
 require("smarty/Smarty.class.php");
@@ -20,7 +21,6 @@ class TemplateEngine extends Smarty {
 	
 		parent::__construct();
 		
-		// @todo Turn on caching
 		$this->force_compile = true;
 		
 		// get the module
@@ -48,6 +48,24 @@ class TemplateEngine extends Smarty {
 		
 		foreach ($langStrings as $key => $val) {
 			$this->assign("lang_".$key, $val);
+		}
+	
+	}
+	
+	/**
+	 * Outputs a template
+	 *
+	 * @param string $template Template name
+	 * @param string $cache_id Cache ID
+	 * @param string $compile_id Compile ID
+	 */
+	public function display ($template, $cache_id = false, $compile_id = false) {
+	
+		try {
+			parent::display($template, $cache_id, $compile_id);
+		} catch (Exception $e) {
+			require_once("exceptions/TemplateException.php");
+			throw new TemplateException();
 		}
 	
 	}

@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage System
- *
- * @todo Logout page needs to send you somewhere
  */
 
 class AuthController extends BaseController implements iController {
@@ -47,7 +45,7 @@ class AuthController extends BaseController implements iController {
 		require("authorisation.php");
 		$auth = Authorisation::getInstance();
 		$auth->logout();
-		redirect(ROOT);
+		redirect();
 	
 	}
 

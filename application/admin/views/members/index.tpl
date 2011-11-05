@@ -27,6 +27,11 @@
 			</td>
 		</tr>
 		{/foreach}
+		<tr>
+			<td colspan="7">
+				Total pages: {$totalPages}
+			</td>
+		</td>
 	</table>
 	<select name="option">
 		<option value="">{$lang_select_action}</option>

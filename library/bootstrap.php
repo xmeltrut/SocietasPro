@@ -16,3 +16,6 @@ require("functions/strings.php");
 require("functions/validation.php");
 require("constants.php");
 require("icontroller.php");
+
+// run functions
+rebuildRequestArray();

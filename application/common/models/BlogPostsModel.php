@@ -5,9 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Common
- *
- * @todo validateSlug() needs to ignore the current post ID
- * @todo TinyMCE doesn't handle apostrophies properly
  */
 
 require_once("basemodel.php");
@@ -62,11 +59,14 @@ class BlogPostsModel extends BaseModel {
 	 * Check a slug is unique and if not, generate a new one
 	 *
 	 * @param string $slug Slug
+	 * @param int $id ID of the current post
 	 * @return string Unique slug
 	 */
-	public function validateSlug ($slug) {
+	public function validateSlug ($slug, $id = 0) {
 	
-		$sql = "SELECT * FROM ".DB_PREFIX."blog_posts WHERE postSlug = '".escape($slug)."' ";
+		$sql = "SELECT * FROM ".DB_PREFIX."blog_posts
+				WHERE postSlug = '".escape($slug)."'
+				AND postID != " . $id;
 		$rec = $this->db->query($sql);
 		
 		if ($rec->getRows() == 0) {
