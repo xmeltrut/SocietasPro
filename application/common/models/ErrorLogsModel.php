@@ -4,9 +4,7 @@
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
- * @subpackage Admin
- *
- * @todo Can we use this to create error logs?
+ * @subpackage Common
  */
 
 require_once("basemodel.php");
@@ -43,6 +41,28 @@ class ErrorLogsModel extends BaseModel {
 		// return array
 		return $arr;
 	
+	}
+	
+	/**
+	 * Insert a new error log
+	 *
+	 * @param $code int Error code
+	 * @param $details string Error details
+	 * @param $sql SQL statement
+	 * @return boolean Success
+	 */
+	public function insert ($code, $details = "", $sql = "") {
+	
+		$sql = "INSERT INTO ".DB_PREFIX."error_logs (
+			logCode, logURL, logDate, logDetails, logSQL
+			) VALUES (
+			".$code.",
+			'".escape($_SERVER["REQUEST_URI"])."',
+			NOW(),
+			'".escape($details)."',
+			'".escape($sql)."'
+			)";
+		return $this->db->query($sql);
 	}
 
 }
