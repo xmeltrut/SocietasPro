@@ -7,7 +7,6 @@
  * @subpackage Core
  *
  * @todo If you mispell the module name, it needs to throw an error
- * @todo Need to add validation to the controller variable
  */
 
 class FrontController {
@@ -145,8 +144,11 @@ class FrontController {
 		$module = (isset($vars[1])) ? $vars[1] : "";
 		self::setModule($module);
 		
-		self::$controller = (isset($vars[2])) ? $vars[2] : "";
-		self::$page = (isset($vars[3])) ? $vars[3] : "";
+		$controller = (isset($vars[2])) ? $vars[2] : "";
+		self::setController($controller);
+		
+		$page = (isset($vars[3])) ? $vars[3] : "";
+		self::setPage($page);
 		
 		// rest are parameters
 		for ($i = 0; $i < count($vars); $i++) {
@@ -154,6 +156,23 @@ class FrontController {
 				self::$params[] = $vars[$i];
 			}
 		}
+	
+	}
+	
+	/**
+	 * Set the controller. We want it tho throw an error if the
+	 * file doesn't exist, but we also don't want to allow rogue
+	 * characters in the filename, so let's replace them all with
+	 * underscores.
+	 *
+	 * @param string $name Controller name
+	 * @return boolean Success
+	 */
+	private function setController ($name) {
+	
+		$name = preg_replace("/([^a-z0-9,\.-])/i", "_", $name);
+		self::$controller = $name;
+		return true;
 	
 	}
 	
@@ -175,6 +194,20 @@ class FrontController {
 		}
 		
 		return false;
+	
+	}
+	
+	/**
+	 * Set the page. Works the same as setController().
+	 *
+	 * @param string $name Page name
+	 * @return boolean Success
+	 */
+	private function setPage ($name) {
+	
+		$name = preg_replace("/([^a-z0-9,\.-])/i", "_", $name);
+		self::$page = $name;
+		return true;
 	
 	}
 
