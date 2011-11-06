@@ -3,7 +3,7 @@
  * Test the member object
  *
  * @author Chris Worfolk <chris@societaspro.org>
- * @package Unit Tests
+ * @package UnitTests
  * @subpackage Objects
  */
 
