@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo Finish implementation of tweets
  */
 
 class DefaultController extends BaseController implements iController {
