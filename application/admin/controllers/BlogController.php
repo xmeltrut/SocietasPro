@@ -43,17 +43,14 @@ class BlogController extends BaseController implements iController {
 	 */
 	public function edit () {
 	
-		// get a front controller
-		$front = FrontController::getInstance();
-		
 		// check for actions
 		if (reqSet("action") == "edit") {
-			$this->model->write($_REQUEST, $front->getParam(0));
+			$this->model->write($_REQUEST, FrontController::getParam(0));
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
 		// get the object
-		$post = $this->model->getById($front->getParam(0));
+		$post = $this->model->getById(FrontController::getParam(0));
 		
 		// output page
 		$this->engine->assign("form", $this->standardForm("edit", $post->getAllData()));

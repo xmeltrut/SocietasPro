@@ -45,17 +45,14 @@ class EventsController extends BaseController implements iController {
 	 */
 	public function edit () {
 	
-		// get a front controller
-		$front = FrontController::getInstance();
-		
 		// check for actions
 		if (reqSet("action") == "edit") {
-			$this->model->write($_REQUEST, $front->getParam(0));
+			$this->model->write($_REQUEST, FrontController::getParam(0));
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
 		// get the object
-		$event = $this->model->getById($front->getParam(0));
+		$event = $this->model->getById(FrontController::getParam(0));
 		
 		// output page
 		$this->engine->assign("form", $this->standardForm("edit", $event->getAllData()));

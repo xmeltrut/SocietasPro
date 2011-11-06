@@ -38,8 +38,7 @@ class BlogController extends BaseController implements iController {
 	public function post () {
 	
 		// get blog post
-		$front = FrontController::getInstance();
-		$event = $this->model->getById($front->getParam(0));
+		$event = $this->model->getById(FrontController::getParam(0));
 		
 		// output page
 		$this->engine->display("blogPost.tpl");
