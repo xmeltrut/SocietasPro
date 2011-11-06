@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
+ *
+ * @todo Action needs to be translated
  */
 
 require_once("basemodel.php");
@@ -41,13 +43,31 @@ class AuditEntriesModel extends BaseModel {
 		$arr = array();
 		
 		// query database
-		$sql = "SELECT * FROM ".DB_PREFIX."audit_entries
+		$sql = "SELECT ae.*, m.memberForename, m.memberSurname, m.memberEmail, aa.actionName
+				FROM ".DB_PREFIX."audit_entries AS ae
+				LEFT OUTER JOIN ".DB_PREFIX."members AS m
+				ON ae.entryMember = m.memberID
+				LEFT OUTER JOIN ".DB_PREFIX."audit_actions AS aa
+				ON ae.entryAction = aa.actionID
 				ORDER BY entryDate DESC ".sqlLimit($pageNum);
 		$rec = $this->db->query($sql);
 		
 		// loop through results
 		while ($row = $rec->fetch()) {
+		
+			// member information
+			if ($row["memberEmail"] === NULL) {
+				$row["entryMember"] = "";
+			} else {
+				$row["entryMember"] = h($row["memberForename"]." ".$row["memberSurname"]." <".$row["memberEmail"].">");
+			}
+			
+			// action information
+			
+			
+			// save row into array
 			$arr[] = $row;
+		
 		}
 		
 		// return array

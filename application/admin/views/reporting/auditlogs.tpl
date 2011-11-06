@@ -14,7 +14,7 @@
 	{foreach $logs as $log}
 	<tr>
 		<td>{$log["entryDate"]}</td>
-		<td>{$log["entryAction"]}</td>
+		<td>{$log["actionName"]}</td>
 		<td>{$log["entryMember"]}</td>
 		<td>{$log["entryOldData"]}</td>
 		<td>{$log["entryNewData"]}</td>
