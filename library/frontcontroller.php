@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org
  * @package SocietasPro
  * @subpackage Core
- *
- * @todo If you mispell the module name, it needs to throw an error
  */
 
 class FrontController {

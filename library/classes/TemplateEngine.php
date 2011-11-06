@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
- *
- * @todo Put a wrapper on display in case of Smarty exceptions
  */
 
 require("smarty/Smarty.class.php");
