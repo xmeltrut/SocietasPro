@@ -26,22 +26,9 @@ function auditTrail ($actionID, $oldData = "", $newData = "") {
 		}
 	}
 	
-	// grab the user ID
-	$memberID = intval($_SESSION["sp_user_id"]);
-	
-	// get database
-	$db = Database::getInstance();
-	
-	// build SQL statement
-	$sql = "INSERT INTO ".DB_PREFIX."audit_entries (
-			entryAction, entryMember, entryDate, entryOldData, entryNewData
-			) VALUES (
-			".$actionID.",
-			".$memberID.",
-			NOW(),
-			'".escape($oldData)."',
-			'".escape($newData)."'
-			)";
-	return $db->query($sql);
+	// insert it
+	require_once("models/AuditEntriesModel.php");
+	$auditEntriesModel = new AuditEntriesModel();
+	return $auditEntriesModel->insert($actionID, $oldData, $newData);
 
 }

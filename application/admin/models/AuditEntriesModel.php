@@ -54,5 +54,32 @@ class AuditEntriesModel extends BaseModel {
 		return $arr;
 	
 	}
+	
+	/**
+	 * Insert a new entry into the log. This should only be used by the
+	 * auditTrail() function!
+	 *
+	 * @param int $actionID Action ID
+	 * @param string $oldData Original data
+	 * @param string $newData Updated data
+	 */
+	public function insert ($actionID, $oldData = "", $newData = "") {
+	
+		// grab the user ID
+		$memberID = intval($_SESSION["sp_user_id"]);
+		
+		// insert into database
+		$sql = "INSERT INTO ".DB_PREFIX."audit_entries (
+				entryAction, entryMember, entryDate, entryOldData, entryNewData
+				) VALUES (
+				".$actionID.",
+				".$memberID.",
+				NOW(),
+				'".escape($oldData)."',
+				'".escape($newData)."'
+				)";
+		return $this->db->query($sql);
+	
+	}
 
 }
