@@ -34,7 +34,7 @@ class PagesModel extends BaseModel {
 			$this->setMessage(LANG_SUCCESS);
 			return true;
 		} else {
-			$this->setMessage(LANG_FAIL);
+			$this->setMessage(LANG_FAILED);
 			return false;
 		}
 	

@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Languages
- *
- * @todo Replace word "fail" with "failed"
  */
 
 $language_strings = array (
