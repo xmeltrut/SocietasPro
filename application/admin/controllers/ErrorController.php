@@ -5,9 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo Translate error message pages
- * @todo Map ErrorDocuments in .htaccess to here
  */
 
 class ErrorController extends BaseController implements iController {
@@ -27,14 +24,22 @@ class ErrorController extends BaseController implements iController {
 	 * 404 Page Not Found
 	 */
 	public function notFound () {
+	
+		$this->engine->assign("title", Language::getContent("page_not_found"));
+		$this->engine->assign("content", Language::getContent("page_not_found_body"));
 		$this->engine->display("errors/404.tpl");
+	
 	}
 	
 	/**
 	 * 500 Server Error
 	 */
 	public function serverError () {
+	
+		$this->engine->assign("title", Language::getContent("server_error"));
+		$this->engine->assign("content", Language::getContent("server_error_body"));
 		$this->engine->display("errors/500.tpl");
+	
 	}
 
 }

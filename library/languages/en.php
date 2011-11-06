@@ -73,3 +73,10 @@ $language_strings = array (
 	"url" => "URL",
 	"view" => "View"
 );
+
+$language_content = array (
+	"page_not_found" => "Page Not Found",
+	"page_not_found_body" => "Sorry, the page you are looking for could not be found.",
+	"server_error" => "Server Error",
+	"server_error_body" => "Sorry, your request could not be completed because of a server error. Please consult the error logs for further information."
+);

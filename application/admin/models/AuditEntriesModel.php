@@ -63,7 +63,7 @@ class AuditEntriesModel extends BaseModel {
 			}
 			
 			// action information
-			
+			$row["actionName"] = Language::translate($row["actionName"]);
 			
 			// save row into array
 			$arr[] = $row;

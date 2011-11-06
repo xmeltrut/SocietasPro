@@ -15,9 +15,10 @@ class Language {
 	private static $instance;
 	
 	/**
-	 * Variable to hold the language strings
+	 * Variable to hold the language strings and content (longer strings)
 	 */
 	private static $strings = array();
+	private static $content = array();
 	
 	/**
 	 * If all else fails, we default to English
@@ -28,6 +29,23 @@ class Language {
 	 * Prevent instancing
 	 */
 	private function __construct () {
+	}
+	
+	/**
+	 * Get a content string. We use content strings because we don't want to be
+	 * setting up huge constants for content which will only be used on one page.
+	 *
+	 * @param string $key Key
+	 * @return string Content, or false if not found
+	 */
+	public static function getContent ($key) {
+	
+		if (array_key_exists($key, self::$content)) {
+			return self::$content[$key];
+		} else {
+			return false;
+		}
+	
 	}
 	
 	/**
@@ -91,11 +109,34 @@ class Language {
 		
 		include_once($languageFile);
 		self::$strings = $language_strings;
+		self::$content = $language_content;
 		
 		// load strings in as constants
 		foreach ($language_strings as $key => $val) {
 			define("LANG_".strtoupper($key), $val);
 		}
+	
+	}
+	
+	/**
+	 * Translate a string, as far as possible
+	 *
+	 * @param string $str String to translate
+	 * @return string Translated string
+	 */
+	public static function translate ($str) {
+	return $str;
+		// take a copy of the area and sort it by string length
+		$arr = self::$strings;
+		function custSort ($a, $b) {
+    		return strlen($b)-strlen($a);
+		}
+		uasort($arr, "custSort");
+		
+		return $str;
+		
+		//print_r($arr);
+		//die();
 	
 	}
 
