@@ -1,6 +1,6 @@
 <?php
 /**
- * This is the default page for the admin panel.
+ * This is the default page for the admin panel
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
