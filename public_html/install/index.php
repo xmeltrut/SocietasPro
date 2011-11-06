@@ -38,16 +38,31 @@ require("bootstrap.php");
 	
 	foreach ($checks as $check) {
 	
-		$checkName = "check".$check;
-		$getName = "get".$check;
-		$testResult = ($test->$checkName()) ? "OK" : "FAIL";
+		if ($data = $test->check($check)) {
+		
+			switch ($data["r"]) {
+				case 0:
+					$result = "FAIL";
+					$bgColour = "#FF0000";
+					break;
+				case 1:
+					$result = "WARNING";
+					$bgColour = "#FFFF00";
+					break;
+				default:
+					$result = "PASS";
+					$bgColour = "#00FF00";
+			}
+	
 	?>
 		<tr>
 			<td><?=$check?></td>
-			<td><?=$test->$getName()?></td>
-			<td><?=$testResult?></td>
+			<td><?=$data["i"]?></td>
+			<td style="background-color: <?=$bgColour?>;"><?=$result?></td>
 		</tr>
 	<?php
+		}
+	
 	}
 	?>
 	</table>
