@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo Action needs to be translated
  */
 
 require_once("basemodel.php");
@@ -63,7 +61,7 @@ class AuditEntriesModel extends BaseModel {
 			}
 			
 			// action information
-			$row["actionName"] = Language::translate($row["actionName"]);
+			//$row["actionName"] = Language::translate($row["actionName"]);
 			
 			// save row into array
 			$arr[] = $row;

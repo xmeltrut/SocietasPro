@@ -36,7 +36,7 @@ class FrontController {
 	public function execute () {
 	
 		$path = "../application/".$this->getModule()."/";
-		set_include_path(get_include_path() . PATH_SEPARATOR . $path); // @todo Tidy this up
+		set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 		
 		$controllerName = $this->getController();
 		$controllerFile = $controllerName . ".php";

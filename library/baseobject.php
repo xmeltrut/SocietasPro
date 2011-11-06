@@ -7,8 +7,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
- *
- * @todo Make use of the magic getter is admin module
  */
 
 abstract class BaseObject {

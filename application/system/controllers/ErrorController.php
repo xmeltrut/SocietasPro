@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage System
- *
- * @todo Create templates
  */
 
 class ErrorController extends BaseController implements iController {

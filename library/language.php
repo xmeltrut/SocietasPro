@@ -117,27 +117,5 @@ class Language {
 		}
 	
 	}
-	
-	/**
-	 * Translate a string, as far as possible
-	 *
-	 * @param string $str String to translate
-	 * @return string Translated string
-	 */
-	public static function translate ($str) {
-	return $str;
-		// take a copy of the area and sort it by string length
-		$arr = self::$strings;
-		function custSort ($a, $b) {
-    		return strlen($b)-strlen($a);
-		}
-		uasort($arr, "custSort");
-		
-		return $str;
-		
-		//print_r($arr);
-		//die();
-	
-	}
 
 }

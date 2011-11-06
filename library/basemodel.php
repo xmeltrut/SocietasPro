@@ -5,9 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
- *
- * @todo Stack error messages (PHP doesn't check all conditions of if statements)
- * @todo We need to give feedback on deletes
  */
 
 abstract class BaseModel {
@@ -41,6 +38,9 @@ abstract class BaseModel {
 	 */
 	public function deleteById ($ids, $auditAction = false) {
 	
+		// initialise variables
+		$successCount = 0;
+		
 		// build the identifier
 		if (!$idKey = $this->getIdentifier()) {
 			return false;
@@ -72,6 +72,9 @@ abstract class BaseModel {
 				// if successful
 				if ($delResult) {
 				
+					// add to count
+					$successCount++;
+					
 					// log to audit trail
 					if ($auditAction) {
 						auditTrail($auditAction, json_encode($row));
@@ -81,6 +84,15 @@ abstract class BaseModel {
 			
 			}
 		
+		}
+		
+		// provide feedback
+		if ($successCount > 0) {
+			$this->setMessage(LANG_SUCCESS);
+			return true;
+		} else {
+			$this->setMessage(LANG_FAILED);
+			return false;
 		}
 	
 	}
