@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
+ *
+ * @todo Can we use the AuditEntriesModel class?
  */
 
 /**

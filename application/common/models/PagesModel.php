@@ -158,13 +158,15 @@ class PagesModel extends BaseModel {
 	 *
 	 * @param string $slug Slug
 	 * @param int $id ID of current page
+	 * @param int $parent ID of parent page
 	 * @return string Unique slug
 	 */
-	public function validateSlug ($slug, $id = 0) {
+	public function validateSlug ($slug, $id = 0, $parent = 0) {
 	
 		$sql = "SELECT * FROM ".DB_PREFIX."pages
 				WHERE pageSlug = '".escape($slug)."'
-				AND pageID != " . $id;
+				AND pageID != " . $id . "
+				AND pageParent = " . $parent;
 		$rec = $this->db->query($sql);
 		
 		if ($rec->getRows() == 0) {
@@ -193,11 +195,11 @@ class PagesModel extends BaseModel {
 			$auditAction = 9;
 		}
 		
-		// make modifications
+		// Make modifications. We must set the parent before the slug for validation reasons.
 		if (
+			!$object->setParent($d["parent"]) ||
 			!$object->setName($d["name"]) ||
 			!$object->setSlug($d["slug"]) ||
-			!$object->setParent($d["parent"]) ||
 			!$object->setContent($d["content"])
 		) {
 			$this->setMessage($object->getMessage());

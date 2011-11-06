@@ -89,8 +89,9 @@ class Page extends BaseObject {
 			return false;
 		} else {
 			$id = ($this->getData("pageID")) ? $this->getData("pageID") : 0;
+			$parent = ($this->getData("pageParent")) ? $this->getData("pageParent") : 0;
 			$pageModel = new PagesModel();
-			$this->setData("pageSlug", $pageModel->validateSlug($value, $id));
+			$this->setData("pageSlug", $pageModel->validateSlug($value, $id, $parent));
 			return true;
 		}
 	}

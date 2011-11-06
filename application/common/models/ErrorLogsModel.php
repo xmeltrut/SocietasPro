@@ -8,7 +8,6 @@
  */
 
 require_once("basemodel.php");
-require_once("objects/Page.php");
 
 class ErrorLogsModel extends BaseModel {
 

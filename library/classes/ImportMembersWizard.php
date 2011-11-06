@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Utilities
+ *
+ * @todo Needs to log to the audit trail too
  */
 
 class ImportMembersWizard {

@@ -10,10 +10,12 @@
  */
 
 $language_strings = array (
+	"action" => "Action",
 	"address" => "Address",
 	"administrator" => "Administrator",
 	"already_exists" => "Already Exists",
 	"are_you_sure" => "Are you sure?",
+	"audit_logs" => "Audit Logs",
 	"blog" => "Blog",
 	"clone" => "Clone",
 	"code" => "Code",
@@ -51,9 +53,11 @@ $language_strings = array (
 	"member" => "Member",
 	"members" => "Members",
 	"name" => "Name",
+	"new" => "New",
 	"none" => "None",
 	"not_found" => "Not Found",
 	"notes" => "Notes",
+	"old" => "Old",
 	"page" => "Page",
 	"pages" => "Pages",
 	"parent" => "Parent",
