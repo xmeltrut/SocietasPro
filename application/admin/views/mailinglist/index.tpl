@@ -1,5 +1,13 @@
 {extends file="standard.tpl"}
 
+{block name=head}
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#newEmail').focus();
+});
+</script>
+{/block}
+
 {block name=body}
 <h2>{$lang_mailing_list}</h2>
 
@@ -39,7 +47,7 @@
 <h3>{$lang_create} {$lang_subscriber}</h3>
 <p>
 	<form action="" method="post">
-		<input type="text" name="email" />
+		<input type="text" name="email" id="newEmail" />
 		<input type="hidden" name="action" value="create" />
 		<input type="submit" />
 	</form>

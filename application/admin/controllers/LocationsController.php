@@ -96,6 +96,7 @@ class LocationsController extends BaseController implements iController {
 		$form->addHidden("id", arrSet($data, "locationID"));
 		$form->addHidden("action", $action);
 		$form->addSubmit();
+		$form->setDefaultElement("name");
 		
 		return $form->build();
 	

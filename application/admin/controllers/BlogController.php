@@ -106,6 +106,7 @@ class BlogController extends BaseController implements iController {
 		$form->addHidden("id", arrSet($data, "postID"));
 		$form->addHidden("action", $action);
 		$form->addSubmit();
+		$form->setDefaultElement("name");
 		
 		return $form->build();
 	

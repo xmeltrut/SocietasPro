@@ -23,6 +23,7 @@ class FormBuilder {
 	private $method;
 	
 	private $hasUpload = false;
+	private $defaultElement = false;
 	
 	/**
 	 * Constructor.
@@ -223,10 +224,24 @@ class FormBuilder {
 	 */
 	public function build () {
 	
+		// if this form has an upload, we need to set the enctype
 		$enctype = ($this->hasUpload) ? 'enctype="multipart/form-data"' : '';
 		
+		// build the form
 		$this->output  = '<form action="'.$this->action.'" method="'.$this->method.'" '.$enctype.'><ol>'.$this->output;
 		$this->output .= '</ol></form>';
+		
+		// if we have a default element, we need to add some JavaScript
+		if ($this->defaultElement) {
+			$str = "<script type=\"text/javascript\">
+					$(document).ready(function(){
+						$('#".$this->defaultElement."').focus();
+					});
+					</script>";
+			$this->output .= $str;
+		}
+		
+		// return the output
 		return $this->output;
 	
 	}
@@ -281,6 +296,24 @@ class FormBuilder {
 		}
 		$var .= '</select>';
 		return $var;
+	
+	}
+	
+	/**
+	 * Set the default element that the cursor will jump to
+	 *
+	 * @param string $id Element ID
+	 * @return boolean Success
+	 */
+	public function setDefaultElement ($id) {
+	
+		// false would be OK, but not blank
+		if ($id == "") {
+			$id = false;
+		}
+		
+		$this->defaultElement = $id;
+		return true;
 	
 	}
 

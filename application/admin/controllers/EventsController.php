@@ -125,6 +125,7 @@ class EventsController extends BaseController implements iController {
 		$form->addHidden("id", arrSet($data, "memberID"));
 		$form->addHidden("action", $action);
 		$form->addSubmit();
+		$form->setDefaultElement("name");
 		
 		return $form->build();
 	

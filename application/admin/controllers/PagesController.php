@@ -110,6 +110,7 @@ class PagesController extends BaseController implements iController {
 		$form->addHidden("id", arrSet($data, "pageID"));
 		$form->addHidden("action", $action);
 		$form->addSubmit();
+		$form->setDefaultElement("name");
 		
 		return $form->build();
 	

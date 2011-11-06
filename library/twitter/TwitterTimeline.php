@@ -49,7 +49,6 @@ class TwitterTimeline {
 		
 		// process results
 		if ($status) {
-			print_r($request->getResponse());
 			$this->response = $request->getResponse();
 		}
 	

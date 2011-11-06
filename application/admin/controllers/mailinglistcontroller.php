@@ -106,6 +106,7 @@ class MailinglistController extends BaseController implements iController {
 		$form->addFile("upload", LANG_FILE);
 		$form->addHidden("action", "import");
 		$form->addSubmit();
+		$form->setDefaultElement("emails");
 		
 		// output page
 		$this->engine->assign("form", $form->build());
