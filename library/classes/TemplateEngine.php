@@ -7,7 +7,6 @@
  * @subpackage Core
  *
  * @todo Put a wrapper on display in case of Smarty exceptions
- * @todo Turn on caching on production systems
  */
 
 require("smarty/Smarty.class.php");
@@ -21,7 +20,10 @@ class TemplateEngine extends Smarty {
 	
 		parent::__construct();
 		
-		$this->force_compile = true;
+		// force recompile when developing
+		if (MODE == "DEBUG") {
+			$this->force_compile = true;
+		}
 		
 		// get the module
 		$front = FrontController::getInstance();
