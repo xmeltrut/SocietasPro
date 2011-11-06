@@ -98,16 +98,27 @@ class MembersController extends BaseController implements iController {
 	 */
 	public function import () {
 	
-		// build a form
+		// build objects
 		require_once("classes/FormBuilder.php");
 		$form = new FormBuilder();
 		
+		require_once("classes/ImportMembersWizard.php");
+		
 		// check for actions
 		if (reqSet("action") == "import") {
-			$file = file($_FILES["upload"]["tmp_name"]);
-			require_once("classes/ImportMembersWizard.php");
+		
+			// move file to a common location
+			$fileHash = strtolower(md5($_FILES["upload"]["name"].microtime(true)));
+			$fileLoca = TEMP_DIR."/".$fileHash.".csv";
+			move_uploaded_file($_FILES["upload"]["tmp_name"], $fileLoca);
+			
+			// read file
+			$file = file($fileLoca);
+			
+			// create a wizard
 			$wizard = new ImportMembersWizard($file);
 			
+			// get headers and build form
 			$headers = $wizard->getColumnHeaders();
 			$options = $wizard->getColumnOptions();
 			
@@ -115,22 +126,48 @@ class MembersController extends BaseController implements iController {
 				$form->addSelect("col".$key, $val, $options, $wizard->matchHeaderToColumn($val));
 			}
 			
+			$form->addHidden("data", $fileHash);
+			$form->addHidden("action", "import2");
 			$form->addSubmit(LANG_IMPORT);
 			
+			// output page
 			$this->engine->assign("form", $form->build());
 			$this->engine->display("members/import2.tpl");
+		
 		} else {
 		
+			// check for actions
+			if (reqSet("action") == "import2") {
 		
-		
-		
-		$form->addFile("upload", LANG_CSV);
-		$form->addHidden("action", "import");
-		$form->addSubmit();
-		
-		// output page
-		$this->engine->assign("form", $form->build());
-		$this->engine->display("members/import.tpl");
+				// get the data file
+				$fileLoca = TEMP_DIR."/".strSantiseFilename($_REQUEST["data"]).".csv";
+				$file = file($fileLoca);
+				
+				// create a wizard
+				$wizard = new ImportMembersWizard($file);
+				
+				// create a map based on user's selections
+				$map = array();
+				
+				foreach ($_REQUEST as $key => $val) {
+					if (substr($key, 0, 3) == "col") {
+						//$newKey = intval(str_replace("col", "", $key));
+						$map[$val] = intval(str_replace("col", "", $key));
+					}
+				}
+				
+				$result = $wizard->importUsingMap($map);
+				$this->engine->assign("msg", $result);
+			
+			}
+			
+			$form->addFile("upload", LANG_CSV);
+			$form->addHidden("action", "import");
+			$form->addSubmit();
+			
+			// output page
+			$this->engine->assign("form", $form->build());
+			$this->engine->display("members/import.tpl");
 		
 		}
 	

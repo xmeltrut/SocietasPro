@@ -50,3 +50,20 @@ function strIncrement ($str) {
 	return $newStr;
 
 }
+
+/**
+ * Get rid of any nasty characters from a filename.
+ *
+ * Note, this won't actually "fix" the filename if you will, it will just
+ * replace the nasty characters with underscores, which we don't really
+ * use in the application, so it will still throw an invalid file not found
+ * when you try to use it (as we want it to do).
+ *
+ * @param string $str Filename
+ * @return string Cleaned filename
+ */
+function strSantiseFilename ($str) {
+
+	return preg_replace("/([^a-z0-9,\.-])/i", "_", $str);
+
+}

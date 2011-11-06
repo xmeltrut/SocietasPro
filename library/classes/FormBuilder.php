@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Utilities
- *
- * @todo It should default the cursor to a specific element
  */
 
 class FormBuilder {

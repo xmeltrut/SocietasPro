@@ -160,17 +160,14 @@ class FrontController {
 	}
 	
 	/**
-	 * Set the controller. We want it tho throw an error if the
-	 * file doesn't exist, but we also don't want to allow rogue
-	 * characters in the filename, so let's replace them all with
-	 * underscores.
+	 * Set the controller.
 	 *
 	 * @param string $name Controller name
 	 * @return boolean Success
 	 */
 	private function setController ($name) {
 	
-		$name = preg_replace("/([^a-z0-9,\.-])/i", "_", $name);
+		$name = strSantiseFilename($name);
 		self::$controller = $name;
 		return true;
 	
@@ -198,14 +195,14 @@ class FrontController {
 	}
 	
 	/**
-	 * Set the page. Works the same as setController().
+	 * Set the page.
 	 *
 	 * @param string $name Page name
 	 * @return boolean Success
 	 */
 	private function setPage ($name) {
 	
-		$name = preg_replace("/([^a-z0-9,\.-])/i", "_", $name);
+		$name = strSantiseFilename($name);
 		self::$page = $name;
 		return true;
 	

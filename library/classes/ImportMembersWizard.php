@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Utilities
- *
- * @todo Needs to log to the audit trail too
  */
 
 class ImportMembersWizard {
@@ -62,6 +60,55 @@ class ImportMembersWizard {
 	public function getColumnOptions () {
 	
 		return $this->columns;
+	
+	}
+	
+	/**
+	 * Import the data using a map of csv column index => database column name
+	 *
+	 * @param array $map Map
+	 * @return string Feedback
+	 */
+	public function importUsingMap ($map) {
+	
+		// initialise variables
+		$successCount = 0;
+		$failCount = 0;
+		$headerRow = true;
+		$membersModel = new MembersModel();
+		
+		// loop through results
+		foreach ($this->data as $rowString) {
+		
+			// skip header row
+			if ($headerRow) {
+				$headerRow = false;
+				continue;
+			}
+			
+			// extract data
+			$row = str_getcsv($rowString);
+			
+			// insert to model
+			$data = array (
+				"address" => $row[$map["Address"]],
+				"email" => $row[$map["Email"]],
+				"forename" => $row[$map["Forename"]],
+				"notes" => $row[$map["Notes"]],
+				"surname" => $row[$map["Surname"]]
+			);
+			
+			// write member
+			if ($membersModel->write($data)) {
+				$successCount++;
+			} else {
+				$failCount++;
+			}
+		
+		}
+		
+		// return result
+		return LANG_SUCCESS.": ".$successCount.", ".LANG_FAILED.": ".$failCount;
 	
 	}
 	
