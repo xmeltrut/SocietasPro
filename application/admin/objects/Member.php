@@ -1,6 +1,6 @@
 <?php
 /**
- * Member object.
+ * Member object
  *
  * @author Chris Worfolk <chris@societaspro.org
  * @package SocietasPro

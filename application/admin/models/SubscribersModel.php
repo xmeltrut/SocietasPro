@@ -73,6 +73,7 @@ class SubscribersModel extends BaseModel {
 		if ($subscriber) {
 			$sql = "DELETE FROM ".DB_PREFIX."subscribers WHERE subscriberEmail = '".escape($email)."' ";
 			if ($this->db->query($sql)) {
+				auditTrail(22, $subscriber);
 				$this->setMessage(LANG_SUCCESS);
 				return true;
 			} else {

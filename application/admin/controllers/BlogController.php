@@ -68,7 +68,7 @@ class BlogController extends BaseController implements iController {
 			if ($info = $this->determineMassAction()) {
 				switch ($info["action"]) {
 					case "delete":
-						$this->model->deleteById($info["ids"]);
+						$this->model->deleteById($info["ids"], 18);
 						break;
 				}
 			}

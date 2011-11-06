@@ -71,7 +71,7 @@ class PagesController extends BaseController implements iController {
 						$this->model->cloneById($info["ids"]);
 						break;
 					case "delete":
-						$this->model->deleteById($info["ids"]);
+						$this->model->deleteById($info["ids"], 19);
 						break;
 				}
 			}

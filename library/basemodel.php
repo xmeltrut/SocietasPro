@@ -7,6 +7,7 @@
  * @subpackage Core
  *
  * @todo Stack error messages (PHP doesn't check all conditions of if statements)
+ * @todo We need to give feedback on deletes
  */
 
 abstract class BaseModel {
@@ -35,9 +36,10 @@ abstract class BaseModel {
 	 * Delete an object in this table by it's ID
 	 *
 	 * @param mixed $ids Integer single ID or array of IDs
+	 * @param int $auditAction Audit trail action ID
 	 * @return boolean
 	 */
-	public function deleteById ($ids) {
+	public function deleteById ($ids, $auditAction = false) {
 	
 		// build the identifier
 		if (!$idKey = $this->getIdentifier()) {
@@ -52,10 +54,34 @@ abstract class BaseModel {
 		// clean the array
 		array_walk($ids, "intval");
 		
-		// build the SQL
-		$sql = "DELETE FROM ".DB_PREFIX.$this->tableName."
-				WHERE " . $this->getIdentifier() . " IN (" . implode(",", $ids) . ")";
-		return $this->db->query($sql);
+		// loop through IDs
+		foreach ($ids as $id) {
+		
+			// get the data
+			$sql = "SELECT * FROM ".DB_PREFIX.$this->tableName."
+					WHERE ".$this->getIdentifier()." = ".$id;
+			$rec = $this->db->query($sql);
+			
+			if ($row = $rec->fetch()) {
+			
+				// run delete SQL
+				$sql = "DELETE FROM ".DB_PREFIX.$this->tableName."
+						WHERE ".$this->getIdentifier()." = ".$id;
+				$delResult = $this->db->query($sql);
+				
+				// if successful
+				if ($delResult) {
+				
+					// log to audit trail
+					if ($auditAction) {
+						auditTrail($auditAction, json_encode($row));
+					}
+				
+				}
+			
+			}
+		
+		}
 	
 	}
 	
