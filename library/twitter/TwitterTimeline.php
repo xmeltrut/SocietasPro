@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Twitter
- *
- * @todo Build a RemoteRequest object
  */
 
 require_once("twitter/Tweet.php");
@@ -38,30 +36,22 @@ class TwitterTimeline {
 	 */
 	private function call () {
 	
-		// build parameters
-		$params = array (
-			"screen_name" => $this->screenName,
-			"count" => $this->count,
-			"include_rts" => "true",
-			"include_entities" => "true"
-		);
+		// build request
+		require_once("classes/RemoteRequest.php");
+		$request = new RemoteRequest("https://api.twitter.com/1/statuses/user_timeline.json");
+		$request->setParam("screen_name", $this->screenName);
+		$request->setParam("count", $this->count);
+		$request->setParam("include_rts", "true");
+		$request->setParam("include_entities", "true");
 		
-		// build URL
-		$url = "https://api.twitter.com/1/statuses/user_timeline.json?";
+		// send request
+		$status = $request->send();
 		
-		foreach ($params as $key => $val) {
-			$url .= $key."=".$val."&";
+		// process results
+		if ($status) {
+			print_r($request->getResponse());
+			$this->response = $request->getResponse();
 		}
-		
-		// make curl request
-		$ch = curl_init(); 
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-		$response = curl_exec($ch);
-		curl_close($ch);
-		
-		// save the response
-		$this->response = $response;
 	
 	}
 	
