@@ -25,9 +25,19 @@ class EventsModel extends BaseModel {
 	 */
 	public function cloneById ($id) {
 	
+		// create and object and strip the ID
 		$event = $this->getById($id);
 		$event->unsetID();
-		return $this->save($event);
+		
+		if ($this->save($event)) {
+			$newData = json_encode(array("eventID" => $this->db->insertId()));
+			auditTrail(15, $event->original(), $newData);
+			$this->setMessage(LANG_SUCCESS);
+			return true;
+		} else {
+			$this->setMessage(LANG_FAILED);
+			return false;
+		}
 	
 	}
 	

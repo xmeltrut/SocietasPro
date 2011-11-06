@@ -94,6 +94,17 @@ class Database {
 	}
 	
 	/**
+	 * Retieve the last auto increment generated ID
+	 *
+	 * @return int ID
+	 */
+	public function insertId () {
+	
+		return mysql_insert_id();
+	
+	}
+	
+	/**
 	 * Query the database.
 	 *
 	 * @param string $sql SQL statement to execute

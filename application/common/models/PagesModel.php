@@ -30,7 +30,8 @@ class PagesModel extends BaseModel {
 		$page->unsetID();
 		
 		if ($this->save($page)) {
-			auditTrail(15, $page->original(), $page);
+			$newData = json_encode(array("pageID" => $this->db->insertId()));
+			auditTrail(16, $page->original(), $newData);
 			$this->setMessage(LANG_SUCCESS);
 			return true;
 		} else {
