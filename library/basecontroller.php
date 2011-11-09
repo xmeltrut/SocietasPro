@@ -37,7 +37,7 @@ abstract class BaseController {
 	
 		// key keys and search them
 		$keys = array_keys($_REQUEST);
-		$matches = preg_grep("/(clone|delete)_([0-9]+)/", $keys);
+		$matches = preg_grep("/(clone|delete|down|up)_([0-9]+)/", $keys);
 		
 		// do we have a match?
 		if (count($matches)) {

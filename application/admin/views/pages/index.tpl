@@ -21,6 +21,8 @@
 			<td>
 				<input type="submit" name="delete_{$page->getData("pageID")}" value="{$lang_delete}" onClick="return areYouSure();" />
 				<input type="submit" name="clone_{$page->getData("pageID")}" value="{$lang_clone}" />
+				<input type="submit" name="up_{$page->getData("pageID")}" value="{$lang_move_up}" />
+				<input type="submit" name="down_{$page->getData("pageID")}" value="{$lang_move_down}" />
 			</td>
 		</tr>
 		{/foreach}

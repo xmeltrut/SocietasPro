@@ -73,6 +73,12 @@ class PagesController extends BaseController implements iController {
 					case "delete":
 						$this->model->deleteById($info["ids"], 19);
 						break;
+					case "up":
+						$this->model->moveUp($info["ids"]);
+						break;
+					case "down":
+						$this->model->moveDown($info["ids"]);
+						break;
 				}
 			}
 			$this->engine->assign("msg", $this->model->getMessage());

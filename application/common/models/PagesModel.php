@@ -5,6 +5,10 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Common
+ *
+ * @todo Creating pages should list it at the bottom
+ * @todo Changing a page parent should trigger a reorder
+ * @todo Only show legitimate buttons
  */
 
 require_once("basemodel.php");
@@ -55,7 +59,8 @@ class PagesModel extends BaseModel {
 		
 		// query the database
 		$sql = "SELECT * FROM ".DB_PREFIX."pages
-				WHERE pageParent = " . $parentID;
+				WHERE pageParent = " . $parentID."
+				ORDER BY pageOrder ASC, pageName ASC ";
 		$rec = $this->db->query($sql);
 		
 		// loop through results
@@ -92,7 +97,8 @@ class PagesModel extends BaseModel {
 		// query the database
 		$sql = "SELECT * FROM ".DB_PREFIX."pages
 				WHERE pageParent = ".$parentID."
-				AND pageID != ".$excludedID;
+				AND pageID != ".$excludedID."
+				ORDER BY pageOrder ASC, pageName ASC ";
 		$rec = $this->db->query($sql);
 		
 		// loop through results
@@ -151,6 +157,86 @@ class PagesModel extends BaseModel {
 		
 		// return results
 		return $arr;
+	
+	}
+	
+	/**
+	 * Move a page down
+	 *
+	 * @param int $id Page ID
+	 * @return boolean Success
+	 */
+	public function moveDown ($id) {
+	
+		$sql = "UPDATE ".DB_PREFIX."pages SET pageOrder = (pageOrder + 3) WHERE pageID = " . $id;
+		return $this->db->query($sql);
+		
+		$this->reorder();
+	
+	}
+	
+	/**
+	 * Move a page up
+	 *
+	 * @param int $id Page ID
+	 * @return boolean Success
+	 */
+	public function moveUp ($id) {
+	
+		$sql = "UPDATE ".DB_PREFIX."pages SET pageOrder = (pageOrder - 3) WHERE pageID = " . $id;
+		if ($this->db->query($sql)) {
+			$this->reorder();
+			return true;
+		} else {
+			return false;
+		}
+	
+	}
+	
+	/**
+	 * Renumber the paging orders
+	 *
+	 * @param int $parent Parent page ID, or false to do all of them
+	 */
+	private function reorder ($parent = false) {
+	
+		if ($parent === false) {
+		
+			// get all potential parent IDs
+			$sql = "SELECT DISTINCT(pageParent) FROM ".DB_PREFIX."pages ";
+			$rec = $this->db->query($sql);
+			
+			// loop though each one
+			while ($row = $rec->fetch()) {
+				$this->reorder($row["pageParent"]);
+			}
+		
+		} else {
+	
+			// initialise variables
+			$orderNumber = 0;
+			
+			// get a list of pages
+			$sql = "SELECT * FROM ".DB_PREFIX."pages
+					WHERE pageParent = " . $parent . "
+					ORDER BY pageOrder ASC, pageName ASC ";
+			$rec = $this->db->query($sql);
+			
+			// loop through pages
+			while ($row = $rec->fetch()) {
+			
+				// run the query
+				$sql = "UPDATE ".DB_PREFIX."pages
+						SET pageOrder = " . $orderNumber . "
+						WHERE pageID = " . $row["pageID"];
+				$this->db->query($sql);
+				
+				// increment the number
+				$orderNumber += 2;
+			
+			}
+		
+		}
 	
 	}
 	
