@@ -30,7 +30,8 @@ require("bootstrap.php");
 	$checks = array (
 		"PhpVersion",
 		"Curl",
-		"MagicQuotes"
+		"MagicQuotes",
+		"TmpDir"
 	);
 	
 	require("systemtest.php");

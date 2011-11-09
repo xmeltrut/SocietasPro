@@ -86,7 +86,7 @@ class SystemTest {
 	 *
 	 * @return array Data
 	 */
-	public function checkMagicQuotes () {
+	private function checkMagicQuotes () {
 	
 		if (get_magic_quotes_gpc()) {
 			$data = array (
@@ -109,7 +109,7 @@ class SystemTest {
 	 *
 	 * @return array Data
 	 */
-	public function checkPhpVersion () {
+	private function checkPhpVersion () {
 	
 		$version = floatval(phpVersion());
 		
@@ -122,6 +122,29 @@ class SystemTest {
 			$data = array (
 				"r" => self::STATUS_FAIL,
 				"i" => phpVersion()
+			);
+		}
+		
+		return $data;
+	
+	}
+	
+	/**
+	 * Check if the tmp directory is writable
+	 *
+	 * @return array Data
+	 */
+	private function checkTmpDir () {
+	
+		if (is_writable(TEMP_DIR)) {
+			$data = array (
+				"r" => self::STATUS_PASS,
+				"i" => "Writable"
+			);
+		} else {
+			$data = array (
+				"r" => self::STATUS_FAIL,
+				"i" => "Not writable"
 			);
 		}
 		
