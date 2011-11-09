@@ -55,6 +55,7 @@ $language_strings = array (
 	"move_up" => "Move Up",
 	"name" => "Name",
 	"new" => "New",
+	"no_records_found" => "No records found",
 	"none" => "None",
 	"not_found" => "Not Found",
 	"notes" => "Notes",

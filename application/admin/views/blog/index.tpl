@@ -24,6 +24,10 @@
 				<input type="submit" name="delete_{$post->getData("postID")}" value="{$lang_delete}" onClick="return areYouSure();" />
 			</td>
 		</tr>
+		{foreachelse}
+		<tr>
+			<td colspan="6">{$lang_no_records_found}</td>
+		</tr>
 		{/foreach}
 		{if $totalPages > 1}
 		<tr>

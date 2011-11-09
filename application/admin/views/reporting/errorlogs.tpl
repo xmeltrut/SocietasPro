@@ -19,6 +19,10 @@
 		<td>{$log["logDetails"]}</td>
 		<td>{$log["logSQL"]}</td>
 	</tr>
+	{foreachelse}
+	<tr>
+		<td colspan="5">{$lang_no_records_found}</td>
+	</tr>
 	{/foreach}
 	{if $totalPages > 1}
 	<tr>

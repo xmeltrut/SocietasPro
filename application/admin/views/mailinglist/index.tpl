@@ -31,6 +31,10 @@ $(document).ready(function(){
 			</form>
 		</td>
 	</tr>
+	{foreachelse}
+	<tr>
+		<td colspan="4">{$lang_no_records_found}</td>
+	</tr>
 	{/foreach}
 </table>
 

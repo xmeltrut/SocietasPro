@@ -22,6 +22,10 @@
 				<input type="submit" name="delete_{$location->getData("locationID")}" value="{$lang_delete}" onClick="return areYouSure();" />
 			</td>
 		</tr>
+		{foreachelse}
+		<tr>
+			<td colspan="5">{$lang_no_records_found}</td>
+		</tr>
 		{/foreach}
 	</table>
 	<select name="option">

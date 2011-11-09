@@ -26,6 +26,10 @@
 				<input type="submit" name="delete_{$member->getData("memberID")}" value="{$lang_delete}" onClick="return areYouSure();" />
 			</td>
 		</tr>
+		{foreachelse}
+		<tr>
+			<td colspan="7">{$lang_no_records_found}</td>
+		</tr>
 		{/foreach}
 		{if $totalPages > 1}
 		<tr>

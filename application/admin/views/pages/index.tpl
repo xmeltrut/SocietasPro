@@ -25,6 +25,10 @@
 				<input type="submit" name="down_{$page->getData("pageID")}" value="{$lang_move_down}" />
 			</td>
 		</tr>
+		{foreachelse}
+		<tr>
+			<td colspan="6">{$lang_no_records_found}</td>
+		</tr>
 		{/foreach}
 	</table>
 	<select name="option">
