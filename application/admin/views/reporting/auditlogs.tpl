@@ -3,6 +3,22 @@
 {block name=body}
 <h2>{$lang_audit_logs}</h2>
 
+<form action="" method="post">
+	<select name="action">
+		<option value="">{$lang_any} {$lang_action|lower}</option>
+		{foreach from=$actions key=key item=value}
+		<option value="{$key}">{$value}</option>
+		{/foreach}
+	</select>
+	<select name="member">
+		<option value="">{$lang_any} {$lang_member|lower}</option>
+		{foreach from=$members key=key item=value}
+		<option value="{$key}">{$value}</option>
+		{/foreach}
+	</select>
+	<input type="submit" value="{$lang_submit}" />
+</form><br />
+
 <table border="1">
 	<tr>
 		<th>{$lang_date}</th>

@@ -20,11 +20,21 @@ class AuditEntriesModel extends BaseModel {
 	/**
 	 * Count the number of log entries
 	 *
+	 * @param int $actionID Filter based on action
+	 * @param int $memberID FIlter based on member
 	 * @return int Log entries
 	 */
-	public function count () {
+	public function count ($actionID = 0, $memberID = 0) {
 	
-		$sql = "SELECT COUNT(entryID) FROM ".DB_PREFIX."audit_entries ";
+		// implement filters
+		$actionFilter = ($actionID) ? "AND entryAction = ".intval($actionID)." " : "";
+		$memberFilter = ($memberID) ? "AND entryMember = ".intval($memberID)." " : "";
+		
+		// count the records
+		$sql = "SELECT COUNT(entryID) FROM ".DB_PREFIX."audit_entries
+				WHERE 1 = 1
+				$actionFilter
+				$memberFilter ";
 		return $this->db->fetchOne($sql);
 	
 	}
@@ -32,13 +42,19 @@ class AuditEntriesModel extends BaseModel {
 	/**
 	 * Get the most recent audit entries
 	 *
-	 * $param int $pageNum Page number
+	 * @param int $pageNum Page number
+	 * @param int $actionID Filter based on action
+	 * @param int $memberID FIlter based on member
 	 * @return Associative array
 	 */
-	public function get ($pageNum = 1) {
+	public function get ($pageNum = 1, $actionID = 0, $memberID = 0) {
 	
 		// initialise array
 		$arr = array();
+		
+		// implement filters
+		$actionFilter = ($actionID) ? "AND entryAction = ".intval($actionID)." " : "";
+		$memberFilter = ($memberID) ? "AND entryMember = ".intval($memberID)." " : "";
 		
 		// query database
 		$sql = "SELECT ae.*, m.memberForename, m.memberSurname, m.memberEmail, aa.actionName
@@ -47,6 +63,9 @@ class AuditEntriesModel extends BaseModel {
 				ON ae.entryMember = m.memberID
 				LEFT OUTER JOIN ".DB_PREFIX."audit_actions AS aa
 				ON ae.entryAction = aa.actionID
+				WHERE 1 = 1
+				$actionFilter
+				$memberFilter
 				ORDER BY entryDate DESC ".sqlLimit($pageNum);
 		$rec = $this->db->query($sql);
 		

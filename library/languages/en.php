@@ -12,6 +12,7 @@ $language_strings = array (
 	"address" => "Address",
 	"administrator" => "Administrator",
 	"already_exists" => "Already Exists",
+	"any" => "Any",
 	"are_you_sure" => "Are you sure?",
 	"audit_logs" => "Audit Logs",
 	"blog" => "Blog",
