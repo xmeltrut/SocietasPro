@@ -31,7 +31,8 @@ require("bootstrap.php");
 		"PhpVersion",
 		"Curl",
 		"MagicQuotes",
-		"TmpDir"
+		"TmpDir",
+		"IncludePath"
 	);
 	
 	require("systemtest.php");

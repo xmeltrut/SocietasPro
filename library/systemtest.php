@@ -13,6 +13,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Utilities
+ *
+ * @todo Move this file into the classes/ directory
  */
 
 class SystemTest {
@@ -74,6 +76,29 @@ class SystemTest {
 			$data = array (
 				"r" => self::STATUS_WARN,
 				"i" => "Missing"
+			);
+		}
+		
+		return $data;
+	
+	}
+	
+	/**
+	 * Check we can set the include path at runtime
+	 *
+	 * @return array Data
+	 */
+	private function checkIncludePath () {
+	
+		if (set_include_path(get_include_path())) {
+			$data = array (
+				"r" => self::STATUS_PASS,
+				"i" => "Can set"
+			);
+		} else {
+			$data = array (
+				"r" => self_STATUS_FAIL,
+				"i" => "Can't set"
 			);
 		}
 		
