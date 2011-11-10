@@ -18,6 +18,7 @@ class FrontController {
 	 * Variables to hold URL parameters
 	 */
 	private static $module;
+	private static $moduleError;
 	private static $controller;
 	private static $page;
 	private static $params;
@@ -35,6 +36,11 @@ class FrontController {
 	
 		$path = "../application/".$this->getModule()."/";
 		set_include_path(get_include_path() . PATH_SEPARATOR . $path);
+		
+		if (self::$moduleError === true) {
+			self::setController("ErrorController");
+			self::setPage("404");
+		}
 		
 		$controllerName = $this->getController();
 		$controllerFile = $controllerName . ".php";
@@ -185,9 +191,11 @@ class FrontController {
 		
 		if ($name == "" || in_array($name, $validModules)) {
 			self::$module = $name;
+			self::$moduleError = false;
 			return true;
 		}
 		
+		self::$moduleError = true;
 		return false;
 	
 	}
