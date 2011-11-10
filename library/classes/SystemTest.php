@@ -13,8 +13,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Utilities
- *
- * @todo Move this file into the classes/ directory
  */
 
 class SystemTest {
