@@ -35,7 +35,7 @@ require("bootstrap.php");
 		"IncludePath"
 	);
 	
-	require("systemtest.php");
+	require("classes/SystemTest.php");
 	$test = new SystemTest();
 	
 	foreach ($checks as $check) {
