@@ -8,7 +8,6 @@
  *
  * @todo Creating pages should list it at the bottom
  * @todo Changing a page parent should trigger a reorder
- * @todo Only show legitimate buttons
  */
 
 require_once("basemodel.php");
@@ -56,6 +55,7 @@ class PagesModel extends BaseModel {
 	
 		// initialse an array
 		$arr = array();
+		$rowCount = 1;
 		
 		// query the database
 		$sql = "SELECT * FROM ".DB_PREFIX."pages
@@ -69,10 +69,21 @@ class PagesModel extends BaseModel {
 			$prefix = str_repeat("-- ", $layer);
 			$pageObject = new Page($row);
 			$pageObject->setName($prefix.$row["pageName"]);
+			
+			if ($rowCount == 1) {
+				$pageObject->setCanMoveUp(false);
+			}
+			
+			if ($rowCount == $rec->getRows()) {
+				$pageObject->setCanMoveDown(false);
+			}
+			
 			$arr[] = $pageObject;
 			
 			$children = $this->get($row["pageID"], ($layer+1));
 			$arr = array_merge($arr, $children);
+			
+			$rowCount++;
 		
 		}
 		

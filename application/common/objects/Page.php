@@ -11,8 +11,65 @@ require_once("baseobject.php");
 
 class Page extends BaseObject {
 
+	/**
+	 * Object specific instance variables
+	 */
+	private $canMoveUp = true;
+	private $canMoveDown = true;
+	
+	/**
+	 * Call parent constructor
+	 */
 	function __construct ($data = array()) {
 		parent::__construct($data);
+	}
+	
+	/**
+	 * Getter for can move down
+	 *
+	 * @return boolean
+	 */
+	public function canMoveDown () {
+		return $this->canMoveDown;
+	}
+	
+	/**
+	 * Getter for can move up
+	 *
+	 * @return bolean
+	 */
+	public function canMoveUp () {
+		return $this->canMoveUp;
+	}
+	
+	/**
+	 * Set whether a page can be moved down
+	 *
+	 * @param boolean $value
+	 * @return boolean Success
+	 */
+	public function setCanMoveDown ($value) {
+		if (is_bool($value)) {
+			$this->canMoveDown = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Set whether a page can be moved up
+	 *
+	 * @param boolean $value
+	 * @return boolean Success
+	 */
+	public function setCanMoveUp ($value) {
+		if (is_bool($value)) {
+			$this->canMoveUp = $value;
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	/**
