@@ -14,9 +14,7 @@ class TemplateException extends Exception {
 	 *
 	 * @param string $sql SQL statement
 	 */
-	function construct () {
-	
-	echo("Hello, World!");
+	function __construct () {
 	
 		// build details string
 		$str  = "File: " . $this->getFile() . "\n";
@@ -25,7 +23,7 @@ class TemplateException extends Exception {
 		$str .= "Trace: " . $this->getTraceAsString();
 		
 		// log gerror message
-		logError($this->getCode, $str);
+		logError($this->getCode(), $str);
 		
 		// output
 		if (MODE == "DEBUG") {
