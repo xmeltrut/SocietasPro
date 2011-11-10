@@ -7,7 +7,6 @@
  * @subpackage Admin
  *
  * @todo Audit trail form should use GET rather than POST
- * @todo Audit trail selects default values
  */
 
 class ReportingController extends BaseController implements iController {
@@ -57,6 +56,8 @@ class ReportingController extends BaseController implements iController {
 		$totalPages = totalPages($auditEntriesModel->count($actionID, $memberID));
 		
 		// output the page
+		$this->engine->assign("actionID", $actionID);
+		$this->engine->assign("memberID", $memberID);
 		$this->engine->assign("actions", $actions);
 		$this->engine->assign("members", $members);
 		$this->engine->assign("logs", $auditEntriesModel->get($pageNum, $actionID, $memberID));

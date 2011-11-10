@@ -7,13 +7,13 @@
 	<select name="action">
 		<option value="">{$lang_any} {$lang_action|lower}</option>
 		{foreach from=$actions key=key item=value}
-		<option value="{$key}">{$value}</option>
+		<option value="{$key}" {if $key==$actionID}selected="selected"{/if}>{$value}</option>
 		{/foreach}
 	</select>
 	<select name="member">
 		<option value="">{$lang_any} {$lang_member|lower}</option>
 		{foreach from=$members key=key item=value}
-		<option value="{$key}">{$value}</option>
+		<option value="{$key}" {if $key==$memberID}selected="selected"{/if}>{$value}</option>
 		{/foreach}
 	</select>
 	<input type="submit" value="{$lang_submit}" />
