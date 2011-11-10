@@ -100,6 +100,23 @@ class Page extends BaseObject {
 	}
 	
 	/**
+	 * Set the order
+	 *
+	 * @param int $value Order
+	 * @return boolean
+	 */
+	public function setOrder ($value) {
+	
+		if (is_int($value)) {
+			$this->setData("pageOrder", $value);
+			return true;
+		} else {
+			return false;
+		}
+	
+	}
+	
+	/**
 	 * Set the parent page
 	 *
 	 * @param int $value Parent ID

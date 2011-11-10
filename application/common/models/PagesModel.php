@@ -6,7 +6,6 @@
  * @package SocietasPro
  * @subpackage Common
  *
- * @todo Creating pages should list it at the bottom
  * @todo Changing a page parent should trigger a reorder
  */
 
@@ -172,6 +171,30 @@ class PagesModel extends BaseModel {
 	}
 	
 	/**
+	 * Work out the next incrementing page order
+	 *
+	 * @param int $parent Page parent ID
+	 * @return int Order
+	 */
+	private function getNextOrder ($parent) {
+	
+		// build SQL
+		$sql = "SELECT pageOrder FROM ".DB_PREFIX."pages
+				WHERE pageParent = ".intval($parent)."
+				ORDER BY pageOrder DESC LIMIT 0, 1 ";
+		
+		// return number
+		$order = $this->db->fetchOne($sql);
+		
+		if ($order !== false) {
+			return ($order + 2);
+		} else {
+			return 0;
+		}
+	
+	}
+	
+	/**
 	 * Move a page down
 	 *
 	 * @param int $id Page ID
@@ -302,6 +325,11 @@ class PagesModel extends BaseModel {
 		) {
 			$this->setMessage($object->getMessage());
 			return false;
+		}
+		
+		// if new, set the order
+		if (!$id) {
+			$object->setOrder($this->getNextOrder($object->pageParent));
 		}
 		
 		// record in audit trail
