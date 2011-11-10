@@ -11,7 +11,13 @@ class DirectoryCursor {
 	/**
 	 * Hold an array of messages
 	 */
-	private $messages;
+	private $messages = array();
+	
+	/**
+	 * We need to fold indexes of files so we can loop through them
+	 */
+	private $directoriesToScan = array();
+	private $filesToScan = array();
 	
 	/**
 	 * Add messages to the main message log
@@ -21,19 +27,70 @@ class DirectoryCursor {
 	 */
 	private function addMessages ($filePath, $arr) {
 	
-		foreach ($arr as $element) {
-			array_unshift($element, $filePath);
-			$this->messages[] = $element;
+		$this->messages[] = array (
+			$filePath,
+			$arr
+		);
+	
+	}
+	
+	/**
+	 * Get next directory to scan
+	 *
+	 * @return string Directory path
+	 */
+	public function getNextDirectory () {
+	
+		return array_shift($this->directoriesToScan);
+	
+	}
+	
+	/**
+	 * Entry point for scanning
+	 */
+	public function scan () {
+	
+		// add first directory
+		$this->directoriesToScan[] = "../../application";
+		
+		// scan all directories
+		while ($dir = $this->getNextDirectory()) {
+			$this->scanDirectory($dir);
 		}
+		
+		// now scan all the files
+		foreach ($this->filesToScan as $file) {
+			$this->scanFile($file);
+		}
+		
+		return $this->messages;
 	
 	}
 	
 	/**
 	 * Scan a directory
+	 *
+	 * @param $dir Directory path
 	 */
-	public function scan () {
+	public function scanDirectory ($dir = false) {
 	
-	
+		// loop through files
+		if ($handle = opendir($dir)) {
+			while (false !== ($file = readdir($handle))) {
+				if (($file != ".") && ($file != "..")) {
+					$path = $dir."/".$file;
+					if (is_dir($path)) {
+						$this->directoriesToScan[] = $path;
+					} elseif (is_file($path)) {
+						$extension = substr($path, -4);
+						if ($extension == ".php") {
+							$this->filesToScan[] = $path;
+						}
+					}
+				}
+			}
+		}
+		closedir($handle);
 	
 	}
 	

@@ -16,12 +16,12 @@ class FileScanner {
 	/**
 	 * Store the file
 	 */
-	private $data;
+	protected $data;
 	
 	/**
 	 * Store a log of messages
 	 */
-	private $messages;
+	private $messages = array();
 	
 	/**
 	 * Constructor
@@ -52,12 +52,13 @@ class FileScanner {
 	 * @param string $msg Message
 	 * @param int $line Line number
 	 */
-	protected function log ($level, $msg, $line = 0) {
+	protected function log ($level, $msg, $line = 0, $code = "") {
 	
 		$this->messages[] = array (
 			$level,
 			$msg,
-			$line
+			$line,
+			$code
 		);
 	
 	}

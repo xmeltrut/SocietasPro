@@ -27,8 +27,8 @@ class KeywordScanner extends FileScanner implements iScanner {
 		foreach ($this->data as $line => $code) {
 		
 			// check for print_r that has been left in
-			if (preg_match("/print_r/", $code) {
-				$this->log(LEVEL_WARN, "print_r", $line);
+			if (preg_match("/print/", $code)) {
+				$this->log(LEVEL_WARN, "print_r", $line, $code);
 			}
 		
 		}
