@@ -112,7 +112,7 @@ class EventsController extends BaseController implements iController {
 		$locations = $locationsModel->get();
 		
 		foreach ($locations as $location) {
-			$options[$location->getData("locationID")] = $location->getData("locationName");
+			$options[$location->locationID] = $location->locationName;
 		}
 		
 		// build the form

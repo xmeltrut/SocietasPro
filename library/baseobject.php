@@ -72,21 +72,6 @@ abstract class BaseObject {
 	}
 	
 	/**
-	 * Get data by array key. Protected because you should override
-	 * it to strip out the need for a prefix.
-	 *
-	 * @param string $key Array key
-	 * @return mixed Value
-	 */
-	public function getData ($key) {
-		if (isset($this->data[$key])) {
-			return $this->data[$key];
-		} else {
-			return false;
-		}
-	}
-	
-	/**
 	 * Returns a string representation of the data as it was when the object
 	 * was originally created - perfect for audit trails.
 	 *

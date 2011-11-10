@@ -21,7 +21,7 @@ class Event extends BaseObject {
 	 * @return Formatted date
 	 */
 	public function getFormattedDate () {
-		return date("j F Y H:i:s", strtotime($this->getData("eventDate")));
+		return date("j F Y H:i:s", strtotime($this->eventDate));
 	}
 	
 	/**

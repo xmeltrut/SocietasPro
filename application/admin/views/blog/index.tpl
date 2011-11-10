@@ -15,13 +15,13 @@
 		</tr>
 		{foreach $posts as $post}
 		<tr>
-			<td><input type="checkbox" name="ids[]" value="{$post->getData("postID")}" /></td>
-			<td>{$post->getData("postID")}</td>
-			<td>{$post->getData("postName")}</td>
+			<td><input type="checkbox" name="ids[]" value="{$post->postID}" /></td>
+			<td>{$post->postID}</td>
+			<td>{$post->postName}</td>
 			<td>{$post->getFormattedDate()}</td>
-			<td><a href="{$root}admin/blog/edit/{$post->getData("postID")}">{$lang_edit}</a></td>
+			<td><a href="{$root}admin/blog/edit/{$post->postID}">{$lang_edit}</a></td>
 			<td>
-				<input type="submit" name="delete_{$post->getData("postID")}" value="{$lang_delete}" onClick="return areYouSure();" />
+				<input type="submit" name="delete_{$post->postID}" value="{$lang_delete}" onClick="return areYouSure();" />
 			</td>
 		</tr>
 		{foreachelse}

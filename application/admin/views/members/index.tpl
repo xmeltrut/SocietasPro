@@ -16,14 +16,14 @@
 		</tr>
 		{foreach $members as $member}
 		<tr>
-			<td><input type="checkbox" name="ids[]" value="{$member->getData("memberID")}" /></td>
-			<td>{$member->getData("memberID")}</td>
-			<td>{$member->getData("memberEmail")}</td>
-			<td>{$member->getData("memberForename")}</td>
-			<td>{$member->getData("memberSurname")}</td>
-			<td><a href="{$root}admin/members/edit/{$member->getData("memberID")}">{$lang_edit}</a></td>
+			<td><input type="checkbox" name="ids[]" value="{$member->memberID}" /></td>
+			<td>{$member->memberID}</td>
+			<td>{$member->memberEmail}</td>
+			<td>{$member->memberForename}</td>
+			<td>{$member->memberSurname}</td>
+			<td><a href="{$root}admin/members/edit/{$member->memberID}">{$lang_edit}</a></td>
 			<td>
-				<input type="submit" name="delete_{$member->getData("memberID")}" value="{$lang_delete}" onClick="return areYouSure();" />
+				<input type="submit" name="delete_{$member->memberID}" value="{$lang_delete}" onClick="return areYouSure();" />
 			</td>
 		</tr>
 		{foreachelse}

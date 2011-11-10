@@ -14,12 +14,12 @@
 		</tr>
 		{foreach $locations as $location}
 		<tr>
-			<td><input type="checkbox" name="ids[]" value="{$location->getData("locationID")}" /></td>
-			<td>{$location->getData("locationID")}</td>
-			<td>{$location->getData("locationName")}</td>
-			<td><a href="{$root}admin/locations/edit/{$location->getData("locationID")}">{$lang_edit}</a></td>
+			<td><input type="checkbox" name="ids[]" value="{$location->locationID}" /></td>
+			<td>{$location->locationID}</td>
+			<td>{$location->locationName}</td>
+			<td><a href="{$root}admin/locations/edit/{$location->locationID}">{$lang_edit}</a></td>
 			<td>
-				<input type="submit" name="delete_{$location->getData("locationID")}" value="{$lang_delete}" onClick="return areYouSure();" />
+				<input type="submit" name="delete_{$location->locationID}" value="{$lang_delete}" onClick="return areYouSure();" />
 			</td>
 		</tr>
 		{foreachelse}

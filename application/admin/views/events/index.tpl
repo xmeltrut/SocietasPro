@@ -15,14 +15,14 @@
 		</tr>
 		{foreach $events as $event}
 		<tr>
-			<td><input type="checkbox" name="ids[]" value="{$event->getData("eventID")}" /></td>
-			<td>{$event->getData("eventID")}</td>
-			<td>{$event->getData("eventName")}</td>
+			<td><input type="checkbox" name="ids[]" value="{$event->eventID}" /></td>
+			<td>{$event->eventID}</td>
+			<td>{$event->eventName}</td>
 			<td>{$event->getFormattedDate()}</td>
-			<td><a href="{$root}admin/events/edit/{$event->getData("eventID")}">{$lang_edit}</a></td>
+			<td><a href="{$root}admin/events/edit/{$event->eventID}">{$lang_edit}</a></td>
 			<td>
-				<input type="submit" name="delete_{$event->getData("eventID")}" value="{$lang_delete}" onClick="return areYouSure();" />
-				<input type="submit" name="clone_{$event->getData("eventID")}" value="{$lang_clone}" />
+				<input type="submit" name="delete_{$event->eventID}" value="{$lang_delete}" onClick="return areYouSure();" />
+				<input type="submit" name="clone_{$event->eventID}" value="{$lang_clone}" />
 			</td>
 		</tr>
 		{foreachelse}

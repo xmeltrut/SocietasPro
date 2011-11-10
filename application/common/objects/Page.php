@@ -108,17 +108,17 @@ class Page extends BaseObject {
 	public function setParent ($value) {
 	
 		// validation
-		if ($this->getData("pageID")) {
+		if ($this->pageID) {
 		
 			// check IDs aren't identical
-			if ($this->getData("pageID") == $value) {
+			if ($this->pageID == $value) {
 				$this->setMessage(strFirst(LANG_INVALID." ".LANG_PARENT));
 				return false;
 			}
 			
 			// check this parent isn't a child of this page
 			$pagesModel = new PagesModel();
-			$ids = $pagesModel->getChildrenAsArray($this->getData("pageID"));
+			$ids = $pagesModel->getChildrenAsArray($this->pageID);
 			
 			if (in_array($value, $ids)) {
 				$this->setMessage(strFirst(LANG_INVALID." ".LANG_PARENT));
@@ -145,8 +145,8 @@ class Page extends BaseObject {
 			$this->setMessage(LANG_INVALID." ".LANG_URL);
 			return false;
 		} else {
-			$id = ($this->getData("pageID")) ? $this->getData("pageID") : 0;
-			$parent = ($this->getData("pageParent")) ? $this->getData("pageParent") : 0;
+			$id = ($this->pageID) ? $this->pageID : 0;
+			$parent = ($this->pageParent) ? $this->pageParent : 0;
 			$pageModel = new PagesModel();
 			$this->setData("pageSlug", $pageModel->validateSlug($value, $id, $parent));
 			return true;

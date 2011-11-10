@@ -56,13 +56,13 @@ class MembersController extends BaseController implements iController {
 		// loop through members
 		foreach ($members as $member) {
 			$data = array (
-				$member->getData("memberID"),
-				$member->getData("memberEmail"),
-				$member->getData("memberForename"),
-				$member->getData("memberSurname"),
-				$this->model->getPrivilege($member->getData("memberPrivileges")),
-				$member->getData("memberAddress"),
-				$member->getData("memberNotes")
+				$member->memberID,
+				$member->memberEmail,
+				$member->memberForename,
+				$member->memberSurname,
+				$this->model->getPrivilege($member->memberPrivileges),
+				$member->memberAddress,
+				$member->memberNotes
 			);
 			$csv->addRow($data);
 		}

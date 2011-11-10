@@ -14,15 +14,15 @@
 		</tr>
 		{foreach $pages as $page}
 		<tr>
-			<td><input type="checkbox" name="ids[]" value="{$page->getData("pageID")}" /></td>
-			<td>{$page->getData("pageID")}</td>
-			<td>{$page->getData("pageName")}</td>
-			<td><a href="{$root}admin/pages/edit/{$page->getData("pageID")}">{$lang_edit}</a></td>
+			<td><input type="checkbox" name="ids[]" value="{$page->pageID}" /></td>
+			<td>{$page->pageID}</td>
+			<td>{$page->pageName}</td>
+			<td><a href="{$root}admin/pages/edit/{$page->pageID}">{$lang_edit}</a></td>
 			<td>
-				<input type="submit" name="delete_{$page->getData("pageID")}" value="{$lang_delete}" onClick="return areYouSure();" />
-				<input type="submit" name="clone_{$page->getData("pageID")}" value="{$lang_clone}" />
-				{if $page->canMoveUp()}<input type="submit" name="up_{$page->getData("pageID")}" value="{$lang_move_up}" />{/if}
-				{if $page->canMoveDown()}<input type="submit" name="down_{$page->getData("pageID")}" value="{$lang_move_down}" />{/if}
+				<input type="submit" name="delete_{$page->pageID}" value="{$lang_delete}" onClick="return areYouSure();" />
+				<input type="submit" name="clone_{$page->pageID}" value="{$lang_clone}" />
+				{if $page->canMoveUp()}<input type="submit" name="up_{$page->pageID}" value="{$lang_move_up}" />{/if}
+				{if $page->canMoveDown()}<input type="submit" name="down_{$page->pageID}" value="{$lang_move_down}" />{/if}
 			</td>
 		</tr>
 		{foreachelse}

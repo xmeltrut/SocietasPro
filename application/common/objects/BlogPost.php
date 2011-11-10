@@ -21,7 +21,7 @@ class BlogPost extends BaseObject {
 	 * @return Formatted date
 	 */
 	public function getFormattedDate () {
-		return date("j F Y H:i:s", strtotime($this->getData("postDate")));
+		return date("j F Y H:i:s", strtotime($this->postDate));
 	}
 	
 	public function setContent ($value) {
@@ -68,7 +68,7 @@ class BlogPost extends BaseObject {
 			$this->setMessage(LANG_INVALID." ".LANG_URL);
 			return false;
 		} else {
-			$id = ($this->getData("postID")) ? $this->getData("postID") : 0;
+			$id = ($this->postID) ? $this->postID : 0;
 			$postsModel = new BlogPostsModel();
 			$this->setData("postSlug", $postsModel->validateSlug($value, $id));
 			return true;

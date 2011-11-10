@@ -1,13 +1,5 @@
 {extends file="standard.tpl"}
 
-{block name=head}
-<script type="text/javascript">
-$(document).ready(function(){
-	$('#newEmail').focus();
-});
-</script>
-{/block}
-
 {block name=body}
 <h2>{$lang_mailing_list}</h2>
 
@@ -20,14 +12,14 @@ $(document).ready(function(){
 	</tr>
 	{foreach $recent as $subscriber}
 	<tr>
-		<td>{$subscriber->getData("subscriberID")}</td>
-		<td>{$subscriber->getData("subscriberEmail")}</td>
+		<td>{$subscriber->subscriberID}</td>
+		<td>{$subscriber->subscriberEmail}</td>
 		<td>{$subscriber->getFormattedDate()}</td>
 		<td>
 			<form action="" method="post">
 				<input type="submit" value="{$lang_delete}" />
 				<input type="hidden" name="action" value="delete" />
-				<input type="hidden" name="id" value="{$subscriber->getData("subscriberID")}" />
+				<input type="hidden" name="id" value="{$subscriber->subscriberID}" />
 			</form>
 		</td>
 	</tr>
