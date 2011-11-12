@@ -6,7 +6,6 @@
  * @package SocietasPro
  * @subpackage Core
  *
- * @todo Tidy up namespace code
  * @todo Implement some kind of namespace alias systems (hacked at the moment)
  */
 
@@ -55,9 +54,10 @@ class FrontController {
 		}
 		
 		include($controllerPath);
+		
+		// create the controller
 		$module = str_replace("public", "publica", $this->getModule());
 		$controllerName = "\\".$module."\\".$controllerName;
-		//echo($controllerName);
 		$controller = new $controllerName();
 		
 		$page = $this->getPage();
