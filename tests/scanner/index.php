@@ -4,8 +4,6 @@
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package BugScanner
- *
- * @todo Should reorder the logs for each line, by line number
  */
 
 // include essentials

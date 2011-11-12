@@ -27,6 +27,10 @@ class DirectoryCursor {
 	 */
 	private function addMessages ($filePath, $arr) {
 	
+		// sort array by line number
+		uasort($arr, "sortByLineNumber");
+		
+		// add this to the report
 		$this->messages[] = array (
 			$filePath,
 			$arr
