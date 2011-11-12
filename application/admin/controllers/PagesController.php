@@ -101,8 +101,6 @@ class PagesController extends BaseController implements iController {
 	 */
 	private function standardForm ($action, $data = array()) {
 	
-		require_once("classes/FormBuilder.php");
-		
 		// build array of page parents
 		$excludedID  = ($action == "edit") ? $data["pageID"] : 0;
 		$pageParent  = array(0 => LANG_NONE);

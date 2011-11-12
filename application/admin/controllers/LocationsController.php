@@ -87,8 +87,6 @@ class LocationsController extends BaseController implements iController {
 	 */
 	private function standardForm ($action, $data = array()) {
 	
-		require_once("classes/FormBuilder.php");
-		
 		$form = new FormBuilder();
 		
 		$form->addInput("name", LANG_NAME, arrSet($data, "locationName"));

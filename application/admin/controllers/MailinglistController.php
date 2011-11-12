@@ -27,7 +27,6 @@ class MailinglistController extends BaseController implements iController {
 	public function csv () {
 	
 		// csv object
-		require_once("classes/CsvBuilder.php");
 		$csv = new CsvBuilder(LANG_MAILING_LIST);
 		
 		// get an array of members
@@ -83,7 +82,6 @@ class MailinglistController extends BaseController implements iController {
 		// check for actions
 		if (reqSet("action") == "import") {
 		
-			require_once("classes/ImportSubscribersWizard.php");
 			$wizard = new ImportSubscribersWizard();
 			
 			if ($_REQUEST["emails"] != "") {
@@ -99,8 +97,6 @@ class MailinglistController extends BaseController implements iController {
 		}
 		
 		// build a form
-		require_once("classes/FormBuilder.php");
-		
 		$form = new FormBuilder();
 		$form->addTextArea("emails", LANG_SUBSCRIBERS);
 		$form->addFile("upload", LANG_FILE);

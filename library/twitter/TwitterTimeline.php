@@ -37,7 +37,6 @@ class TwitterTimeline {
 	private function call () {
 	
 		// build request
-		require_once("classes/RemoteRequest.php");
 		$request = new RemoteRequest("https://api.twitter.com/1/statuses/user_timeline.json");
 		$request->setParam("screen_name", $this->screenName);
 		$request->setParam("count", $this->count);

@@ -18,4 +18,5 @@ require("constants.php");
 require("icontroller.php");
 
 // run functions
+spl_autoload_register("autoload");
 rebuildRequestArray();

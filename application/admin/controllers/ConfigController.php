@@ -40,7 +40,6 @@ class ConfigController extends BaseController implements iController {
 		$list = $language->listAsArray();
 		
 		// build a form
-		require_once("classes/FormBuilder.php");
 		$form = new FormBuilder();
 		$form->addSelect("language", LANG_LANGUAGE, $list, Configuration::get("language"));
 		$form->addHidden("action", "update");

@@ -99,7 +99,6 @@ class EventsController extends BaseController implements iController {
 	private function standardForm ($action, $data = array()) {
 	
 		// create a form object
-		require_once("classes/FormBuilder.php");
 		$form = new FormBuilder();
 		
 		// create a location model

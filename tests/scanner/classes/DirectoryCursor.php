@@ -104,12 +104,18 @@ class DirectoryCursor {
 		// get the file contents
 		$file = file($filePath);
 		
-		// scanning
+		// build scanners
 		$keywordScanner = new KeywordScanner($file);
-		$this->addMessages($filePath, $keywordScanner->scan());
-		
 		$unitTestScanner = new UnitTestScanner($file);
-		$this->addMessages($filePath, $unitTestScanner->scan());
+		
+		// run the scan
+		$scanResults = array_merge (
+			$keywordScanner->scan(),
+			$unitTestScanner->scan()
+		);
+		
+		// log the results
+		$this->addMessages($filePath, $scanResults);
 	
 	}
 

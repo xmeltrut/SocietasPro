@@ -44,7 +44,6 @@ class MembersController extends BaseController implements iController {
 	public function csv () {
 	
 		// csv object
-		require_once("classes/CsvBuilder.php");
 		$csv = new CsvBuilder(LANG_MEMBERS);
 		
 		// get an array of members
@@ -99,10 +98,7 @@ class MembersController extends BaseController implements iController {
 	public function import () {
 	
 		// build objects
-		require_once("classes/FormBuilder.php");
 		$form = new FormBuilder();
-		
-		require_once("classes/ImportMembersWizard.php");
 		
 		// check for actions
 		if (reqSet("action") == "import") {
@@ -210,8 +206,6 @@ class MembersController extends BaseController implements iController {
 	 */
 	private function standardForm ($action, $data = array()) {
 	
-		require_once("classes/FormBuilder.php");
-		
 		$form = new FormBuilder();
 		$form->addInput("email", LANG_EMAIL, arrSet($data, "memberEmail"));
 		$form->addInput("forename", LANG_FORENAME, arrSet($data, "memberForename"));

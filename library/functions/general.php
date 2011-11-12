@@ -8,6 +8,21 @@
  */
 
 /**
+ * Attempt to load a class file that has not yet been loaded
+ *
+ * @param string $className Class name
+ */
+function autoload ($className) {
+
+	$path = "../library/classes/".$className.".php";
+	
+	if (file_exists($path)) {
+		require $path;
+	}
+
+}
+
+/**
  * Take an array and convert it into constants
  *
  * @param array $arr Associative arrays
