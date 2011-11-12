@@ -7,8 +7,6 @@
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package BugScanner
- *
- * @todo Add validation to logs
  */
 
 class FileScanner {
