@@ -11,8 +11,6 @@
  * @subpackage Database
  */
 
-require_once("recordset.php");
-
 function escape ($sql) {
 	return mysql_real_escape_string($sql);
 }
