@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@buzzsports.com>
  * @package SocietasPro
  * @subpackage Exceptions
- *
- * @todo This doesn't work since we introduced namespaces
  */
 
 class HttpErrorException extends Exception {
@@ -26,7 +24,8 @@ class HttpErrorException extends Exception {
 	
 		// invoke error controller
 		require_once("controllers/errorcontroller.php");
-		$this->errorController = new ErrorController();
+		$controllerName = "\\".FrontController::getModule()."\\ErrorController";;
+		$this->errorController = new $controllerName();
 		
 		// switch between error codes
 		switch ($code) {

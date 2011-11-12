@@ -7,7 +7,7 @@
  * @subpackage System
  */
 
-namespace public;
+namespace system;
 
 class ErrorController extends \BaseController implements \iController {
 
