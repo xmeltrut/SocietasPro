@@ -42,7 +42,6 @@ class TemplateEngine extends Smarty {
 		$this->assign("msg", "");
 		
 		// load language strings
-		require_once("language.php");
 		$language = Language::getInstance();
 		$langStrings = $language->getStrings();
 		
