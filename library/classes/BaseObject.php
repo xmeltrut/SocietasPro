@@ -65,7 +65,7 @@ abstract class BaseObject {
 	/**
 	 * Standard get return message function
 	 *
-	 * @return string Message
+	 * @return string|array Message
 	 */
 	public function getMessage () {
 		return $this->message;
@@ -131,9 +131,24 @@ abstract class BaseObject {
 	 * Set the return message
 	 *
 	 * @param string $msg Message
+	 * @return boolean Success
 	 */
 	protected function setMessage ($msg) {
-		$this->message .= $msg;
+	
+		if ($msg != "") {
+			if (is_array($this->message)) {
+				$this->message[] = $msg;
+			} elseif ($this->message != "") {
+				$this->message = array($this->message, $msg);
+			} else {
+				$this->message = $msg;
+			}
+			
+			return true;
+		}
+		
+		return false;
+	
 	}
 	
 	/**

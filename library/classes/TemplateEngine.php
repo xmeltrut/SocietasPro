@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
- *
- * @todo Implement setMessage() function to assign the message
  */
 
 require("smarty/Smarty.class.php");

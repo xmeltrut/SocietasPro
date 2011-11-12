@@ -117,7 +117,7 @@ abstract class BaseModel {
 	/**
 	 * Get the return message
 	 *
-	 * @return string Message
+	 * @return string|array Message
 	 */
 	public function getMessage () {
 		return $this->message;
