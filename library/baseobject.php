@@ -72,6 +72,37 @@ abstract class BaseObject {
 	}
 	
 	/**
+	 * Check if a data element has been updated
+	 *
+	 * This will return false if the element doesn't exist, except if it exsits in one instance and
+	 * not the other, in which case it will return true. It does not use strict type checking.
+	 *
+	 * @param string $key Key
+	 * @return boolean
+	 */
+	public function hasChanged ($key) {
+	
+		// run both checks
+		$a = array_key_exists($key, $this->data);
+		$b = array_key_exists($key, $this->originalData);
+	
+		if ($a || $b) {
+			if ($a && $b) {
+				if ($this->data[$key] == $this->originalData[$key]) {
+					return false;
+				} else {
+					return true;
+				}
+			} else {
+				return true;
+			}
+		} else {
+			return false;
+		}
+	
+	}
+	
+	/**
 	 * Returns a string representation of the data as it was when the object
 	 * was originally created - perfect for audit trails.
 	 *

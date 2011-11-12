@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Common
- *
- * @todo Changing a page parent should trigger a reorder
  */
 
 require_once("basemodel.php");
@@ -330,6 +328,10 @@ class PagesModel extends BaseModel {
 		// if new, set the order
 		if (!$id) {
 			$object->setOrder($this->getNextOrder($object->pageParent));
+		} else {
+			if ($object->hasChanged("pageParent")) {
+				$object->setOrder($this->getNextOrder($object->pageParent));
+			}
 		}
 		
 		// record in audit trail
