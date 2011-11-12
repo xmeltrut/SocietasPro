@@ -7,7 +7,6 @@
  * @subpackage Admin
  */
 
-require_once("basemodel.php");
 require_once("objects/location.php");
 
 class LocationsModel extends BaseModel {

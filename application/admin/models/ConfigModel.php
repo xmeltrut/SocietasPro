@@ -11,8 +11,6 @@
  * @subpackage Admin
  */
 
-require_once("basemodel.php");
-
 class ConfigModel extends BaseModel {
 
 	private $model;

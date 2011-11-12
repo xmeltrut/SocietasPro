@@ -7,8 +7,6 @@
  * @subpackage Common
  */
 
-require_once("basemodel.php");
-
 class ErrorLogsModel extends BaseModel {
 
 	protected $tableName = "error_logs";

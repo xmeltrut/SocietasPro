@@ -7,8 +7,6 @@
  * @subpackage Admin
  */
 
-require_once("basemodel.php");
-
 class AuditEntriesModel extends BaseModel {
 
 	protected $tableName = "audit_entries";

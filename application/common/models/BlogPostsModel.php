@@ -7,7 +7,6 @@
  * @subpackage Common
  */
 
-require_once("basemodel.php");
 require_once("objects/BlogPost.php");
 
 class BlogPostsModel extends BaseModel {

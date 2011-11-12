@@ -7,7 +7,6 @@
  * @subpackage Admin
  */
 
-require_once("basemodel.php");
 require_once("objects/Member.php");
 
 class MembersModel extends BaseModel {

@@ -7,7 +7,6 @@
  * @subpackage Admin
  */
 
-require_once("basemodel.php");
 require_once("objects/subscriber.php");
 
 class SubscribersModel extends BaseModel {
