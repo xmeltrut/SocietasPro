@@ -51,7 +51,6 @@ class Configuration {
 	private static function initialise () {
 	
 		// create a database object
-		require_once("database.php");
 		$db = Database::getInstance();
 		
 		// query for all config options

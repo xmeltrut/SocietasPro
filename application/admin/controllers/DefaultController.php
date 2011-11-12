@@ -19,7 +19,6 @@ class DefaultController extends BaseController implements iController {
 	public function index () {
 	
 		// get a database object
-		require_once("database.php");
 		$db = Database::getInstance();
 		
 		// set variables

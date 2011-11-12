@@ -71,7 +71,6 @@ class Authorisation {
 		$success = false;
 		
 		// create a database connection
-		require_once("database.php");
 		$db = Database::getInstance();
 		
 		// select the user

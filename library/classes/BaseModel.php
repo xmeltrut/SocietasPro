@@ -24,7 +24,6 @@ abstract class BaseModel {
 	 */
 	function __construct () {
 	
-		require_once("database.php");
 		$this->db = Database::getInstance();
 	
 	}
