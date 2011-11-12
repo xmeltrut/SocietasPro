@@ -12,7 +12,7 @@ class MemberTest extends PHPUnit_Framework_TestCase {
 	private $object;
 	
 	function setUp () {
-		require_once("../application/admin/objects/Member.php");
+		require_once("../../application/admin/objects/Member.php");
 		$this->object = new Member();
 	}
 	

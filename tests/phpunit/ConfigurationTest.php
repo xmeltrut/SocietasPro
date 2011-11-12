@@ -12,12 +12,11 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
 	private $object;
 	
 	function setUp () {
-		require_once("../library/classes/Configuration.php");
-		$this->object = Configuration::getInstance();
+		require_once("../../library/classes/Configuration.php");
 	}
 	
 	public function testGet () {
-		$value = $this->object->get("language");
+		$value = Configuration::get("language");
 		$this->assertGreaterThan(false, $value);
 	}
 
