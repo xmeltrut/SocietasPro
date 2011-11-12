@@ -30,7 +30,7 @@ class ReportingController extends BaseController implements iController {
 		$actions = array();
 		
 		while ($row = $rec->fetch()) {
-			$actions[$row["actionID"]] = $row["actionName"];
+			$actions[$row["actionID"]] = $row["actionLocalised"];
 		}
 		
 		// get a list of members

@@ -32,6 +32,7 @@ $language_strings = array (
 	"error_logs" => "Dor QonoS",
 	"event" => "wanI'",
 	"events" => "wanImey'",
+	"export" => "negH",
 	"export_as_csv" => "negH CSV",
 	"file" => "De'",
 	"forename" => "wa'DIch pong",

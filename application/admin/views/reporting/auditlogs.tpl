@@ -7,7 +7,7 @@
 	<select name="action">
 		<option value="">{$lang_any} {$lang_action|lower}</option>
 		{foreach from=$actions key=key item=value}
-		<option value="{$key}" {if $key==$actionID}selected="selected"{/if}>{$value}</option>
+		<option value="{$key}" {if $key==$actionID}selected="selected"{/if}>{eval var=$value}</option>
 		{/foreach}
 	</select>
 	<select name="member">
