@@ -29,7 +29,8 @@ class DatabaseException extends Exception {
 					SQL: " . $sql . "<br />
 					Message: " . $db->getError() . "<br />
 					Code: " . $db->getErrorNumber();
-			die($msg);
+			print $msg;
+			exit(1);
 		
 		} else {
 		

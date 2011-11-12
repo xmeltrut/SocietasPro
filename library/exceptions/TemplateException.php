@@ -12,10 +12,13 @@ class TemplateException extends Exception {
 	/**
 	 * Constructor
 	 *
-	 * @param string $sql SQL statement
+	 * @param string $msg Message
 	 */
-	function __construct () {
+	function __construct ($msg = "") {
 	
+		// set message
+		$this->message = $msg;
+		
 		// build details string
 		$str  = "File: " . $this->getFile() . "\n";
 		$str .= "Line: " . $this->getLine() . "\n";

@@ -33,10 +33,11 @@ class TemplateEngine extends Smarty {
 		
 		if ($module == "public") {
 			$this->setTemplateDir("../personalisation/themes/default/");
-		} elseif ($module != "") {
+		} elseif ($module != "admin") {
 			$this->setTemplateDir("../application/".$module."/views/");
 		} else {
-			die("Unable to initialise template engine, no module defined.");
+			require("exceptions/TemplateException.php");
+			throw new TemplateException("Unable to initialise template engine, no module defined.");
 		}
 		
 		// set a URL root

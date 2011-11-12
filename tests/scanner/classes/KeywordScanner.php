@@ -43,6 +43,10 @@ class KeywordScanner extends FileScanner implements iScanner {
 			if (strpos("include_once(", $code) !== false) {
 				$this->log(LEVEL_WARN, "Use require_once() instead of include_once()", $line, $code);
 			}
+			
+			if (strpos("die(", $code) !== false) {
+				$this->log(LEVEL_WARN, "Throw an exception rather than using die()", $line, $code);
+			}
 		
 		}
 		

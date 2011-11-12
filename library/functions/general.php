@@ -108,7 +108,7 @@ function rebuildRequestArray () {
 function redirect ($url = "") {
 	Header("Location: ".ROOT.$url);
 	echo('<a href="$url">'.ROOT.$url.'</a>');
-	die();
+	exit(0);
 }
 
 /**
