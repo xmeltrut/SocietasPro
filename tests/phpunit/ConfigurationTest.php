@@ -12,7 +12,7 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
 	private $object;
 	
 	function setUp () {
-		require_once("../library/configuration.php");
+		require_once("../library/classes/Configuration.php");
 		$this->object = Configuration::getInstance();
 	}
 	
