@@ -93,9 +93,9 @@ class Language {
 				$language = trim(substr($filedata[2], 3));
 				$arr[$matches[1]] = $language;
 			}
-	    }
-	    
-	    return $arr;
+		}
+		
+		return $arr;
 	
 	}
 	

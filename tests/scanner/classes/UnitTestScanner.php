@@ -26,10 +26,11 @@ class UnitTestScanner extends FileScanner implements iScanner {
 	
 		foreach ($this->data as $line => $code) {
 		
-			if (preg_match("/^(abstract |)class ([a-z]+)([a-z ]*)\{/i", $code, $matches)) {
-				$path = "../phpunit/".$matches[2]."Test.php";
+			if (preg_match("/^class ([a-z]+)([a-z ]*)\{/i", $code, $matches)) {
+				$filename = $matches[1]."Test.php";
+				$path = "../phpunit/".$filename;
 				if (!file_exists($path)) {
-					$this->log(LEVEL_NOTICE, "Unit test missing", $line, $code);
+					$this->log(LEVEL_NOTICE, "Unit test missing (".$filename.")", $line, $code);
 				}
 			} else {
 			}

@@ -2,7 +2,7 @@
 /**
  * Members field is an object to represent a custom database column
  *
- * @author Chris Worfolk <chris@societaspro.org
+ * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
  */

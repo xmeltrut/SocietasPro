@@ -1,7 +1,7 @@
 <?php
 /**
  * Base object, because coding getters and setters for every single object
- * is far too tedious. Instead, we can use generic ones and deal with the 
+ * is far too tedious. Instead, we can use generic ones and deal with the
  * fall out later.
  *
  * @author Chris Worfolk <chris@societaspro.org>

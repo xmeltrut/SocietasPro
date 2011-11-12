@@ -2,7 +2,7 @@
 /**
  * Page object
  *
- * @author Chris Worfolk <chris@societaspro.org
+ * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Common
  */
