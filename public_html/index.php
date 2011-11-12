@@ -16,7 +16,6 @@ $front = FrontController::getInstance();
 
 // check if the user is logged in
 if ($front->getModule() == "admin") {
-	require("authorisation.php");
 	$auth = Authorisation::getInstance();
 	if (!$auth->isLoggedIn()) {
 		redirect("system/auth/login");
