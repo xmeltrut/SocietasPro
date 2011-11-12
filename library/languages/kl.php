@@ -7,7 +7,6 @@
  * @subpackage Languages
  *
  * @todo Add language validation to the scanner
- * @todo Dropdown on action logs aren't translating
  */
 
 $language_strings = array (
