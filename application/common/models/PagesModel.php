@@ -321,7 +321,7 @@ class PagesModel extends BaseModel {
 			$object->setName($d["name"]),
 			$object->setSlug($d["slug"]),
 			$object->setContent($d["content"])
-		)
+		);
 		
 		if (in_array(false, $writes)) {
 			$this->setMessage($object->getMessage());

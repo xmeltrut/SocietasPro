@@ -5,6 +5,10 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
+ *
+ * @todo Implemented overloaded assign() funciton to check for disallowed names
+ * @todo Implement setMessage() function to assign the message
+ * @todo Update codebase to use setMessage() function
  */
 
 require("smarty/Smarty.class.php");
@@ -52,6 +56,15 @@ class TemplateEngine extends Smarty {
 	}
 	
 	/**
+	 * Assign a variable
+	 *
+	 * @param mixed $var1 Name of variable
+	 * @param mixed $var2 Value
+	 */
+	//public function assign ($var1, $var2 = false) {
+	//}
+	
+	/**
 	 * Outputs a template
 	 *
 	 * @param string $template Template name
@@ -66,6 +79,17 @@ class TemplateEngine extends Smarty {
 			require_once("exceptions/TemplateException.php");
 			throw new TemplateException();
 		}
+	
+	}
+	
+	/**
+	 * Set the message/notice at the top of the page
+	 *
+	 * @param mixed $msg Can be string or array of strings
+	 */
+	public function setMessage ($msg) {
+	
+		
 	
 	}
 

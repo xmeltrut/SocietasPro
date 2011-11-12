@@ -82,7 +82,7 @@ class LocationsModel extends BaseModel {
 		$writes = array (
 			$object->setName($d["name"]),
 			$object->setDescription($d["description"])
-		)
+		);
 		
 		if (in_array(false, $writes)) {
 			$this->setMessage($object->getMessage());
