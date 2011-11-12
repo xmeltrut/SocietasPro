@@ -34,7 +34,7 @@ class ConfigController extends \BaseController implements \iController {
 		// check for actions
 		if (reqSet("action") == "update") {
 			$this->model->setOption("language", $_REQUEST["language"]);
-			$this->engine->assign("msg", $this->model->getMessage());
+			$this->engine->setMessage($this->model->getMessage());
 		}
 		
 		// get a list of languages

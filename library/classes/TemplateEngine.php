@@ -6,9 +6,7 @@
  * @package SocietasPro
  * @subpackage Core
  *
- * @todo Implemented overloaded assign() funciton to check for disallowed names
  * @todo Implement setMessage() function to assign the message
- * @todo Update codebase to use setMessage() function
  */
 
 require("smarty/Smarty.class.php");
@@ -33,7 +31,7 @@ class TemplateEngine extends Smarty {
 		
 		if ($module == "public") {
 			$this->setTemplateDir("../personalisation/themes/default/");
-		} elseif ($module != "admin") {
+		} elseif ($module != "") {
 			$this->setTemplateDir("../application/".$module."/views/");
 		} else {
 			require("exceptions/TemplateException.php");
@@ -44,7 +42,7 @@ class TemplateEngine extends Smarty {
 		$this->assign("root", ROOT);
 		
 		// set the standard message to nothing
-		$this->assign("msg", "");
+		$this->setMessage("");
 		
 		// load language strings
 		$language = Language::getInstance();
@@ -57,13 +55,17 @@ class TemplateEngine extends Smarty {
 	}
 	
 	/**
-	 * Assign a variable
-	 *
-	 * @param mixed $var1 Name of variable
-	 * @param mixed $var2 Value
+	 * Assign a variable. This just calls the parent function, barring
+	 * a few checks on our end.
 	 */
-	//public function assign ($var1, $var2 = false) {
-	//}
+	public function assign($tplVar, $value = null, $noCache = false) {
+		if ($tplVar == "msg") {
+			require("exceptions/TemplateException.php");
+			throw new TemplateException('You can assign $msg directly');
+		} else {
+			parent::assign($tplVar, $value, $noCache);
+		}
+	}
 	
 	/**
 	 * Outputs a template
@@ -86,11 +88,21 @@ class TemplateEngine extends Smarty {
 	/**
 	 * Set the message/notice at the top of the page
 	 *
-	 * @param mixed $msg Can be string or array of strings
+	 * @param string|array $msg Can be string or array of strings
 	 */
 	public function setMessage ($msg) {
 	
+		if (is_array($msg)) {
+			$msgCode  = "<ul>";
+			foreach ($msg as $str) {
+			$msgCode .= "<li>".$str."</li>";
+			}
+			$msgCode .= "</ul>";
+		} else {
+			$msgCode = $msg;
+		}
 		
+		parent::assign("msg", $msgCode);
 	
 	}
 

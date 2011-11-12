@@ -93,7 +93,7 @@ class MailinglistController extends \BaseController implements \iController {
 			}
 			
 			if (isset($result)) {
-				$this->engine->assign("msg", $result);
+				$this->engine->setMessage($result);
 			}
 		
 		}
@@ -120,13 +120,13 @@ class MailinglistController extends \BaseController implements \iController {
 		// check for actions
 		if (reqSet("action") == "create") {
 			$this->model->create($_REQUEST["email"]);
-			$this->engine->assign("msg", $this->model->getMessage());
+			$this->engine->setMessage($this->model->getMessage());
 		} elseif (reqSet("action") == "delete") {
 			$this->model->deleteById($_REQUEST["id"]);
-			$this->engine->assign("msg", $this->model->getMessage());
+			$this->engine->setMessage($this->model->getMessage());
 		} elseif (reqSet("action") == "deleteByEmail") {
 			$this->model->deleteByEmail($_REQUEST["email"]);
-			$this->engine->assign("msg", $this->model->getMessage());
+			$this->engine->setMessage($this->model->getMessage());
 		}
 		
 		// get list of recent subscribers

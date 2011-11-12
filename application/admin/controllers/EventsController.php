@@ -31,7 +31,7 @@ class EventsController extends \BaseController implements \iController {
 		// check for actions
 		if (reqSet("action") == "create") {
 			$this->model->write($_REQUEST);
-			$this->engine->assign("msg", $this->model->getMessage());
+			$this->engine->setMessage($this->model->getMessage());
 		}
 		
 		// output the page
@@ -48,7 +48,7 @@ class EventsController extends \BaseController implements \iController {
 		// check for actions
 		if (reqSet("action") == "edit") {
 			$this->model->write($_REQUEST, \FrontController::getParam(0));
-			$this->engine->assign("msg", $this->model->getMessage());
+			$this->engine->setMessage($this->model->getMessage());
 		}
 		
 		// get the object
@@ -77,7 +77,7 @@ class EventsController extends \BaseController implements \iController {
 						break;
 				}
 			}
-			$this->engine->assign("msg", $this->model->getMessage());
+			$this->engine->setMessage($this->model->getMessage());
 		}
 		
 		// gather page variables
