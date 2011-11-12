@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
+ *
+ * Make actions and members clickable
  */
 
 class ReportingController extends BaseController implements iController {
