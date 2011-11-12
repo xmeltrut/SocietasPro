@@ -7,8 +7,6 @@
  * @subpackage Common
  */
 
-require_once("baseobject.php");
-
 class BlogPost extends BaseObject {
 
 	function __construct ($data = array()) {

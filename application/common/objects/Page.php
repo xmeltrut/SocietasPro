@@ -7,8 +7,6 @@
  * @subpackage Common
  */
 
-require_once("baseobject.php");
-
 class Page extends BaseObject {
 
 	/**

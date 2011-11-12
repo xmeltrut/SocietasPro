@@ -7,8 +7,6 @@
  * @subpackage Admin
  */
 
-require_once("baseobject.php");
-
 class Member extends BaseObject {
 
 	function __construct ($data = array()) {
