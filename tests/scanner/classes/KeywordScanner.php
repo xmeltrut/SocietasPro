@@ -4,6 +4,8 @@
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package BugScanner
+ *
+ * Add scanning for function ($vars) { formatting / braces
  */
 
 class KeywordScanner extends FileScanner implements iScanner {
@@ -26,9 +28,12 @@ class KeywordScanner extends FileScanner implements iScanner {
 	
 		foreach ($this->data as $line => $code) {
 		
-			// check for print_r that has been left in
-			if (preg_match("/print_r/", $code)) {
+			if (strpos("print_r", $code) !== false) {
 				$this->log(LEVEL_WARN, "print_r", $line, $code);
+			}
+			
+			if (strpos("function construct", $code) !== false) {
+				$this->log(LEVEL_WARN, "construct should be named __construct", $line, $code);
 			}
 		
 		}
