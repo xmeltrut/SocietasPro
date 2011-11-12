@@ -22,7 +22,7 @@
 		</tr>
 		{foreach from=$item[1] item=report}
 		<tr>
-			<td class="line filename">{$report[2]}</td>
+			<td class="line filename">{if $report[2] > 0}{$report[2]}{else}&nbsp;{/if}</td>
 			<td>{$report[1]}</td>
 			<td>{$report[3]}</td>
 			<td class="level level_{$report[0]}">{$report[4]}</td>

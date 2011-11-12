@@ -122,12 +122,14 @@ class DirectoryCursor {
 		$keywordScanner = new KeywordScanner($file);
 		$formattingScanner = new FormattingScanner($file);
 		$unitTestScanner = new UnitTestScanner($file);
+		$languageScanner = new LanguageScanner($filePath);
 		
 		// run the scan
 		$scanResults = array_merge (
 			$keywordScanner->scan(),
 			$formattingScanner->scan(),
-			$unitTestScanner->scan()
+			$unitTestScanner->scan(),
+			$languageScanner->scan()
 		);
 		
 		// log the results

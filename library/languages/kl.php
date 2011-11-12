@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Languages
- *
- * @todo Add language validation to the scanner
  */
 
 $language_strings = array (
