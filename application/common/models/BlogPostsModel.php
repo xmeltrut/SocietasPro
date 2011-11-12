@@ -51,7 +51,7 @@ class BlogPostsModel extends BaseModel {
 	}
 	
 	/**
-	 * Get a specific post
+	 * Get a specific post by ID
 	 *
 	 * @param int $id Post ID
 	 * @return BlogPost
@@ -59,6 +59,25 @@ class BlogPostsModel extends BaseModel {
 	public function getById ($id) {
 	
 		$sql = "SELECT * FROM ".DB_PREFIX."blog_posts WHERE postID = " . intval($id);
+		$rec = $this->db->query($sql);
+		
+		if ($row = $rec->fetch()) {
+			return new BlogPost($row);
+		} else {
+			return false;
+		}
+	
+	}
+	
+	/**
+	 * Get a specific post by slug
+	 *
+	 * @param string $slug Post slug
+	 * @return BlogPost
+	 */
+	public function getBySlug ($slug) {
+	
+		$sql = "SELECT * FROM ".DB_PREFIX."blog_posts WHERE postSlug = '" . escape($slug) . "' ";
 		$rec = $this->db->query($sql);
 		
 		if ($row = $rec->fetch()) {

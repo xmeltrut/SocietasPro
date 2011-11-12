@@ -22,6 +22,12 @@ class BlogPost extends BaseObject {
 		return date("j F Y H:i:s", strtotime($this->postDate));
 	}
 	
+	/**
+	 * Set the content of the post
+	 *
+	 * @param string $value Value
+	 * @return boolean Success
+	 */
 	public function setContent ($value) {
 		$this->setData("postContent", $value);
 		return true;

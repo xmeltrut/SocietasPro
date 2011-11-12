@@ -38,9 +38,10 @@ class BlogController extends BaseController implements iController {
 	public function post () {
 	
 		// get blog post
-		$event = $this->model->getById(FrontController::getParam(0));
+		$post = $this->model->getBySlug(FrontController::getParam(0));
 		
 		// output page
+		$this->engine->assign("post", $post);
 		$this->engine->display("blogPost.tpl");
 	
 	}

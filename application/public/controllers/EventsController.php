@@ -21,6 +21,17 @@ class EventsController extends BaseController implements iController {
 	
 	}
 	
+	public function details () {
+	
+		// get blog post
+		$event = $this->model->getById(FrontController::getParam(0));
+		
+		// output page
+		$this->engine->assign("event", $event);
+		$this->engine->display("eventDetails.tpl");
+	
+	}
+	
 	public function index () {
 	
 		// get events
