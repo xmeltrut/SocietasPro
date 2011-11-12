@@ -141,6 +141,11 @@ class FrontController {
 			$url = str_replace(ROOT, "", $_SERVER["REQUEST_URI"]);
 		}
 		
+		// remove any querystring
+		if (($pos = strpos($url, "?")) !== false) {
+			$url = substr($url, 0, $pos);
+		}
+		
 		// extract variables
 		$vars = explode("/", $url);
 		

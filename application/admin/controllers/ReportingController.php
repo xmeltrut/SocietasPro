@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo Audit trail form should use GET rather than POST
  */
 
 class ReportingController extends BaseController implements iController {

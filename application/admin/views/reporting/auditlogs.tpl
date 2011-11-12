@@ -3,7 +3,7 @@
 {block name=body}
 <h2>{$lang_audit_logs}</h2>
 
-<form action="" method="post">
+<form action="" method="get">
 	<select name="action">
 		<option value="">{$lang_any} {$lang_action|lower}</option>
 		{foreach from=$actions key=key item=value}
