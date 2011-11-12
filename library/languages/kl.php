@@ -7,7 +7,6 @@
  * @subpackage Languages
  *
  * @todo Add language validation to the scanner
- * @todo Check language overloading is working - I think it's constants…
  * @todo Dropdown on action logs aren't translating
  */
 
@@ -63,6 +62,7 @@ $language_strings = array (
 	"select_action" => "wiV vang",
 	"submit" => "muH",
 	"subscribers" => "novpu'",
+	"success" => "Qapla'",
 	"surname" => "pong",
 	"unknown" => "tlhol",
 	"url" => "quV"

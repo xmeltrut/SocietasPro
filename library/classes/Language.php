@@ -141,7 +141,7 @@ class Language {
 		self::$content = $content;
 		
 		// load strings in as constants
-		foreach ($language_strings as $key => $val) {
+		foreach ($strings as $key => $val) {
 			define("LANG_".strtoupper($key), $val);
 		}
 	
