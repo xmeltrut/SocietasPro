@@ -106,15 +106,39 @@ class Language {
 	 */
 	private static function load ($languageCode) {
 	
+		// build the file location
 		$languageFile = "languages/" . $languageCode . ".php";
 		
+		// check if file exists
 		if (!fileExists($languageFile)) {
 			return self::load(self::DEFAULT_LANGUAGE);
 		}
 		
-		include_once($languageFile);
-		self::$strings = $language_strings;
-		self::$content = $language_content;
+		// load default language
+		require("languages/".self::DEFAULT_LANGUAGE.".php");
+		$strings = $language_strings;
+		$content = $language_content;
+		
+		// load custom language
+		if ($languageCode != self::DEFAULT_LANGUAGE) {
+		
+			// check file exists
+			if (!fileExists($languageFile)) {
+				return self::load(self::DEFAULT_LANGUAGE);
+			}
+			
+			// load file
+			require($languageFile);
+			
+			// overwrite default language
+			$strings = array_merge($strings, $language_strings);
+			$content = array_merge($content, $language_content);
+		
+		}
+		
+		// set instance varaibles
+		self::$strings = $strings;
+		self::$content = $content;
 		
 		// load strings in as constants
 		foreach ($language_strings as $key => $val) {

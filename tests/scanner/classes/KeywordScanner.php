@@ -36,8 +36,12 @@ class KeywordScanner extends FileScanner implements iScanner {
 				$this->log(LEVEL_WARN, "construct should be named __construct", $line, $code);
 			}
 			
-			if (strpos("include (", $code) !== false) {
+			if (strpos("include(", $code) !== false) {
 				$this->log(LEVEL_WARN, "Use require() instead of include()", $line, $code);
+			}
+			
+			if (strpos("include_once(", $code) !== false) {
+				$this->log(LEVEL_WARN, "Use require_once() instead of include_once()", $line, $code);
 			}
 		
 		}
