@@ -7,7 +7,7 @@
  * @subpackage Core
  */
 
-require("basecontroller.php");
+require("classes/basecontroller.php");
 require("config.php");
 require("configuration.php");
 require("functions/audit.php");
