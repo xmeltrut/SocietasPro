@@ -52,11 +52,17 @@ class FileScanner {
 	 */
 	protected function log ($level, $msg, $line = 0, $code = "") {
 	
+		// get level information
+		global $levelInfo;
+		$levelName = $levelInfo[$level];
+		
+		// log message
 		$this->messages[] = array (
 			$level,
 			$msg,
 			$line,
-			$code
+			$code,
+			$levelName
 		);
 	
 	}

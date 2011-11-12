@@ -50,12 +50,22 @@ class DirectoryCursor {
 	 */
 	public function scan () {
 	
-		// add first directory
-		$this->directoriesToScan[] = "../../application";
+		// add top level directories
+		$this->directoriesToScan = array (
+			"../../application",
+			"../../library"
+		);
+		
+		// excluded directories
+		$excludedDirectories = array (
+			"../../library/smarty"
+		);
 		
 		// scan all directories
 		while ($dir = $this->getNextDirectory()) {
-			$this->scanDirectory($dir);
+			if (!in_array($dir, $excludedDirectories)) {
+				$this->scanDirectory($dir);
+			}
 		}
 		
 		// now scan all the files

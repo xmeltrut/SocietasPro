@@ -9,7 +9,7 @@
 
 	<h1>Bug Scanner</h1>
 	
-	<table border="1">
+	<table width="100%" cellpadding="10" cellspacing="5" border="0">
 		<tr>
 			<th>Line</th>
 			<th>Notice</th>
@@ -18,14 +18,14 @@
 		</tr>
 		{foreach from=$messages item=item}
 		<tr>
-			<td colspan="4">{$item[0]}</td>
+			<td colspan="4" class="filename">{$item[0]}</td>
 		</tr>
 		{foreach from=$item[1] item=report}
 		<tr>
-			<td>{$report[2]}</td>
+			<td class="line filename">{$report[2]}</td>
 			<td>{$report[1]}</td>
 			<td>{$report[3]}</td>
-			<td>{$report[0]}</td>
+			<td class="level level_{$report[0]}">{$report[4]}</td>
 		</tr>
 		{/foreach}
 		{/foreach}

@@ -2,3 +2,35 @@ body {
 	font-family: verdana, arial, sans-serif;
 	font-size: small;
 }
+
+.filename {
+	background-color: #DDDDDD;
+}
+
+.level {
+	text-align: center;
+}
+
+.level_1 {
+	background-color: #FF3300;
+}
+
+.level_2 {
+	background-color: #FFCC00;
+}
+
+.level_3 {
+	background-color: #99CC66;
+}
+
+.line {
+	text-align: right;
+}
+
+td {
+	background-color: #F3F3F3;
+}
+
+th {
+	background-color: #3399FF;
+}
