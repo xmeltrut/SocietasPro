@@ -7,7 +7,9 @@
  * @subpackage Public
  */
 
-class EventsController extends BaseController implements iController {
+namespace publica;
+
+class EventsController extends \BaseController implements \iController {
 
 	private $model;
 	
@@ -17,14 +19,14 @@ class EventsController extends BaseController implements iController {
 		
 		// create a model
 		require_once("models/EventsModel.php");
-		$this->model = new EventsModel();
+		$this->model = new \EventsModel();
 	
 	}
 	
 	public function details () {
 	
 		// get blog post
-		$event = $this->model->getById(FrontController::getParam(0));
+		$event = $this->model->getById(\FrontController::getParam(0));
 		
 		// output page
 		$this->engine->assign("event", $event);

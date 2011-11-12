@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@buzzsports.com>
  * @package SocietasPro
  * @subpackage Exceptions
+ *
+ * @todo This doesn't work since we introduced namespaces
  */
 
 class HttpErrorException extends Exception {

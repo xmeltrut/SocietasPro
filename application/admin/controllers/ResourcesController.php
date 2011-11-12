@@ -7,7 +7,7 @@
  * @subpackage Admin
  */
 
-class ResourcesController extends BaseController implements iController {
+class ResourcesController extends \BaseController implements \iController {
 
 	function __construct () {
 		parent::__construct();
@@ -18,7 +18,7 @@ class ResourcesController extends BaseController implements iController {
 	 */
 	public function index () {
 		require_once("exceptions/HttpErrorException");
-		throw new HttpErrorException(404);
+		throw new \HttpErrorException(404);
 	}
 	
 	/**

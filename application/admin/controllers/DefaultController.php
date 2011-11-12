@@ -7,7 +7,9 @@
  * @subpackage Admin
  */
 
-class DefaultController extends BaseController implements iController {
+namespace admin;
+
+class DefaultController extends \BaseController implements \iController {
 
 	function __construct () {
 		parent::__construct();
@@ -19,7 +21,7 @@ class DefaultController extends BaseController implements iController {
 	public function index () {
 	
 		// get a database object
-		$db = Database::getInstance();
+		$db = \Database::getInstance();
 		
 		// set variables
 		$this->engine->assign("total_members", $db->fetchOne("SELECT COUNT(memberID) FROM ".DB_PREFIX."members"));
@@ -37,7 +39,7 @@ class DefaultController extends BaseController implements iController {
 	
 		// get the tweets
 		require_once("twitter/TwitterTimeline.php");
-		$timeline = new TwitterTimeline("SocietasPro");
+		$timeline = new \TwitterTimeline("SocietasPro");
 		$tweets = $timeline->get();
 		
 		// output page

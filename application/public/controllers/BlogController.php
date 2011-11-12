@@ -7,7 +7,9 @@
  * @subpackage Public
  */
 
-class BlogController extends BaseController implements iController {
+namespace publica;
+
+class BlogController extends \BaseController implements \iController {
 
 	private $model;
 	
@@ -17,7 +19,7 @@ class BlogController extends BaseController implements iController {
 		
 		// create a model
 		require_once("models/BlogPostsModel.php");
-		$this->model = new BlogPostsModel();
+		$this->model = new \BlogPostsModel();
 	
 	}
 	
@@ -38,7 +40,7 @@ class BlogController extends BaseController implements iController {
 	public function post () {
 	
 		// get blog post
-		$post = $this->model->getBySlug(FrontController::getParam(0));
+		$post = $this->model->getBySlug(\FrontController::getParam(0));
 		
 		// output page
 		$this->engine->assign("post", $post);

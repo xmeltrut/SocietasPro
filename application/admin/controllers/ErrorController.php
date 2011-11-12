@@ -7,7 +7,7 @@
  * @subpackage Admin
  */
 
-class ErrorController extends BaseController implements iController {
+class ErrorController extends \BaseController implements \iController {
 
 	function __construct () {
 		parent::__construct();
@@ -25,8 +25,8 @@ class ErrorController extends BaseController implements iController {
 	 */
 	public function notFound () {
 	
-		$this->engine->assign("title", Language::getContent("page_not_found"));
-		$this->engine->assign("content", Language::getContent("page_not_found_body"));
+		$this->engine->assign("title", \Language::getContent("page_not_found"));
+		$this->engine->assign("content", \Language::getContent("page_not_found_body"));
 		$this->engine->display("errors/404.tpl");
 	
 	}
@@ -36,8 +36,8 @@ class ErrorController extends BaseController implements iController {
 	 */
 	public function serverError () {
 	
-		$this->engine->assign("title", Language::getContent("server_error"));
-		$this->engine->assign("content", Language::getContent("server_error_body"));
+		$this->engine->assign("title", \Language::getContent("server_error"));
+		$this->engine->assign("content", \Language::getContent("server_error_body"));
 		$this->engine->display("errors/500.tpl");
 	
 	}

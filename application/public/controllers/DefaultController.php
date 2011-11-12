@@ -7,7 +7,9 @@
  * @subpackage Public
  */
 
-class DefaultController extends BaseController implements iController {
+namespace publica;
+
+class DefaultController extends \BaseController implements \iController {
 
 	private $model;
 	
@@ -17,7 +19,7 @@ class DefaultController extends BaseController implements iController {
 		
 		// create a model
 		require_once("models/PagesModel.php");
-		$this->model = new PagesModel();
+		$this->model = new \PagesModel();
 	
 	}
 	

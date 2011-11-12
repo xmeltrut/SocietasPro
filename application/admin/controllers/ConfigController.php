@@ -7,7 +7,9 @@
  * @subpackage Admin
  */
 
-class ConfigController extends BaseController implements iController {
+namespace admin;
+
+class ConfigController extends \BaseController implements \iController {
 
 	private $model;
 	
@@ -17,7 +19,7 @@ class ConfigController extends BaseController implements iController {
 		
 		// create a model
 		require_once("models/ConfigModel.php");
-		$this->model = new ConfigModel();
+		$this->model = new \ConfigModel();
 	
 	}
 	
@@ -36,12 +38,12 @@ class ConfigController extends BaseController implements iController {
 		}
 		
 		// get a list of languages
-		$language = Language::getInstance();
+		$language = \Language::getInstance();
 		$list = $language->listAsArray();
 		
 		// build a form
-		$form = new FormBuilder();
-		$form->addSelect("language", LANG_LANGUAGE, $list, Configuration::get("language"));
+		$form = new \FormBuilder();
+		$form->addSelect("language", LANG_LANGUAGE, $list, \Configuration::get("language"));
 		$form->addHidden("action", "update");
 		$form->addSubmit();
 		

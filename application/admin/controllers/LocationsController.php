@@ -7,7 +7,9 @@
  * @subpackage Admin
  */
 
-class LocationsController extends BaseController implements iController {
+namespace admin;
+
+class LocationsController extends \BaseController implements \iController {
 
 	private $instance;
 	
@@ -17,7 +19,7 @@ class LocationsController extends BaseController implements iController {
 		
 		// create a model
 		require_once("models/LocationsModel.php");
-		$this->model = new LocationsModel();
+		$this->model = new \LocationsModel();
 	
 	}
 	
@@ -45,12 +47,12 @@ class LocationsController extends BaseController implements iController {
 	
 		// check for actions
 		if (reqSet("action") == "edit") {
-			$this->model->write($_REQUEST, FrontController::getParam(0));
+			$this->model->write($_REQUEST, \FrontController::getParam(0));
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
 		// get the object
-		$location = $this->model->getById(FrontController::getParam(0));
+		$location = $this->model->getById(\FrontController::getParam(0));
 		
 		// output page
 		$this->engine->assign("form", $this->standardForm("edit", $location->getAllData()));
@@ -87,7 +89,7 @@ class LocationsController extends BaseController implements iController {
 	 */
 	private function standardForm ($action, $data = array()) {
 	
-		$form = new FormBuilder();
+		$form = new \FormBuilder();
 		
 		$form->addInput("name", LANG_NAME, arrSet($data, "locationName"));
 		$form->addTextArea("description", LANG_DESCRIPTION, arrSet($data, "locationDescription"));

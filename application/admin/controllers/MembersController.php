@@ -7,7 +7,9 @@
  * @subpackage Admin
  */
 
-class MembersController extends BaseController implements iController {
+namespace admin;
+
+class MembersController extends \BaseController implements \iController {
 
 	private $model;
 	
@@ -17,7 +19,7 @@ class MembersController extends BaseController implements iController {
 		
 		// create a members model
 		require_once("models/MembersModel.php");
-		$this->model = new MembersModel();
+		$this->model = new \MembersModel();
 	
 	}
 	
@@ -44,7 +46,7 @@ class MembersController extends BaseController implements iController {
 	public function csv () {
 	
 		// csv object
-		$csv = new CsvBuilder(LANG_MEMBERS);
+		$csv = new \CsvBuilder(LANG_MEMBERS);
 		
 		// get an array of members
 		$members = $this->model->get();
@@ -112,7 +114,7 @@ class MembersController extends BaseController implements iController {
 			$file = file($fileLoca);
 			
 			// create a wizard
-			$wizard = new ImportMembersWizard($file);
+			$wizard = new \ImportMembersWizard($file);
 			
 			// get headers and build form
 			$headers = $wizard->getColumnHeaders();
@@ -140,7 +142,7 @@ class MembersController extends BaseController implements iController {
 				$file = file($fileLoca);
 				
 				// create a wizard
-				$wizard = new ImportMembersWizard($file);
+				$wizard = new \ImportMembersWizard($file);
 				
 				// create a map based on user's selections
 				$map = array();
@@ -187,7 +189,7 @@ class MembersController extends BaseController implements iController {
 		}
 		
 		// gather variables for page
-		$pageNum = FrontController::getParam(0);
+		$pageNum = \FrontController::getParam(0);
 		$totalPages = totalPages($this->model->count());
 		$members = $this->model->get($pageNum);
 		
@@ -206,7 +208,7 @@ class MembersController extends BaseController implements iController {
 	 */
 	private function standardForm ($action, $data = array()) {
 	
-		$form = new FormBuilder();
+		$form = new \FormBuilder();
 		$form->addInput("email", LANG_EMAIL, arrSet($data, "memberEmail"));
 		$form->addInput("forename", LANG_FORENAME, arrSet($data, "memberForename"));
 		$form->addInput("surname", LANG_SURNAME, arrSet($data, "memberSurname"));

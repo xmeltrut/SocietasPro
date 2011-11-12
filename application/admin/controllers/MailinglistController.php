@@ -7,7 +7,9 @@
  * @subpackage Admin
  */
 
-class MailinglistController extends BaseController implements iController {
+namespace admin;
+
+class MailinglistController extends \BaseController implements \iController {
 
 	private $instance;
 	
@@ -17,7 +19,7 @@ class MailinglistController extends BaseController implements iController {
 		
 		// create a model
 		require_once("models/SubscribersModel.php");
-		$this->model = new SubScribersModel();
+		$this->model = new \SubScribersModel();
 	
 	}
 	
@@ -27,7 +29,7 @@ class MailinglistController extends BaseController implements iController {
 	public function csv () {
 	
 		// csv object
-		$csv = new CsvBuilder(LANG_MAILING_LIST);
+		$csv = new \CsvBuilder(LANG_MAILING_LIST);
 		
 		// get an array of members
 		$subscribers = $this->model->getAsArray();
@@ -58,7 +60,7 @@ class MailinglistController extends BaseController implements iController {
 	
 		// create a members model
 		require_once("models/MembersModel.php");
-		$membersModel = new MembersModel();
+		$membersModel = new \MembersModel();
 		
 		// create a list
 		$subscribers = $this->model->getAsArray();
@@ -82,7 +84,7 @@ class MailinglistController extends BaseController implements iController {
 		// check for actions
 		if (reqSet("action") == "import") {
 		
-			$wizard = new ImportSubscribersWizard();
+			$wizard = new \ImportSubscribersWizard();
 			
 			if ($_REQUEST["emails"] != "") {
 				$result = $wizard->import($_REQUEST["emails"]);
@@ -97,7 +99,7 @@ class MailinglistController extends BaseController implements iController {
 		}
 		
 		// build a form
-		$form = new FormBuilder();
+		$form = new \FormBuilder();
 		$form->addTextArea("emails", LANG_SUBSCRIBERS);
 		$form->addFile("upload", LANG_FILE);
 		$form->addHidden("action", "import");

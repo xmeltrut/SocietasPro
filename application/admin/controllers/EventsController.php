@@ -7,7 +7,9 @@
  * @subpackage Admin
  */
 
-class EventsController extends BaseController implements iController {
+namespace admin;
+
+class EventsController extends \BaseController implements \iController {
 
 	private $instance;
 	
@@ -17,7 +19,7 @@ class EventsController extends BaseController implements iController {
 		
 		// create a model
 		require_once("models/EventsModel.php");
-		$this->model = new EventsModel();
+		$this->model = new \EventsModel();
 	
 	}
 	
@@ -45,12 +47,12 @@ class EventsController extends BaseController implements iController {
 	
 		// check for actions
 		if (reqSet("action") == "edit") {
-			$this->model->write($_REQUEST, FrontController::getParam(0));
+			$this->model->write($_REQUEST, \FrontController::getParam(0));
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
 		// get the object
-		$event = $this->model->getById(FrontController::getParam(0));
+		$event = $this->model->getById(\FrontController::getParam(0));
 		
 		// output page
 		$this->engine->assign("form", $this->standardForm("edit", $event->getAllData()));
@@ -79,7 +81,7 @@ class EventsController extends BaseController implements iController {
 		}
 		
 		// gather page variables
-		$pageNum = FrontController::getParam(0);
+		$pageNum = \FrontController::getParam(0);
 		$totalPages = totalPages($this->model->count());
 		$events = $this->model->get($pageNum);
 		
@@ -99,11 +101,11 @@ class EventsController extends BaseController implements iController {
 	private function standardForm ($action, $data = array()) {
 	
 		// create a form object
-		$form = new FormBuilder();
+		$form = new \FormBuilder();
 		
 		// create a location model
 		include_once("models/LocationsModel.php");
-		$locationsModel = new LocationsModel();
+		$locationsModel = new \LocationsModel();
 		
 		// build an array of locations
 		$options = array();

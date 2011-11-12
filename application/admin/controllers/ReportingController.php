@@ -9,7 +9,9 @@
  * Make actions and members clickable
  */
 
-class ReportingController extends BaseController implements iController {
+namespace admin;
+
+class ReportingController extends \BaseController implements \iController {
 
 	function __construct () {
 		parent::__construct();
@@ -21,7 +23,7 @@ class ReportingController extends BaseController implements iController {
 	public function auditlogs () {
 	
 		// get a database instance
-		$db = Database::getInstance();
+		$db = \Database::getInstance();
 		
 		// get a list of actions
 		$sql = "SELECT * FROM ".DB_PREFIX."audit_actions ORDER BY actionName ASC ";
@@ -47,12 +49,12 @@ class ReportingController extends BaseController implements iController {
 		
 		// invoke a model
 		require_once("models/AuditEntriesModel.php");
-		$auditEntriesModel = new AuditEntriesModel();
+		$auditEntriesModel = new \AuditEntriesModel();
 		
 		// gather variables for page
 		$actionID = (isset($_REQUEST["action"])) ? $_REQUEST["action"] : 0;
 		$memberID = (isset($_REQUEST["member"])) ? $_REQUEST["member"] : 0;
-		$pageNum = FrontController::getParam(0);
+		$pageNum = \FrontController::getParam(0);
 		$totalPages = totalPages($auditEntriesModel->count($actionID, $memberID));
 		
 		// output the page
@@ -73,10 +75,10 @@ class ReportingController extends BaseController implements iController {
 	
 		// invoke a model
 		require_once("models/ErrorLogsModel.php");
-		$errorLogsModel = new ErrorLogsModel();
+		$errorLogsModel = new \ErrorLogsModel();
 		
 		// gather variables for page
-		$pageNum = FrontController::getParam(0);
+		$pageNum = \FrontController::getParam(0);
 		$totalPages = totalPages($errorLogsModel->count());
 		
 		// output the page

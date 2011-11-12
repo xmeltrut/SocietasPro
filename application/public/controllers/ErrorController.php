@@ -7,7 +7,9 @@
  * @subpackage Public
  */
 
-class ErrorController extends BaseController implements iController {
+namespace publica;
+
+class ErrorController extends \BaseController implements \iController {
 
 	function __construct () {
 		parent::__construct();

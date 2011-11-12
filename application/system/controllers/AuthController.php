@@ -7,7 +7,9 @@
  * @subpackage System
  */
 
-class AuthController extends BaseController implements iController {
+namespace system;
+
+class AuthController extends \BaseController implements \iController {
 
 	/**
 	 * Default page
@@ -23,7 +25,7 @@ class AuthController extends BaseController implements iController {
 	
 		// check for actions
 		if (reqSet("action") == "login") {
-			$auth = Authorisation::getInstance();
+			$auth = \Authorisation::getInstance();
 			$rv = $auth->login($_REQUEST["email"], $_REQUEST["password"], $msg);
 			
 			if ($rv) {
@@ -41,7 +43,7 @@ class AuthController extends BaseController implements iController {
 	 */
 	public function logout () {
 	
-		$auth = Authorisation::getInstance();
+		$auth = \Authorisation::getInstance();
 		$auth->logout();
 		redirect();
 	

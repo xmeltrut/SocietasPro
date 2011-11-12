@@ -7,7 +7,9 @@
  * @subpackage Admin
  */
 
-class PagesController extends BaseController implements iController {
+namespace admin;
+
+class PagesController extends \BaseController implements \iController {
 
 	private $model;
 	
@@ -17,7 +19,7 @@ class PagesController extends BaseController implements iController {
 		
 		// create a model
 		require_once("models/PagesModel.php");
-		$this->model = new PagesModel();
+		$this->model = new \PagesModel();
 	
 	}
 	
@@ -45,12 +47,12 @@ class PagesController extends BaseController implements iController {
 	
 		// check for actions
 		if (reqSet("action") == "edit") {
-			$this->model->write($_REQUEST, FrontController::getParam(0));
+			$this->model->write($_REQUEST, \FrontController::getParam(0));
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
 		// get the object
-		$page = $this->model->getById(FrontController::getParam(0));
+		$page = $this->model->getById(\FrontController::getParam(0));
 		
 		// output the page
 		$this->engine->assign("form", $this->standardForm("edit", $page->getAllData()));
@@ -106,7 +108,7 @@ class PagesController extends BaseController implements iController {
 		$pageParent  = array(0 => LANG_NONE);
 		$pageParent += $this->model->getAsArray($excludedID);
 		
-		$form = new FormBuilder();
+		$form = new \FormBuilder();
 		$form->addInput("name", LANG_NAME, arrSet($data, "pageName"));
 		$form->addInput("slug", LANG_URL, arrSet($data, "pageSlug"));
 		$form->addSelect("parent", LANG_PARENT, $pageParent, arrSet($data, "pageParent"));

@@ -7,7 +7,9 @@
  * @subpackage Admin
  */
 
-class BlogController extends BaseController implements iController {
+namespace admin;
+
+class BlogController extends \BaseController implements \iController {
 
 	private $model;
 	
@@ -17,7 +19,7 @@ class BlogController extends BaseController implements iController {
 		
 		// create a model
 		require_once("models/BlogPostsModel.php");
-		$this->model = new BlogPostsModel();
+		$this->model = new \BlogPostsModel();
 	
 	}
 	
@@ -45,12 +47,12 @@ class BlogController extends BaseController implements iController {
 	
 		// check for actions
 		if (reqSet("action") == "edit") {
-			$this->model->write($_REQUEST, FrontController::getParam(0));
+			$this->model->write($_REQUEST, \FrontController::getParam(0));
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
 		// get the object
-		$post = $this->model->getById(FrontController::getParam(0));
+		$post = $this->model->getById(\FrontController::getParam(0));
 		
 		// output page
 		$this->engine->assign("form", $this->standardForm("edit", $post->getAllData()));
@@ -76,7 +78,7 @@ class BlogController extends BaseController implements iController {
 		}
 		
 		// gather page variables
-		$pageNum = FrontController::getParam(0);
+		$pageNum = \FrontController::getParam(0);
 		$totalPages = totalPages($this->model->count());
 		$posts = $this->model->get($pageNum);
 		
@@ -96,7 +98,7 @@ class BlogController extends BaseController implements iController {
 	 */
 	private function standardForm ($action, $data = array()) {
 	
-		$form = new FormBuilder();
+		$form = new \FormBuilder();
 		$form->addInput("name", LANG_NAME, arrSet($data, "postName"));
 		$form->addInput("slug", LANG_URL, arrSet($data, "postSlug"));
 		$form->addDateTime("date", LANG_DATE, arrSet($data, "postDate"));
