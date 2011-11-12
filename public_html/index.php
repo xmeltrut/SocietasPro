@@ -11,7 +11,7 @@
 require("bootstrap.php");
 
 // create a front controller
-require("frontcontroller.php");
+require("classes/FrontController.php");
 $front = FrontController::getInstance();
 
 // check if the user is logged in
