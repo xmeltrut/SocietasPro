@@ -129,12 +129,14 @@ class BlogPostsModel extends BaseModel {
 		}
 		
 		// make modifications
-		if (
-			!$object->setName($d["name"]) ||
-			!$object->setSlug($d["slug"]) ||
-			!$object->setDateByArray($d["date"]) ||
-			!$object->setContent($d["content"])
-		) {
+		$writes = array (
+			$object->setName($d["name"]),
+			$object->setSlug($d["slug"]),
+			$object->setDateByArray($d["date"]),
+			$object->setContent($d["content"])
+		);
+		
+		if (in_array(false, $writes)) {
 			$this->setMessage($object->getMessage());
 			return false;
 		}

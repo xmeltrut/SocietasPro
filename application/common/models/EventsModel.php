@@ -111,12 +111,14 @@ class EventsModel extends BaseModel {
 		}
 		
 		// make modifications
-		if (
-			!$object->setName($d["name"]) ||
-			!$object->setLocation($d["location"]) ||
-			!$object->setDateByArray($d["date"]) ||
-			!$object->setDescription($d["description"])
-		) {
+		$writes = array (
+			$object->setName($d["name"]),
+			$object->setLocation($d["location"]),
+			$object->setDateByArray($d["date"]),
+			$object->setDescription($d["description"])
+		);
+		
+		if (in_array(false, $writes)) {
 			$this->setMessage($object->getMessage());
 			return false;
 		}

@@ -314,12 +314,16 @@ class PagesModel extends BaseModel {
 		}
 		
 		// Make modifications. We must set the parent before the slug for validation reasons.
-		if (
-			!$object->setParent($d["parent"]) ||
-			!$object->setName($d["name"]) ||
-			!$object->setSlug($d["slug"]) ||
-			!$object->setContent($d["content"])
-		) {
+		
+		
+		$writes = array (
+			$object->setParent($d["parent"]),
+			$object->setName($d["name"]),
+			$object->setSlug($d["slug"]),
+			$object->setContent($d["content"])
+		)
+		
+		if (in_array(false, $writes)) {
 			$this->setMessage($object->getMessage());
 			return false;
 		}

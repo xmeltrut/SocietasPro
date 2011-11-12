@@ -83,12 +83,12 @@ class MembersController extends \BaseController implements \iController {
 	
 		// check for actions
 		if (reqSet("action") == "edit") {
-			$this->model->write($_REQUEST, FrontController::getParam(0));
+			$this->model->write($_REQUEST, \FrontController::getParam(0));
 			$this->engine->assign("msg", $this->model->getMessage());
 		}
 		
 		// output page
-		$member = $this->model->getById(FrontController::getParam(0));
+		$member = $this->model->getById(\FrontController::getParam(0));
 		$this->engine->assign("form", $this->standardForm("edit", $member->getAllData()));
 		$this->engine->display("members/edit.tpl");
 	

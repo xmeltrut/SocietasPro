@@ -133,7 +133,7 @@ abstract class BaseObject {
 	 * @param string $msg Message
 	 */
 	protected function setMessage ($msg) {
-		$this->message = $msg;
+		$this->message .= $msg;
 	}
 	
 	/**

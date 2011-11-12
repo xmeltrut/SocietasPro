@@ -148,13 +148,15 @@ class MembersModel extends BaseModel {
 		}
 		
 		// make modifications
-		if (
-			!$object->setEmailAddress($d["email"]) ||
-			!$object->setForename($d["forename"]) ||
-			!$object->setSurname($d["surname"]) ||
-			!$object->setAddress($d["address"]) ||
-			!$object->setNotes($d["notes"])
-		) {
+		$writes = array (
+			$object->setEmailAddress($d["email"]),
+			$object->setForename($d["forename"]),
+			$object->setSurname($d["surname"]),
+			$object->setAddress($d["address"]),
+			$object->setNotes($d["notes"])
+		);
+		
+		if (in_array(false, $writes)) {
 			$this->setMessage($object->getMessage());
 			return false;
 		}
