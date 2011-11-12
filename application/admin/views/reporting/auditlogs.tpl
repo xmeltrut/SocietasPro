@@ -30,7 +30,7 @@
 	{foreach $logs as $log}
 	<tr>
 		<td>{$log["entryDate"]}</td>
-		<td>{$log["actionName"]}</td>
+		<td>{eval var=$log["actionLocalised"]}</td>
 		<td>{$log["entryMember"]}</td>
 		<td>{$log["entryOldData"]}</td>
 		<td>{$log["entryNewData"]}</td>

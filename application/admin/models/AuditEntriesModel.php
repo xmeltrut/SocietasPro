@@ -57,7 +57,7 @@ class AuditEntriesModel extends BaseModel {
 		$memberFilter = ($memberID) ? "AND entryMember = ".intval($memberID)." " : "";
 		
 		// query database
-		$sql = "SELECT ae.*, m.memberForename, m.memberSurname, m.memberEmail, aa.actionName
+		$sql = "SELECT ae.*, m.memberForename, m.memberSurname, m.memberEmail, aa.actionLocalised
 				FROM ".DB_PREFIX."audit_entries AS ae
 				LEFT OUTER JOIN ".DB_PREFIX."members AS m
 				ON ae.entryMember = m.memberID

@@ -2,6 +2,11 @@
 /**
  * Language module, adds multi-lingual support.
  *
+ * The language strings are used in three places. Firstly, every one gets
+ * converted into a constant named LANG_STRING. Secondly, they are used
+ * in Smarty as {$lang_string}. Finally they are also used in certain database
+ * tables (currently just audit_actions) as Localised columns.
+ *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core

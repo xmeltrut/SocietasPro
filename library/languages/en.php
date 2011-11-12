@@ -33,6 +33,7 @@ $language_strings = array (
 	"error_logs" => "Error Logs",
 	"event" => "Event",
 	"events" => "Events",
+	"export" => "Export",
 	"export_as_csv" => "Export as CSV",
 	"fail" => "Fail",
 	"failed" => "Failed",
