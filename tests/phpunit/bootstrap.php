@@ -7,5 +7,5 @@
  * @subpackage Core
  */
 
-require("../../library/config.php");
+require("../../personalisation/config.php");
 require("../../library/classes/Database.php");

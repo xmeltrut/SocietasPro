@@ -8,7 +8,7 @@
  */
 
 require("classes/BaseController.php");
-require("config.php");
+require("../personalisation/config.php");
 require("classes/Configuration.php");
 require("functions/audit.php");
 require("functions/general.php");
