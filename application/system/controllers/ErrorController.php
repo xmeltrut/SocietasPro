@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage System
- *
- * @todo System error pages are throwing a template exception
  */
 
 namespace system;

@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package UnitTests
  * @subpackage Controllers
- *
- * @todo Add more tests
  */
 
 class MembersControllerTest extends PHPUnit_Framework_TestCase {
@@ -16,6 +14,10 @@ class MembersControllerTest extends PHPUnit_Framework_TestCase {
 	function setUp () {
 		require_once("../application/admin/controllers/MembersController.php");
 		$this->object = new MemberController();
+	}
+	
+	public function testExample () {
+		$this->assertTrue(false);
 	}
 
 }
