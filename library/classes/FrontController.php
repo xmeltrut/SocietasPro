@@ -52,7 +52,6 @@ class FrontController {
 		$controllerPath = $path . "controllers/" . $controllerFile;
 		
 		if (!file_exists($controllerPath)) {
-			include_once("exceptions/HttpErrorException.php");
 			throw new HttpErrorException(404);
 		}
 		

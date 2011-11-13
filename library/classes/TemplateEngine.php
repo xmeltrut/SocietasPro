@@ -32,7 +32,6 @@ class TemplateEngine extends Smarty {
 		} elseif ($module != "") {
 			$this->setTemplateDir("../application/".$module."/views/");
 		} else {
-			require("exceptions/TemplateException.php");
 			throw new TemplateException("Unable to initialise template engine, no module defined.");
 		}
 		
@@ -58,7 +57,6 @@ class TemplateEngine extends Smarty {
 	 */
 	public function assign($tplVar, $value = null, $noCache = false) {
 		if ($tplVar == "msg") {
-			require("exceptions/TemplateException.php");
 			throw new TemplateException('You can assign $msg directly');
 		} else {
 			parent::assign($tplVar, $value, $noCache);
@@ -77,7 +75,6 @@ class TemplateEngine extends Smarty {
 		try {
 			parent::display($template, $cache_id, $compile_id);
 		} catch (Exception $e) {
-			require_once("exceptions/TemplateException.php");
 			throw new TemplateException();
 		}
 	

@@ -36,7 +36,6 @@ class TemplateException extends Exception {
 		
 		} else {
 		
-			require("exceptions/HttpErrorException.php");
 			throw new HttpErrorException(500, false);
 		
 		}

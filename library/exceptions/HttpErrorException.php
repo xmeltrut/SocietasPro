@@ -23,7 +23,7 @@ class HttpErrorException extends Exception {
 	function __construct($code, $log = true) {
 	
 		// invoke error controller
-		require_once("controllers/errorcontroller.php");
+		require_once("controllers/ErrorController.php");
 		$controllerName = "\\".FrontController::getNamespace()."\\ErrorController";;
 		$this->errorController = new $controllerName();
 		
