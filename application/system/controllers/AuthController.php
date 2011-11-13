@@ -17,7 +17,7 @@ class AuthController extends \BaseController implements \iController {
 	public function index () {
 		$this->login();
 	}
-	 
+	
 	/**
 	 * Login page
 	 */

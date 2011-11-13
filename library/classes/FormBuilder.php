@@ -85,7 +85,7 @@ class FormBuilder {
 		if ($includeSeconds) {
 			$secondsCode = $this->returnSelect($name."[second]", $seconds, $defaultSecond);
 		} else {
-			$secondsCode = $this->returnHidden($name."[second]",$defaultSecond); 
+			$secondsCode = $this->returnHidden($name."[second]",$defaultSecond);
 		}
 		
 		// build form elements

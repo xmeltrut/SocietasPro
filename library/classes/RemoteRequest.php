@@ -83,7 +83,7 @@ class RemoteRequest {
 	 */
 	private function sendViaCurl () {
 	
-		$ch = curl_init(); 
+		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $this->buildUrl());
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		$response = curl_exec($ch);

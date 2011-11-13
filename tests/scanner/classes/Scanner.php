@@ -41,7 +41,7 @@ class Scanner {
 		$this->messages[] = array (
 			$level,
 			$msg,
-			$line,
+			($line+1),
 			highlightSyntax($code),
 			$levelName
 		);
