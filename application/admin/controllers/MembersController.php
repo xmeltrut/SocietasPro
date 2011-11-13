@@ -89,6 +89,8 @@ class MembersController extends \BaseController implements \iController {
 		
 		// output page
 		$member = $this->model->getById(\FrontController::getParam(0));
+		if ($member === false) { throw new \HttpErrorException(404); }
+		
 		$this->engine->assign("form", $this->standardForm("edit", $member->getAllData()));
 		$this->engine->display("members/edit.tpl");
 	

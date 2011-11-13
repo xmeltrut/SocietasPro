@@ -14,10 +14,15 @@
  */
 function autoload ($className) {
 
-	$path = "../library/classes/".$className.".php";
+	$paths = array (
+		"../library/classes/".$className.".php",
+		"../library/exceptions/".$className.".php"
+	);
 	
-	if (file_exists($path)) {
-		require $path;
+	foreach ($paths as $path) {
+		if (file_exists($path)) {
+			require $path;
+		}
 	}
 
 }

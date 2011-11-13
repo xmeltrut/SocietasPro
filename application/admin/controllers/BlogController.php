@@ -53,6 +53,7 @@ class BlogController extends \BaseController implements \iController {
 		
 		// get the object
 		$post = $this->model->getById(\FrontController::getParam(0));
+		if ($post === false) { throw new \HttpErrorException(404); }
 		
 		// output page
 		$this->engine->assign("form", $this->standardForm("edit", $post->getAllData()));

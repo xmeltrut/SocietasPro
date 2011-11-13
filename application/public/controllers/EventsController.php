@@ -27,6 +27,7 @@ class EventsController extends \BaseController implements \iController {
 	
 		// get blog post
 		$event = $this->model->getById(\FrontController::getParam(0));
+		if ($event === false) { throw new \HttpErrorException(404); }
 		
 		// output page
 		$this->engine->assign("event", $event);

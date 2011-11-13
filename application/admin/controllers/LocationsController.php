@@ -53,6 +53,7 @@ class LocationsController extends \BaseController implements \iController {
 		
 		// get the object
 		$location = $this->model->getById(\FrontController::getParam(0));
+		if ($location === false) { throw new \HttpErrorException(404); }
 		
 		// output page
 		$this->engine->assign("form", $this->standardForm("edit", $location->getAllData()));

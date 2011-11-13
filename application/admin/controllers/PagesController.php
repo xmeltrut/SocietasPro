@@ -53,6 +53,7 @@ class PagesController extends \BaseController implements \iController {
 		
 		// get the object
 		$page = $this->model->getById(\FrontController::getParam(0));
+		if ($page === false) { throw new \HttpErrorException(404); }
 		
 		// output the page
 		$this->engine->assign("form", $this->standardForm("edit", $page->getAllData()));

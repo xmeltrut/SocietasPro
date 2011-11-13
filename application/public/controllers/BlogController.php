@@ -41,6 +41,7 @@ class BlogController extends \BaseController implements \iController {
 	
 		// get blog post
 		$post = $this->model->getBySlug(\FrontController::getParam(0));
+		if ($post === false) { throw new \HttpErrorException(404); }
 		
 		// output page
 		$this->engine->assign("post", $post);
