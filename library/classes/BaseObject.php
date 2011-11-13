@@ -80,24 +80,38 @@ abstract class BaseObject {
 	 * @param string $key Key
 	 * @return boolean
 	 */
-	public function hasChanged ($key) {
+	public function hasChanged ($key = false) {
 	
-		// run both checks
-		$a = array_key_exists($key, $this->data);
-		$b = array_key_exists($key, $this->originalData);
-	
-		if ($a || $b) {
-			if ($a && $b) {
-				if ($this->data[$key] == $this->originalData[$key]) {
-					return false;
+		if ($key) {
+		
+			// run both checks
+			$a = array_key_exists($key, $this->data);
+			$b = array_key_exists($key, $this->originalData);
+		
+			if ($a || $b) {
+				if ($a && $b) {
+					if ($this->data[$key] == $this->originalData[$key]) {
+						return false;
+					} else {
+						return true;
+					}
 				} else {
 					return true;
 				}
 			} else {
-				return true;
+				return false;
 			}
+		
 		} else {
-			return false;
+		
+			$arr = array_diff_assoc($this->data, $this->originalData);
+			
+			if (count($arr) > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		
 		}
 	
 	}

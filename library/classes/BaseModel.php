@@ -184,9 +184,36 @@ abstract class BaseModel {
 	 * Set a return message
 	 *
 	 * @param string $msg Mssage
+	 * @return boolean Success
 	 */
 	public function setMessage ($msg) {
-		$this->message = $msg;
+	
+		if ($msg != "") {
+		
+			// convert it to an array
+			if (!is_array($msg)) {
+				$msg = array($msg);
+			}
+			
+			// loop through elements
+			foreach ($msg as $str) {
+			
+				if (is_array($this->message)) {
+					$this->message[] = $str;
+				} elseif ($this->message != "") {
+					$this->message = array($this->message, $str);
+				} else {
+					$this->message = $str;
+				}
+			
+			}
+			
+			return true;
+		
+		}
+		
+		return false;
+	
 	}
 
 }

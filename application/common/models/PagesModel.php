@@ -314,8 +314,6 @@ class PagesModel extends BaseModel {
 		}
 		
 		// Make modifications. We must set the parent before the slug for validation reasons.
-		
-		
 		$writes = array (
 			$object->setParent($d["parent"]),
 			$object->setName($d["name"]),
@@ -323,12 +321,7 @@ class PagesModel extends BaseModel {
 			$object->setContent($d["content"])
 		);
 		
-		if (in_array(false, $writes)) {
-			$this->setMessage($object->getMessage());
-			return false;
-		}
-		
-		// if new, set the order
+		// adjust the page order
 		if (!$id) {
 			$object->setOrder($this->getNextOrder($object->pageParent));
 		} else {
@@ -337,12 +330,19 @@ class PagesModel extends BaseModel {
 			}
 		}
 		
-		// record in audit trail
-		auditTrail($auditAction, $object->original(), $object);
+		if (in_array(false, $writes)) {
+			$this->setMessage($object->getMessage());
+		}
 		
-		// save object
-		$this->setMessage(LANG_SUCCESS);
-		return $this->save($object);
+		if ($object->hasChanged()) {
+			if ($this->save($object)) {
+				auditTrail($auditAction, $object->original(), $object);
+				$this->setMessage(LANG_SUCCESS);
+				return true;
+			}
+		}
+		
+		return false;
 	
 	}
 

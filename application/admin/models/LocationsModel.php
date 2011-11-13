@@ -86,15 +86,17 @@ class LocationsModel extends BaseModel {
 		
 		if (in_array(false, $writes)) {
 			$this->setMessage($object->getMessage());
-			return false;
 		}
 		
-		// record in audit trail
-		auditTrail($auditAction, $object->original(), $object);
+		if ($object->hasChanged()) {
+			if ($this->save($object)) {
+				auditTrail($auditAction, $object->original(), $object);
+				$this->setMessage(LANG_SUCCESS);
+				return true;
+			}
+		}
 		
-		// save object
-		$this->setMessage(LANG_SUCCESS);
-		return $this->save($object);
+		return false;
 	
 	}
 
