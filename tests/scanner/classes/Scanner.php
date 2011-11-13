@@ -42,7 +42,7 @@ class Scanner {
 			$level,
 			$msg,
 			$line,
-			$code,
+			highlightSyntax($code),
 			$levelName
 		);
 	

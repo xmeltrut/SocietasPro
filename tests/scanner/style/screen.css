@@ -3,6 +3,18 @@ body {
 	font-size: small;
 }
 
+.codeFunction {
+	color: #009900;
+}
+
+.codeKeyword {
+	color: #FF0000;
+}
+
+.codeVariable {
+	color: #0000FF;
+}
+
 .filename {
 	background-color: #DDDDDD;
 }

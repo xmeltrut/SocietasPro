@@ -7,8 +7,6 @@
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package BugScanner
- *
- * @todo Colour code lines of code
  */
 
 class FileScanner extends Scanner {
