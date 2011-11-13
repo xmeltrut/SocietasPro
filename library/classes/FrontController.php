@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org
  * @package SocietasPro
  * @subpackage Core
- *
- * @todo Implement some kind of namespace alias systems (hacked at the moment)
  */
 
 class FrontController {
@@ -15,6 +13,11 @@ class FrontController {
 	 * Variable to hold single instance
 	 */
 	private static $instance;
+	
+	/**
+	 * Array of valid modules, name => namespace
+	 */
+	private static $modules;
 	
 	/**
 	 * Variables to hold URL parameters
@@ -56,8 +59,8 @@ class FrontController {
 		include($controllerPath);
 		
 		// create the controller
-		$module = str_replace("public", "publica", $this->getModule());
-		$controllerName = "\\".$module."\\".$controllerName;
+		$namespace = $this->getNamespace();
+		$controllerName = "\\".$namespace."\\".$controllerName;
 		$controller = new $controllerName();
 		
 		$page = $this->getPage();
@@ -90,6 +93,11 @@ class FrontController {
 		if (!isset(self::$instance)) {
 			$className = __CLASS__;
 			self::$instance = new $className;
+			self::$modules = array (
+				"admin" => "admin",
+				"system" => "system",
+				"public" => "publica"
+			);
 			self::parseVariables();
 		}
 		return self::$instance;
@@ -105,6 +113,16 @@ class FrontController {
 			self::$module = "public";
 		}
 		return self::$module;
+	}
+	
+	/**
+	 * Get the namespace of the current module
+	 *
+	 * @return string Namespace
+	 */
+	public function getNamespace () {
+		$module = self::getModule();
+		return self::$modules[$module];
 	}
 	
 	/**
@@ -198,9 +216,7 @@ class FrontController {
 	 */
 	private function setModule ($name) {
 	
-		$validModules = array ("admin", "public", "system");
-		
-		if ($name == "" || in_array($name, $validModules)) {
+		if ($name == "" || array_key_exists($name, self::$modules)) {
 			self::$module = $name;
 			self::$moduleError = false;
 			return true;

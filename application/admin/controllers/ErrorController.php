@@ -7,6 +7,8 @@
  * @subpackage Admin
  */
 
+namespace admin;
+
 class ErrorController extends \BaseController implements \iController {
 
 	function __construct () {
