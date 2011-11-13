@@ -4,8 +4,6 @@
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package BugScanner
- *
- * @todo Scan for if, foreach, for, etc without correct spacing
  */
 
 class FormattingScanner extends FileScanner implements iScanner {
@@ -49,6 +47,11 @@ class FormattingScanner extends FileScanner implements iScanner {
 			
 			if (preg_match("/(function|class) ([a-z0-9_\-]+)(\(|{)/i", $code)) {
 				$this->log(LEVEL_NOTICE, "Use a space between name and brackets", $line, $code);
+			}
+			
+			// not spacing out your control statements
+			if (preg_match("/(if|while|for|foreach)(\(|{)/i", $code)) {
+				$this->log(LEVEL_NOTICE, "Use a space between control statements and brackets, ) {", $line, $code);
 			}
 		
 		}

@@ -60,13 +60,12 @@ function arrSet ($arr, $index) {
  * @return boolean
  */
 function fileExists ($file) {
-  $ps = explode(":", ini_get('include_path'));
-  foreach($ps as $path)
-  {
-    if(file_exists($path.'/'.$file)) return true;
-  }
-  if(file_exists($file)) return true;
-  return false;
+	$ps = explode(":", ini_get('include_path'));
+	foreach ($ps as $path) {
+		if (file_exists($path.'/'.$file)) return true;
+	}
+	if (file_exists($file)) return true;
+	return false;
 }
 
 /**
