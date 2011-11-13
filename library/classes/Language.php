@@ -81,7 +81,7 @@ class Language {
 	 */
 	public function listAsArray () {
 	
-		$languageDir = "../library/languages/";
+		$languageDir = ROOT_DIR."../library/languages/";
 		$arr = array();
 		
 		$handle = opendir($languageDir);

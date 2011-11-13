@@ -22,6 +22,11 @@ class SystemTest {
 	const STATUS_PASS = 2;
 	
 	/**
+	 * Count the number of fails
+	 */
+	private $failCount = 0;
+	
+	/**
 	 * Run a check. This should be the only public function and all
 	 * checks should be forced to run through here.
 	 *
@@ -51,6 +56,11 @@ class SystemTest {
 		
 		if (!isset($response["i"])) {
 			return false;
+		}
+		
+		// if fail, increment fail count
+		if ($response["r"] == self::STATUS_FAIL) {
+			$this->failCount++;
 		}
 		
 		// return data
@@ -173,6 +183,15 @@ class SystemTest {
 		
 		return $data;
 	
+	}
+	
+	/**
+	 * Get the number of tests which have failed
+	 *
+	 * @return int Failed tests
+	 */
+	public function getFailCount () {
+		return $this->failCount;
 	}
 
 }
