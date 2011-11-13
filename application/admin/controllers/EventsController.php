@@ -105,7 +105,7 @@ class EventsController extends \BaseController implements \iController {
 		$form = new \FormBuilder();
 		
 		// create a location model
-		include_once("models/LocationsModel.php");
+		require_once("models/LocationsModel.php");
 		$locationsModel = new \LocationsModel();
 		
 		// build an array of locations

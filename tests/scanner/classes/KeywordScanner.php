@@ -28,23 +28,23 @@ class KeywordScanner extends FileScanner implements iScanner {
 	
 		foreach ($this->data as $line => $code) {
 		
-			if (strpos("print_r", $code) !== false) {
+			if (strpos($code, "print_r") !== false) {
 				$this->log(LEVEL_WARN, "print_r", $line, $code);
 			}
 			
-			if (strpos("function construct", $code) !== false) {
+			if (strpos($code, "function construct") !== false) {
 				$this->log(LEVEL_WARN, "construct should be named __construct", $line, $code);
 			}
 			
-			if (strpos("include(", $code) !== false) {
+			if (strpos($code, "include(") !== false) {
 				$this->log(LEVEL_WARN, "Use require() instead of include()", $line, $code);
 			}
 			
-			if (strpos("include_once(", $code) !== false) {
+			if (strpos($code, "include_once(") !== false) {
 				$this->log(LEVEL_WARN, "Use require_once() instead of include_once()", $line, $code);
 			}
 			
-			if (strpos("die(", $code) !== false) {
+			if (strpos($code, "die(") !== false) {
 				$this->log(LEVEL_WARN, "Throw an exception rather than using die()", $line, $code);
 			}
 		

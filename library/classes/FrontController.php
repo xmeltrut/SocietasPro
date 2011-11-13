@@ -55,7 +55,7 @@ class FrontController {
 			throw new HttpErrorException(404);
 		}
 		
-		include($controllerPath);
+		require($controllerPath);
 		
 		// create the controller
 		$namespace = $this->getNamespace();
@@ -65,7 +65,6 @@ class FrontController {
 		$page = $this->getPage();
 		
 		if (!is_callable(array($controller, $page))) {
-			include_once("exceptions/HttpErrorException.php");
 			throw new HttpErrorException(404);
 		}
 		

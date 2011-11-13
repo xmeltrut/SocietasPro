@@ -62,12 +62,10 @@ class Database {
 			self::$instance = new $className;
 			
 			if (!self::$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS)) {
-				include("exceptions/DatabaseException.php");
 				throw new DatabaseException();
 			}
 			
 			if (!mysql_select_db(DB_NAME, self::$connection)) {
-				include("exceptions/DatabaseException.php");
 				throw new DatabaseException();
 			}
 		
@@ -116,7 +114,6 @@ class Database {
 		
 		// run the query
 		if (!$resource = mysql_query($sql, self::$connection)) {
-			include("exceptions/DatabaseException.php");
 			throw new DatabaseException($sql);
 		}
 		
