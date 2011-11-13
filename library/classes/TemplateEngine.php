@@ -74,8 +74,8 @@ class TemplateEngine extends Smarty {
 	
 		try {
 			parent::display($template, $cache_id, $compile_id);
-		} catch (Exception $e) {
-			throw new TemplateException();
+		} catch (SmartyException $e) {
+			throw new TemplateException($e->getMessage());
 		}
 	
 	}
