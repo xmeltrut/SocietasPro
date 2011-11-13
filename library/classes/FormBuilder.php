@@ -232,7 +232,7 @@ class FormBuilder {
 		// if we have a default element, we need to add some JavaScript
 		if ($this->defaultElement) {
 			$str = "<script type=\"text/javascript\">
-					$(document).ready(function(){
+					$(document).ready(function () {
 						$('#".$this->defaultElement."').focus();
 					});
 					</script>";

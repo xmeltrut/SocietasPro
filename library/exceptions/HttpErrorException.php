@@ -20,7 +20,7 @@ class HttpErrorException extends Exception {
 	 * @param int $code HTTP status code
 	 * @param boolean $log Set to false not to log here
 	 */
-	function __construct($code, $log = true) {
+	function __construct ($code, $log = true) {
 	
 		// invoke error controller
 		require_once("controllers/ErrorController.php");

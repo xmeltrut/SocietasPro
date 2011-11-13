@@ -123,7 +123,7 @@ abstract class BaseObject {
 	 * @param string $key Key
 	 * @param string $value Value
 	 */
-	protected function setData($key, $value) {
+	protected function setData ($key, $value) {
 		$this->data[$key] = $value;
 	}
 	

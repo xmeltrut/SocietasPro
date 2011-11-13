@@ -55,7 +55,7 @@ class TemplateEngine extends Smarty {
 	 * Assign a variable. This just calls the parent function, barring
 	 * a few checks on our end.
 	 */
-	public function assign($tplVar, $value = null, $noCache = false) {
+	public function assign ($tplVar, $value = null, $noCache = false) {
 		if ($tplVar == "msg") {
 			throw new TemplateException('You can assign $msg directly');
 		} else {

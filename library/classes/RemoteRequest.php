@@ -111,7 +111,7 @@ class RemoteRequest {
 	 * @param string $key Key
 	 * @param string $val Value
 	 */
-	public function setParam($key, $val) {
+	public function setParam ($key, $val) {
 	
 		// basic validation
 		if ($key == "") {
