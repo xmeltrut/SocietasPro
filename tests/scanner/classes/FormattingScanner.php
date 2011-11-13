@@ -4,6 +4,8 @@
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package BugScanner
+ *
+ * @todo Scan for if, foreach, for, etc without correct spacing
  */
 
 class FormattingScanner extends FileScanner implements iScanner {
