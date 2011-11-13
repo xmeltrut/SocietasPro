@@ -25,9 +25,13 @@ class DefaultController extends \BaseController implements \iController {
 	
 	public function index () {
 	
-		// get posts
+		// get homepage
+		$page = $this->model->getHomepage();
+		if ($page === false) { throw new HttpErrorException(404); }
 		
-		$this->engine->display("homepage.tpl");
+		// output page
+		$this->engine->assign("page", $page);
+		$this->engine->display("page.tpl");
 	
 	}
 

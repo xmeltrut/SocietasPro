@@ -168,6 +168,25 @@ class PagesModel extends BaseModel {
 	}
 	
 	/**
+	 * Get the default page for the public site
+	 *
+	 * @return Page Homepage
+	 */
+	public function getHomepage () {
+	
+		// query for page ID
+		$sql = "SELECT pageID FROM ".DB_PREFIX."pages
+				WHERE pageParentX = 0
+				ORDER BY pageOrder ASC, pageName ASC
+				LIMIT 0, 1 ";
+		$id  = $this->db->fetchOne($sql);
+		
+		// deliver page
+		return $this->getById($id);
+	
+	}
+	
+	/**
 	 * Work out the next incrementing page order
 	 *
 	 * @param int $parent Page parent ID

@@ -7,6 +7,9 @@
 <p>
 	<a href="{$root}public/events/details/{$event->eventID}">{$event->eventName}</a>
 </p>
+<p>
+	{$event->getFormattedDate()}
+</p>
 {$event->eventDescription}
 {/foreach}
 {/block}

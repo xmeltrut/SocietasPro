@@ -23,9 +23,15 @@ class Database {
 	private static $instance;
 	
 	/**
-	 * Variable to hold the connection.
+	 * Variable to hold the connection
 	 */
 	private static $connection;
+	
+	/**
+	 * Store the error messages for external use
+	 */
+	private $error;
+	private $errorNumber;
 	
 	/**
 	 * Prevent instancing
@@ -39,7 +45,7 @@ class Database {
 	 * @return string Error message
 	 */
 	public function getError () {
-		return mysql_error();
+		return $this->error;
 	}
 	
 	/**
@@ -48,7 +54,7 @@ class Database {
 	 * @return int Error code
 	 */
 	public function getErrorNumber () {
-		return mysql_errno();
+		return $this->errorNumber;
 	}
 	
 	/**
@@ -114,12 +120,22 @@ class Database {
 		
 		// run the query
 		if (!$resource = mysql_query($sql, self::$connection)) {
+			$this->snapshotError();
 			throw new DatabaseException($sql);
 		}
 		
 		// return the recordset
 		return new Recordset($resource);
 	
+	}
+	
+	/**
+	 * Take a snapshot of the error messages and save them to instance
+	 * variables so that the exception can access them.
+	 */
+	private function snapshotError () {
+		$this->error = mysql_error();
+		$this->errorNumber = mysql_errno();
 	}
 
 }

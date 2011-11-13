@@ -26,6 +26,7 @@
 				[ <a href="{$root}admin/config">{$lang_configuration}</a> ]
 				[ <a href="{$root}admin/reporting">{$lang_reporting}</a> ]
 				[ <a href="{$root}system/auth/logout">{$lang_logout}</a> ]
+				[ <a href="{$root}public">{$lang_view}</a> ]
 			</div>
 			
 			<hr />
