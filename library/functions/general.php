@@ -15,8 +15,8 @@
 function autoload ($className) {
 
 	$paths = array (
-		"../library/classes/".$className.".php",
-		"../library/exceptions/".$className.".php"
+		ROOT_DIR."../library/classes/".$className.".php",
+		ROOT_DIR."../library/exceptions/".$className.".php"
 	);
 	
 	foreach ($paths as $path) {

@@ -11,7 +11,7 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
 
 	private $object;
 	
-	function setUp () {
+	public static function setUpBeforeClss () {
 		require_once("../../library/classes/Configuration.php");
 	}
 	

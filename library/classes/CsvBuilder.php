@@ -28,6 +28,7 @@ class CsvBuilder {
 	 * Add a row to the CSV file
 	 *
 	 * @param array $data Array of values
+	 * @return boolean Success
 	 */
 	public function addRow ($data) {
 	
@@ -35,6 +36,7 @@ class CsvBuilder {
 		$line = implode('","', $data);
 		$line = '"'.$line."\"\n";
 		$this->output .= $line;
+		return true;
 	
 	}
 	

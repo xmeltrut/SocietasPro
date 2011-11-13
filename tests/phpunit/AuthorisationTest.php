@@ -11,7 +11,7 @@ class AuthorisationTest extends PHPUnit_Framework_TestCase {
 
 	private $object;
 	
-	function setUp () {
+	public static function setUpBeforeClass () {
 		require_once("../../library/classes/Authorisation.php");
 		$this->object = Authorisation::getInstance();
 	}

@@ -11,7 +11,7 @@ class MemberTest extends PHPUnit_Framework_TestCase {
 
 	private $object;
 	
-	function setUp () {
+	public static function setUpBeforeClass () {
 		require_once("../../application/admin/objects/Member.php");
 		$this->object = new Member();
 	}

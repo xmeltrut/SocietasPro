@@ -8,6 +8,7 @@
  * @subpackage Core
  */
 
+define("ROOT_DIR", "./");
 require("bootstrap.php");
 
 // create a front controller

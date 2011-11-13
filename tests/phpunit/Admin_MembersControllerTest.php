@@ -11,9 +11,12 @@ class MembersControllerTest extends PHPUnit_Framework_TestCase {
 
 	private $object;
 	
-	function setUp () {
-		require_once("../application/admin/controllers/MembersController.php");
-		$this->object = new MemberController();
+	public static function setUpBeforeClass () {
+		require_once("../../library/classes/BaseController.php");
+		require_once("../../library/classes/FrontController.php");
+		//require_once("../../library/iController.php");
+		require_once("../../application/admin/controllers/MembersController.php");
+		$this->object = new \admin\MembersController();
 	}
 	
 	public function testExample () {

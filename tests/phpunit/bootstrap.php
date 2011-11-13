@@ -7,5 +7,13 @@
  * @subpackage Core
  */
 
-require("../../personalisation/config.php");
-require("../../library/classes/Database.php");
+define("ROOT_DIR", "../");
+require("../../library/bootstrap.php");
+
+// autoload function
+function autoloadForTest($className) {
+	
+}
+
+// register autoload function
+spl_autoload_register("autoloadForTest");
