@@ -14,13 +14,17 @@ class DatabaseException extends Exception {
 	 *
 	 * @param string $sql SQL statement
 	 */
-	function __construct ($sql = "") {
+	function __construct ($sql = false) {
 	
 		// get a database instance
-		$db = Database::getInstance();
+			$db = Database::getInstance();
 		
-		// log the error here
-		logError($db->getErrorNumber(), $db->getError(), $sql);
+		if ($sql) {
+		
+			// log the error here
+			logError($db->getErrorNumber(), $db->getError(), $sql);
+		
+		}
 		
 		// output
 		if (MODE == "DEBUG") {

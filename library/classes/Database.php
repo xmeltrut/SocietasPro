@@ -30,8 +30,8 @@ class Database {
 	/**
 	 * Store the error messages for external use
 	 */
-	private $error;
-	private $errorNumber;
+	private static $error;
+	private static $errorNumber;
 	
 	/**
 	 * Prevent instancing
@@ -45,7 +45,7 @@ class Database {
 	 * @return string Error message
 	 */
 	public function getError () {
-		return $this->error;
+		return self::$error;
 	}
 	
 	/**
@@ -54,7 +54,7 @@ class Database {
 	 * @return int Error code
 	 */
 	public function getErrorNumber () {
-		return $this->errorNumber;
+		return self::$errorNumber;
 	}
 	
 	/**
@@ -67,11 +67,13 @@ class Database {
 			$className = __CLASS__;
 			self::$instance = new $className;
 			
-			if (!self::$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS)) {
+			if (!self::$connection = @mysql_connect(DB_HOST, DB_USER, DB_PASS)) {
+				self::snapshotError();
 				throw new DatabaseException();
 			}
 			
 			if (!mysql_select_db(DB_NAME, self::$connection)) {
+				self::snapshotError();
 				throw new DatabaseException();
 			}
 		
@@ -133,9 +135,9 @@ class Database {
 	 * Take a snapshot of the error messages and save them to instance
 	 * variables so that the exception can access them.
 	 */
-	private function snapshotError () {
-		$this->error = mysql_error();
-		$this->errorNumber = mysql_errno();
+	private static function snapshotError () {
+		self::$error = mysql_error();
+		self::$errorNumber = mysql_errno();
 	}
 
 }

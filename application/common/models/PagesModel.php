@@ -176,7 +176,7 @@ class PagesModel extends BaseModel {
 	
 		// query for page ID
 		$sql = "SELECT pageID FROM ".DB_PREFIX."pages
-				WHERE pageParentX = 0
+				WHERE pageParent = 0
 				ORDER BY pageOrder ASC, pageName ASC
 				LIMIT 0, 1 ";
 		$id  = $this->db->fetchOne($sql);
