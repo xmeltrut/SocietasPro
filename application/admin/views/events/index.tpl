@@ -1,6 +1,6 @@
-{extends file="standard.tpl"}
+{extends file="events/standard.tpl"}
 
-{block name=body}
+{block name=innerbody}
 <h2>{$lang_events}</h2>
 
 <form action="" method="post">
@@ -47,12 +47,4 @@
 	<input type="submit" value="{$lang_submit}" />
 	<input type="hidden" name="action" value="mass" />
 </form>
-
-<p>
-	<a href="{$root}admin/events/create">{$lang_create} {$lang_event|lower}</a>
-</p>
-
-<p>
-	<a href="{$root}admin/locations">{$lang_manage} {$lang_locations|lower}</a>
-</p>
 {/block}
