@@ -6,7 +6,7 @@
  * @package SocietasPro
  * @subpackage Admin
  *
- * @todo Move all resources under this controller
+ * @todo Replace mime_content_type with the new fileinfo functions
  */
 
 namespace admin;
@@ -15,6 +15,24 @@ class ResourcesController extends \BaseController implements \iController {
 
 	function __construct () {
 		parent::__construct();
+	}
+	
+	/**
+	 * Images
+	 */
+	public function images () {
+	
+		$image = \FrontController::getParam(0);
+		$imagePath = "../application/admin/resources/images/".$image;
+		
+		if (file_exists($imagePath)) {
+			header("Content-type: " . mime_content_type($imagePath));
+			$data = file_get_contents($imagePath);
+			print $data;
+		} else {
+			throw new \HttpErrorException(404);
+		}
+	
 	}
 	
 	/**

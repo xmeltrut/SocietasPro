@@ -72,7 +72,7 @@ $(document).ready( function () {
 			<td>
 				<div id="tweets">
 					<p>
-						<img src="{$root}images/admin/loader1.gif" alt="" />
+						<img src="{$root}admin/resources/images/loader1.gif" alt="" />
 					</p>
 				</div>
 			</td>
