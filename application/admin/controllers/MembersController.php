@@ -12,6 +12,7 @@ namespace admin;
 class MembersController extends \BaseController implements \iController {
 
 	private $model;
+	private $fieldsModel;
 	
 	function __construct () {
 	
@@ -20,6 +21,10 @@ class MembersController extends \BaseController implements \iController {
 		// create a members model
 		require_once("models/MembersModel.php");
 		$this->model = new \MembersModel();
+		
+		// create a members field model
+		require_once("models/MembersFieldsModel.php");
+		$this->fieldsModel = new \MembersFieldsModel();
 	
 	}
 	
@@ -37,6 +42,23 @@ class MembersController extends \BaseController implements \iController {
 		// output the page
 		$this->engine->assign("form", $this->standardForm("create"));
 		$this->engine->display("members/create.tpl");
+	
+	}
+	
+	/**
+	 * Create a new members field
+	 */
+	public function createfield () {
+	
+		// check for actions
+		if (reqSet("action") == "create") {
+			$this->fieldsModel->write($_REQUEST);
+			$this->engine->setMessage($this->fieldsModel->getMessage());
+		}
+		
+		// output the page
+		$this->engine->assign("form", $this->fieldsForm("create"));
+		$this->engine->display("members/createfield.tpl");
 	
 	}
 	
@@ -93,6 +115,71 @@ class MembersController extends \BaseController implements \iController {
 		
 		$this->engine->assign("form", $this->standardForm("edit", $member->getAllData()));
 		$this->engine->display("members/edit.tpl");
+	
+	}
+	
+	/**
+	 * Edit a members field
+	 */
+	public function editfield () {
+	
+		// check for actions
+		if (reqSet("action") == "edit") {
+			$this->fieldsModel->write($_REQUEST, \FrontController::getParam(0));
+			$this->engine->setMessage($this->fieldsModel->getMessage());
+		}
+		
+		// output page
+		$field = $this->fieldsModel->getById(\FrontController::getParam(0));
+		if ($field === false) { throw new \HttpErrorException(404); }
+		
+		$this->engine->assign("form", $this->fieldsForm("edit", $field->getAllData()));
+		$this->engine->display("members/editfield.tpl");
+	
+	}
+	
+	/**
+	 * Form for members fields
+	 *
+	 * @param string $action Form variable
+	 * @param array $data Default values
+	 */
+	private function fieldsForm ($action, $data = array()) {
+	
+		$form = new \FormBuilder();
+		$form->addInput("name", LANG_NAME, arrSet($data, "fieldName"));
+		$form->addSelect("type", LANG_TYPE, $this->fieldsModel->getTypes(), arrSet($data, "fieldType"));
+		$form->addTextArea("options", LANG_OPTIONS, arrSet($data, "fieldOptions"));
+		$form->addHidden("id", arrSet($data, "fieldID"));
+		$form->addHidden("action", $action);
+		$form->addSubmit();
+		$form->setDefaultElement("name");
+		
+		return $form->build();
+	
+	}
+	
+	/**
+	 * Custom fields
+	 */
+	public function fields () {
+	
+		// check for actions
+		if (reqSet("action") == "mass") {
+			if ($info = $this->determineMassAction()) {
+				switch ($info["action"]) {
+					case "delete":
+						$this->fieldsModel->deleteById($info["ids"], 25);
+						break;
+				}
+			}
+			$this->engine->setMessage($this->fieldsModel->getMessage());
+		}
+		
+		// output the page
+		$fields = $this->fieldsModel->get();
+		$this->engine->assign("fields", $fields);
+		$this->engine->display("members/fields.tpl");
 	
 	}
 	

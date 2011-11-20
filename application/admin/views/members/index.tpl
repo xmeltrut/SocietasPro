@@ -1,6 +1,13 @@
 {extends file="standard.tpl"}
 
 {block name=body}
+<ol class="submenu">
+	<li><a href="#">Manage Members</a></li>
+	<li><a href="#">Create Member</a></li>
+	<li><a href="#">Import Members</a></li>
+	<li><a href="#">Export as CSV</a></li>
+</ol>
+
 <h2>{$lang_members}</h2>
 
 <form action="" method="post">

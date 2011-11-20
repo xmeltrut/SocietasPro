@@ -13,20 +13,23 @@
 	<div id="container">
 	
 		<div id="header">
-
+		
+			<ul>
+				<li>&raquo; <a href="{$root}system/auth/logout">{$lang_logout}</a></li>
+				<li>&raquo; <a href="{$root}public">{$lang_view}</a></li>
+			</ul>
+			
 			<h1>SocietasPro</h1>
 			
 			<div id="navigation">
-				[ <a href="{$root}admin">{$lang_home}</a> ]
-				[ <a href="{$root}admin/members">{$lang_members}</a> ]
-				[ <a href="{$root}admin/mailinglist">{$lang_mailing_list}</a> ]
-				[ <a href="{$root}admin/events">{$lang_events}</a> ]
-				[ <a href="{$root}admin/pages">{$lang_pages}</a> ]
-				[ <a href="{$root}admin/blog">{$lang_blog}</a> ]
-				[ <a href="{$root}admin/config">{$lang_configuration}</a> ]
-				[ <a href="{$root}admin/reporting">{$lang_reporting}</a> ]
-				[ <a href="{$root}system/auth/logout">{$lang_logout}</a> ]
-				[ <a href="{$root}public">{$lang_view}</a> ]
+				<a href="{$root}admin">{$lang_home}</a>
+				<a href="{$root}admin/members">{$lang_members}</a>
+				<a href="{$root}admin/mailinglist">{$lang_mailing_list}</a>
+				<a href="{$root}admin/events">{$lang_events}</a>
+				<a href="{$root}admin/pages">{$lang_pages}</a>
+				<a href="{$root}admin/blog">{$lang_blog}</a>
+				<a href="{$root}admin/config">{$lang_configuration}</a>
+				<a href="{$root}admin/reporting">{$lang_reporting}</a>
 			</div>
 			
 			<hr />
