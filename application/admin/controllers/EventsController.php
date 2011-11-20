@@ -11,7 +11,8 @@ namespace admin;
 
 class EventsController extends \BaseController implements \iController {
 
-	private $instance;
+	private $model;
+	private $locationsModel;
 	
 	function __construct () {
 	
@@ -20,6 +21,10 @@ class EventsController extends \BaseController implements \iController {
 		// create a model
 		require_once("models/EventsModel.php");
 		$this->model = new \EventsModel();
+		
+		// create a model
+		require_once("models/LocationsModel.php");
+		$this->locationsModel = new \LocationsModel();
 	
 	}
 	
@@ -41,6 +46,23 @@ class EventsController extends \BaseController implements \iController {
 	}
 	
 	/**
+	 * Create a new location
+	 */
+	public function createlocation () {
+	
+		// check for actions
+		if (reqSet("action") == "create") {
+			$this->locationsModel->write($_REQUEST);
+			$this->engine->setMessage($this->locationsModel->getMessage());
+		}
+		
+		// output page
+		$this->engine->assign("form", $this->locationsForm("create"));
+		$this->engine->display("events/createlocation.tpl");
+	
+	}
+	
+	/**
 	 * Edit an event
 	 */
 	public function edit () {
@@ -58,6 +80,27 @@ class EventsController extends \BaseController implements \iController {
 		// output page
 		$this->engine->assign("form", $this->standardForm("edit", $event->getAllData()));
 		$this->engine->display("events/edit.tpl");
+	
+	}
+	
+	/**
+	 * Edit a location
+	 */
+	public function editlocation () {
+	
+		// check for actions
+		if (reqSet("action") == "edit") {
+			$this->locationsModel->write($_REQUEST, \FrontController::getParam(0));
+			$this->engine->setMessage($this->locationsModel->getMessage());
+		}
+		
+		// get the object
+		$location = $this->locationsModel->getById(\FrontController::getParam(0));
+		if ($location === false) { throw new \HttpErrorException(404); }
+		
+		// output page
+		$this->engine->assign("form", $this->locationsForm("edit", $location->getAllData()));
+		$this->engine->display("events/editlocation.tpl");
 	
 	}
 	
@@ -91,6 +134,51 @@ class EventsController extends \BaseController implements \iController {
 		$this->engine->assign("pageNum", $pageNum);
 		$this->engine->assign("totalPages", $totalPages);
 		$this->engine->display("events/index.tpl");
+	
+	}
+	
+	/**
+	 * Show a list of locations
+	 */
+	public function locations () {
+	
+		// check for actions
+		if (reqSet("action") == "mass") {
+			if ($info = $this->determineMassAction()) {
+				switch ($info["action"]) {
+					case "delete":
+						$this->locationsModel->deleteById($info["ids"], 20);
+						break;
+				}
+			}
+			$this->engine->setMessage($this->locationsModel->getMessage());
+		}
+		
+		// output page
+		$locations = $this->locationsModel->get();
+		$this->engine->assign("locations", $locations);
+		$this->engine->display("events/locations.tpl");
+	
+	}
+	
+	/**
+	 * Create a standard form for editing locations
+	 *
+	 * @param string $action Form variable
+	 * @param array $data Default values
+	 */
+	private function locationsForm ($action, $data = array()) {
+	
+		$form = new \FormBuilder();
+		
+		$form->addInput("name", LANG_NAME, arrSet($data, "locationName"));
+		$form->addTextArea("description", LANG_DESCRIPTION, arrSet($data, "locationDescription"));
+		$form->addHidden("id", arrSet($data, "locationID"));
+		$form->addHidden("action", $action);
+		$form->addSubmit();
+		$form->setDefaultElement("name");
+		
+		return $form->build();
 	
 	}
 	
