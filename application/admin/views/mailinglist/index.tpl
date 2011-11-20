@@ -1,6 +1,6 @@
-{extends file="standard.tpl"}
+{extends file="mailinglist/standard.tpl"}
 
-{block name=body}
+{block name=innerbody}
 <h2>{$lang_mailing_list}</h2>
 
 <table border="1">
@@ -30,12 +30,6 @@
 	{/foreach}
 </table>
 
-<p>
-	<a href="{$root}admin/mailinglist/generate">{$lang_view} {$lang_mailing_list|lower}</a>
-</p>
-<p>
-	<a href="{$root}admin/mailinglist/import">{$lang_import} {$lang_subscribers|lower}</a>
-</p>
 <p>
 	<a href="{$root}admin/mailinglist/csv">{$lang_export_as_csv}</a>
 </p>
