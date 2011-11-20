@@ -12,6 +12,10 @@ body {
 	font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
 }
 
+.clear {
+	clear: both;
+}
+
 form ol {
 	padding: 0;
 }
@@ -166,6 +170,10 @@ ol.submenu li a:hover, ol.submenu li a:active, ol.submenu li.active a:link, ol.s
 	color: #333333;
 	text-decoration: none;
 	background: #FFFFFF;
+}
+
+.right {
+	text-align: right;
 }
 
 table {
