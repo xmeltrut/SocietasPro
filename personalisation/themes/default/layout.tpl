@@ -3,6 +3,7 @@
 <head>
 <title>Default Theme</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" type="text/css" href="{$root}public/resources/style" />
 {block name=head}{/block}
 </head>
 <body>
@@ -11,7 +12,7 @@
 	
 		<div id="header">
 
-			<h1>Default Theme</h1>
+			<h1>{$group_name}</h1>
 			
 			<div id="navigation">
 				[ <a href="{$root}public">Home</a> ]
@@ -23,11 +24,16 @@
 		
 		</div>
 		
-		{if $msg}
-			{$msg}
+		<div id="content">
+			<div id="contentWrapper" class="wrapper">
+				{block name=body}{/block}
+			</div>
+		</div>
+		
+		<div id="footer">
 			<hr />
-		{/if}
-		{block name=body}{/block}
+			&copy; {$group_name}
+		</div>
 	
 	</div>
 

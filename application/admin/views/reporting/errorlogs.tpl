@@ -14,10 +14,10 @@
 	{foreach $logs as $log}
 	<tr>
 		<td>{$log["logDate"]}</td>
-		<td>{$log["logCode"]}</td>
-		<td>{$log["logURL"]}</td>
-		<td>{$log["logDetails"]}</td>
-		<td>{$log["logSQL"]}</td>
+		<td><a href="{$root}admin/reporting/errorlogs?code={$log["logCode"]}">{$log["logCode"]}</a></td>
+		<td>{$log["logURL"]|wordwrap:40:"<br />\n":true}</td>
+		<td>{$log["logDetails"]|wordwrap:40:"<br />\n":true}</td>
+		<td>{$log["logSQL"]|wordwrap:40:"<br />\n":true}</td>
 	</tr>
 	{foreachelse}
 	<tr>

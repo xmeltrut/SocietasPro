@@ -32,8 +32,8 @@
 		<td>{$log["entryDate"]}</td>
 		<td>{eval var=$log["actionLocalised"]}</td>
 		<td>{$log["entryMember"]}</td>
-		<td>{$log["entryOldData"]}</td>
-		<td>{$log["entryNewData"]}</td>
+		<td>{$log["entryOldData"]|wordwrap:40:"<br />\n":true}</td>
+		<td>{$log["entryNewData"]|wordwrap:40:"<br />\n":true}</td>
 	</tr>
 	{foreachelse}
 	<tr>

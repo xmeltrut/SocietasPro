@@ -6,7 +6,8 @@
  * @package SocietasPro
  * @subpackage Admin
  *
- * @todo Make actions and members clickable
+ * @todo Make actions and members clickable in audit trail
+ * @todo Make error codes clickable in error logs
  * @todo Review navigation
  */
 

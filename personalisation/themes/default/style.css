@@ -8,5 +8,38 @@ Author URI: http://www.chrisworfolk.com
 Tags: blue, custom header, fixed width, two columns, widgets
 */
 
+a:link, a:visited {
+	color: #000000;
+	text-decoration: underline;
+}
+
 body {
+	margin: 0;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+}
+
+#content {
+	min-height: 20em;
+	background: #669933;
+}
+
+#contentWrapper {
+	padding: 3em 0;
+}
+
+#header {
+	text-align: center;
+}
+
+#header h1 {
+	font-size: 400%;
+}
+
+#header hr {
+	display: none;
+}
+
+.wrapper {
+	width: 900px;
+	margin: 0 auto;
 }
