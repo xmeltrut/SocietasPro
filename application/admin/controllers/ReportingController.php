@@ -55,7 +55,7 @@ class ReportingController extends \BaseController implements \iController {
 		// gather variables for page
 		$actionID = (isset($_REQUEST["action"])) ? $_REQUEST["action"] : 0;
 		$memberID = (isset($_REQUEST["member"])) ? $_REQUEST["member"] : 0;
-		$pageNum = \FrontController::getParam(0);
+		$pageNum = pageNum(\FrontController::getParam(0));
 		$totalPages = totalPages($auditEntriesModel->count($actionID, $memberID));
 		
 		// output the page
@@ -64,6 +64,7 @@ class ReportingController extends \BaseController implements \iController {
 		$this->engine->assign("actions", $actions);
 		$this->engine->assign("members", $members);
 		$this->engine->assign("logs", $auditEntriesModel->get($pageNum, $actionID, $memberID));
+		$this->engine->assign("pageNum", $pageNum);
 		$this->engine->assign("totalPages", $totalPages);
 		$this->engine->display("reporting/auditlogs.tpl");
 	
@@ -79,11 +80,12 @@ class ReportingController extends \BaseController implements \iController {
 		$errorLogsModel = new \ErrorLogsModel();
 		
 		// gather variables for page
-		$pageNum = \FrontController::getParam(0);
+		$pageNum = pageNum(\FrontController::getParam(0));
 		$totalPages = totalPages($errorLogsModel->count());
 		
 		// output the page
 		$this->engine->assign("logs", $errorLogsModel->get($pageNum));
+		$this->engine->assign("pageNum", $pageNum);
 		$this->engine->assign("totalPages", $totalPages);
 		$this->engine->display("reporting/errorlogs.tpl");
 	

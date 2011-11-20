@@ -82,12 +82,13 @@ class EventsController extends \BaseController implements \iController {
 		}
 		
 		// gather page variables
-		$pageNum = \FrontController::getParam(0);
+		$pageNum = pageNum(\FrontController::getParam(0));
 		$totalPages = totalPages($this->model->count());
 		$events = $this->model->get($pageNum);
 		
 		// output the page
 		$this->engine->assign("events", $events);
+		$this->engine->assign("pageNum", $pageNum);
 		$this->engine->assign("totalPages", $totalPages);
 		$this->engine->display("events/index.tpl");
 	

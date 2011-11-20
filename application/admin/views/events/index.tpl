@@ -34,7 +34,11 @@
 		<tr>
 			<td colspan="6" class="pagingRow">
 				{$lang_page}: {for $i=1 to $totalPages}
-				<a href="{$root}admin/events/index/{$i}">{$i}</a>
+					{if $i == $pageNum}
+						{$i}
+					{else}
+						<a href="{$root}admin/events/index/{$i}">{$i}</a>
+					{/if}
 				{/for}
 			</td>
 		</tr>

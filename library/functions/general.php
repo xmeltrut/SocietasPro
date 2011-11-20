@@ -92,6 +92,18 @@ function logError ($code, $details = "", $sql = "") {
 }
 
 /**
+ * Convert a variable to a page number, with fallback
+ *
+ * @param int $page Page number
+ * @return int Page number
+ */
+function pageNum ($var) {
+	$var = intval($var);
+	if ($var < 1) { $var = 1; }
+	return $var;
+}
+
+/**
  * Rebuild the incoming $_REQUEST array, if required
  */
 function rebuildRequestArray () {

@@ -28,7 +28,11 @@
 	<tr>
 		<td colspan="5">
 			{$lang_page}: {for $i=1 to $totalPages}
-			<a href="{$root}admin/reporting/errorlogs/{$i}">{$i}</a>
+				{if $i == $pageNum}
+					{$i}
+				{else}
+					<a href="{$root}admin/reporting/errorlogs/{$i}">{$i}</a>
+				{/if}
 			{/for}
 		</td>
 	</tr>

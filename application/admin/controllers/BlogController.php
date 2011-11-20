@@ -79,13 +79,13 @@ class BlogController extends \BaseController implements \iController {
 		}
 		
 		// gather page variables
-		$pageNum = \FrontController::getParam(0);
+		$pageNum = pageNum(\FrontController::getParam(0));
 		$totalPages = totalPages($this->model->count());
 		$posts = $this->model->get($pageNum);
 		
 		// output page
-		
 		$this->engine->assign("posts", $posts);
+		$this->engine->assign("pageNum", $pageNum);
 		$this->engine->assign("totalPages", $totalPages);
 		$this->engine->display("blog/index.tpl");
 	

@@ -280,12 +280,13 @@ class MembersController extends \BaseController implements \iController {
 		}
 		
 		// gather variables for page
-		$pageNum = \FrontController::getParam(0);
+		$pageNum = pageNum(\FrontController::getParam(0));
 		$totalPages = totalPages($this->model->count());
 		$members = $this->model->get($pageNum);
 		
 		// output the page
 		$this->engine->assign("members", $members);
+		$this->engine->assign("pageNum", $pageNum);
 		$this->engine->assign("totalPages", $totalPages);
 		$this->engine->display("members/index.tpl");
 	
