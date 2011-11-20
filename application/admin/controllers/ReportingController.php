@@ -7,8 +7,8 @@
  * @subpackage Admin
  *
  * @todo Make actions and members clickable in audit trail
- * @todo Make error codes clickable in error logs
  * @todo Review navigation
+ * @todo Review style of audit trails
  */
 
 namespace admin;
@@ -80,12 +80,15 @@ class ReportingController extends \BaseController implements \iController {
 		require_once("models/ErrorLogsModel.php");
 		$errorLogsModel = new \ErrorLogsModel();
 		
+		// should we filter?
+		$code = isset($_REQUEST["code"]) ? $_REQUEST["code"] : false;
+		
 		// gather variables for page
 		$pageNum = pageNum(\FrontController::getParam(0));
-		$totalPages = totalPages($errorLogsModel->count());
+		$totalPages = totalPages($errorLogsModel->count($code));
 		
 		// output the page
-		$this->engine->assign("logs", $errorLogsModel->get($pageNum));
+		$this->engine->assign("logs", $errorLogsModel->get($code, $pageNum));
 		$this->engine->assign("pageNum", $pageNum);
 		$this->engine->assign("totalPages", $totalPages);
 		$this->engine->display("reporting/errorlogs.tpl");

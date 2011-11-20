@@ -77,9 +77,6 @@ class AuditEntriesModel extends BaseModel {
 				$row["entryMember"] = h($row["memberForename"]." ".$row["memberSurname"]." <".$row["memberEmail"].">");
 			}
 			
-			// html encoded versions
-			
-			
 			// save row into array
 			$arr[] = $row;
 		

@@ -18,11 +18,15 @@ class ErrorLogsModel extends BaseModel {
 	/**
 	 * Count the number of log entries
 	 *
+	 * @param int $code Code to filter on
 	 * @return int Log entries
 	 */
-	public function count () {
+	public function count ($code = false) {
 	
 		$sql = "SELECT COUNT(logID) FROM ".DB_PREFIX."error_logs ";
+		if ($code !== false) {
+			$sql .= "WHERE logCode = ".$code;
+		}
 		return $this->db->fetchOne($sql);
 	
 	}
@@ -30,16 +34,25 @@ class ErrorLogsModel extends BaseModel {
 	/**
 	 * Get the most recent error logs.
 	 *
-	 * $param int $pageNum Page number
+	 * @param int $code Code to filter on
+	 * @param int $pageNum Page number
 	 * @return Associative array
 	 */
-	public function get ($pageNum = 1) {
+	public function get ($code = false, $pageNum = 1) {
 	
 		// initialise array
 		$arr = array();
 		
+		// filtering code
+		if ($code !== false) {
+			$filter = "WHERE logCode = ".$code." ";
+		} else {
+			$filter = "";
+		}
+		
 		// query database
 		$sql = "SELECT * FROM ".DB_PREFIX."error_logs
+				$filter
 				ORDER BY logDate DESC ".sqlLimit($pageNum);
 		$rec = $this->db->query($sql);
 		
