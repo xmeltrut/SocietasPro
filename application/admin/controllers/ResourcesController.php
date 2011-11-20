@@ -9,6 +9,8 @@
  * @todo Move all resources under this controller
  */
 
+namespace admin;
+
 class ResourcesController extends \BaseController implements \iController {
 
 	function __construct () {
@@ -30,6 +32,17 @@ class ResourcesController extends \BaseController implements \iController {
 		$js = file_get_contents("resources/admin.js", true);
 		$js = str_replace('{$lang_are_you_sure}', LANG_ARE_YOU_SURE, $js);
 		Header("content-type: text/javascript");
+		print $js;
+	
+	}
+	
+	/**
+	 * Get the main stylesheet
+	 */
+	public function style () {
+	
+		$js = file_get_contents("resources/admin.css", true);
+		Header("content-type: text/css");
 		print $js;
 	
 	}

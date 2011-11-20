@@ -44,7 +44,7 @@ h1 {
 	min-height: 40px;
 	margin: 0 0 5px 20px;
 	padding-left: 50px;
-	background: url("../images/admin/logo.png") center left no-repeat;
+	background: url("../../../images/admin/logo.png") center left no-repeat;
 	cursor: default;
 }
 
@@ -109,7 +109,7 @@ label {
 	padding-left: 1em;
 	border: #CCCCCC 1px solid;
 	border-radius: 5px;
-	background-image: url("../images/admin/navigationbg.png");
+	background-image: url("../../../images/admin/navigationbg.png");
 	background-position: center left;
 	background-repeat: repeat-x;
 }
@@ -123,7 +123,7 @@ label {
 }
 
 #navigation a.active {
-	background-image: url("../images/admin/highlightbg.png");
+	background-image: url("../../../images/admin/highlightbg.png");
 }
 
 #navigation a:link, #navigation a:visited {
@@ -134,7 +134,7 @@ label {
 #navigation a:hover, #navigation a:active {
 	color: #000000;
 	text-decoration: none;
-	background-image: url("../images/admin/highlightbg.png");
+	background-image: url("../../../images/admin/highlightbg.png");
 }
 
 ol.submenu {
@@ -183,12 +183,12 @@ table td {
 }
 
 table td.pagingRow {
-	background-image: url("../images/admin/navigationbg.png");
+	background-image: url("../../../images/admin/navigationbg.png");
 }
 
 table th {
 	padding: 5px;
-	background-image: url("../images/admin/navigationbg.png");
+	background-image: url("../../../images/admin/navigationbg.png");
 	background-position: top left;
 	background-repeat: repeat-x;
 	border: #CCCCCC 1px solid;
