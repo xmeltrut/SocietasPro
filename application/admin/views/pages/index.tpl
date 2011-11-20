@@ -38,8 +38,4 @@
 	<input type="submit" value="{$lang_submit}" />
 	<input type="hidden" name="action" value="mass" />
 </form>
-
-<p>
-	<a href="{$root}admin/pages/create">{$lang_create} {$lang_page|lower}</a>
-</p>
 {/block}

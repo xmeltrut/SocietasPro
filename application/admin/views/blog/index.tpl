@@ -1,6 +1,6 @@
-{extends file="standard.tpl"}
+{extends file="blog/standard.tpl"}
 
-{block name=body}
+{block name=innerbody}
 <h2>{$lang_blog}</h2>
 
 <form action="" method="post">
@@ -46,8 +46,4 @@
 	<input type="submit" value="{$lang_submit}" />
 	<input type="hidden" name="action" value="mass" />
 </form>
-
-<p>
-	<a href="{$root}admin/blog/create">{$lang_create} {$lang_blog|lower} {$lang_post|lower}</a>
-</p>
 {/block}
