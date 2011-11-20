@@ -1,6 +1,6 @@
-{extends file="standard.tpl"}
+{extends file="config/standard.tpl"}
 
-{block name=body}
+{block name=innerbody}
 <h2>{$lang_language}</h2>
 
 {$form}

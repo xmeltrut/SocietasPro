@@ -41,6 +41,7 @@ $language_strings = array (
 	"fields" => "Fields",
 	"file" => "File",
 	"forename" => "Forename",
+	"group" => "Group",
 	"home" => "Home",
 	"id" => "ID",
 	"import" => "Import",
