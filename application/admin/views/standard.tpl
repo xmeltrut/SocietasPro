@@ -37,9 +37,12 @@
 		</div>
 		
 		{if $msg}
+		<div id="message">
 			{$msg}
 			<hr />
+		</div>
 		{/if}
+		
 		{block name=body}{/block}
 	
 	</div>

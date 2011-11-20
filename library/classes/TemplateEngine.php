@@ -96,8 +96,10 @@ class TemplateEngine extends Smarty {
 			$msgCode .= "<li>".$str."</li>";
 			}
 			$msgCode .= "</ul>";
+		} elseif ($msg != "") {
+			$msgCode = "<ul><li>".$msg."</li></ul>";
 		} else {
-			$msgCode = $msg;
+			$msgCode = "";
 		}
 		
 		parent::assign("msg", $msgCode);

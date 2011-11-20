@@ -86,6 +86,23 @@ label {
 	cursor: pointer;
 }
 
+#message {
+	margin-top: 10px;
+	padding: 1em;
+	background: #99CC66;
+	border-radius: 5px;
+	font-size: 80%;
+}
+
+#message hr {
+	display: none;
+}
+
+#message ul {
+	margin: 0;
+	padding-left: 1.5em;
+}
+
 #navigation {
 	height: 50px;
 	line-height: 50px;
