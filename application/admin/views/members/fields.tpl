@@ -1,6 +1,8 @@
-{extends file="standard.tpl"}
+{extends file="members/standard.tpl"}
 
-{block name=body}
+{block name=innerbody}
+
+
 <h2>{$lang_members} {$lang_fields}</h2>
 
 <form action="" method="post">

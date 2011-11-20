@@ -4,19 +4,13 @@ a:link, a:visited {
 }
 
 a:hover, a:active {
-	color: #6666FF;
+	color: #3399FF;
 	text-decoration: underline;
 }
 
 body {
 	font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
 }
-
-/*#container {
-	width: 920px;
-	margin: 0 auto;
-	padding: 0 20px;
-}*/
 
 form ol {
 	padding: 0;
@@ -68,7 +62,7 @@ h2 {
 
 #header ul {
 	float: right;
-	margin: 0;
+	margin: 19px 0 0 0;
 	padding: 0;
 }
 
@@ -84,7 +78,7 @@ h2 {
 }
 
 #header ul li a:hover, #header ul li a:active {
-	color: #6666FF;
+	color: #3399FF;
 	text-decoration: none;
 }
 
@@ -111,6 +105,10 @@ label {
 	padding: 0 0.7em;
 }
 
+#navigation a.active {
+	background-image: url("../images/admin/highlightbg.png");
+}
+
 #navigation a:link, #navigation a:visited {
 	color: #333333;
 	text-decoration: none;
@@ -124,7 +122,7 @@ label {
 
 ol.submenu {
 	height: 2em;
-	margin-top: 5px;
+	margin-top: 10px;
 	padding: 0;
 	font-size: 80%;
 }
@@ -150,10 +148,11 @@ ol.submenu li a:link, ol.submenu li a:visited {
 ol.submenu li a:hover, ol.submenu li a:active {
 	color: #333333;
 	text-decoration: none;
-	background: #FFFFFF:
+	background: #FFFFFF;
 }
 
 table {
+	margin-bottom: 0.2em;
 	background: #EEEEEE;
 	border: #CCCCCC 1px solid;
 	border-radius: 5px;

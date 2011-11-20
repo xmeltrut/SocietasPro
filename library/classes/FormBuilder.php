@@ -21,6 +21,7 @@ class FormBuilder {
 	private $method;
 	
 	private $hasUpload = false;
+	private $altRow = false;
 	private $defaultElement = false;
 	
 	/**
@@ -89,16 +90,14 @@ class FormBuilder {
 		}
 		
 		// build form elements
-		$var = '<li>
-					<label for="'.$name.'">'.$label.'</label>
-					'.$this->returnSelect($name."[day]", $days, $defaultDay).'
-					'.$this->returnSelect($name."[month]", $months, $defaultMonth).'
-					'.$this->returnInput($name."[year]", $defaultYear, 4).'
-					'.$this->returnSelect($name."[hour]", $hours, $defaultHour).'
-					'.$this->returnSelect($name."[minute]", $minutes, $defaultMinute).'
-					'.$secondsCode.'
-				</li>';
-		$this->output .= $var;
+		$code = '<label for="'.$name.'">'.$label.'</label>
+				'.$this->returnSelect($name."[day]", $days, $defaultDay).'
+				'.$this->returnSelect($name."[month]", $months, $defaultMonth).'
+				'.$this->returnInput($name."[year]", $defaultYear, 4).'
+				'.$this->returnSelect($name."[hour]", $hours, $defaultHour).'
+				'.$this->returnSelect($name."[minute]", $minutes, $defaultMinute).'
+				'.$secondsCode;
+		$this->appendRow($code);
 	
 	}
 	
@@ -114,11 +113,9 @@ class FormBuilder {
 		$this->hasUpload = true;
 		
 		// add element to the form
-		$var = '<li>
-					<label for="'.$name.'">'.$label.'</label>
-					'.$this->returnInput($name, $default, 0, "", "file").'
-				</li>';
-		$this->output .= $var;
+		$code = '<label for="'.$name.'">'.$label.'</label>
+				'.$this->returnInput($name, $default, 0, "", "file");
+		$this->appendRow($code);
 	
 	}
 	
@@ -143,11 +140,9 @@ class FormBuilder {
 	 */
 	public function addInput ($name, $label, $default = "") {
 	
-		$var = '<li>
-					<label for="'.$name.'">'.$label.'</label>
-					'.$this->returnInput($name, $default, 0, "stdRow").'
-				</li>';
-		$this->output .= $var;
+		$code = '<label for="'.$name.'">'.$label.'</label>'.
+				$this->returnInput($name, $default, 0, "stdRow");
+		$this->appendRow($code);
 	
 	}
 	
@@ -161,11 +156,9 @@ class FormBuilder {
 	 */
 	public function addSelect ($name, $label, $options, $default = false) {
 	
-		$var = '<li>
-					<label for="'.$name.'">'.$label.'</label>
-					'.$this->returnSelect($name, $options, $default).'
-				</li>';
-		$this->output .= $var;
+		$code = '<label for="'.$name.'">'.$label.'</label>
+				'.$this->returnSelect($name, $options, $default);
+		$this->appendRow($code);
 	
 	}
 	
@@ -176,10 +169,8 @@ class FormBuilder {
 	 */
 	public function addSubmit ($text = LANG_SUBMIT) {
 	
-		$var = '<li>
-					<input type="submit" value="'.$text.'" />
-				</li>';
-		$this->output .= $var;
+		$code = '<input type="submit" value="'.$text.'" />';
+		$this->appendRow($code);
 	
 	}
 	
@@ -192,11 +183,9 @@ class FormBuilder {
 	 */
 	public function addTextArea ($name, $label, $default = "") {
 	
-		$var = '<li>
-					<label for="'.$name.'">'.$label.'</label>
-					<textarea name="'.$name.'" id="'.$name.'" class="stdRow">'.h($default).'</textarea>
-				</li>';
-		$this->output .= $var;
+		$code = '<label for="'.$name.'">'.$label.'</label>
+				<textarea name="'.$name.'" id="'.$name.'" class="stdRow">'.h($default).'</textarea>';
+		$this->appendRow($code);
 	
 	}
 	
@@ -208,8 +197,30 @@ class FormBuilder {
 	 */
 	public function addVisualEditor ($name, $default = "") {
 	
-		$var = '<li>
-					<textarea name="'.$name.'" id="'.$name.'" class="visualEditor">'.h($default).'</textarea>
+		$code = '<textarea name="'.$name.'" id="'.$name.'" class="visualEditor">'.h($default).'</textarea>';
+		$this->appendRow($code);
+	
+	}
+	
+	/**
+	 * Append an element onto the output
+	 *
+	 * @param string $code HTML code
+	 */
+	private function appendRow ($code) {
+	
+		// work out class
+		if ($this->altRow) {
+			$className = "altRow";
+			$this->altRow = false;
+		} else {
+			$className = "";
+			$this->altRow = true;
+		}
+		
+		// add code to output
+		$var = '<li class="'.$className.'">
+					'.$code.'
 				</li>';
 		$this->output .= $var;
 	

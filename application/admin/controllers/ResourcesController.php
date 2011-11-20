@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
+ *
+ * @todo Move all resources under this controller
  */
 
 class ResourcesController extends \BaseController implements \iController {

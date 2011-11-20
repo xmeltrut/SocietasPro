@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
+ *
+ * @todo There is code for adding custom fields in here
  */
 
 namespace admin;
@@ -189,7 +191,7 @@ class MembersController extends \BaseController implements \iController {
 	public function import () {
 	
 		// build objects
-		$form = new FormBuilder();
+		$form = new \FormBuilder();
 		
 		// check for actions
 		if (reqSet("action") == "import") {
@@ -304,6 +306,19 @@ class MembersController extends \BaseController implements \iController {
 		$form->addSelect("privileges", LANG_PRIVILEGES, $this->model->getPrivileges(), arrSet($data, "memberPrivileges"));
 		$form->addTextArea("address", LANG_ADDRESS, arrSet($data, "memberAddress"));
 		$form->addTextArea("notes", LANG_NOTES, arrSet($data, "memberNotes"));
+		
+		/*$fields = $this->fieldsModel->get();
+		foreach ($fields as $field) {
+			$fieldID = "custom".$field->fieldID;
+			switch ($field->fieldType) {
+				case "textarea":
+					$form->addTextArea($fieldID, $field->fieldName, "");
+					break;
+				default:
+					$form->addInput($fieldID, $field->fieldName, "");
+			}
+		}*/
+		
 		$form->addHidden("id", arrSet($data, "memberID"));
 		$form->addHidden("action", $action);
 		$form->addSubmit();

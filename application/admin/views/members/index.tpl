@@ -1,13 +1,6 @@
-{extends file="standard.tpl"}
+{extends file="members/standard.tpl"}
 
-{block name=body}
-<ol class="submenu">
-	<li><a href="#">Manage Members</a></li>
-	<li><a href="#">Create Member</a></li>
-	<li><a href="#">Import Members</a></li>
-	<li><a href="#">Export as CSV</a></li>
-</ol>
-
+{block name=innerbody}
 <h2>{$lang_members}</h2>
 
 <form action="" method="post">
@@ -55,14 +48,6 @@
 	<input type="submit" value="{$lang_submit}" />
 	<input type="hidden" name="action" value="mass" />
 </form>
-
-<p>
-	<a href="{$root}admin/members/create">{$lang_create} {$lang_member|lower}</a>
-</p>
-
-<p>
-	<a href="{$root}admin/members/import">{$lang_import} {$lang_members|lower}</a>
-</p>
 
 <p>
 	<a href="{$root}admin/members/csv">{$lang_export_as_csv}</a>

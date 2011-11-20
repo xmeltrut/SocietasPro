@@ -77,7 +77,7 @@ class FrontController {
 	 *
 	 * @return string Controller
 	 */
-	private function getController () {
+	public function getController () {
 		if (self::$controller == "") {
 			self::$controller = "Default";
 		}

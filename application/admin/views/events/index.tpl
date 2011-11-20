@@ -11,7 +11,7 @@
 			<th>{$lang_name}</th>
 			<th>{$lang_date}</th>
 			<th>{$lang_edit}</th>
-			<th>{$lang_delete}</th>
+			<th>{$lang_options}</th>
 		</tr>
 		{foreach $events as $event}
 		<tr>
