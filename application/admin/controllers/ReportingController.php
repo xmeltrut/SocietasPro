@@ -6,7 +6,6 @@
  * @package SocietasPro
  * @subpackage Admin
  *
- * @todo Review navigation
  * @todo Review style of audit trails
  */
 
@@ -96,7 +95,7 @@ class ReportingController extends \BaseController implements \iController {
 	
 	public function index () {
 	
-		$this->engine->display("reporting/index.tpl");
+		$this->auditlogs();
 	
 	}
 

@@ -1,6 +1,6 @@
-{extends file="standard.tpl"}
+{extends file="reporting/standard.tpl"}
 
-{block name=body}
+{block name=innerbody}
 <h2>{$lang_audit_logs}</h2>
 
 <form action="" method="get">
