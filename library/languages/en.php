@@ -86,7 +86,8 @@ $language_strings = array (
 	"type" => "Type",
 	"unknown" => "Unknown",
 	"url" => "URL",
-	"view" => "View"
+	"view" => "View",
+	"website" => "Website"
 );
 
 $language_content = array (

@@ -16,7 +16,7 @@
 		
 			<ul>
 				<li>&raquo; <a href="{$root}system/auth/logout">{$lang_logout}</a></li>
-				<li>&raquo; <a href="{$root}public">{$lang_view}</a></li>
+				<li>&raquo; <a href="{$root}public">{$lang_view} {$lang_website|lower}</a></li>
 			</ul>
 			
 			<h1>{$group_name}</h1>
