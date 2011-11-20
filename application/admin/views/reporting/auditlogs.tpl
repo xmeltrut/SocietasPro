@@ -42,7 +42,7 @@
 	{/foreach}
 	{if $totalPages > 1}
 	<tr>
-		<td colspan="5">
+		<td colspan="5" class="pagingRow">
 			{$lang_page}: {for $i=1 to $totalPages}
 				{if $i == $pageNum}
 					{$i}

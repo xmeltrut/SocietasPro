@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Utilities
+ *
+ * @todo The visual editor size should be bigger
  */
 
 class FormBuilder {
