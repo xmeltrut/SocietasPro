@@ -3,7 +3,7 @@
 {block name=innerhead}
 <style type="text/css">
 .subscriberList {
-	width: 100%;
+	width: 99%;
 	height: 20em;
 }
 </style>

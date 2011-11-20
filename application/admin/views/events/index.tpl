@@ -32,7 +32,7 @@
 		{/foreach}
 		{if $totalPages > 1}
 		<tr>
-			<td colspan="7">
+			<td colspan="6" class="pagingRow">
 				{$lang_page}: {for $i=1 to $totalPages}
 				<a href="{$root}admin/events/index/{$i}">{$i}</a>
 				{/for}

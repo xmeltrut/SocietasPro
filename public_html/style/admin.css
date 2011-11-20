@@ -36,7 +36,7 @@ form ol li textarea.stdRow {
 }
 
 form ol li textarea.visualEditor {
-	width: 40em;
+	width: 45em;
 	height: 20em;
 }
 
@@ -163,6 +163,10 @@ table td {
 	padding: 5px;
 	background: #FFFFFF;
 	border: #CCCCCC 1px solid;
+}
+
+table td.pagingRow {
+	background-image: url("../images/admin/navigationbg.png");
 }
 
 table th {
