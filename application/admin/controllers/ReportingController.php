@@ -6,7 +6,6 @@
  * @package SocietasPro
  * @subpackage Admin
  *
- * @todo Make actions and members clickable in audit trail
  * @todo Review navigation
  * @todo Review style of audit trails
  */

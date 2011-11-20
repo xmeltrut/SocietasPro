@@ -72,9 +72,9 @@ class AuditEntriesModel extends BaseModel {
 		
 			// member information
 			if ($row["memberEmail"] === NULL) {
-				$row["entryMember"] = "";
+				$row["entryMemberName"] = "";
 			} else {
-				$row["entryMember"] = h($row["memberForename"]." ".$row["memberSurname"]." <".$row["memberEmail"].">");
+				$row["entryMemberName"] = h($row["memberForename"]." ".$row["memberSurname"]." <".$row["memberEmail"].">");
 			}
 			
 			// save row into array
