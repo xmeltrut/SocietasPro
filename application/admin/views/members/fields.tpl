@@ -32,8 +32,4 @@
 	</table>
 	<input type="hidden" name="action" value="mass" />
 </form>
-
-<p>
-	<a href="{$root}admin/members/createfield">{$lang_create} {$lang_field|lower}</a>
-</p>
 {/block}
