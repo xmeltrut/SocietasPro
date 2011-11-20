@@ -1,6 +1,6 @@
-{extends file="standard.tpl"}
+{extends file="pages/standard.tpl"}
 
-{block name=head}
+{block name=innerhead}
 {include file="visualeditor.tpl"}
 
 <script type="text/javascript">
@@ -12,7 +12,7 @@ $(document).ready(function(){
 </script>
 {/block}
 
-{block name=body}
+{block name=innerbody}
 <h2>{$lang_create} {$lang_page}</h2>
 
 {$form}

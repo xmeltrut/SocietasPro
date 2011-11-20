@@ -1,6 +1,6 @@
-{extends file="standard.tpl"}
+{extends file="pages/standard.tpl"}
 
-{block name=body}
+{block name=innerbody}
 <h2>{$lang_pages}</h2>
 
 <form action="" method="post">
