@@ -128,7 +128,7 @@ class FrontController {
 	 *
 	 * @param string Page
 	 */
-	private function getPage () {
+	public function getPage () {
 		if (self::$page == "") {
 			self::$page = "index";
 		}

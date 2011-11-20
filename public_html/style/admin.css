@@ -145,7 +145,7 @@ ol.submenu li a:link, ol.submenu li a:visited {
 	text-decoration: none;
 }
 
-ol.submenu li a:hover, ol.submenu li a:active {
+ol.submenu li a:hover, ol.submenu li a:active, ol.submenu li.active a:link, ol.submenu li.active a:visited {
 	color: #333333;
 	text-decoration: none;
 	background: #FFFFFF;

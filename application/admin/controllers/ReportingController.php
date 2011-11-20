@@ -6,7 +6,8 @@
  * @package SocietasPro
  * @subpackage Admin
  *
- * Make actions and members clickable
+ * @todo Make actions and members clickable
+ * @todo Review navigation
  */
 
 namespace admin;

@@ -32,6 +32,7 @@ class TemplateEngine extends Smarty {
 		} elseif ($module != "") {
 			$this->setTemplateDir("../application/".$module."/views/");
 			$this->assign("controller", strtolower(substr($front->getController(), 0, -10)));
+			$this->assign("section", $front->getPage());
 		} else {
 			throw new TemplateException("Unable to initialise template engine, no module defined.");
 		}

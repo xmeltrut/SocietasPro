@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
+ *
+ * @todo Review navigation
  */
 
 namespace admin;
