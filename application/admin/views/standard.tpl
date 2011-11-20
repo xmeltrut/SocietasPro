@@ -19,7 +19,7 @@
 				<li>&raquo; <a href="{$root}public">{$lang_view}</a></li>
 			</ul>
 			
-			<h1>SocietasPro</h1>
+			<h1>{$group_name}</h1>
 			
 			<div id="navigation">
 				<a {if $controller == "default"}class="active"{/if} href="{$root}admin">{$lang_home}</a>

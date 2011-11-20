@@ -37,8 +37,9 @@ class TemplateEngine extends Smarty {
 			throw new TemplateException("Unable to initialise template engine, no module defined.");
 		}
 		
-		// set a URL root
+		// assign some generic variables
 		$this->assign("root", ROOT);
+		$this->assign("group_name", Configuration::get("group_name"));
 		
 		// set the standard message to nothing
 		$this->setMessage("");
