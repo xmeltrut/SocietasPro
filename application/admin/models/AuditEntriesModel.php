@@ -77,6 +77,10 @@ class AuditEntriesModel extends BaseModel {
 				$row["entryMemberName"] = h($row["memberForename"]." ".$row["memberSurname"]." <".$row["memberEmail"].">");
 			}
 			
+			// html outputs
+			$row["entryOldDataHtml"] = $this->htmlOutput($row["entryOldData"]);
+			$row["entryNewDataHtml"] = $this->htmlOutput($row["entryNewData"]);
+			
 			// save row into array
 			$arr[] = $row;
 		
@@ -84,6 +88,38 @@ class AuditEntriesModel extends BaseModel {
 		
 		// return array
 		return $arr;
+	
+	}
+	
+	/**
+	 * Converts a data block to a HTML friendly output
+	 *
+	 * @param string $data Data value
+	 * @return string HTML to output
+	 */
+	private function htmlOutput ($data) {
+	
+		if ($data != "") {
+		
+			$dataArr = json_decode($data, true);
+			
+			if (is_array($dataArr)) {
+			
+				foreach ($dataArr as $key => $val) {
+					$dataArr[$key] = htmlspecialchars($val);
+				}
+				
+				$data = json_encode($dataArr);
+			
+			} else {
+			
+				$data = htmlspecialchars($data);
+			
+			}
+		
+		}
+		
+		return $data;
 	
 	}
 	

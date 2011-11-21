@@ -32,8 +32,8 @@
 		<td>{$log["entryDate"]}</td>
 		<td><a href="{$root}admin/reporting/auditlogs?action={$log["entryAction"]}&amp;member={$memberID}">{eval var=$log["actionLocalised"]}</a></td>
 		<td><a href="{$root}admin/reporting/auditlogs?action={$actionID}&amp;member={$log["entryMember"]}">{$log["entryMemberName"]}</a></td>
-		<td>{$log["entryOldData"]}</td>
-		<td>{$log["entryNewData"]}</td>
+		<td>{$log["entryOldDataHtml"]|wordwrap:40:"<br />\n":true}</td>
+		<td>{$log["entryNewDataHtml"]|wordwrap:40:"<br />\n":true}</td>
 	</tr>
 	{foreachelse}
 	<tr>

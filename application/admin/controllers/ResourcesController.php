@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo Replace mime_content_type with the new fileinfo functions
  */
 
 namespace admin;

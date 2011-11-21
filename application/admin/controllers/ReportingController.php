@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo Review style of audit trails
  */
 
 namespace admin;
