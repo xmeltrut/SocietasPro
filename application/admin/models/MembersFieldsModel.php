@@ -38,6 +38,26 @@ class MembersFieldsModel extends BaseModel {
 	}
 	
 	/**
+	 * Get a list of fields as an array
+	 *
+	 * @return array Associative array containing IDs and values
+	 */
+	public function getAsArray () {
+	
+		$arr = array();
+		
+		$sql = "SELECT * FROM ".DB_PREFIX."members_fields ";
+		$rec = $this->db->query($sql);
+		
+		while ($row = $rec->fetch()) {
+			$arr[$row["fieldID"]] = $row["fieldName"];
+		}
+		
+		return $arr;
+	
+	}
+	
+	/**
 	 * Get a specific field
 	 *
 	 * @param int $id Field ID

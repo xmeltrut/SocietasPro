@@ -49,7 +49,7 @@ class MembersModel extends BaseModel {
 		
 		// build array
 		while ($row = $rec->fetch()) {
-			$members[] = new Member($row);
+			$members[] = new Member($row, $this->getCustomData($row["memberID"]));
 		}
 		
 		// return results
@@ -69,10 +69,36 @@ class MembersModel extends BaseModel {
 		$rec = $this->db->query($sql);
 		
 		if ($row = $rec->fetch()) {
-			return new Member($row);
+			return new Member($row, $this->getCustomData($id));
 		} else {
 			return false;
 		}
+	
+	}
+	
+	/**
+	 * Get custom data for a member
+	 *
+	 * @param int $id ID of member
+	 * @return array Array
+	 */
+	private function getCustomData ($id) {
+	
+		// initialise an array
+		$arr = array();
+		
+		// query the database
+		$sql = "SELECT * FROM ".DB_PREFIX."members_data
+				WHERE dataMember = ".$id;
+		$rec = $this->db->query($sql);
+		
+		// loop through results
+		while ($row = $rec->fetch()) {
+			$arr[$row["dataField"]] = $row["dataValue"];
+		}
+		
+		// return array
+		return $arr;
 	
 	}
 	
@@ -130,6 +156,52 @@ class MembersModel extends BaseModel {
 	}
 	
 	/**
+	 * Save function to include custom data as well
+	 *
+	 * @param Member $obj Member object
+	 * @return boolean Success
+	 */
+	public function save ($obj) {
+	
+		$customData = $obj->getAllCustomData();
+		$result = parent::save($obj);
+		
+		if ($result) {
+		
+			foreach ($customData as $key => $val) {
+			
+				$sql = "SELECT dataField FROM ".DB_PREFIX."members_data
+						WHERE dataMember = ".$obj->memberID."
+						AND dataField = ".$key;
+				$sea = $this->db->query($sql);
+				
+				if ($sea->getRows() == 1) {
+			
+					$sql = "UPDATE ".DB_PREFIX."members_data
+							SET dataValue = '".escape($val)."'
+							WHERE dataMember = ".$obj->memberID."
+							AND dataField = ".$key;
+					$this->db->query($sql);
+				
+				} else {
+				
+					$sql = "INSERT INTO ".DB_PREFIX."members_data (
+							dataMember, dataField, dataValue
+							) VALUES (
+							".$obj->memberID.",".$key.",'".escape($val)."'
+							)";
+					$this->db->query($sql);
+				
+				}
+			}
+		
+		}
+		
+		return $result;
+	
+	}
+	
+	/**
 	 * Edit or create a member
 	 *
 	 * @param array $d Data
@@ -156,6 +228,14 @@ class MembersModel extends BaseModel {
 			$object->setNotes($d["notes"])
 		);
 		
+		// modify custom data
+		$membersFieldsModel = new MembersFieldsModel();
+		$fields = $membersFieldsModel->getAsArray();
+		foreach ($fields as $key => $val) {
+			$object->setCustomData($key, $d["custom".$key]);
+		}
+		
+		// check response
 		if (in_array(false, $writes)) {
 			$this->setMessage($object->getMessage());
 		}

@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
- *
- * @todo There is code for adding custom fields in here
  */
 
 namespace admin;
@@ -111,11 +109,18 @@ class MembersController extends \BaseController implements \iController {
 			$this->engine->setMessage($this->model->getMessage());
 		}
 		
-		// output page
+		// get a member object
 		$member = $this->model->getById(\FrontController::getParam(0));
 		if ($member === false) { throw new \HttpErrorException(404); }
 		
-		$this->engine->assign("form", $this->standardForm("edit", $member->getAllData()));
+		// build initial data array
+		$defaults = $member->getAllData();
+		foreach ($member->getAllCustomData() as $key => $val) {
+			$defaults["custom".$key] = $val;
+		}
+		
+		// output page
+		$this->engine->assign("form", $this->standardForm("edit", $defaults));
 		$this->engine->display("members/edit.tpl");
 	
 	}
@@ -308,17 +313,17 @@ class MembersController extends \BaseController implements \iController {
 		$form->addTextArea("address", LANG_ADDRESS, arrSet($data, "memberAddress"));
 		$form->addTextArea("notes", LANG_NOTES, arrSet($data, "memberNotes"));
 		
-		/*$fields = $this->fieldsModel->get();
+		$fields = $this->fieldsModel->get();
 		foreach ($fields as $field) {
 			$fieldID = "custom".$field->fieldID;
 			switch ($field->fieldType) {
 				case "textarea":
-					$form->addTextArea($fieldID, $field->fieldName, "");
+					$form->addTextArea($fieldID, $field->fieldName, arrSet($data, $fieldID));
 					break;
 				default:
-					$form->addInput($fieldID, $field->fieldName, "");
+					$form->addInput($fieldID, $field->fieldName, arrSet($data, $fieldID));
 			}
-		}*/
+		}
 		
 		$form->addHidden("id", arrSet($data, "memberID"));
 		$form->addHidden("action", $action);

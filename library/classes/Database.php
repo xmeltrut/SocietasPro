@@ -40,6 +40,15 @@ class Database {
 	}
 	
 	/**
+	 * Get the number of affected rows
+	 *
+	 * @return int Number of affected rows
+	 */
+	public function getAffectedRows () {
+		return mysql_affected_rows(self::$connection);
+	}
+	
+	/**
 	 * Get the last error message
 	 *
 	 * @return string Error message

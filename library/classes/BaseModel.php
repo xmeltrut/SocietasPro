@@ -124,12 +124,13 @@ abstract class BaseModel {
 	}
 	
 	/**
-	 * Generic save function. Needs overriding.
+	 * Generic save function. Object is passed in as a reference so we can update
+	 * the ID on an insert and use it in the function that calls this one.
 	 *
 	 * @param object $obj Object to save
 	 * @return boolean
 	 */
-	public function save ($obj) {
+	public function save (&$obj) {
 	
 		// build the identifier
 		if (!$idKey = $this->getIdentifier()) {
@@ -154,6 +155,11 @@ abstract class BaseModel {
 			// this is an insert
 			$sql = "INSERT INTO ".DB_PREFIX.$this->tableName." (".implode($keys, ",").") VALUES ('".implode($vals, "','")."')";
 			$rv  = $this->db->query($sql);
+			
+			// if successful, reload
+			if ($rv) {
+				$obj = $this->getById($this->db->insertId());
+			}
 		
 		} else {
 		
