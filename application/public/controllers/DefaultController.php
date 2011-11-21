@@ -34,5 +34,17 @@ class DefaultController extends \BaseController implements \iController {
 		$this->engine->display("page.tpl");
 	
 	}
+	
+	public function page () {
+	
+		// get page
+		$page = $this->model->getBySlug(FrontController::getParam(0));
+		if ($page === false) { throw new HttpErrorException(404); }
+		
+		// output page
+		$this->engine->assign("page", $page);
+		$this->engine->display("page.tpl");
+	
+	}
 
 }

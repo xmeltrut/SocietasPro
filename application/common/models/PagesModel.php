@@ -141,6 +141,25 @@ class PagesModel extends BaseModel implements iModel {
 	}
 	
 	/**
+	 * Get a specific page by slug
+	 *
+	 * @param string $slug Page slug
+	 * @return Page
+	 */
+	public function getBySlug ($slug) {
+	
+		$sql = "SELECT * FROM ".DB_PREFIX."pages WHERE pageSlug = '" . escape($slug) . "' ";
+		$rec = $this->db->query($sql);
+		
+		if ($row = $rec->fetch()) {
+			return new Page($row);
+		} else {
+			return false;
+		}
+	
+	}
+	
+	/**
 	 * Get an array of child page IDs
 	 *
 	 * @param int $id Page ID

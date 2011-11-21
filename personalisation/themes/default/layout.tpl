@@ -26,13 +26,25 @@
 		
 		<div id="content">
 			<div id="contentWrapper" class="wrapper">
-				{block name=body}{/block}
+			
+				<div id="col1">
+					{foreach $menu as $menuItem}
+					<a href="{$root}public/pages/page/{$menuItem->pageSlug}">{$menuItem->pageName}</a><br />
+					{/foreach}
+				</div>
+				
+				<div id="col2">
+					{block name=body}{/block}
+				</div>
+				
+				<div class="clear"></div>
+			
 			</div>
 		</div>
 		
 		<div id="footer">
 			<hr />
-			&copy; {$group_name}
+			&copy; {$current_year} {$group_name}. Powered by <a href ="http://www.societaspro.org/">SocietasPro</a>.
 		</div>
 	
 	</div>

@@ -4,11 +4,9 @@
 <h2>Events</h2>
 
 {foreach $events as $event}
+<h3><a href="{$root}public/events/details/{$event->eventID}">{$event->eventName}</a></h3>
 <p>
-	<a href="{$root}public/events/details/{$event->eventID}">{$event->eventName}</a>
-</p>
-<p>
-	{$event->getFormattedDate()}
+	<em>{$event->getFormattedDate()}</em>
 </p>
 {$event->eventDescription}
 {/foreach}

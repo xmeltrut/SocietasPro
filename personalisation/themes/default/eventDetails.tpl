@@ -4,7 +4,7 @@
 <h2>{$event->eventName}</h2>
 
 <p>
-	{$event->getFormattedDate()}
+	<em>{$event->getFormattedDate()}</em>
 </p>
 
 {$event->eventDescription}

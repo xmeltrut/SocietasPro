@@ -4,9 +4,7 @@
 <h2>Blog</h2>
 
 {foreach $posts as $post}
-<p>
-	<a href="{$root}public/blog/post/{$post->postSlug}">{$post->postName}</a>
-</p>
+<h3><a href="{$root}public/blog/post/{$post->postSlug}">{$post->postName}</a></h3>
 {$post->postContent}
 {/foreach}
 {/block}

@@ -29,6 +29,10 @@ class TemplateEngine extends Smarty {
 		
 		if ($module == "public") {
 			$this->setTemplateDir("../personalisation/themes/default/");
+			$this->assign("current_year", date("Y"));
+			require("models/PagesModel.php");
+			$pagesModel = new PagesModel();
+			$this->assign("menu", $pagesModel->get());
 		} elseif ($module != "") {
 			$this->setTemplateDir("../application/".$module."/views/");
 			$this->assign("controller", strtolower(substr($front->getController(), 0, -10)));

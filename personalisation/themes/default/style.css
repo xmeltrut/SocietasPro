@@ -18,21 +18,63 @@ body {
 	font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
 }
 
+.clear {
+	clear: both;
+}
+
+#col1 {
+	width: 200px;
+	float: left;
+	border-right: #99CC33 1px solid;
+}
+
+#col2 {
+	width: 650px;
+	float: right;
+}
+
 #content {
 	min-height: 20em;
 	background: #669933;
+}
+
+#content h2 {
+	margin-top: 0;
 }
 
 #contentWrapper {
 	padding: 3em 0;
 }
 
+#footer {
+	padding: 3em;
+	text-align: center;
+	color: #666666;
+	font-size: 80%;
+}
+
+#footer a:link, #footer a:visited {
+	color: #666666;
+	text-decoration: none;
+}
+
+#footer a:hover, #footer a:active {
+	color: #666666;
+	text-decoration: underline;
+}
+
+#footer hr {
+	display: none;
+}
+
 #header {
 	text-align: center;
+	padding-bottom: 3em;
 }
 
 #header h1 {
 	font-size: 400%;
+	cursor: default;
 }
 
 #header hr {
