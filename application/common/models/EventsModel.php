@@ -9,7 +9,7 @@
 
 require_once("objects/event.php");
 
-class EventsModel extends BaseModel {
+class EventsModel extends BaseModel implements iModel {
 
 	protected $tableName = "events";
 	

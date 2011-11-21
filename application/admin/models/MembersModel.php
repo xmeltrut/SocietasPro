@@ -9,7 +9,7 @@
 
 require_once("objects/Member.php");
 
-class MembersModel extends BaseModel {
+class MembersModel extends BaseModel implements iModel {
 
 	protected $tableName = "members";
 	

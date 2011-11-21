@@ -9,7 +9,7 @@
 
 require_once("objects/subscriber.php");
 
-class SubscribersModel extends BaseModel {
+class SubscribersModel extends BaseModel implements iModel {
 
 	protected $tableName = "subscribers";
 	
@@ -160,6 +160,27 @@ class SubscribersModel extends BaseModel {
 			return new Subscriber($row);
 		} else {
 			$this->setMessage(strFirst(LANG_EMAIL_ADDRESS." ".LANG_ALREADY_EXISTS));
+			return false;
+		}
+	
+	}
+	
+	/**
+	 * Get subscriber by their ID
+	 *
+	 * @param int $id ID
+	 * @return Subscriber
+	 */
+	public function getByID ($id) {
+	
+		// query database
+		$sql = "SELECT * FROM ".DB_PREFIX."subscribers WHERE subscriberID = ".intval($id);
+		$rec = $this->db->query($sql);
+		
+		// return result
+		if ($row = $rec->fetch()) {
+			return new Subscriber($row);
+		} else {
 			return false;
 		}
 	

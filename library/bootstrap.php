@@ -16,6 +16,7 @@ require("functions/strings.php");
 require("functions/validation.php");
 require("constants.php");
 require("interfaces/iController.php");
+require("interfaces/iModel.php");
 
 // run functions
 spl_autoload_register("autoload");

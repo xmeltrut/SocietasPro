@@ -9,7 +9,7 @@
 
 require_once("objects/location.php");
 
-class LocationsModel extends BaseModel {
+class LocationsModel extends BaseModel implements iModel {
 
 	protected $tableName = "locations";
 	

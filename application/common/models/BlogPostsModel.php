@@ -9,7 +9,7 @@
 
 require_once("objects/BlogPost.php");
 
-class BlogPostsModel extends BaseModel {
+class BlogPostsModel extends BaseModel implements iModel {
 
 	protected $tableName = "blog_posts";
 	

@@ -1,12 +1,12 @@
 <?php
 /**
- * Interface for controllers.
+ * Interface for models.
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
  */
 
-interface iController {
-	public function index ();
+interface iModel {
+	public function getById ($id);
 }
