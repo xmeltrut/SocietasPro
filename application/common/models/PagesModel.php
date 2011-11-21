@@ -351,6 +351,7 @@ class PagesModel extends BaseModel implements iModel {
 		
 		if (in_array(false, $writes)) {
 			$this->setMessage($object->getMessage());
+			if ($id === false) { return false; }
 		}
 		
 		if ($object->hasChanged()) {
