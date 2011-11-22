@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Public
- *
- * @todo This get stylesheet function needs theme-ising
  */
 
 namespace publica;

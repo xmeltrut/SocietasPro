@@ -7,4 +7,4 @@
  * @subpackage Core
  */
 
-$spVersion = "0.1.0";
+$spVersion = "0.2.0";

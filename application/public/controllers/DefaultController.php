@@ -27,7 +27,7 @@ class DefaultController extends \BaseController implements \iController {
 	
 		// get homepage
 		$page = $this->model->getHomepage();
-		if ($page === false) { throw new HttpErrorException(404); }
+		if ($page === false) { throw new \HttpErrorException(404); }
 		
 		// output page
 		$this->engine->assign("page", $page);
@@ -38,8 +38,8 @@ class DefaultController extends \BaseController implements \iController {
 	public function page () {
 	
 		// get page
-		$page = $this->model->getBySlug(FrontController::getParam(0));
-		if ($page === false) { throw new HttpErrorException(404); }
+		$page = $this->model->getBySlug(\FrontController::getParam(0));
+		if ($page === false) { throw new \HttpErrorException(404); }
 		
 		// output page
 		$this->engine->assign("page", $page);

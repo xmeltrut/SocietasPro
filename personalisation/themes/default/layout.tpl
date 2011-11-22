@@ -29,7 +29,7 @@
 			
 				<div id="col1">
 					{foreach $menu as $menuItem}
-					<a href="{$root}public/pages/page/{$menuItem->pageSlug}">{$menuItem->pageName}</a><br />
+					<a href="{$root}public/default/page/{$menuItem->pageSlug}">{$menuItem->pageName}</a><br />
 					{/foreach}
 				</div>
 				
