@@ -3,20 +3,26 @@
 <head>
 <title>SocietasPro</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<link rel="stylesheet" type="text/css" href="/style/system.css" />
+<link rel="stylesheet" type="text/css" href="{$root}system/resources/style" />
 </head>
 <body>
 
-	<form action="" method="post">
-	
-		{$lang_email}: <input type="text" name="email" />
+	<div class="box">
+
+		<form action="" method="post">
 		
-		{$lang_password}: <input type="password" name="password" />
+			<label for="email">{$lang_email_address}</label>
+			<input type="text" id="email" name="email" />
+			
+			<label for="password">{$lang_password}</label>
+			<input type="password" id="password" name="password" />
+			
+			<input type="hidden" name="action" value="login" />
+			<input type="submit" value="{$lang_login}" />
 		
-		<input type="hidden" name="action" value="login" />
-		<input type="submit" value="{$lang_login}" />
+		</form>
 	
-	</form>
+	</div>
 
 </body>
 </html>

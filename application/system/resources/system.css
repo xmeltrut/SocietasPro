@@ -1,0 +1,46 @@
+a:link, a:visited {
+	color: #0000FF;
+	text-decoration: underline;
+}
+
+a:hover, a:active {
+	color: #3399FF;
+	text-decoration: underline;
+}
+
+body {
+	background: #EEEEEE;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+}
+
+.box {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 350px;
+	margin-left: -200px;
+	height: 200px;
+	margin-top: -125px;
+	padding: 25px;
+	border: #999999 1px solid;
+	border-radius: 10px;
+	background: #FFFFFF;
+}
+
+input[type=text], input[type=password] {
+	display: block;
+	width: 99%;
+	margin-bottom: 25px;
+	font-size: 150%;
+}
+
+input[type=submit] {
+	position: absolute;
+	bottom: 25px;
+	right: 25px;
+	font-size: 200%;
+}
+
+label {
+	cursor: pointer;
+}
