@@ -2,6 +2,15 @@
 
 {block name=head}
 <script type="text/javascript">
+function checkVersion () {
+	$.get("{$root}admin/default/version", function (data) {
+		if (data != "") {
+			$("#version").html(data);
+			$("#version").slideDown();
+		}
+	});
+}
+
 function loadTweets () {
 	$.get("{$root}admin/default/tweets", function (data) {
 		$("#tweets").html(data);
@@ -9,6 +18,7 @@ function loadTweets () {
 }
 
 $(document).ready( function () {
+	checkVersion();
 	loadTweets();
 });
 </script>
@@ -22,6 +32,10 @@ $(document).ready( function () {
 .col2 {
 	width: 49%;
 	float: right;
+}
+
+#version {
+	display: none;
 }
 </style>
 {/block}
@@ -59,6 +73,8 @@ $(document).ready( function () {
 			</td>
 		</tr>
 	</table>
+	
+	<div id="version"></div>
 
 </div>
 

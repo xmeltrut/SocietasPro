@@ -47,5 +47,39 @@ class DefaultController extends \BaseController implements \iController {
 		$this->engine->display("default/tweets.tpl");
 	
 	}
+	
+	/**
+	 * Check version
+	 */
+	public function version () {
+	
+		// make a curl request
+		$request = new \RemoteRequest("http://www.societaspro.org/api");
+		$request->setParam("action", "get_latest_version");
+		$request->setParam("format", "json");
+		
+		if ($request->send()) {
+		
+			// get response
+			$response = $request->getResponse();
+			
+			if ($responseArray = json_decode($response, true)) {
+			
+				// get version
+				$latestVersion = $responseArray["version"];
+				
+				if ($latestVersion != SP_VERSION) {
+				
+					$this->engine->assign("latest_version", $latestVersion);
+					$this->engine->assign("version_information", \Language::getContent("version_information"));
+					$this->engine->display("default/version.tpl");
+				
+				}
+			
+			}
+		
+		}
+	
+	}
 
 }

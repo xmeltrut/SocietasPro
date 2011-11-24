@@ -86,6 +86,7 @@ $language_strings = array (
 	"type" => "Type",
 	"unknown" => "Unknown",
 	"url" => "URL",
+	"version" => "Version",
 	"view" => "View",
 	"website" => "Website"
 );
@@ -94,5 +95,6 @@ $language_content = array (
 	"page_not_found" => "Page Not Found",
 	"page_not_found_body" => "Sorry, the page you are looking for could not be found.",
 	"server_error" => "Server Error",
-	"server_error_body" => "Sorry, your request could not be completed because of a server error. Please consult the error logs for further information."
+	"server_error_body" => "Sorry, your request could not be completed because of a server error. Please consult the error logs for further information.",
+	"version_information" => "A new version of SocietasPro is available! You are running version {\$version}, however the latest version is now {\$latest_version}. You should upgrade as soon as possible to get the latest improvements, bug fixes and security updates."
 );

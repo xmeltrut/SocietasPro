@@ -44,6 +44,7 @@ class TemplateEngine extends Smarty {
 		// assign some generic variables
 		$this->assign("root", ROOT);
 		$this->assign("group_name", Configuration::get("group_name"));
+		$this->assign("version", SP_VERSION);
 		
 		// set the standard message to nothing
 		$this->setMessage("");
