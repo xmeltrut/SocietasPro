@@ -34,7 +34,11 @@ class Authorisation {
 	 * @return int AdminStyle
 	 */
 	public function getAdminStyle () {
-		return intval($_SESSION["sp_admin_style"]);
+		if (isset($_SESSION["sp_admin_style"])) {
+			return intval($_SESSION["sp_admin_style"]);
+		} else {
+			return 0;
+		}
 	}
 	
 	/**
@@ -43,7 +47,11 @@ class Authorisation {
 	 * @return int ID
 	 */
 	public function getID () {
-		return intval($_SESSION["sp_user_id"]);
+		if (isset($_SESSION["sp_user_id"])) {
+			return intval($_SESSION["sp_user_id"]);
+		} else {
+			return 0;
+		}
 	}
 	
 	/**

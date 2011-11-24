@@ -37,8 +37,8 @@ input[type=text], input[type=password] {
 input[type=submit] {
 	position: absolute;
 	bottom: 25px;
-	right: 25px;
-	font-size: 200%;
+	right: 23px;
+	font-size: 150%;
 }
 
 label {
