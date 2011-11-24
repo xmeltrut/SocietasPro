@@ -27,6 +27,11 @@ body {
 	background: #FFFFFF;
 }
 
+h1 {
+	margin-top: 0;
+	font-size: 150%;
+}
+
 input[type=text], input[type=password] {
 	display: block;
 	width: 99%;
