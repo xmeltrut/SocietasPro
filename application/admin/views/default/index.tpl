@@ -57,6 +57,18 @@ $(document).ready( function () {
 			<td>{$lang_mailing_list} {$lang_subscribers}</td>
 			<td class="right">{$total_subscribers}</td>
 		</tr>
+		<tr>
+			<td>{$lang_events}</td>
+			<td class="right">{$total_events}</td>
+		</tr>
+		<tr>
+			<td>{$lang_pages}</td>
+			<td class="right">{$total_pages}</td>
+		</tr>
+		<tr>
+			<td>{$lang_blog} {$lang_posts}</td>
+			<td class="right">{$total_blog_posts}</td>
+		</tr>
 	</table><br />
 	
 	<table border="1" width="100%">

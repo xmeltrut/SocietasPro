@@ -26,6 +26,9 @@ class DefaultController extends \BaseController implements \iController {
 		// set variables
 		$this->engine->assign("total_members", $db->fetchOne("SELECT COUNT(memberID) FROM ".DB_PREFIX."members"));
 		$this->engine->assign("total_subscribers", $db->fetchOne("SELECT COUNT(subscriberID) FROM ".DB_PREFIX."subscribers"));
+		$this->engine->assign("total_events", $db->fetchOne("SELECT COUNT(eventID) FROM ".DB_PREFIX."events"));
+		$this->engine->assign("total_pages", $db->fetchOne("SELECT COUNT(pageID) FROM ".DB_PREFIX."pages"));
+		$this->engine->assign("total_blog_posts", $db->fetchOne("SELECT COUNT(postID) FROM ".DB_PREFIX."blog_posts"));
 		
 		// output age
 		$this->engine->display("default/index.tpl");

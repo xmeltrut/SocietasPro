@@ -70,6 +70,7 @@ $language_strings = array (
 	"parent" => "Parent",
 	"password" => "Password",
 	"post" => "Post",
+	"posts" => "Posts",
 	"privileges" => "Privileges",
 	"reporting" => "Reporting",
 	"select" => "Select",
