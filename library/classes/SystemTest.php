@@ -163,6 +163,29 @@ class SystemTest {
 	}
 	
 	/**
+	 * Check we have the spl_autoload_register function available
+	 *
+	 * @return array Data
+	 */
+	private function checkSplAutoloadRegister () {
+	
+		if (function_exists("spl_autoload_register")) {
+			$data = array (
+				"r" => self::STATUS_PASS,
+				"i" => "Exists"
+			);
+		} else {
+			$data = array (
+				"r" => self::STATUS_FAIL,
+				"i" => "Not Found"
+			);
+		}
+		
+		return $data;
+	
+	}
+	
+	/**
 	 * Check if the tmp directory is writable
 	 *
 	 * @return array Data

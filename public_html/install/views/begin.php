@@ -19,7 +19,8 @@ $checks = array (
 	"Curl",
 	"MagicQuotes",
 	"TmpDir",
-	"IncludePath"
+	"IncludePath",
+	"SplAutoloadRegister"
 );
 
 require("classes/SystemTest.php");
