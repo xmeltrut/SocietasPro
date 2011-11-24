@@ -7,6 +7,7 @@
 {block name=body}
 	<ol class="submenu">
 		<li {if $section == "index"}class="active"{/if}><a href="{$root}admin/config">{$lang_configuration}</a></li>
+		<li {if $section == "preferences"}class="active"{/if}><a href="{$root}admin/config/preferences">{$lang_preferences}</a></li>
 		<li {if $section == "language"}class="active"{/if}><a href="{$root}admin/config/language">{$lang_language}</a></li>
 	</ol>
 	

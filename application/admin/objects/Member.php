@@ -72,6 +72,17 @@ class Member extends BaseObject {
 	}
 	
 	/**
+	 * Set the admin style
+	 *
+	 * @param int $value Style
+	 * @return boolean Success
+	 */
+	public function setAdminStyle ($value) {
+		$this->setData("memberAdminStyle", intval($value));
+		return true;
+	}
+	
+	/**
 	 * Set a custom data field
 	 *
 	 * @param int $key Field ID

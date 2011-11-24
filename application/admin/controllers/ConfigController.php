@@ -66,5 +66,44 @@ class ConfigController extends \BaseController implements \iController {
 		$this->engine->display("config/language.tpl");
 	
 	}
+	
+	public function preferences () {
+	
+		// build an object
+		$auth = \Authorisation::getInstance();
+		
+		// check for actions
+		if (reqSet("action") == "update") {
+		
+			require_once("models/MembersModel.php");
+			$membersModel = new \MembersModel();
+			
+			$member = $membersModel->getById($auth->getID());
+			$member->setAdminStyle(reqSet("style"));
+			$membersModel->save($member);
+			
+			$auth->setAdminStyle(reqSet("style"));
+			
+			$this->engine->setMessage($this->model->getMessage());
+		
+		}
+		
+		// build an array of options
+		$options = array (
+			0 => LANG_DEFAULT,
+			1 => LANG_HIGH_CONTRAST
+		);
+		
+		// build a form
+		$form = new \FormBuilder();
+		$form->addSelect("style", LANG_STYLE, $options, $auth->getAdminStyle());
+		$form->addHidden("action", "update");
+		$form->addSubmit();
+		
+		// output the page
+		$this->engine->assign("form", $form->build());
+		$this->engine->display("config/preferences.tpl");
+	
+	}
 
 }

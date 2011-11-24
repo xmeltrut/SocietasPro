@@ -29,6 +29,24 @@ class Authorisation {
 	}
 	
 	/**
+	 * Get the admin style
+	 *
+	 * @return int AdminStyle
+	 */
+	public function getAdminStyle () {
+		return intval($_SESSION["sp_admin_style"]);
+	}
+	
+	/**
+	 * Get the current user's ID
+	 *
+	 * @return int ID
+	 */
+	public function getID () {
+		return intval($_SESSION["sp_user_id"]);
+	}
+	
+	/**
 	 * Singleton
 	 */
 	public static function getInstance () {
@@ -101,6 +119,7 @@ class Authorisation {
 		if ($success) {
 			$_SESSION["sp_logged_in"] = "true";
 			$_SESSION["sp_user_id"] = $row["memberID"];
+			$_SESSION["sp_admin_style"] = $row["memberAdminStyle"];
 			return true;
 		} else {
 			$msg = "There was no match for the username and password.";
@@ -115,6 +134,15 @@ class Authorisation {
 	public function logout () {
 		$_SESSION["sp_logged_in"] = "false";
 		session_destroy();
+	}
+	
+	/**
+	 * Set the admin style
+	 *
+	 * @param int $value AdminStyle
+	 */
+	public function setAdminStyle ($value) {
+		$_SESSION["sp_admin_style"] = intval($value);
 	}
 
 }

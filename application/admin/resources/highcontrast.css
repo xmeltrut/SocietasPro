@@ -1,0 +1,34 @@
+a:link, a:visited {
+	color: #0000FF;
+	text-decoration: underline;
+}
+
+a:hover, a:active {
+	color: #FF0000;
+	text-decoration: underline;
+}
+
+form ol li {
+	padding: 5px;
+	background: #CCCCCC;
+}
+
+form ol li.altRow {
+	background: #FFFFFF;
+}
+
+#navigation {
+	border: #000000 1px solid;
+}
+
+table {
+	border: #000000 1px solid;
+}
+
+table td {
+	border: #000000 1px solid;
+}
+
+table th {
+	border: #000000 1px solid;
+}

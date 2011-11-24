@@ -41,6 +41,17 @@ class ResourcesController extends \BaseController implements \iController {
 	}
 	
 	/**
+	 * Get the high contrast stylesheet
+	 */
+	public function highcontrast () {
+	
+		$code = file_get_contents("resources/highcontrast.css", true);
+		Header("content-type: text/css");
+		print $code;
+	
+	}
+	
+	/**
 	 * Get the main admin javascript file
 	 */
 	public function js () {

@@ -46,6 +46,10 @@ class TemplateEngine extends Smarty {
 		$this->assign("group_name", Configuration::get("group_name"));
 		$this->assign("version", SP_VERSION);
 		
+		// user login details
+		$auth = Authorisation::getInstance();
+		$this->assign("session_admin_style", $auth->getAdminStyle());
+		
 		// set the standard message to nothing
 		$this->setMessage("");
 		
