@@ -72,12 +72,20 @@ class MembersController extends \BaseController implements \iController {
 		
 		// get an array of members
 		$members = $this->model->get();
+		$fields = $this->fieldsModel->get();
 		
 		// begin output
-		$csv->addRow(array(LANG_ID,LANG_EMAIL,LANG_FORENAME,LANG_SURNAME,LANG_PRIVILEGES,LANG_ADDRESS,LANG_NOTES));
+		$headers = array(LANG_ID,LANG_EMAIL,LANG_FORENAME,LANG_SURNAME,LANG_PRIVILEGES,LANG_ADDRESS,LANG_NOTES);
+		
+		foreach ($fields as $field) {
+			$headers[] = $field->fieldName;
+		}
+		
+		$csv->addRow($headers);
 		
 		// loop through members
 		foreach ($members as $member) {
+		
 			$data = array (
 				$member->memberID,
 				$member->memberEmail,
@@ -87,7 +95,13 @@ class MembersController extends \BaseController implements \iController {
 				$member->memberAddress,
 				$member->memberNotes
 			);
+			
+			foreach ($member->getAllCustomData() as $custom) {
+				$data[] = $custom;
+			}
+			
 			$csv->addRow($data);
+		
 		}
 		
 		// log as an action in the audit trail
