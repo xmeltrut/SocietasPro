@@ -3,6 +3,7 @@
 	tinyMCE.init({
 		mode : "specific_textareas",
 		editor_selector : "visualEditor",
-		theme : "simple"
+		theme : "advanced",
+		theme_advanced_toolbar_location : "top"
 	});
 </script>
