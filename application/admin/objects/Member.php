@@ -133,6 +133,24 @@ class Member extends BaseObject {
 	}
 	
 	/**
+	 * Set the password
+	 *
+	 * @param string $value Password
+	 * @return boolean Success
+	 */
+	public function setPassword ($value) {
+	
+		if ($value != "") {
+			$auth = Authorisation::getInstance();
+			$pass = $auth->encodePassword($value);
+			$this->setData("memberPassword", $pass);
+		}
+		
+		return true;
+	
+	}
+	
+	/**
 	 * Set the privileges
 	 *
 	 * @param int $value Privilege level

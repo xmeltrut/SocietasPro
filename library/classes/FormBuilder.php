@@ -147,6 +147,20 @@ class FormBuilder {
 	}
 	
 	/**
+	 * Add a password input to the form.
+	 *
+	 * @param string $name Name to give the element
+	 * @param string $label Text for label
+	 */
+	public function addPassword ($name, $label) {
+	
+		$code = '<label for="'.$name.'">'.$label.'</label>'.
+				$this->returnInput($name, "", 0, "stdRow", "password");
+		$this->appendRow($code);
+	
+	}
+	
+	/**
 	 * Add a dropdown menu
 	 *
 	 * @param string $name Name to give the lement

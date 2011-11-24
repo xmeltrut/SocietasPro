@@ -310,6 +310,7 @@ class MembersController extends \BaseController implements \iController {
 		$form->addInput("forename", LANG_FORENAME, arrSet($data, "memberForename"));
 		$form->addInput("surname", LANG_SURNAME, arrSet($data, "memberSurname"));
 		$form->addSelect("privileges", LANG_PRIVILEGES, $this->model->getPrivileges(), arrSet($data, "memberPrivileges"));
+		$form->addPassword("password", LANG_PASSWORD);
 		$form->addTextArea("address", LANG_ADDRESS, arrSet($data, "memberAddress"));
 		$form->addTextArea("notes", LANG_NOTES, arrSet($data, "memberNotes"));
 		

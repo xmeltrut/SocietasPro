@@ -25,7 +25,7 @@ form ol li {
 	list-style-type: none;
 }
 
-form ol li input[type=text].stdRow {
+form ol li input[type=text].stdRow, form ol li input[type=password].stdRow {
 	width: 30em;
 }
 

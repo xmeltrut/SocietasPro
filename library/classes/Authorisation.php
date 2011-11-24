@@ -23,7 +23,7 @@ class Authorisation {
 	 * @param string $password Password to encode
 	 * @return string Encoded password
 	 */
-	private function encodePassword ($password) {
+	public function encodePassword ($password) {
 		$encodedPassword = md5(PASSWORD_SALT . $password);
 		return $encodedPassword;
 	}
