@@ -224,6 +224,7 @@ class MembersModel extends BaseModel implements iModel {
 			$object->setEmailAddress($d["email"]),
 			$object->setForename($d["forename"]),
 			$object->setSurname($d["surname"]),
+			$object->setPrivileges($d["privileges"]),
 			$object->setPassword($d["password"]),
 			$object->setAddress($d["address"]),
 			$object->setNotes($d["notes"])
