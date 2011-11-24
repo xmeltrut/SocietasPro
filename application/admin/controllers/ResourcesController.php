@@ -20,15 +20,27 @@ class ResourcesController extends \BaseController implements \iController {
 	 */
 	public function images () {
 	
+		// build the image path
 		$image = \FrontController::getParam(0);
 		$imagePath = "../application/admin/resources/images/".$image;
 		
 		if (file_exists($imagePath)) {
-			header("Content-type: " . mime_content_type($imagePath));
+		
+			if (class_exists("finfo")) {
+				$finfo = new \finfo(FILEINFO_MIME, null);
+				$imageHeader = $finfo->file($imagePath);
+			} else {
+				$imageHeader = mime_content_type($imagePath);
+			}
+			
+			header("Content-type: " . $imageHeader);
 			$data = file_get_contents($imagePath);
 			print $data;
+		
 		} else {
+		
 			throw new \HttpErrorException(404);
+		
 		}
 	
 	}
