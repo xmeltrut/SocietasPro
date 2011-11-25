@@ -52,6 +52,26 @@ function strIncrement ($str) {
 }
 
 /**
+ * Generate a random string, good for passwords
+ *
+ * @param int $length Length in characters
+ * @return string
+ */
+function strRandom ($length = 8) {
+
+	$password = "";
+	$possible = "2346789abcdefghijkmnpqrtuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ";
+	$maxlength = strlen($possible);
+	
+	for ($i = 0; $i < $length; $i++) {
+		$char = substr($possible, mt_rand(0, $maxlength-1), 1);
+	}
+	
+	return $password;
+
+}
+
+/**
  * Get rid of any nasty characters from a filename.
  *
  * Note, this won't actually "fix" the filename if you will, it will just

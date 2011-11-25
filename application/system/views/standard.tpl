@@ -4,6 +4,7 @@
 <title>SocietasPro</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <link rel="stylesheet" type="text/css" href="{$root}system/resources/style" />
+<script type="text/javascript" src="{$root}js/jquery.js"></script>
 </head>
 <body>
 
