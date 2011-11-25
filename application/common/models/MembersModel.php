@@ -58,6 +58,25 @@ class MembersModel extends BaseModel implements iModel {
 	}
 	
 	/**
+	 * Get a specific member by email
+	 *
+	 * @param string $email Email address
+	 * @return Member
+	 */
+	public function getByEmail ($email) {
+	
+		$sql = "SELECT * FROM ".DB_PREFIX."members WHERE memberEmail = '" . escape($email) . "'";
+		$rec = $this->db->query($sql);
+		
+		if ($row = $rec->fetch()) {
+			return new Member($row, $this->getCustomData($row["memberID"]));
+		} else {
+			return false;
+		}
+	
+	}
+	
+	/**
 	 * Get a specific member
 	 *
 	 * @param int $id Member ID

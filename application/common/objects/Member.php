@@ -162,6 +162,19 @@ class Member extends BaseObject {
 	}
 	
 	/**
+	 * Set the password reset key
+	 *
+	 * @param string $value Reset key
+	 * @return boolean Success
+	 */
+	public function setPasswordResetKey ($value) {
+	
+		$this->setData("memberPasswordResetKey", $value);
+		return true;
+	
+	}
+	
+	/**
 	 * Set the privileges
 	 *
 	 * @param int $value Privilege level
