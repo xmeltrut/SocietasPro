@@ -17,6 +17,7 @@
 			<div id="navigation">
 				[ <a href="{$root}public">Home</a> ]
 				[ <a href="{$root}public/events">Events</a> ]
+				[ <a href="{$root}public/events/calendar">Calendar</a> ]
 				[ <a href="{$root}public/blog">Blog</a> ]
 			</div>
 			

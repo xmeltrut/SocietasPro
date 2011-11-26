@@ -5,6 +5,8 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Common
+ *
+ * @todo Events should be sorted by date
  */
 
 require_once("objects/event.php");
@@ -63,6 +65,32 @@ class EventsModel extends BaseModel implements iModel {
 		$events = array();
 		
 		$sql = "SELECT * FROM ".DB_PREFIX."events ".sqlLimit($pageNum);
+		$rec = $this->db->query($sql);
+		
+		while ($row = $rec->fetch()) {
+			$events[] = new Event($row);
+		}
+		
+		return $events;
+	
+	}
+	
+	/**
+	 * Get a list of events for a specific date
+	 *
+	 * @param string $date Date in a YYYYMMDD format
+	 * @return array Array of events
+	 */
+	public function getByDate ($date) {
+	
+		// initialise variables
+		$events = array();
+		$searchDate = substr($date,0,4)."-".substr($date,4,2)."-".substr($date,6,2);
+		
+		// query database
+		$sql = "SELECT * FROM ".DB_PREFIX."events
+				WHERE eventDate LIKE '".$searchDate."%'
+				ORDER BY eventDate ASC";
 		$rec = $this->db->query($sql);
 		
 		while ($row = $rec->fetch()) {
