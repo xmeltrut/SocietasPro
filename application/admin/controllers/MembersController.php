@@ -332,6 +332,9 @@ class MembersController extends \BaseController implements \iController {
 		foreach ($fields as $field) {
 			$fieldID = "custom".$field->fieldID;
 			switch ($field->fieldType) {
+				case "select":
+					$form->addSelect($fieldID, $field->fieldName, $field->getOptions(), arrSet($data, $fieldID));
+					break;
 				case "textarea":
 					$form->addTextArea($fieldID, $field->fieldName, arrSet($data, $fieldID));
 					break;

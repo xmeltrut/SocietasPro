@@ -14,6 +14,19 @@ class MembersField extends BaseObject {
 	}
 	
 	/**
+	 * Get the options available
+	 *
+	 * @return array Options
+	 */
+	public function getOptions () {
+	
+		$options = explode("\n", $this->fieldOptions);
+		array_walk($options, "trim");
+		return $options;
+	
+	}
+	
+	/**
 	 * Set the name of the field
 	 *
 	 * @param string $value Name
