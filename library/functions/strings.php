@@ -52,6 +52,21 @@ function strIncrement ($str) {
 }
 
 /**
+ * Purify a string to make sure there is no rogue HTML.
+ *
+ * @param string $input Input code
+ * @return string Cleaned code
+ */
+function strPurify ($input) {
+
+	require_once("htmlpurifier/HTMLPurifier.standalone.php");
+	$purifier = new HTMLPurifier();
+    $output = $purifier->purify($input);
+    return $output;
+
+}
+
+/**
  * Generate a random string, good for passwords
  *
  * @param int $length Length in characters

@@ -77,7 +77,7 @@ class Page extends BaseObject {
 	 * @return boolean Success
 	 */
 	public function setContent ($value) {
-		$this->setData("pageContent", $value);
+		$this->setData("pageContent", strPurify($value));
 		return true;
 	}
 	

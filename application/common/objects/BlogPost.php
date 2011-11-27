@@ -29,7 +29,7 @@ class BlogPost extends BaseObject {
 	 * @return boolean Success
 	 */
 	public function setContent ($value) {
-		$this->setData("postContent", $value);
+		$this->setData("postContent", strPurify($value));
 		return true;
 	}
 	
