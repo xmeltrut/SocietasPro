@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Common
- *
- * @todo Events should be sorted by date
  */
 
 require_once("objects/event.php");
@@ -64,7 +62,7 @@ class EventsModel extends BaseModel implements iModel {
 	
 		$events = array();
 		
-		$sql = "SELECT * FROM ".DB_PREFIX."events ".sqlLimit($pageNum);
+		$sql = "SELECT * FROM ".DB_PREFIX."events ORDER BY eventDate DESC ".sqlLimit($pageNum);
 		$rec = $this->db->query($sql);
 		
 		while ($row = $rec->fetch()) {
