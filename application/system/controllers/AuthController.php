@@ -87,6 +87,8 @@ class AuthController extends \BaseController implements \iController {
 				$msg = str_replace("%%PASSWORD%%", "<strong>".$newPassword."</strong>", $msg);
 			
 			}
+			
+			$this->engine->assign("message", $msg);
 		
 		} elseif (reqSet("action") == "reset" && reqSet("email") != "") {
 		
@@ -102,7 +104,7 @@ class AuthController extends \BaseController implements \iController {
 				
 				// build email variables
 				$body = \Language::getContent("password_reset_email")."\n\n".
-						$_SERVER["REQUEST_URI"]."?email=".urlencode($member->memberEmail).
+						"http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]."?email=".urlencode($member->memberEmail).
 						"&key=".md5($passwordKey);
 				
 				// send email

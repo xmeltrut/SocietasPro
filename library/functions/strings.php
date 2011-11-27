@@ -80,6 +80,7 @@ function strRandom ($length = 8) {
 	
 	for ($i = 0; $i < $length; $i++) {
 		$char = substr($possible, mt_rand(0, $maxlength-1), 1);
+		$password .= $char;
 	}
 	
 	return $password;
