@@ -52,7 +52,7 @@ class Configuration {
 	 */
 	public static function getUrl () {
 	
-		$protocol = ($_SERVER["HTTPS") ? "https" : "http";
+		$protocol = ($_SERVER["HTTPS"]) ? "https" : "http";
 		$server = $_SERVER["SERVER_NAME"];
 		return $protocol.":".$server;
 	

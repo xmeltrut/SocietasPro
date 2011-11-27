@@ -110,6 +110,12 @@ class ImportMembersWizard {
 				"surname" => $row[$map["Surname"]]
 			);
 			
+			// check for duplicates
+			if (($data["email"] != "") && $membersModel->getByEmail($data["email"])) {
+				$failCount++;
+				continue;
+			}
+			
 			// add custom fields
 			$fields = $membersFieldsModel->get();
 			foreach ($fields as $field) {
