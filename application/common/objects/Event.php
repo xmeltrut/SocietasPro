@@ -9,7 +9,10 @@
 
 class Event extends BaseObject {
 
-	public $location = false;
+	/**
+	 * Store a location object
+	 */
+	private $location = false;
 	
 	/**
 	 * Constructor. Run parent and location data gathering.
@@ -21,6 +24,20 @@ class Event extends BaseObject {
 		parent::__construct($data);
 		$this->fetchLocationData();
 	
+	}
+	
+	/**
+	 * Magic getter. Override parent for access to location object.
+	 *
+	 * @param string $key Key
+	 * @return mixed
+	 */
+	public function __get ($key) {
+		if ($key == "location") {
+			return $this->location;
+		} else {
+			return parent::__get($key);
+		}
 	}
 	
 	/**
