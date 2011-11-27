@@ -8,6 +8,12 @@
 </head>
 <body>
 
+	{if $msg}
+	<div id="msg">
+		{$msg}
+	</div>
+	{/if}
+
 	<div class="box">
 	
 		{block name=body}{/block}

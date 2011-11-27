@@ -31,9 +31,12 @@ class AuthController extends \BaseController implements \iController {
 			if ($rv) {
 				redirect("admin");
 			}
+		} else {
+			$msg = "";
 		}
 		
 		// display page
+		$this->engine->setMessage($msg);
 		$this->engine->assign("forgotten_your_password", \Language::getContent("forgotten_your_password"));
 		$this->engine->display("auth/login.tpl");
 	
