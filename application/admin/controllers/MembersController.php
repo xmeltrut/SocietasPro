@@ -259,7 +259,6 @@ class MembersController extends \BaseController implements \iController {
 				
 				foreach ($_REQUEST as $key => $val) {
 					if (substr($key, 0, 3) == "col") {
-						//$newKey = intval(str_replace("col", "", $key));
 						$map[$val] = intval(str_replace("col", "", $key));
 					}
 				}
