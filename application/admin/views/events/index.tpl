@@ -10,6 +10,7 @@
 			<th>{$lang_id}</th>
 			<th>{$lang_name}</th>
 			<th>{$lang_date}</th>
+			<th>{$lang_location}</th>
 			<th>{$lang_edit}</th>
 			<th>{$lang_options}</th>
 		</tr>
@@ -19,6 +20,13 @@
 			<td>{$event->eventID}</td>
 			<td>{$event->eventName}</td>
 			<td>{$event->getFormattedDate()}</td>
+			<td>
+				{if $event->location}
+					{$event->location->locationName}
+				{else}
+					&nbsp;
+				{/if}
+			</td>
 			<td><a href="{$root}admin/events/edit/{$event->eventID}">{$lang_edit}</a></td>
 			<td>
 				<input type="submit" name="delete_{$event->eventID}" value="{$lang_delete}" onClick="return areYouSure();" />
