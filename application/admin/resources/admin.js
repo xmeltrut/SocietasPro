@@ -38,3 +38,14 @@ function generateSlug (str) {
 	return str;
 
 }
+
+/**
+ * Tick or untick all the checkboxes
+ */
+function toggleAllCheckboxes () {
+	if ($("#toggleCheckbox").attr("checked") == undefined) {
+		$("input[name='ids[]']").attr("checked", false);
+	} else {
+		$("input[name='ids[]']").attr("checked", true);
+	}
+}

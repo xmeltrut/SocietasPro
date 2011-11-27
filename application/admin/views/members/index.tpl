@@ -6,7 +6,7 @@
 <form action="" method="post">
 	<table border="1">
 		<tr>
-			<th>&nbsp;</th>
+			<th><input type="checkbox" id="toggleCheckbox" onChange="toggleAllCheckboxes();" /></th>
 			<th>{$lang_id}</th>
 			<th>{$lang_email}</th>
 			<th>{$lang_forename}</th>
