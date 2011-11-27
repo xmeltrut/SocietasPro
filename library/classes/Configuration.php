@@ -46,6 +46,19 @@ class Configuration {
 	}
 	
 	/**
+	 * Get the URL of the install
+	 *
+	 * @return string URL
+	 */
+	public static function getUrl () {
+	
+		$protocol = ($_SERVER["HTTPS") ? "https" : "http";
+		$server = $_SERVER["SERVER_NAME"];
+		return $protocol.":".$server;
+	
+	}
+	
+	/**
 	 * Initalise the data array
 	 */
 	private static function initialise () {

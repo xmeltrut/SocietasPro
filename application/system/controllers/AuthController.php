@@ -107,7 +107,7 @@ class AuthController extends \BaseController implements \iController {
 				
 				// build email variables
 				$body = \Language::getContent("password_reset_email")."\n\n".
-						"http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]."?email=".urlencode($member->memberEmail).
+						Configuration::getUrl()."system/auth/reset?email=".urlencode($member->memberEmail).
 						"&key=".md5($passwordKey);
 				
 				// send email
