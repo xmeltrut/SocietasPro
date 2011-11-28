@@ -31,7 +31,7 @@ abstract class BaseModel {
 	/**
 	 * Delete an object in this table by it's ID
 	 *
-	 * @param mixed $ids Integer single ID or array of IDs
+	 * @param int|array $ids IDs to delete
 	 * @param int $auditAction Audit trail action ID
 	 * @return boolean
 	 */

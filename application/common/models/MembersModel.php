@@ -30,6 +30,33 @@ class MembersModel extends BaseModel implements iModel {
 	}
 	
 	/**
+	 * Delete members by ID. We need to overwrite this so that we can
+	 * delete custom data as well.
+	 *
+	 * @param int|array $ids IDs to delete
+	 * @param int $auditAction Audit trail action ID
+	 * @return boolean
+	 */
+	public function deleteById ($ids, $auditAction = false) {
+	
+		if ( parent::deleteById($ids, $auditAction) ) {
+		
+			$ids = (is_array($ids)) ? $ids : array($ids);
+			foreach ($ids as $id) {
+				$sql = "DELETE FROM ".DB_PREFIX."members_data WHERE dataMember = ".intval($id);
+				$this->db->query($sql);
+			}
+			return true;
+		
+		} else {
+		
+			return false;
+		
+		}
+	
+	}
+	
+	/**
 	 * List members from the database.
 	 *
 	 * @param int $pageNum Page number
