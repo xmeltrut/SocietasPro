@@ -39,19 +39,48 @@ class MembersModel extends BaseModel implements iModel {
 	 */
 	public function deleteById ($ids, $auditAction = false) {
 	
-		if ( parent::deleteById($ids, $auditAction) ) {
+		// initialise variables
+		$successCount = 0;
+		$ids = (is_array($ids)) ? $ids : array($ids);
 		
-			$ids = (is_array($ids)) ? $ids : array($ids);
-			foreach ($ids as $id) {
-				$sql = "DELETE FROM ".DB_PREFIX."members_data WHERE dataMember = ".intval($id);
-				$this->db->query($sql);
+		// loop through results
+		foreach ($ids as $id) {
+		
+			if ($member = $this->getById($id)) {
+			
+				if (parent::deleteById($ids, $auditAction)) {
+				
+					// delete custom data
+					$sql = "DELETE FROM ".DB_PREFIX."members_data WHERE dataMember = ".intval($id);
+					$this->db->query($sql);
+					
+					// store in archive table
+					$sql = "INSERT INTO ".DB_PREFIX."members_archives (
+							memberID, memberEmail, memberForename, memberSurname
+							) VALUES (
+							".$member->memberID.",
+							'".escape($member->memberEmail)."',
+							'".escape($member->memberForename)."',
+							'".escape($member->memberSurname)."'
+							)";
+					$this->db->query($sql);
+					
+					// increment counter
+					$successCount++;
+				
+				}
+			
 			}
+		
+		}
+		
+		// provide feedback
+		if ($successCount > 0) {
+			$this->setMessage(LANG_SUCCESS, true);
 			return true;
-		
 		} else {
-		
+			$this->setMessage(LANG_FAILED, true);
 			return false;
-		
 		}
 	
 	}

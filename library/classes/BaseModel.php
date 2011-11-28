@@ -190,15 +190,21 @@ abstract class BaseModel {
 	 * Set a return message
 	 *
 	 * @param string $msg Mssage
+	 * @param boolean $clearPrevious If set to true, it won't stack errors
 	 * @return boolean Success
 	 */
-	public function setMessage ($msg) {
+	public function setMessage ($msg, $clearPrevious = false) {
 	
 		if ($msg != "") {
 		
 			// convert it to an array
 			if (!is_array($msg)) {
 				$msg = array($msg);
+			}
+			
+			// should we reset it first?
+			if ($clearPrevious) {
+				$this->message = "";
 			}
 			
 			// loop through elements
