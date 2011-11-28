@@ -10,20 +10,32 @@
 class Member extends BaseObject {
 
 	/**
-	 * Custom data array
+	 * Custom data arrays
 	 */
-	private $customData;
-	private $originalCustomData;
+	private $customData = array();
+	private $originalCustomData = array();
 	
 	/**
-	 * Constructor. Call parent.
+	 * Constructor. Call parent and then load custom data.
 	 *
 	 * @param array $data Object data
 	 * @param array $customData Custom data
 	 */
-	function __construct ($data = array(), $customData = array()) {
+	function __construct ($data = array()) {
 		parent::__construct($data);
-		$this->customData = $this->originalCustomData = $customData;
+		$this->fetchCustomData();
+	}
+	
+	/**
+	 * Fetch any custom data that is stored
+	 */
+	private function fetchCustomData () {
+	
+		if ($this->memberID) {
+			$membersModel = new MembersModel();
+			$this->customData = $this->originalCustomData = $membersModel->getCustomData($this->memberID);
+		}
+	
 	}
 	
 	/**

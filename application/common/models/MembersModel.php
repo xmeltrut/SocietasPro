@@ -49,7 +49,7 @@ class MembersModel extends BaseModel implements iModel {
 		
 		// build array
 		while ($row = $rec->fetch()) {
-			$members[] = new Member($row, $this->getCustomData($row["memberID"]));
+			$members[] = new Member($row);
 		}
 		
 		// return results
@@ -69,7 +69,7 @@ class MembersModel extends BaseModel implements iModel {
 		$rec = $this->db->query($sql);
 		
 		if ($row = $rec->fetch()) {
-			return new Member($row, $this->getCustomData($row["memberID"]));
+			return new Member($row);
 		} else {
 			return false;
 		}
@@ -88,7 +88,7 @@ class MembersModel extends BaseModel implements iModel {
 		$rec = $this->db->query($sql);
 		
 		if ($row = $rec->fetch()) {
-			return new Member($row, $this->getCustomData($id));
+			return new Member($row);
 		} else {
 			return false;
 		}
@@ -101,7 +101,7 @@ class MembersModel extends BaseModel implements iModel {
 	 * @param int $id ID of member
 	 * @return array Array
 	 */
-	private function getCustomData ($id) {
+	public function getCustomData ($id) {
 	
 		// initialise an array
 		$arr = array();
