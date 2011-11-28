@@ -45,7 +45,7 @@ class Event extends BaseObject {
 	 *
 	 * @return boolean Success
 	 */
-	private function fetchLocationData() {
+	private function fetchLocationData () {
 	
 		if ($this->eventLocation) {
 			require_once("models/LocationsModel.php");

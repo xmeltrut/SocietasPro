@@ -62,6 +62,7 @@ class DirectoryCursor {
 		
 		// excluded directories
 		$excludedDirectories = array (
+			"../../library/htmlpurifier",
 			"../../library/smarty"
 		);
 		
