@@ -7,4 +7,4 @@
  * @subpackage Core
  */
 
-define("SP_VERSION", "0.2.0");
+define("SP_VERSION", "0.3.0");

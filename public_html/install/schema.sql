@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 3.3.9.2
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Nov 22, 2011 at 07:55 PM
--- Server version: 5.5.9
--- PHP Version: 5.3.6
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
@@ -122,14 +113,30 @@ CREATE TABLE `tbl_locations` (
 CREATE TABLE `tbl_members` (
   `memberID` int(11) NOT NULL AUTO_INCREMENT,
   `memberEmail` varchar(255) NOT NULL,
-  `memberPassword` varchar(255) NOT NULL,
-  `memberForename` varchar(255) NOT NULL,
-  `memberSurname` varchar(255) NOT NULL,
+  `memberPassword` varchar(50) NOT NULL,
+  `memberPasswordResetKey` varchar(12) NOT NULL,
+  `memberForename` varchar(50) NOT NULL,
+  `memberSurname` varchar(50) NOT NULL,
   `memberPrivileges` tinyint(1) NOT NULL DEFAULT '1',
+  `memberAdminStyle` tinyint(1) NOT NULL DEFAULT '0',
   `memberAddress` text NOT NULL,
   `memberNotes` text NOT NULL,
   PRIMARY KEY (`memberID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_members_archives`
+--
+
+CREATE TABLE `tbl_members_archives` (
+  `memberID` int(11) NOT NULL,
+  `memberEmail` varchar(255) NOT NULL,
+  `memberForename` varchar(50) NOT NULL,
+  `memberSurname` varchar(50) NOT NULL,
+  PRIMARY KEY (`memberID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -212,6 +219,8 @@ CREATE TABLE `tbl_subscribers` (
   `subscriberDate` datetime NOT NULL,
   PRIMARY KEY (`subscriberID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
 -- Dumping data for table `tbl_audit_actions`
