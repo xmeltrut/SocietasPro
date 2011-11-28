@@ -55,10 +55,18 @@ class AuditEntriesModel extends BaseModel {
 		$memberFilter = ($memberID) ? "AND entryMember = ".intval($memberID)." " : "";
 		
 		// query database
-		$sql = "SELECT ae.*, m.memberForename, m.memberSurname, m.memberEmail, aa.actionLocalised
+		$sql = "SELECT ae.*,
+				m.memberID, m.memberForename, m.memberSurname, m.memberEmail,
+				ma.memberID AS archiveMemberID,
+				ma.memberForename AS archiveMemberForename,
+				ma.memberSurname AS archiveMemberSurname,
+				ma.memberEmail AS archiveMemberEmail,
+				aa.actionLocalised
 				FROM ".DB_PREFIX."audit_entries AS ae
 				LEFT OUTER JOIN ".DB_PREFIX."members AS m
 				ON ae.entryMember = m.memberID
+				LEFT OUTER JOIN ".DB_PREFIX."members_archives AS ma
+				ON ae.entryMember = ma.memberID
 				LEFT OUTER JOIN ".DB_PREFIX."audit_actions AS aa
 				ON ae.entryAction = aa.actionID
 				WHERE 1 = 1
@@ -71,10 +79,12 @@ class AuditEntriesModel extends BaseModel {
 		while ($row = $rec->fetch()) {
 		
 			// member information
-			if ($row["memberEmail"] === NULL) {
-				$row["entryMemberName"] = "";
-			} else {
+			if ($row["memberID"] !== NULL) {
 				$row["entryMemberName"] = h($row["memberForename"]." ".$row["memberSurname"]." <".$row["memberEmail"].">");
+			} elseif ($row["archiveMemberID"] !== NULL) {
+				$row["entryMemberName"] = h($row["archiveMemberForename"]." ".$row["archiveMemberSurname"]." <".$row["archiveMemberEmail"].">");
+			} else {
+				$row["entryMemberName"] = "";
 			}
 			
 			// html outputs
