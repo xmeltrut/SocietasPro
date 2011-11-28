@@ -221,6 +221,7 @@ class MembersController extends \BaseController implements \iController {
 			move_uploaded_file($_FILES["upload"]["tmp_name"], $fileLoca);
 			
 			// read file
+			ini_set('auto_detect_line_endings', true);
 			$file = file($fileLoca);
 			
 			// create a wizard

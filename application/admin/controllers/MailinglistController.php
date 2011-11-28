@@ -89,6 +89,7 @@ class MailinglistController extends \BaseController implements \iController {
 			if ($_REQUEST["emails"] != "") {
 				$result = $wizard->import($_REQUEST["emails"]);
 			} elseif ($_FILES["upload"]["size"] > 0) {
+				ini_set('auto_detect_line_endings', true);
 				$result = $wizard->import(file_get_contents($_FILES["upload"]["tmp_name"]));
 			}
 			
