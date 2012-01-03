@@ -33,8 +33,8 @@ class ConfigModel extends BaseModel {
 	
 		// update the database
 		$sql = "UPDATE ".DB_PREFIX."config SET
-				configValue = '".escape($value)."'
-				WHERE configOption = '".escape($option)."' ";
+				configValue = '".$this->db->escape($value)."'
+				WHERE configOption = '".$this->db->escape($option)."' ";
 		$this->db->query($sql);
 		
 		// log to audit trail

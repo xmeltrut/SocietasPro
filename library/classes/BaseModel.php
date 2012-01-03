@@ -149,7 +149,7 @@ abstract class BaseModel {
 			
 			foreach ($data as $key => $val) {
 				$keys[] = $key;
-				$vals[] = escape($val);
+				$vals[] = $this->db->escape($val);
 			}
 			
 			// this is an insert
@@ -171,7 +171,7 @@ abstract class BaseModel {
 			$updateSql = "";
 			
 			foreach ($data as $key => $val) {
-				$updateSql .= "$key = '".escape($val)."', ";
+				$updateSql .= "$key = '".$this->db->escape($val)."', ";
 			}
 			
 			$sql .= substr($updateSql, 0, -2) . " ";

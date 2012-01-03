@@ -15,7 +15,7 @@ function escape ($sql) {
 	return mysql_real_escape_string($sql);
 }
 
-class Database {
+class Database implements iDatabase {
 
 	/**
 	 * Variable to hold the instance of this singleton
@@ -37,6 +37,16 @@ class Database {
 	 * Prevent instancing
 	 */
 	private function __construct () {
+	}
+	
+	/**
+	 * Escape a string
+	 *
+	 * @param string $sql SQL
+	 * @return string Escaped string
+	 */
+	function escape ($sql) {
+		return mysql_real_escape_string($sql);
 	}
 	
 	/**

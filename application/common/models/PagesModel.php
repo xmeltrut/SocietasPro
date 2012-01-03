@@ -148,7 +148,7 @@ class PagesModel extends BaseModel implements iModel {
 	 */
 	public function getBySlug ($slug) {
 	
-		$sql = "SELECT * FROM ".DB_PREFIX."pages WHERE pageSlug = '" . escape($slug) . "' ";
+		$sql = "SELECT * FROM ".DB_PREFIX."pages WHERE pageSlug = '" . $this->db->escape($slug) . "' ";
 		$rec = $this->db->query($sql);
 		
 		if ($row = $rec->fetch()) {
@@ -320,7 +320,7 @@ class PagesModel extends BaseModel implements iModel {
 	public function validateSlug ($slug, $id = 0, $parent = 0) {
 	
 		$sql = "SELECT * FROM ".DB_PREFIX."pages
-				WHERE pageSlug = '".escape($slug)."'
+				WHERE pageSlug = '".$this->db->escape($slug)."'
 				AND pageID != " . $id . "
 				AND pageParent = " . $parent;
 		$rec = $this->db->query($sql);

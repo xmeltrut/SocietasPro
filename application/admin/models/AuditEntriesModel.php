@@ -153,8 +153,8 @@ class AuditEntriesModel extends BaseModel {
 				".$actionID.",
 				".$memberID.",
 				NOW(),
-				'".escape($oldData)."',
-				'".escape($newData)."'
+				'".$this->db->escape($oldData)."',
+				'".$this->db->escape($newData)."'
 				)";
 		return $this->db->query($sql);
 	

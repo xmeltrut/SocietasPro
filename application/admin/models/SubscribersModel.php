@@ -44,7 +44,7 @@ class SubscribersModel extends BaseModel implements iModel {
 		$sql = "INSERT INTO ".DB_PREFIX."subscribers (
 				subscriberEmail, subscriberIP, subscriberDate
 				) VALUES (
-				'".escape($email)."',
+				'".$this->db->escape($email)."',
 				'".$_SERVER["REMOTE_ADDR"]."',
 				NOW()
 				)";
@@ -70,7 +70,7 @@ class SubscribersModel extends BaseModel implements iModel {
 		$subscriber = $this->getByEmail($email);
 		
 		if ($subscriber) {
-			$sql = "DELETE FROM ".DB_PREFIX."subscribers WHERE subscriberEmail = '".escape($email)."' ";
+			$sql = "DELETE FROM ".DB_PREFIX."subscribers WHERE subscriberEmail = '".$this->db->escape($email)."' ";
 			if ($this->db->query($sql)) {
 				auditTrail(22, $subscriber);
 				$this->setMessage(LANG_SUCCESS);
@@ -152,7 +152,7 @@ class SubscribersModel extends BaseModel implements iModel {
 		}
 		
 		// query database
-		$sql = "SELECT * FROM ".DB_PREFIX."subscribers WHERE subscriberEmail = '".escape($email)."' ";
+		$sql = "SELECT * FROM ".DB_PREFIX."subscribers WHERE subscriberEmail = '".$this->db->escape($email)."' ";
 		$rec = $this->db->query($sql);
 		
 		// return result

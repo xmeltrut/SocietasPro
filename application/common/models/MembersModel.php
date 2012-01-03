@@ -59,9 +59,9 @@ class MembersModel extends BaseModel implements iModel {
 							memberID, memberEmail, memberForename, memberSurname
 							) VALUES (
 							".$member->memberID.",
-							'".escape($member->memberEmail)."',
-							'".escape($member->memberForename)."',
-							'".escape($member->memberSurname)."'
+							'".$this->db->escape($member->memberEmail)."',
+							'".$this->db->escape($member->memberForename)."',
+							'".$this->db->escape($member->memberSurname)."'
 							)";
 					$this->db->query($sql);
 					
@@ -121,7 +121,7 @@ class MembersModel extends BaseModel implements iModel {
 	 */
 	public function getByEmail ($email) {
 	
-		$sql = "SELECT * FROM ".DB_PREFIX."members WHERE memberEmail = '" . escape($email) . "'";
+		$sql = "SELECT * FROM ".DB_PREFIX."members WHERE memberEmail = '" . $this->db->escape($email) . "'";
 		$rec = $this->db->query($sql);
 		
 		if ($row = $rec->fetch()) {
@@ -253,7 +253,7 @@ class MembersModel extends BaseModel implements iModel {
 				if ($sea->getRows() == 1) {
 			
 					$sql = "UPDATE ".DB_PREFIX."members_data
-							SET dataValue = '".escape($val)."'
+							SET dataValue = '".$this->db->escape($val)."'
 							WHERE dataMember = ".$obj->memberID."
 							AND dataField = ".$key;
 					$this->db->query($sql);
@@ -263,7 +263,7 @@ class MembersModel extends BaseModel implements iModel {
 					$sql = "INSERT INTO ".DB_PREFIX."members_data (
 							dataMember, dataField, dataValue
 							) VALUES (
-							".$obj->memberID.",".$key.",'".escape($val)."'
+							".$obj->memberID.",".$key.",'".$this->db->escape($val)."'
 							)";
 					$this->db->query($sql);
 				

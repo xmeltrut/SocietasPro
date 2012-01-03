@@ -80,10 +80,10 @@ class ErrorLogsModel extends BaseModel {
 			logCode, logURL, logDate, logDetails, logSQL
 			) VALUES (
 			".$code.",
-			'".escape($_SERVER["REQUEST_URI"])."',
+			'".$this->db->escape($_SERVER["REQUEST_URI"])."',
 			NOW(),
-			'".escape($details)."',
-			'".escape($sql)."'
+			'".$this->db->escape($details)."',
+			'".$this->db->escape($sql)."'
 			)";
 		return $this->db->query($sql);
 	}

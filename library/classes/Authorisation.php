@@ -101,7 +101,7 @@ class Authorisation {
 		
 		// select the user
 		$sql = "SELECT * FROM ".DB_PREFIX."members
-				WHERE memberEmail = '".escape($email)."'";
+				WHERE memberEmail = '".$db->escape($email)."'";
 		$rec = $db->query($sql);
 		
 		if ($rec->getRows() > 0) {
