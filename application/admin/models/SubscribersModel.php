@@ -44,11 +44,12 @@ class SubscribersModel extends BaseModel implements iModel {
 		$sql = "INSERT INTO ".DB_PREFIX."subscribers (
 				subscriberEmail, subscriberIP, subscriberDate
 				) VALUES (
-				'".$this->db->escape($email)."',
-				'".$_SERVER["REMOTE_ADDR"]."',
+				?,
+				?,
 				NOW()
 				)";
-		$this->db->query($sql);
+		$sth = $this->db->prepare($sql);
+		$sth->execute(array($email, $_SERVER["REMOTE_ADDR"]));
 		
 		// log to audit trail
 		auditTrail(14, "", $email);
@@ -70,8 +71,9 @@ class SubscribersModel extends BaseModel implements iModel {
 		$subscriber = $this->getByEmail($email);
 		
 		if ($subscriber) {
-			$sql = "DELETE FROM ".DB_PREFIX."subscribers WHERE subscriberEmail = '".$this->db->escape($email)."' ";
-			if ($this->db->query($sql)) {
+			$sql = "DELETE FROM ".DB_PREFIX."subscribers WHERE subscriberEmail = ? ";
+			$sth = $this->db->prepare($sql);
+			if ($sth->execute(array($email))) {
 				auditTrail(22, $subscriber);
 				$this->setMessage(LANG_SUCCESS);
 				return true;
@@ -152,8 +154,9 @@ class SubscribersModel extends BaseModel implements iModel {
 		}
 		
 		// query database
-		$sql = "SELECT * FROM ".DB_PREFIX."subscribers WHERE subscriberEmail = '".$this->db->escape($email)."' ";
-		$rec = $this->db->query($sql);
+		$sql = "SELECT * FROM ".DB_PREFIX."subscribers WHERE subscriberEmail = ? ";
+		$rec = $this->db->prepare($sql);
+		$rec->execute(array($email));
 		
 		// return result
 		if ($row = $rec->fetch()) {

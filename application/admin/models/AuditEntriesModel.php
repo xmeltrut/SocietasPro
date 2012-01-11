@@ -150,13 +150,14 @@ class AuditEntriesModel extends BaseModel {
 		$sql = "INSERT INTO ".DB_PREFIX."audit_entries (
 				entryAction, entryMember, entryDate, entryOldData, entryNewData
 				) VALUES (
-				".$actionID.",
-				".$memberID.",
+				?,
+				?,
 				NOW(),
-				'".$this->db->escape($oldData)."',
-				'".$this->db->escape($newData)."'
+				?,
+				?'
 				)";
-		return $this->db->query($sql);
+		$sth = $this->db->prepare($sql);
+		return $sth->execute(array($actionID, $memberID, $oldData, $newData));
 	
 	}
 

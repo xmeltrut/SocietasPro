@@ -145,20 +145,23 @@ abstract class BaseModel {
 		
 			// build arrays to implode
 			$keys = array();
+			$plac = array();
 			$vals = array();
 			
 			foreach ($data as $key => $val) {
 				$keys[] = $key;
-				$vals[] = $this->db->escape($val);
+				$plac[] = "?";
+				$vals[] = $val;
 			}
 			
 			// this is an insert
-			$sql = "INSERT INTO ".DB_PREFIX.$this->tableName." (".implode($keys, ",").") VALUES ('".implode($vals, "','")."')";
-			$rv  = $this->db->query($sql);
+			$sql = "INSERT INTO ".DB_PREFIX.$this->tableName." (".implode($keys, ",").") VALUES (".implode($plac, ",").")";
+			$sth = $this->db->prepare($sql);
+			$rv  = $sth->execute($vals);
 			
 			// if successful, reload
 			if ($rv) {
-				$obj = $this->getById($this->db->insertId());
+				$obj = $this->getById($this->db->lastInsertId());
 			}
 		
 		} else {
@@ -169,15 +172,18 @@ abstract class BaseModel {
 			
 			$sql = "UPDATE ".DB_PREFIX.$this->tableName." SET ";
 			$updateSql = "";
+			$updateVars = array();
 			
 			foreach ($data as $key => $val) {
-				$updateSql .= "$key = '".$this->db->escape($val)."', ";
+				$updateSql .= "$key = ?, ";
+				$updateVars[] = $val;
 			}
 			
 			$sql .= substr($updateSql, 0, -2) . " ";
 			$sql .= "WHERE $idKey = " . $identifier;
 			
-			$rv = $this->db->query($sql);
+			$sth = $this->db->prepare($sql);
+			$rv = $sth->execute($updateVars);
 		
 		}
 		

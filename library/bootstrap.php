@@ -20,7 +20,6 @@ require("functions/validation.php");
 require("constants.php");
 
 require("interfaces/iController.php");
-require("interfaces/iDatabase.php");
 require("interfaces/iModel.php");
 
 // run functions

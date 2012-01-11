@@ -77,8 +77,9 @@ class BlogPostsModel extends BaseModel implements iModel {
 	 */
 	public function getBySlug ($slug) {
 	
-		$sql = "SELECT * FROM ".DB_PREFIX."blog_posts WHERE postSlug = '" . $this->db->escape($slug) . "' ";
-		$rec = $this->db->query($sql);
+		$sql = "SELECT * FROM ".DB_PREFIX."blog_posts WHERE postSlug = ? ";
+		$rec = $this->db->prepare($sql);
+		$rec->execute(array($slug));
 		
 		if ($row = $rec->fetch()) {
 			return new BlogPost($row);
@@ -98,11 +99,12 @@ class BlogPostsModel extends BaseModel implements iModel {
 	public function validateSlug ($slug, $id = 0) {
 	
 		$sql = "SELECT * FROM ".DB_PREFIX."blog_posts
-				WHERE postSlug = '".$this->db->escape($slug)."'
-				AND postID != " . $id;
-		$rec = $this->db->query($sql);
+				WHERE postSlug = ?
+				AND postID != ? ";
+		$rec = $this->db->prepare($sql);
+		$rec->execute(array($slug, $id));
 		
-		if ($rec->getRows() == 0) {
+		if ($rec->rowCount() == 0) {
 			return $slug;
 		} else {
 			return $this->validateSlug(strIncrement($slug));

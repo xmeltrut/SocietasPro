@@ -1,21 +1,13 @@
 <?php
 /**
- * Database object
- *
- * If an error occurs, we throw a DatabaseException. We need to include this file,
- * but we don't need to use include_once because it's a one way trip so it won't
- * have been included before.
+ * Database singleton
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Database
  */
 
-function escape ($sql) {
-	return mysql_real_escape_string($sql);
-}
-
-class Database implements iDatabase {
+class Database {
 
 	/**
 	 * Variable to hold the instance of this singleton
@@ -28,56 +20,13 @@ class Database implements iDatabase {
 	private static $connection;
 	
 	/**
-	 * Store the error messages for external use
-	 */
-	private static $error;
-	private static $errorNumber;
-	
-	/**
 	 * Prevent instancing
 	 */
 	private function __construct () {
 	}
 	
 	/**
-	 * Escape a string
-	 *
-	 * @param string $sql SQL
-	 * @return string Escaped string
-	 */
-	function escape ($sql) {
-		return mysql_real_escape_string($sql);
-	}
-	
-	/**
-	 * Get the number of affected rows
-	 *
-	 * @return int Number of affected rows
-	 */
-	public function getAffectedRows () {
-		return mysql_affected_rows(self::$connection);
-	}
-	
-	/**
-	 * Get the last error message
-	 *
-	 * @return string Error message
-	 */
-	public function getError () {
-		return self::$error;
-	}
-	
-	/**
-	 * Get the last error code
-	 *
-	 * @return int Error code
-	 */
-	public function getErrorNumber () {
-		return self::$errorNumber;
-	}
-	
-	/**
-	 * Singleton
+	 * Singleton implementation
 	 */
 	public static function getInstance () {
 	
@@ -86,77 +35,17 @@ class Database implements iDatabase {
 			$className = __CLASS__;
 			self::$instance = new $className;
 			
-			if (!self::$connection = @mysql_connect(DB_HOST, DB_USER, DB_PASS)) {
-				self::snapshotError();
-				throw new DatabaseException();
-			}
-			
-			if (!mysql_select_db(DB_NAME, self::$connection)) {
-				self::snapshotError();
-				throw new DatabaseException();
+			try {
+				self::$connection = new PdoWrapper("mysql:host=".DB_HOST.";dbname=".DB_NAME,DB_USER,DB_PASS);
+				self::$connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+			} catch (PDOException $e) {
+				throw new GeneralException($e->getMessage());
 			}
 		
 		}
 		
-		return self::$instance;
+		return self::$connection;
 	
-	}
-	
-	/**
-	 * Fetch one single value from the database.
-	 *
-	 * @param string $sql SQL statement
-	 * @return mixed Value
-	 */
-	public function fetchOne ($sql) {
-	
-		$recordset = $this->query($sql);
-		$row = $recordset->fetchArray();
-		return $row[0];
-	
-	}
-	
-	/**
-	 * Retieve the last auto increment generated ID
-	 *
-	 * @return int ID
-	 */
-	public function insertId () {
-	
-		return mysql_insert_id();
-	
-	}
-	
-	/**
-	 * Query the database.
-	 *
-	 * @param string $sql SQL statement to execute
-	 */
-	public function query ($sql) {
-	
-		// validate we have been passed SQL
-		if ($sql == "") {
-			return false;
-		}
-		
-		// run the query
-		if (!$resource = mysql_query($sql, self::$connection)) {
-			$this->snapshotError();
-			throw new DatabaseException($sql);
-		}
-		
-		// return the recordset
-		return new Recordset($resource);
-	
-	}
-	
-	/**
-	 * Take a snapshot of the error messages and save them to instance
-	 * variables so that the exception can access them.
-	 */
-	private static function snapshotError () {
-		self::$error = mysql_error();
-		self::$errorNumber = mysql_errno();
 	}
 
 }

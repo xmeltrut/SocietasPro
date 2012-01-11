@@ -29,7 +29,7 @@ class PagesModel extends BaseModel implements iModel {
 		$page->unsetID();
 		
 		if ($this->save($page)) {
-			$newData = json_encode(array("pageID" => $this->db->insertId()));
+			$newData = json_encode(array("pageID" => $this->db->lastInsertId()));
 			auditTrail(16, $page->original(), $newData);
 			$this->setMessage(LANG_SUCCESS);
 			return true;
@@ -70,7 +70,7 @@ class PagesModel extends BaseModel implements iModel {
 				$pageObject->setCanMoveUp(false);
 			}
 			
-			if ($rowCount == $rec->getRows()) {
+			if ($rowCount == $rec->rowCount()) {
 				$pageObject->setCanMoveDown(false);
 			}
 			
@@ -320,12 +320,13 @@ class PagesModel extends BaseModel implements iModel {
 	public function validateSlug ($slug, $id = 0, $parent = 0) {
 	
 		$sql = "SELECT * FROM ".DB_PREFIX."pages
-				WHERE pageSlug = '".$this->db->escape($slug)."'
-				AND pageID != " . $id . "
-				AND pageParent = " . $parent;
-		$rec = $this->db->query($sql);
+				WHERE pageSlug = ?
+				AND pageID != ?
+				AND pageParent = ? ";
+		$rec = $this->db->prepare($sql);
+		$rec->execute(array($slug, $id, $parent));
 		
-		if ($rec->getRows() == 0) {
+		if ($rec->rowCount() == 0) {
 			return $slug;
 		} else {
 			return $this->validateSlug(strIncrement($slug));

@@ -17,7 +17,7 @@ class DatabaseException extends Exception {
 	function __construct ($sql = false) {
 	
 		// get a database instance
-			$db = Database::getInstance();
+		$db = Database::getInstance();
 		
 		if ($sql) {
 		

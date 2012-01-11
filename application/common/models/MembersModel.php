@@ -58,12 +58,13 @@ class MembersModel extends BaseModel implements iModel {
 					$sql = "INSERT INTO ".DB_PREFIX."members_archives (
 							memberID, memberEmail, memberForename, memberSurname
 							) VALUES (
-							".$member->memberID.",
-							'".$this->db->escape($member->memberEmail)."',
-							'".$this->db->escape($member->memberForename)."',
-							'".$this->db->escape($member->memberSurname)."'
+							?,
+							?,
+							?',
+							?
 							)";
-					$this->db->query($sql);
+					$sth = $this->db->prepare($sql);
+					$sth->execute(array($member->memberID, $member->memberEmail, $member->memberForename, $member->memberSurname));
 					
 					// increment counter
 					$successCount++;
@@ -250,7 +251,7 @@ class MembersModel extends BaseModel implements iModel {
 						AND dataField = ".$key;
 				$sea = $this->db->query($sql);
 				
-				if ($sea->getRows() == 1) {
+				if ($sea->rowCount() == 1) {
 			
 					$sql = "UPDATE ".DB_PREFIX."members_data
 							SET dataValue = '".$this->db->escape($val)."'

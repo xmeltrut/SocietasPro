@@ -79,13 +79,14 @@ class ErrorLogsModel extends BaseModel {
 		$sql = "INSERT INTO ".DB_PREFIX."error_logs (
 			logCode, logURL, logDate, logDetails, logSQL
 			) VALUES (
-			".$code.",
-			'".$this->db->escape($_SERVER["REQUEST_URI"])."',
+			?,
+			?,
 			NOW(),
-			'".$this->db->escape($details)."',
-			'".$this->db->escape($sql)."'
+			?,
+			?
 			)";
-		return $this->db->query($sql);
+		$sth = $this->db->prepare($sql);
+		return $sth->execute(array($code, $_SERVER["REQUEST_URI"], $details, $sql));;
 	}
 
 }
