@@ -10,18 +10,12 @@
  * @subpackage Core
  */
 
-class Configuration {
+class Configuration extends Singleton {
 
 	/**
 	 * Hold all the configuration options from the database
 	 */
 	private static $data = false;
-	
-	/**
-	 * This is a static class, so no instancing
-	 */
-	private function __construct () {
-	}
 	
 	/**
 	 * Get a value from the configuration

@@ -7,15 +7,9 @@
  * @subpackage Core
  */
 
-class Authorisation {
+class Authorisation extends Singleton {
 
 	private static $instance;
-	
-	/**
-	 * Prevent people creating instances
-	 */
-	private function __construct () {
-	}
 	
 	/**
 	 * Encode a password

@@ -12,7 +12,7 @@
  * @subpackage Core
  */
 
-class Language {
+class Language extends Singleton {
 
 	/**
 	 * Variable to hold instance
@@ -29,12 +29,6 @@ class Language {
 	 * If all else fails, we default to English
 	 */
 	const DEFAULT_LANGUAGE = "en";
-	
-	/**
-	 * Prevent instancing
-	 */
-	private function __construct () {
-	}
 	
 	/**
 	 * Get a content string. We use content strings because we don't want to be

@@ -9,6 +9,7 @@
 
 require("version.php");
 require("classes/BaseController.php");
+require("classes/Singleton.php");
 require(ROOT_DIR."../personalisation/config.php");
 require("classes/Configuration.php");
 

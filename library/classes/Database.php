@@ -7,7 +7,7 @@
  * @subpackage Database
  */
 
-class Database {
+class Database extends Singleton {
 
 	/**
 	 * Variable to hold the instance of this singleton
@@ -18,12 +18,6 @@ class Database {
 	 * Variable to hold the connection
 	 */
 	private static $connection;
-	
-	/**
-	 * Prevent instancing
-	 */
-	private function __construct () {
-	}
 	
 	/**
 	 * Singleton implementation

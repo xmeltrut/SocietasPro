@@ -7,7 +7,7 @@
  * @subpackage Core
  */
 
-class FrontController {
+class FrontController extends Singleton {
 
 	/**
 	 * Variable to hold single instance
@@ -27,12 +27,6 @@ class FrontController {
 	private static $controller;
 	private static $page;
 	private static $params;
-	
-	/**
-	 * Constructor
-	 */
-	private function __construct () {
-	}
 	
 	/**
 	 * Execute a page request
