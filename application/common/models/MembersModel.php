@@ -254,19 +254,21 @@ class MembersModel extends BaseModel implements iModel {
 				if ($sea->rowCount() == 1) {
 			
 					$sql = "UPDATE ".DB_PREFIX."members_data
-							SET dataValue = '".$this->db->escape($val)."'
-							WHERE dataMember = ".$obj->memberID."
-							AND dataField = ".$key;
-					$this->db->query($sql);
+							SET dataValue = ?
+							WHERE dataMember = ?
+							AND dataField = ? ";
+					$sth = $this->db->prepare($sql);
+					$sth->execute(array($val, $obj->memberID, $key));
 				
 				} else {
 				
 					$sql = "INSERT INTO ".DB_PREFIX."members_data (
 							dataMember, dataField, dataValue
 							) VALUES (
-							".$obj->memberID.",".$key.",'".$this->db->escape($val)."'
+							?,?,?
 							)";
-					$this->db->query($sql);
+					$sth = $this->db->prepare($sql);
+					$sth->execute(array($obj->memberID, $key, $val));
 				
 				}
 			}
