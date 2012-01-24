@@ -1,7 +1,7 @@
 {extends file="layout.tpl"}
 
 {block name=body}
-<h2>Calendar</h2>
+<h1>Calendar</h1>
 
 <div style="width: 33%; float: left; text-align: left;">&laquo; <a href="{$root}public/events/calendar/{$previousMonthLink}">{$previousMonthName}</a></div>
 <div style="width: 34%; float: left; text-align: center; font-weight: bold;">{$currentMonthName}</div>

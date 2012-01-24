@@ -5,6 +5,9 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Public
+ *
+ * @todo Resources should use current theme
+ * @todo Add validation
  */
 
 namespace publica;
@@ -20,6 +23,17 @@ class ResourcesController extends \BaseController implements \iController {
 	 */
 	public function index () {
 		throw new \HttpErrorException(404);
+	}
+	
+	/**
+	 * Images directory
+	 */
+	public function images () {
+	
+		$code = file_get_contents("../personalisation/themes/default/images/".\FrontController::getParam(0), true);
+		Header("content-type: image/png");
+		print $code;
+	
 	}
 	
 	/**

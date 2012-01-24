@@ -1,7 +1,7 @@
 {extends file="layout.tpl"}
 
 {block name=body}
-<h2>{$page->pageName}</h2>
+<h1>{$page->pageName}</h1>
 
 {$page->pageContent}
 {/block}

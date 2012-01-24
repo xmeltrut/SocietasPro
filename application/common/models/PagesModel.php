@@ -148,8 +148,9 @@ class PagesModel extends BaseModel implements iModel {
 	 */
 	public function getBySlug ($slug) {
 	
-		$sql = "SELECT * FROM ".DB_PREFIX."pages WHERE pageSlug = '" . $this->db->escape($slug) . "' ";
-		$rec = $this->db->query($sql);
+		$sql = "SELECT * FROM ".DB_PREFIX."pages WHERE pageSlug = ? ";
+		$rec = $this->db->prepare($sql);
+		$rec->execute(array($slug));
 		
 		if ($row = $rec->fetch()) {
 			return new Page($row);

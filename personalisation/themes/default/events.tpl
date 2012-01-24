@@ -1,7 +1,7 @@
 {extends file="layout.tpl"}
 
 {block name=body}
-<h2>Events</h2>
+<h1>Events</h1>
 
 {foreach $events as $event}
 <h3><a href="{$root}public/events/details/{$event->eventID}">{$event->eventName}</a></h3>

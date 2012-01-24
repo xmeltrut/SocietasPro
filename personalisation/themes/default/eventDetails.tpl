@@ -1,7 +1,7 @@
 {extends file="layout.tpl"}
 
 {block name=body}
-<h2>{$event->eventName}</h2>
+<h1>{$event->eventName}</h1>
 
 <p>
 	<em>{$event->getFormattedDate()}</em>
