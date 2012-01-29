@@ -1,7 +1,10 @@
 {extends file="layout.tpl"}
 
 {block name=body}
-<h1>{$page->pageName}</h1>
-
-{$page->pageContent}
+<div class="post">
+	<h2 class="title">{$page->pageName}</h2>
+	<div class="entry">
+		{$page->pageContent}
+	</div>
+</div>
 {/block}

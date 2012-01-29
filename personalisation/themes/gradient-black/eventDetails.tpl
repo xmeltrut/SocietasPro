@@ -1,11 +1,13 @@
 {extends file="layout.tpl"}
 
 {block name=body}
-<h1>{$event->eventName}</h1>
-
-<p>
-	<em>{$event->getFormattedDate()}</em>
-</p>
-
-{$event->eventDescription}
+<div class="post">
+	<h2 class="title">{$event->eventName}</h2>
+	<p class="meta">
+		{$event->getFormattedDate()}
+	</p>
+	<div class="entry">
+		{$event->eventDescription}
+	</div>
+</div>
 {/block}

@@ -1,14 +1,20 @@
 {extends file="layout.tpl"}
 
 {block name=body}
-<h1>Events</h1>
+<div>
+	<h2 class="pagetitle">Events</h2>
+	<div class="entry">&nbsp;</div>
+</div>
 
-{foreach $events as $event}
-<h3><a href="{$root}public/events/details/{$event->eventID}">{$event->eventName}</a></h3>
-<p>
-	<em>{$event->getFormattedDate()}</em>
-</p>
-{$event->eventDescription}
-<p>&nbsp;</p>
-{/foreach}
+<div class="post">
+	{foreach $events as $event}
+	<h2 class="title"><a href="{$root}public/events/details/{$event->eventID}">{$event->eventName}</a></h2>
+	<p class="meta">
+		{$event->getFormattedDate()}
+	</p>
+	<div class="entry">
+		{$event->eventDescription}
+	</div>
+	{/foreach}
+</div>
 {/block}

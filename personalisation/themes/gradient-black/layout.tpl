@@ -15,18 +15,18 @@
 		<div id="header">
 			<div id="logo">
 				<h1>{$group_name}</h1>
-				<p>template design by <a href="http://www.freecsstemplates.org/">CSS Templates</a></p>
 			</div>
 		</div>
 	</div>
 	<!-- end #header -->
 	<div id="menu">
-		<ul><li class="current_page_item"><a href="#">Homepage</a></li>
-			<li><a href="{$root}public">Home</a></li>
+		<ul>
+			<li class="current_page_item"><a href="{$root}public">Home</a></li>
 			<li><a href="{$root}public/events">Events</a></li>
 			<li><a href="{$root}public/events/calendar">Calendar</a></li>
 			<li><a href="{$root}public/blog">Blog</a></li>
-		</ul></div>
+		</ul>
+	</div>
 	<!-- end #menu -->
 	<div id="page">
 		<div id="page-bgtop">
@@ -36,7 +36,8 @@
 				
 					{block name=body}{/block}
 				
-					<div style="clear: both;"> </div>
+					<div style="clear: both;"></div>
+				
 				</div>
 				<!-- end #content -->
 				
