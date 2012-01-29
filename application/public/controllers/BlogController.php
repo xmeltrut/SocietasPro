@@ -26,7 +26,7 @@ class BlogController extends \BaseController implements \iController {
 	public function index () {
 	
 		// get a list of posts
-		$posts = $this->model->get();
+		$posts = $this->model->get(1, "Published");
 		
 		// output page
 		$this->engine->assign("posts", $posts);

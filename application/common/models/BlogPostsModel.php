@@ -33,13 +33,21 @@ class BlogPostsModel extends BaseModel implements iModel {
 	 * Get a list of posts
 	 *
 	 * @param int $pageNum Page number
+	 * @param boolean|string $statusFilter Filter on status
 	 * @return array Array of posts
 	 */
-	public function get ($pageNum = 1) {
+	public function get ($pageNum = 1, $statusFilter = false) {
 	
+		// initialise array
 		$arr = array();
 		
-		$sql = "SELECT * FROM ".DB_PREFIX."blog_posts ORDER BY postDate DESC ".sqlLimit($pageNum);
+		// build filters
+		$statusFilterSql = ($statusFilter) ? "WHERE postStatus = '".$statusFilter."'" : "";
+		
+		// query database
+		$sql = "SELECT * FROM ".DB_PREFIX."blog_posts
+				$statusFilterSql
+				ORDER BY postDate DESC ".sqlLimit($pageNum);
 		$rec = $this->db->query($sql);
 		
 		while ($row = $rec->fetch()) {
