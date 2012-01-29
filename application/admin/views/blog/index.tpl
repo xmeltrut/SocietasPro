@@ -10,6 +10,7 @@
 			<th>{$lang_id}</th>
 			<th>{$lang_name}</th>
 			<th>{$lang_date}</th>
+			<th>{$lang_status}</th>
 			<th>{$lang_edit}</th>
 			<th>{$lang_delete}</th>
 		</tr>
@@ -19,6 +20,7 @@
 			<td>{$post->postID}</td>
 			<td>{$post->postName}</td>
 			<td>{$post->getFormattedDate()}</td>
+			<td>{$post->postStatus}</td>
 			<td><a href="{$root}admin/blog/edit/{$post->postID}">{$lang_edit}</a></td>
 			<td>
 				<input type="submit" name="delete_{$post->postID}" value="{$lang_delete}" onClick="return areYouSure();" />

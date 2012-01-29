@@ -9,6 +9,7 @@
 			<th><input type="checkbox" id="toggleCheckbox" onChange="toggleAllCheckboxes();" /></th>
 			<th>{$lang_id}</th>
 			<th>{$lang_name}</th>
+			<th>{$lang_status}</th>
 			<th>{$lang_edit}</th>
 			<th>{$lang_delete}</th>
 		</tr>
@@ -17,6 +18,7 @@
 			<td><input type="checkbox" name="ids[]" value="{$page->pageID}" /></td>
 			<td>{$page->pageID}</td>
 			<td>{$page->pageName}</td>
+			<td>{$page->pageStatus}</td>
 			<td><a href="{$root}admin/pages/edit/{$page->pageID}">{$lang_edit}</a></td>
 			<td>
 				<input type="submit" name="delete_{$page->pageID}" value="{$lang_delete}" onClick="return areYouSure();" />

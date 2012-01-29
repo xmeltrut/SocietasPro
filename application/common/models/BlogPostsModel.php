@@ -73,11 +73,16 @@ class BlogPostsModel extends BaseModel implements iModel {
 	 * Get a specific post by slug
 	 *
 	 * @param string $slug Post slug
+	 * @param boolean $ignoreStatus Ignore status
 	 * @return BlogPost
 	 */
-	public function getBySlug ($slug) {
+	public function getBySlug ($slug, $ignoreStatus = true) {
 	
-		$sql = "SELECT * FROM ".DB_PREFIX."blog_posts WHERE postSlug = ? ";
+		// ignore status sql
+		$ignoreStatusSql = ($ignoreStatus) ? "" : "postStatus = 'Published'";
+		
+		// run query
+		$sql = "SELECT * FROM ".DB_PREFIX."blog_posts WHERE postSlug = ? $ignoreStatusSql ";
 		$rec = $this->db->prepare($sql);
 		$rec->execute(array($slug));
 		
@@ -134,6 +139,7 @@ class BlogPostsModel extends BaseModel implements iModel {
 		$writes = array (
 			$object->setName($d["name"]),
 			$object->setSlug($d["slug"]),
+			$object->setStatus($d["status"]),
 			$object->setDateByArray($d["date"]),
 			$object->setContent($d["content"])
 		);

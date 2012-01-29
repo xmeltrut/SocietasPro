@@ -40,7 +40,7 @@ class BlogController extends \BaseController implements \iController {
 	public function post () {
 	
 		// get blog post
-		$post = $this->model->getBySlug(\FrontController::getParam(0));
+		$post = $this->model->getBySlug(\FrontController::getParam(0), false);
 		if ($post === false) { throw new \HttpErrorException(404); }
 		
 		// output page

@@ -99,9 +99,16 @@ class BlogController extends \BaseController implements \iController {
 	 */
 	private function standardForm ($action, $data = array()) {
 	
+		// status values
+		$statusValues = array (
+			"Published" => LANG_PUBLISHED,
+			"Draft" => LANG_DRAFT
+		);
+		
 		$form = new \FormBuilder();
 		$form->addInput("name", LANG_NAME, arrSet($data, "postName"));
 		$form->addInput("slug", LANG_URL, arrSet($data, "postSlug"));
+		$form->addSelect("status", LANG_STATUS, $statusValues, arrSet($data, "postStatus"));
 		$form->addDateTime("date", LANG_DATE, arrSet($data, "postDate"));
 		$form->addVisualEditor("content", arrSet($data, "postContent"));
 		$form->addHidden("id", arrSet($data, "postID"));
