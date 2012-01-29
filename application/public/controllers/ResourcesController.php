@@ -30,7 +30,7 @@ class ResourcesController extends \BaseController implements \iController {
 	 */
 	public function images () {
 	
-		$code = file_get_contents("../personalisation/themes/default/images/".\FrontController::getParam(0), true);
+		$code = file_get_contents("../personalisation/themes/".\Configuration::get("theme")."/images/".\FrontController::getParam(0), true);
 		Header("content-type: image/png");
 		print $code;
 	
@@ -41,7 +41,7 @@ class ResourcesController extends \BaseController implements \iController {
 	 */
 	public function style () {
 	
-		$code = file_get_contents("../personalisation/themes/default/style.css", true);
+		$code = file_get_contents("../personalisation/themes/".\Configuration::get("theme")."/style.css", true);
 		Header("content-type: text/css");
 		print $code;
 	

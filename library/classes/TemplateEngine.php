@@ -28,7 +28,7 @@ class TemplateEngine extends Smarty {
 		$module = $front->getModule();
 		
 		if ($module == "public") {
-			$this->setTemplateDir("../personalisation/themes/default/");
+			$this->setTemplateDir("../personalisation/themes/".Configuration::get("theme")."/");
 			$this->assign("current_year", date("Y"));
 			require_once("models/PagesModel.php");
 			$pagesModel = new PagesModel();
