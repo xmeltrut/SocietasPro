@@ -23,11 +23,17 @@ class DefaultController extends \BaseController implements \iController {
 	
 	}
 	
+	/**
+	 * Display the homepage. If it doesn't exist, they are probably running
+	 * their install without a public website, so sent them straight to admin
+	 */
 	public function index () {
 	
 		// get homepage
 		$page = $this->model->getHomepage();
-		if ($page === false) { throw new \HttpErrorException(404); }
+		if ($page === false) {
+			redirect("admin");
+		}
 		
 		// output page
 		$this->engine->assign("page", $page);
@@ -35,6 +41,9 @@ class DefaultController extends \BaseController implements \iController {
 	
 	}
 	
+	/**
+	 * Display a requested page
+	 */
 	public function page () {
 	
 		// get page
