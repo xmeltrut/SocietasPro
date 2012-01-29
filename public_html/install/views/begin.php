@@ -9,7 +9,7 @@
 ?>
 <h2>System Test</h2>
 
-<table border="1">
+<table border="1" width="100%">
 	<tr>
 		<th>Check</th>
 		<th>Output</th>
@@ -50,18 +50,35 @@ foreach ($checks as $check) {
 	<tr>
 		<td><?=$check?></td>
 		<td><?=$data["i"]?></td>
-		<td style="background-color: <?=$bgColour?>;"><?=$result?></td>
+		<td style="text-align: center; background-color: <?=$bgColour?>;"><?=$result?></td>
 	</tr>
 <?php
 	}
 
 }
-
-$nextStep = ($test->getFailCount() > 0) ? "" : "configure";
 ?>
-</table><br />
+</table>
+
+<?php if ($test->getFailCount() > 0) { ?>
+
+<p>
+	Problems were detected. This need to be resolved before you can proceed with the installer.
+</p>
 
 <form action="" method="post">
-	<input type="hidden" name="step" value="<?=$nextStep?>" />
+	<input type="hidden" name="step" value="" />
+	<input type="submit" value="Try again" />
+</form>
+
+<?php } else { ?>
+
+<p>
+	All systems tests were passed, you can now proceed to the installer.
+</p>
+
+<form action="" method="post">
+	<input type="hidden" name="step" value="configure" />
 	<input type="submit" value="Proceed" />
 </form>
+
+<?php } ?>
