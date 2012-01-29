@@ -9,5 +9,6 @@
 	<em>{$event->getFormattedDate()}</em>
 </p>
 {$event->eventDescription}
+<p>&nbsp;</p>
 {/foreach}
 {/block}
