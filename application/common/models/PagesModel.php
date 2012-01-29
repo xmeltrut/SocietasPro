@@ -226,7 +226,7 @@ class PagesModel extends BaseModel implements iModel {
 			}
 			
 			// calculate header
-			$header = ($page) ? $page->pageName : "Pages";
+			$header = ($page) ? $page->pageName : NULL;
 			
 			// assign array back to the main array
 			$arr[$level] = array (
