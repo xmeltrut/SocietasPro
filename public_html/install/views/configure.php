@@ -7,14 +7,17 @@
  * @subpackage Installer
  */
 ?>
+<h2>Configure</h2>
 
-<?php if ($msg != "") { ?>
-<p>
-	<strong><?=$msg?></strong>
-</p>
-<?php } ?>
+<form action="" method="post" name="form" id="form">
 
-<form action="" method="post">
+	<?php if ($msg != "") { ?>
+	<fieldset class="errorShading">
+		<legend>Error</legend>
+		
+		<?=$msg?>
+	</fieldset>
+	<?php } ?>
 
 	<fieldset>
 		<legend>Install details</legend>
@@ -54,3 +57,7 @@
 	<input type="submit" value="Begin install" />
 
 </form>
+
+<script type="text/javascript">
+document.forms['form'].elements['group_name'].focus();
+</script>

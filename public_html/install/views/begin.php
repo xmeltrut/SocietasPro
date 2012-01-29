@@ -7,6 +7,8 @@
  * @subpackage Installer
  */
 ?>
+<h2>System Test</h2>
+
 <table border="1">
 	<tr>
 		<th>Check</th>

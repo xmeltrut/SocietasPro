@@ -1,7 +1,123 @@
+a:link, a:visited {
+	color: #0000FF;
+	text-decoration: underline;
+}
+
+a:hover, a:active {
+	color: #3399FF;
+	text-decoration: underline;
+}
+
 body {
+	background: #EEEEEE;
 	font: 18px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+}
+
+.clear {
+	clear: both;
+}
+
+#container {
+	width: 600px;
+	margin: 0 auto;
+}
+
+#content {
+	padding: 30px;
+	background: #FFFFFF;
+	border: #999999 1px solid;
+	border-radius: 10px;
+	background: #FFFFFF;
+}
+
+.errorShading {
+	background: #FFFF99;
+}
+
+fieldset {
+	margin-bottom: 10px;
+	border: #999999 1px solid;
+}
+
+fieldset ol {
+	margin: 0;
+	padding: 0;
+}
+
+fieldset ol li {
+	margin: 10px 0 0 0;
+	padding: 0;
+	clear: both;
+	list-style-type: none;
+}
+
+fieldset ol li input, fieldset ol li select {
+	width: 200px;
+}
+
+fieldset ol li label {
+	float: left;
+	width: 200px;
+}
+
+#footer {
+	padding: 10px 10px 30px 10px;
+	font-size: 12px;
+	color: #333333;
+}
+
+#footer a:link, #footer a:visited {
+	color: #333333;
+	text-decoration: none;
+}
+
+#footer a:hover, #footer a:active {
+	color: #333333;
+	text-decoration: underline;
+}
+
+h1 {
+	padding-left: 60px;
+	background: url("../images/societaspro.png") center left no-repeat;
+	cursor: default;
+}
+
+h2 {
+	margin-top: 0;
+	font-size: 100%;
 }
 
 label {
 	cursor: pointer;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+table {
+	margin-bottom: 0.2em;
+	background: #EEEEEE;
+	border: #CCCCCC 1px solid;
+	border-radius: 5px;
+	border-spacing: 3px;
+}
+
+table td {
+	padding: 5px;
+	background: #FFFFFF;
+	border: #CCCCCC 1px solid;
+}
+
+table th {
+	padding: 5px;
+	background-image: url("../images/navigationbg.png");
+	background-position: top left;
+	background-repeat: repeat-x;
+	border: #CCCCCC 1px solid;
+	color: #333333;
 }
