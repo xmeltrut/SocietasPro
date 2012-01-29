@@ -55,7 +55,7 @@ foreach ($checks as $check) {
 
 }
 
-$nextStep = ($test->getFailCount() > 0) ? "" : "begin";
+$nextStep = ($test->getFailCount() > 0) ? "" : "configure";
 ?>
 </table><br />
 

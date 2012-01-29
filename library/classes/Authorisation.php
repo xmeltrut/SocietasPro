@@ -50,12 +50,16 @@ class Authorisation extends Singleton {
 	
 	/**
 	 * Singleton
+	 *
+	 * @param boolean $withSession Sometimes, we may just want functionality
 	 */
-	public static function getInstance () {
+	public static function getInstance ($withSession = true) {
 		if (!isset(self::$instance)) {
 			$className = __CLASS__;
 			self::$instance = new $className;
-			session_start();
+			if ($withSession) {
+				session_start();
+			}
 		}
 		return self::$instance;
 	}

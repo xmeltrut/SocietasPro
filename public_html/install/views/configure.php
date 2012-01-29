@@ -14,8 +14,8 @@
 		
 		<ol>
 			<li>
-				<label for="">Group name</label>
-				<input type="text" />
+				<label for="group_name">Group name</label>
+				<input type="text" name="group_name" id="group_name" />
 			</li>
 			<li>
 				<label for="language">Language</label>
@@ -43,7 +43,7 @@
 		</ol>
 	</fieldset>
 	
-	<input type="hidden" name="step" value="configure" />
+	<input type="hidden" name="step" value="install" />
 	<input type="submit" value="Begin install" />
 
 </form>

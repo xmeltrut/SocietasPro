@@ -9,6 +9,10 @@
 
 define("ROOT_DIR", "../");
 require("bootstrap.php");
+
+// custom install files
+require("includes/general.php");
+require("includes/install.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -25,7 +29,13 @@ require("bootstrap.php");
 	$step = (isset($_POST["step"])) ? $_POST["step"] : "";
 	
 	switch ($step) {
-		case "begin":
+		case "install":
+			$rv = install($_POST["group_name"], $_POST["language"], $_POST["email"], $_POST["password"], $msg);
+			if ($rv) { // if false, fall through
+				require("views/install.php");
+				break;
+			}
+		case "configure":
 			$languages = Language::listAsArray();
 			require("views/configure.php");
 			break;

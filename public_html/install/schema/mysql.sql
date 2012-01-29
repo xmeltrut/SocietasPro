@@ -1,11 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 3.3.9.2
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Jan 01, 2012 at 05:19 PM
--- Server version: 5.5.9
--- PHP Version: 5.3.6
+-- MySQL
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -52,6 +45,7 @@ CREATE TABLE `tbl_blog_posts` (
   `postID` int(11) NOT NULL AUTO_INCREMENT,
   `postName` varchar(255) NOT NULL,
   `postSlug` varchar(255) NOT NULL,
+  `postStatus` enum('Published','Draft') NOT NULL DEFAULT 'Published',
   `postContent` text NOT NULL,
   `postDate` datetime NOT NULL,
   PRIMARY KEY (`postID`)
@@ -184,7 +178,9 @@ CREATE TABLE `tbl_pages` (
   `pageID` int(11) NOT NULL AUTO_INCREMENT,
   `pageParent` int(11) NOT NULL DEFAULT '0',
   `pageOrder` int(11) NOT NULL DEFAULT '0',
+  `pageStatus` enum('Published','Draft') NOT NULL DEFAULT 'Published',
   `pageName` varchar(255) NOT NULL,
+  `pageDescription` varchar(255) NOT NULL,
   `pageSlug` varchar(255) NOT NULL,
   `pageContent` text NOT NULL,
   PRIMARY KEY (`pageID`)
@@ -228,35 +224,3 @@ CREATE TABLE `tbl_subscribers` (
   `subscriberDate` datetime NOT NULL,
   PRIMARY KEY (`subscriberID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Dumping data for table `tbl_audit_actions`
---
-
-INSERT INTO `tbl_audit_actions` VALUES(1, 'Create member', '{$lang_create} {$lang_member}');
-INSERT INTO `tbl_audit_actions` VALUES(2, 'Edit member', '{$lang_edit} {$lang_member}');
-INSERT INTO `tbl_audit_actions` VALUES(3, 'Create location', '{$lang_create} {$lang_location}');
-INSERT INTO `tbl_audit_actions` VALUES(4, 'Edit location', '{$lang_edit} {$lang_location}');
-INSERT INTO `tbl_audit_actions` VALUES(5, 'Create blog post', '{$lang_create} {$lang_blog} {$lang_post}');
-INSERT INTO `tbl_audit_actions` VALUES(6, 'Edit blog post', '{$lang_edit} {$lang_blog} {$lang_post}');
-INSERT INTO `tbl_audit_actions` VALUES(7, 'Create event', '{$lang_create} {$lang_event}');
-INSERT INTO `tbl_audit_actions` VALUES(8, 'Edit event', '{$lang_edit} {$lang_event}');
-INSERT INTO `tbl_audit_actions` VALUES(9, 'Create page', '{$lang_create} {$lang_page}');
-INSERT INTO `tbl_audit_actions` VALUES(10, 'Edit page', '{$lang_edit} {$lang_page}');
-INSERT INTO `tbl_audit_actions` VALUES(11, 'Edit configuration option', '{$lang_edit} {$lang_configuration}');
-INSERT INTO `tbl_audit_actions` VALUES(12, 'Export members', '{$lang_export} {$lang_members}');
-INSERT INTO `tbl_audit_actions` VALUES(13, 'Export mailing list', '{$lang_export} {$lang_mailing_list}');
-INSERT INTO `tbl_audit_actions` VALUES(14, 'Create subscriber', '{$lang_create} {$lang_subscriber}');
-INSERT INTO `tbl_audit_actions` VALUES(15, 'Clone event', '{$lang_clone} {$lang_event}');
-INSERT INTO `tbl_audit_actions` VALUES(16, 'Clone page', '{$lang_clone} {$lang_page}');
-INSERT INTO `tbl_audit_actions` VALUES(17, 'Delete member', '{$lang_delete} {$lang_member}');
-INSERT INTO `tbl_audit_actions` VALUES(18, 'Delete blog post', '{$lang_delete} {$lang_blog} {$lang_post}');
-INSERT INTO `tbl_audit_actions` VALUES(19, 'Delete page', '{$lang_delete} {$lang_page}');
-INSERT INTO `tbl_audit_actions` VALUES(20, 'Delete location', '{$lang_delete} {$lang_location}');
-INSERT INTO `tbl_audit_actions` VALUES(21, 'Delete event', '{$lang_delete} {$lang_event}');
-INSERT INTO `tbl_audit_actions` VALUES(22, 'Delete subscriber', '{$lang_delete} {$lang_subscriber}');
-INSERT INTO `tbl_audit_actions` VALUES(23, 'Create members field', '{$lang_create} {$lang_members} {$lang_field}');
-INSERT INTO `tbl_audit_actions` VALUES(24, 'Edit members field', '{$lang_edit} {$lang_members} {$lang_field}');
-INSERT INTO `tbl_audit_actions` VALUES(25, 'Delete members field', '{$lang_delete} {$lang_members} {$lang_field}');
