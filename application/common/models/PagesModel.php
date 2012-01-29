@@ -217,7 +217,7 @@ class PagesModel extends BaseModel implements iModel {
 	 * @param int $parent Page ID
 	 */
 	public function getLinear ($id = 0) {
-	$id = 3;
+	
 		// initialise required variables
 		$level = 0;
 		
@@ -249,11 +249,13 @@ class PagesModel extends BaseModel implements iModel {
 			$header = ($page) ? $page->pageName : NULL;
 			
 			// assign array back to the main array
-			$arr[$level] = array (
-				"header" => $header,
-				"pages" => $thisLevel
-			);
-			$level++;
+			if (count($thisLevel) > 0) {
+				$arr[$level] = array (
+					"header" => $header,
+					"pages" => $thisLevel
+				);
+				$level++;
+			}
 			
 			// if we've reached the top
 			if ($id == 0) {
