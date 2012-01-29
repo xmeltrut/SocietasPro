@@ -38,7 +38,7 @@ class DefaultController extends \BaseController implements \iController {
 	public function page () {
 	
 		// get page
-		$page = $this->model->getBySlug(\FrontController::getParam(0));
+		$page = $this->model->getBySlug(\FrontController::getParam(0), false);
 		if ($page === false) { throw new \HttpErrorException(404); }
 		
 		// output page

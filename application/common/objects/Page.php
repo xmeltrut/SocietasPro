@@ -169,6 +169,23 @@ class Page extends BaseObject {
 	}
 	
 	/**
+	 * Set the status of the page
+	 *
+	 * @param string $value Value to set to
+	 * @return boolean Success
+	 */
+	public function setStatus ($value) {
+		$vals = array("Published", "Draft");
+		if (in_array($value, $vals)) {
+			$this->setData("pageStatus", $value);
+			return true;
+		} else {
+			$this->setMessage(LANG_INVALID." ".LANG_STATUS);
+			return false;
+		}
+	}
+	
+	/**
 	 * Unset the ID. Used for cloning.
 	 *
 	 * @return boolean Success

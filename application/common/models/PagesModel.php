@@ -144,11 +144,16 @@ class PagesModel extends BaseModel implements iModel {
 	 * Get a specific page by slug
 	 *
 	 * @param string $slug Page slug
+	 * @param boolean $ignoreStatus Ignore the status column
 	 * @return Page
 	 */
-	public function getBySlug ($slug) {
+	public function getBySlug ($slug, $ignoreStatus = true) {
 	
-		$sql = "SELECT * FROM ".DB_PREFIX."pages WHERE pageSlug = ? ";
+		// should we ignore the status?
+		$ignoreStatusSql = ($ignoreStatus) ? "" : "AND pageStatus = 'Published' ";
+		
+		// run the query
+		$sql = "SELECT * FROM ".DB_PREFIX."pages WHERE pageSlug = ? $ignoreStatusSql ";
 		$rec = $this->db->prepare($sql);
 		$rec->execute(array($slug));
 		
@@ -184,6 +189,30 @@ class PagesModel extends BaseModel implements iModel {
 		
 		// return results
 		return $arr;
+	
+	}
+	
+	/**
+	 * Get a linear series of pages
+	 *
+	 * @param int $parent Page ID
+	 */
+	public function getLinear ($id = 0) {
+	
+		$page = $this->getById($id);
+		
+		$arr = array();
+		
+		$sql = "SELECT * FROM ".DB_PREFIX."pages
+				WHERE pageParent = ".$page->pageParent."
+				ORDER BY pageOrder ASC, pageName ASC ";
+		$rec = $db->query($sql);
+		
+		while ($row = $rec->fetch()) {
+			$arr[] = new Page($row);
+		}
+		
+		return array(0 => $arr);
 	
 	}
 	
@@ -358,6 +387,7 @@ class PagesModel extends BaseModel implements iModel {
 			$object->setParent($d["parent"]),
 			$object->setName($d["name"]),
 			$object->setSlug($d["slug"]),
+			$object->setStatus($d["status"]),
 			$object->setContent($d["content"])
 		);
 		

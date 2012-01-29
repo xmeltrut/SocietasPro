@@ -109,10 +109,17 @@ class PagesController extends \BaseController implements \iController {
 		$pageParent  = array(0 => LANG_NONE);
 		$pageParent += $this->model->getAsArray($excludedID);
 		
+		// status values
+		$statusValues = array (
+			"Published" => LANG_PUBLISHED,
+			"Draft" => LANG_DRAFT
+		);
+		
 		$form = new \FormBuilder();
 		$form->addInput("name", LANG_NAME, arrSet($data, "pageName"));
 		$form->addInput("slug", LANG_URL, arrSet($data, "pageSlug"));
 		$form->addSelect("parent", LANG_PARENT, $pageParent, arrSet($data, "pageParent"));
+		$form->addSelect("status", LANG_STATUS, $statusValues, arrSet($data, "pageStatus"));
 		$form->addVisualEditor("content", arrSet($data, "pageContent"));
 		$form->addHidden("id", arrSet($data, "pageID"));
 		$form->addHidden("action", $action);
