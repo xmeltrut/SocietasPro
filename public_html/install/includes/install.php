@@ -34,7 +34,7 @@ function install ($groupName, $language, $email, $password, &$msg) {
 	
 	foreach ($commands as $command) {
 		$command = trim($command);
-		if ( ($command != "") && (substr($command, 0, 2) != "--") && (substr($command, 0, 1) != "#") ) {
+		if ($command != "") {
 			$sth = $db->prepare($command);
 			if (!$sth->execute()) {
 				$msg = "Query failed: ".$command;

@@ -7,6 +7,13 @@
  * @subpackage Installer
  */
 ?>
+
+<?php if ($msg != "") { ?>
+<p>
+	<strong><?=$msg?></strong>
+</p>
+<?php } ?>
+
 <form action="" method="post">
 
 	<fieldset>
@@ -15,13 +22,13 @@
 		<ol>
 			<li>
 				<label for="group_name">Group name</label>
-				<input type="text" name="group_name" id="group_name" />
+				<input type="text" name="group_name" id="group_name" value="<?=reqSet("group_name")?>" />
 			</li>
 			<li>
 				<label for="language">Language</label>
 				<select id="language" name="language">
 					<?php foreach ($languages as $key => $val) { ?>
-					<option value="<?=$key?>"><?=$val?></option>
+					<option value="<?=$key?>" <?php if ($key == reqSet("language")) { ?>selected="selected"<?php } ?>><?=$val?></option>
 					<?php } ?>
 				</select>
 			</li>
@@ -34,7 +41,7 @@
 		<ol>
 			<li>
 				<label for="email">Email address</label>
-				<input type="text" id="email" name="email" />
+				<input type="text" id="email" name="email" value="<?=reqSet("email")?>" />
 			</li>
 			<li>
 				<label for="password">Password</label>

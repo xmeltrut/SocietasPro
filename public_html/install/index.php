@@ -26,6 +26,7 @@ require("includes/install.php");
 	<h1>SocietasPro Installer</h1>
 	
 	<?php
+	$msg = "";
 	$step = (isset($_POST["step"])) ? $_POST["step"] : "";
 	
 	switch ($step) {

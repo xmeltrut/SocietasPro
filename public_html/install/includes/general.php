@@ -21,9 +21,23 @@ function parseSqlFile ($fileName) {
 	}
 	
 	// get file
-	$data = file_get_contents($fileName);
+	$data = file($fileName);
+	
+	// initialise a return array
+	$arr = array();
+	
+	// strip out comment lines
+	foreach ($data as $line) {
+		$line = trim($line);
+		if ( ($line != "") && (substr($line, 0, 2) != "--") && (substr($line, 0, 1) != "#") ) {
+			$arr[] = $line;
+		}
+	}
+	
+	// glue array back together
+	$str = implode("\n", $arr);
 	
 	// return array
-	return explode(";", $data);
+	return explode(";", $str);
 
 }
