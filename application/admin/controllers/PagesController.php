@@ -117,6 +117,7 @@ class PagesController extends \BaseController implements \iController {
 		
 		$form = new \FormBuilder();
 		$form->addInput("name", LANG_NAME, arrSet($data, "pageName"));
+		$form->addInput("description", LANG_DESCRIPTION, arrSet($data, "pageDescription"));
 		$form->addInput("slug", LANG_URL, arrSet($data, "pageSlug"));
 		$form->addSelect("parent", LANG_PARENT, $pageParent, arrSet($data, "pageParent"));
 		$form->addSelect("status", LANG_STATUS, $statusValues, arrSet($data, "pageStatus"));

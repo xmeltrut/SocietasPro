@@ -82,6 +82,17 @@ class Page extends BaseObject {
 	}
 	
 	/**
+	 * Set the page description
+	 *
+	 * @param string $value Page decription
+	 * @return boolean Success
+	 */
+	public function setDescription ($value) {
+		$this->setData("pageDescription", $value);
+		return true;
+	}
+	
+	/**
 	 * Set the name of the page
 	 *
 	 * @param string $value Page name

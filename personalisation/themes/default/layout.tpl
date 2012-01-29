@@ -50,9 +50,13 @@
 
 <ul>
 {foreach $menuLevel["pages"] as $menuItem}
-<li><a href="{$root}public/default/page/{$menuItem->pageSlug}">{$menuItem->pageName}</a></li>
+<li>
+	<a href="{$root}public/default/page/{$menuItem->pageSlug}">{$menuItem->pageName}</a>
+	{if $menuItem->pageDescription}
+	<br />{$menuItem->pageDescription}
+	{/if}
+</li>
 {/foreach}
-<li><a href="#">Last Category Link</a><br>Description of the last category</li>
 </ul>
 {/foreach}
 

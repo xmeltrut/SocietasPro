@@ -420,6 +420,7 @@ class PagesModel extends BaseModel implements iModel {
 		$writes = array (
 			$object->setParent($d["parent"]),
 			$object->setName($d["name"]),
+			$object->setDescription($d["description"]),
 			$object->setSlug($d["slug"]),
 			$object->setStatus($d["status"]),
 			$object->setContent($d["content"])
