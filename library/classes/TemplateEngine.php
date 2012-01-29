@@ -49,18 +49,6 @@ class TemplateEngine extends Smarty {
 			throw new TemplateException("Unable to initialise template engine, no module defined.");
 		}
 		
-		// assign some generic variables
-		$this->assign("root", ROOT);
-		$this->assign("group_name", Configuration::get("group_name"));
-		$this->assign("version", SP_VERSION);
-		
-		// user login details
-		$auth = Authorisation::getInstance();
-		$this->assign("session_admin_style", $auth->getAdminStyle());
-		
-		// set the standard message to nothing
-		$this->setMessage("");
-		
 		// load language strings
 		$language = Language::getInstance();
 		$langStrings = $language->getStrings();
@@ -68,6 +56,26 @@ class TemplateEngine extends Smarty {
 		foreach ($langStrings as $key => $val) {
 			$this->assign("lang_".$key, $val);
 		}
+		
+		// assign some generic variables
+		$this->assign("root", ROOT);
+		$this->assign("group_name", Configuration::get("group_name"));
+		$this->assign("version", SP_VERSION);
+		
+		// is the install directory present?
+		if (file_exists("install/") && MODE == "LIVE") {
+			$this->assign("installDir", true);
+			$this->assign("installDirMsg", Language::getContent("install_directory_exists"));
+		} else {
+			$this->assign("installDir", false);
+		}
+		
+		// user login details
+		$auth = Authorisation::getInstance();
+		$this->assign("session_admin_style", $auth->getAdminStyle());
+		
+		// set the standard message to nothing
+		$this->setMessage("");
 	
 	}
 	

@@ -37,8 +37,15 @@
 		
 		</div>
 		
+		{if $installDir}
+		<div class="message" id="messageInstallDir">
+			{$installDirMsg}
+			<hr />
+		</div>
+		{/if}
+		
 		{if $msg}
-		<div id="message">
+		<div class="message" id="message">
 			{$msg}
 			<hr />
 		</div>

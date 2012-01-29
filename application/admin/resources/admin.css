@@ -90,19 +90,27 @@ label {
 	cursor: pointer;
 }
 
-#message {
+.message {
 	margin-top: 10px;
 	padding: 1em;
-	background: #99CC66;
 	border-radius: 5px;
 	font-size: 80%;
 }
 
-#message hr {
+#message {
+	background: #99CC66;
+}
+
+#messageInstallDir {
+	background: #CC3333;
+	color: #FFFFFF;
+}
+
+.message hr {
 	display: none;
 }
 
-#message ul {
+.message ul {
 	margin: 0;
 	padding-left: 1.5em;
 }
