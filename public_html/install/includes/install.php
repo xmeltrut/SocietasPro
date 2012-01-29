@@ -46,8 +46,8 @@ function install ($groupName, $language, $email, $password, &$msg) {
 	// configure config
 	$sql = "UPDATE ".DB_PREFIX."config SET configValue = ? WHERE configOption = ? ";
 	$sth = $db->prepare($sql);
-	$sth->execute(array("group_name", $groupName));
-	$sth->execute(array("language", $language));
+	$sth->execute(array($groupName, "group_name"));
+	$sth->execute(array($language, "language"));
 	
 	// encode user's password
 	$auth = Authorisation::getInstance(false);
