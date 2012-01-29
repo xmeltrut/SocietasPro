@@ -29,9 +29,19 @@ function install ($groupName, $language, $email, $password, &$msg) {
 		return false;
 	}
 	
-	// install database
+	// get database object
 	$db = Database::getInstance();
 	
+	// check it isn't already installed
+	$tables = $db->query("SHOW TABLES");
+	while ($row = $tables->fetch(PDO::FETCH_NUM)) {
+		if ($row[0] == DB_PREFIX."config") {
+			$msg = "SocietasPro is already installed. For security reasons, you cannot reinstall it without first deleting the existing tables from the database manually.";
+			return false;
+		}
+	}
+	
+	// install database
 	foreach ($commands as $command) {
 		$command = trim($command);
 		if ($command != "") {
