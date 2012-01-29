@@ -193,6 +193,25 @@ class PagesModel extends BaseModel implements iModel {
 	}
 	
 	/**
+	 * Get the default page for the public site
+	 *
+	 * @return Page Homepage
+	 */
+	public function getHomepage () {
+	
+		// query for page ID
+		$sql = "SELECT pageID FROM ".DB_PREFIX."pages
+				WHERE pageParent = 0
+				ORDER BY pageOrder ASC, pageName ASC
+				LIMIT 0, 1 ";
+		$id  = $this->db->fetchOne($sql);
+		
+		// deliver page
+		return $this->getById($id);
+	
+	}
+	
+	/**
 	 * Get a linear series of pages
 	 *
 	 * @param int $parent Page ID
@@ -217,6 +236,7 @@ class PagesModel extends BaseModel implements iModel {
 			// query the database
 			$sql = "SELECT * FROM ".DB_PREFIX."pages
 					WHERE pageParent = ".$id."
+					AND pageStatus = 'Published'
 					ORDER BY pageOrder ASC, pageName ASC ";
 			$rec = $this->db->query($sql);
 			
@@ -244,28 +264,7 @@ class PagesModel extends BaseModel implements iModel {
 		
 		}
 		
-		//print_r($arr);
-		
 		return $arr;
-	
-	}
-	
-	/**
-	 * Get the default page for the public site
-	 *
-	 * @return Page Homepage
-	 */
-	public function getHomepage () {
-	
-		// query for page ID
-		$sql = "SELECT pageID FROM ".DB_PREFIX."pages
-				WHERE pageParent = 0
-				ORDER BY pageOrder ASC, pageName ASC
-				LIMIT 0, 1 ";
-		$id  = $this->db->fetchOne($sql);
-		
-		// deliver page
-		return $this->getById($id);
 	
 	}
 	
