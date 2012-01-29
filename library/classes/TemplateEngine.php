@@ -95,13 +95,14 @@ class TemplateEngine extends Smarty {
 	 * Outputs a template
 	 *
 	 * @param string $template Template name
-	 * @param string $cache_id Cache ID
-	 * @param string $compile_id Compile ID
+	 * @param mixed $cache_id Cache ID
+	 * @param mixed $compile_id Compile ID
+	 * @param object $parent
 	 */
-	public function display ($template, $cache_id = false, $compile_id = false) {
+	public function display ($template, $cache_id = null, $compile_id = null, $parent = null) {
 	
 		try {
-			parent::display($template, $cache_id, $compile_id);
+			parent::display($template, $cache_id, $compile_id, $parent);
 		} catch (SmartyException $e) {
 			throw new TemplateException($e->getMessage());
 		}
