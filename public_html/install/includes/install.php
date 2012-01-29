@@ -33,7 +33,7 @@ function install ($groupName, $language, $email, $password, &$msg) {
 	$db = Database::getInstance();
 	
 	// check it isn't already installed
-	$tables = $db->query("SHOW TABLES");
+	$tables = $db->query("show tables");
 	while ($row = $tables->fetch(PDO::FETCH_NUM)) {
 		if ($row[0] == DB_PREFIX."config") {
 			$msg = "SocietasPro is already installed. For security reasons, you cannot reinstall it without first deleting the existing tables from the database manually.";
@@ -45,11 +45,20 @@ function install ($groupName, $language, $email, $password, &$msg) {
 	foreach ($commands as $command) {
 		$command = trim($command);
 		if ($command != "") {
-			$sth = $db->prepare($command);
-			if (!$sth->execute()) {
+		
+			$success = false;
+			
+			if ($sth = $db->prepare($command)) {
+				if ($sth->execute()) {
+					$success = true;
+				}
+			}
+			
+			if ($success === false) {
 				$msg = "Query failed: ".$command;
 				return false;
 			}
+		
 		}
 	}
 	
