@@ -37,6 +37,9 @@ function parseSqlFile ($fileName) {
 	// glue array back together
 	$str = implode("\n", $arr);
 	
+	// swap out database prefix
+	$str = str_replace("`tbl_", "`".DB_PREFIX, $str);
+	
 	// return array
 	return explode(";", $str);
 
