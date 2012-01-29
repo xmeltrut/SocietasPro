@@ -198,21 +198,55 @@ class PagesModel extends BaseModel implements iModel {
 	 * @param int $parent Page ID
 	 */
 	public function getLinear ($id = 0) {
-	
-		$page = $this->getById($id);
+	$id = 3;
+		// initialise required variables
+		$level = 0;
 		
+		// the array we will ultimately return
 		$arr = array();
 		
-		$sql = "SELECT * FROM ".DB_PREFIX."pages
-				WHERE pageParent = ".$page->pageParent."
-				ORDER BY pageOrder ASC, pageName ASC ";
-		$rec = $db->query($sql);
+		// start a loop of unknown length
+		while (true) {
 		
-		while ($row = $rec->fetch()) {
-			$arr[] = new Page($row);
+			// get the page
+			$page = ($id > 0) ? $this->getById($id) : 0;
+			
+			// initialise an array for this level
+			$thisLevel = array();
+			
+			// query the database
+			$sql = "SELECT * FROM ".DB_PREFIX."pages
+					WHERE pageParent = ".$id."
+					ORDER BY pageOrder ASC, pageName ASC ";
+			$rec = $this->db->query($sql);
+			
+			// load pages into the array
+			while ($row = $rec->fetch()) {
+				$thisLevel[] = new Page($row);
+			}
+			
+			// calculate header
+			$header = ($page) ? $page->pageName : "Pages";
+			
+			// assign array back to the main array
+			$arr[$level] = array (
+				"header" => $header,
+				"pages" => $thisLevel
+			);
+			$level++;
+			
+			// if we've reached the top
+			if ($id == 0) {
+				break;
+			} else {
+				$id = $page->pageParent;
+			}
+		
 		}
 		
-		return array(0 => $arr);
+		//print_r($arr);
+		
+		return $arr;
 	
 	}
 	

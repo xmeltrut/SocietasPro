@@ -32,7 +32,7 @@ class TemplateEngine extends Smarty {
 			$this->assign("current_year", date("Y"));
 			require_once("models/PagesModel.php");
 			$pagesModel = new PagesModel();
-			$this->assign("menu", $pagesModel->get());
+			$this->assign("menu", $pagesModel->getLinear());
 		} elseif ($module != "") {
 			$this->setTemplateDir("../application/".$module."/views/");
 			$this->assign("controller", strtolower(substr($front->getController(), 0, -10)));

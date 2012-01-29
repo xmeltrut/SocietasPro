@@ -39,31 +39,18 @@
 
 <div class="left">
 
-<h3>Navigation</h3>
+{foreach $menu as $menuLevel}
+<h3>{$menuLevel["header"]}</h3>
 
 <ul>
-{foreach $menu as $menuItem}
+{foreach $menuLevel["pages"] as $menuItem}
 <li><a href="{$root}public/default/page/{$menuItem->pageSlug}">{$menuItem->pageName}</a></li>
 {/foreach}
-<li><a href="#">About Us Information</a><br>Link to our business information</li>
-<li><a href="#">Resources and Friends</a><br>Related resources and friends</li>
 <li><a href="#">Last Category Link</a><br>Description of the last category</li>
-</ul><h3>Advertisments</h3>
-<ul><li><a href="http://f248f4qj7gxjpeaay9pqtaboaq.hop.clickbank.net/?tid=GS">Adsense $100k Blueprint</a><br>Amazing Adsense guide. Step-by-step! No fluff!</li>
-<li><a href="http://9d0442lg4b0mwj7cnolx4l1w16.hop.clickbank.net/?tid=GS">Web Design Business Startup Kit</a><br>A complete turnkey business solution for web designers</li>
-<li><a href="http://11795.rapbank.com">RapBank.com</a><br>Join for free and get paid instant commision</li>
-<li><a href="http://rapbank.com/go/1476/11795">Newbie Start Up Guide</a><br>Everything is laid out in plain English</li>
-</ul><h3>Latest Articles</h3>
-<ul><li><a href="#">List Your Latest Articles</a></li>
-<li><a href="#">Praesent augue nibh</a></li>
-<li><a href="#">Vestibulum ante ipsum primis</a></li>
-<li><a href="#">Pellentesque vulputate mi quis erat</a></li>
-<li><a href="#">Anothe filler link</a></li>
-<li><a href="#">Aenean interdum fermentum felis</a></li>
-<li><a href="#">Maecenas et aliquet nisl</a></li>
-<li><a href="#">Integer dapibus vulputate ornare</a></li>
-<li><a href="#">Sagittis et venenatis nisi</a></li>
-</ul></div>
+</ul>
+{/foreach}
+
+</div>
 
 <div class="leftbottom"> </div>
 
