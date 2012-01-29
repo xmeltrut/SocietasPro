@@ -35,6 +35,8 @@
 
 </div>
 
+<div class="leftcontainer">
+
 <div class="lefttop"> </div>
 
 <div class="left">
@@ -63,6 +65,8 @@
 </div>
 
 <div class="leftbottom"> </div>
+
+</div>
 
 <div style="clear: both;"> </div>
 

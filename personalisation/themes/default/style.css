@@ -98,10 +98,13 @@ width: 580px;
 margin-top: 10px;
 }
 
+.leftcontainer {
+	float: left;
+	width: 340px;
+}
+
 .left { 
-float: left;
 background: url(images/sidebarcontent.png) repeat-y;
-width: 340px;
 color: #717171;
 }
 .left h3 { background: url(images/sidebarh3.png) no-repeat; height: 40px; line-height: 40px; margin: 0 0 0 20px; padding: 0 0 0 10px; color: #000; border: none; font-size: 17px; }
@@ -109,8 +112,8 @@ color: #717171;
 .left ul li { background: url(images/list.png) no-repeat left top; padding: 0 0 3px 20px; margin: 0; font-size: 13px;}
 .left ul li a { font-size: 14px; }
 
-.lefttop { width: 340px; float: left; background: url(images/sidebartop.png) no-repeat; padding: 15px 0; }
-.leftbottom { width: 340px; float: left; background: url(images/sidebarbottom.png) no-repeat; padding: 15px 0; }
+.lefttop { background: url(images/sidebartop.png) no-repeat; padding: 15px 0; }
+.leftbottom { background: url(images/sidebarbottom.png) no-repeat; padding: 15px 0; }
 
 #footer { 
 background: url(images/footer.png) no-repeat;
