@@ -276,6 +276,8 @@ class MembersController extends \BaseController implements \iController {
 			
 			// output page
 			$this->engine->assign("form", $form->build());
+			$this->engine->assign("is_writable", $tmp->isWritable());
+			$this->engine->assign("not_writable", str_replace("%%DIR%%", $tmp->getPath(), \Language::getContent("enable_tmp_dir")));
 			$this->engine->display("members/import.tpl");
 		
 		}

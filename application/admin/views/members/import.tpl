@@ -12,5 +12,9 @@
 {block name=innerbody}
 <h2>{$lang_import} {$lang_members}</h2>
 
-{$form}
+{if $is_writable}
+	{$form}
+{else}
+	{$not_writable}
+{/if}
 {/block}

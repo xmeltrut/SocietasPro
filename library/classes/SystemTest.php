@@ -200,7 +200,7 @@ class SystemTest {
 			);
 		} else {
 			$data = array (
-				"r" => self::STATUS_FAIL,
+				"r" => self::STATUS_WARNING,
 				"i" => "Not writable"
 			);
 		}

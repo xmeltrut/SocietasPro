@@ -102,6 +102,7 @@ $language_strings = array (
 
 $language_content = array (
 	"email_sent" => "An email has been sent to you. Please check your inbox.",
+	"enable_tmp_dir" => "To enable this feature you must make %%DIR%% writable by the web server.",
 	"forgotten_your_password" => "Forgotten your password?",
 	"install_directory_exists" => "The install directory still exists in public_html. For security reasons, you should remove this.",
 	"new_password" => "Your password has successfully been reset. Your new password is %%PASSWORD%%. You can now use this to log in.",
