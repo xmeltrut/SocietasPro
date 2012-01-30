@@ -21,6 +21,11 @@ class TemplateEngine extends Smarty {
 		// force recompile when developing
 		if (MODE == "DEBUG") {
 			$this->force_compile = true;
+		} else {
+			$tmp = new TmpGateway();
+			if ($tmp->getPath()) {
+				$this->compile_dir = $tmp->getPath()."/templates_c";
+			}
 		}
 		
 		// get the module
