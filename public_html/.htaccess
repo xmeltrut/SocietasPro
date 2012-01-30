@@ -1,5 +1,3 @@
-php_value include_path ".:/Users/chris/Sites/societaspro/edge/library/:/Users/chris/Sites/societaspro/edge/application/common/"
-
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /

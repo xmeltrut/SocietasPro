@@ -33,6 +33,8 @@ class FrontController extends Singleton {
 	 */
 	public function execute () {
 	
+		set_include_path(get_include_path() . PATH_SEPARATOR . "../application/common/");
+		
 		$path = "../application/".$this->getModule()."/";
 		set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 		

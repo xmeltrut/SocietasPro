@@ -28,7 +28,7 @@
 		</tr>
 		{foreachelse}
 		<tr>
-			<td colspan="6">{$lang_no_records_found}</td>
+			<td colspan="7">{$lang_no_records_found}</td>
 		</tr>
 		{/foreach}
 		{if $totalPages > 1}
