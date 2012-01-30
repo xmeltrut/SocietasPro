@@ -211,13 +211,14 @@ class MembersController extends \BaseController implements \iController {
 	
 		// build objects
 		$form = new \FormBuilder();
+		$tmp = new \TmpGateway();
 		
 		// check for actions
 		if (reqSet("action") == "import") {
 		
 			// move file to a common location
 			$fileHash = strtolower(md5($_FILES["upload"]["name"].microtime(true)));
-			$fileLoca = TEMP_DIR."/".$fileHash.".csv";
+			$fileLoca = $tmp->getPath()."/".$fileHash.".csv";
 			move_uploaded_file($_FILES["upload"]["tmp_name"], $fileLoca);
 			
 			// read file
@@ -249,7 +250,7 @@ class MembersController extends \BaseController implements \iController {
 			if (reqSet("action") == "import2") {
 		
 				// get the data file
-				$fileLoca = TEMP_DIR."/".strSantiseFilename($_REQUEST["data"]).".csv";
+				$fileLoca = $tmp->getPath()."/".strSantiseFilename($_REQUEST["data"]).".csv";
 				$file = file($fileLoca);
 				
 				// create a wizard

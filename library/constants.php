@@ -8,8 +8,7 @@
  */
 
 $constants = array (
-	"ITEMS_PER_PAGE" => 25,
-	"TEMP_DIR" => "/tmp"
+	"ITEMS_PER_PAGE" => 25
 );
 
 arrayToConstants($constants);

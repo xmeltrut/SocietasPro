@@ -192,7 +192,8 @@ class SystemTest {
 	 */
 	private function checkTmpDir () {
 	
-		if (is_writable(TEMP_DIR)) {
+		$tmp = new TmpGateway();
+		if ($tmp->isWritable()) {
 			$data = array (
 				"r" => self::STATUS_PASS,
 				"i" => "Writable"
