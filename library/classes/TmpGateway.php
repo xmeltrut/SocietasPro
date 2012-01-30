@@ -19,22 +19,32 @@ class TmpGateway {
 	 */
 	public function __construct () {
 	
-		// if we don't have the function, we'll have to create one
-		if (!function_exists('sys_get_temp_dir')) {
-			function sys_get_temp_dir() {
-				if ( $temp=getenv('TMP') )     return $temp;
-				if ( $temp=getenv('TEMP') )    return $temp;
-				if ( $temp=getenv('TMPDIR') )  return $temp;
-				$temp = tempnam(__FILE__,'');
-				if (file_exists($temp)) {
-					unlink($temp);
-					return dirname($temp);
-				}
-				return false;
-			}
-		}
+		if (defined("TMP_DIR")) {
 		
-		$this->tmpDir = realpath(sys_get_temp_dir());
+			// allows config override
+			$this->tmpDir = TMP_DIR;
+		
+		} else {
+		
+			// if we don't have the function, we'll have to create one
+			if (!function_exists('sys_get_temp_dir')) {
+				function sys_get_temp_dir() {
+					if ( $temp=getenv('TMP') )     return $temp;
+					if ( $temp=getenv('TEMP') )    return $temp;
+					if ( $temp=getenv('TMPDIR') )  return $temp;
+					$temp = tempnam(__FILE__,'');
+					if (file_exists($temp)) {
+						unlink($temp);
+						return dirname($temp);
+					}
+					return false;
+				}
+			}
+			
+			// set the path
+			$this->tmpDir = realpath(sys_get_temp_dir());
+		
+		}
 	
 	}
 	
