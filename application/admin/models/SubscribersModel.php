@@ -55,7 +55,7 @@ class SubscribersModel extends BaseModel implements iModel {
 		auditTrail(14, "", $email);
 		
 		// and return
-		$this->setMessage(LANG_SUCCESS);
+		$this->setMessage(LANG_SUCCESS, true);
 		return true;
 	
 	}
@@ -162,7 +162,7 @@ class SubscribersModel extends BaseModel implements iModel {
 		if ($row = $rec->fetch()) {
 			return new Subscriber($row);
 		} else {
-			$this->setMessage(strFirst(LANG_EMAIL_ADDRESS." ".LANG_ALREADY_EXISTS));
+			$this->setMessage(strFirst(LANG_INVALID." ".LANG_EMAIL_ADDRESS));
 			return false;
 		}
 	
