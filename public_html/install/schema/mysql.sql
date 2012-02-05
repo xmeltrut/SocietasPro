@@ -240,13 +240,9 @@ CREATE TABLE `tbl_subscribers` (
   PRIMARY KEY (`subscriberID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
-INSERT INTO `tbl_config` VALUES('group_name', 'SocietasPro');
-INSERT INTO `tbl_config` VALUES('language', 'en');
-INSERT INTO `tbl_config` VALUES('theme', 'default');
-
--- --------------------------------------------------------
+--
+-- Dumping data for table `tbl_audit_actions`
+--
 
 INSERT INTO `tbl_audit_actions` VALUES(1, 'Create member', '{$lang_create} {$lang_member}');
 INSERT INTO `tbl_audit_actions` VALUES(2, 'Edit member', '{$lang_edit} {$lang_member}');
@@ -273,3 +269,17 @@ INSERT INTO `tbl_audit_actions` VALUES(22, 'Delete subscriber', '{$lang_delete} 
 INSERT INTO `tbl_audit_actions` VALUES(23, 'Create members field', '{$lang_create} {$lang_members} {$lang_field}');
 INSERT INTO `tbl_audit_actions` VALUES(24, 'Edit members field', '{$lang_edit} {$lang_members} {$lang_field}');
 INSERT INTO `tbl_audit_actions` VALUES(25, 'Delete members field', '{$lang_delete} {$lang_members} {$lang_field}');
+
+--
+-- Dumping data for table `tbl_config`
+--
+
+INSERT INTO `tbl_config` VALUES('db_version', '1');
+INSERT INTO `tbl_config` VALUES('feature_blog', 'on');
+INSERT INTO `tbl_config` VALUES('feature_events', 'on');
+INSERT INTO `tbl_config` VALUES('feature_mailing_list', 'on');
+INSERT INTO `tbl_config` VALUES('feature_members', 'on');
+INSERT INTO `tbl_config` VALUES('feature_pages', 'on');
+INSERT INTO `tbl_config` VALUES('group_name', 'SocietasPro');
+INSERT INTO `tbl_config` VALUES('language', 'en');
+INSERT INTO `tbl_config` VALUES('theme', 'default');
