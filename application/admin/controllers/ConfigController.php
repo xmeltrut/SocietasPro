@@ -27,12 +27,15 @@ class ConfigController extends \BaseController implements \iController {
 	
 		// check for actions
 		if (reqSet("action") == "update") {
-			$this->model->setOption("feature_members", $_REQUEST["members"]);
-			$this->model->setOption("feature_mailing_list", $_REQUEST["mailing_list"]);
-			$this->model->setOption("feature_events", $_REQUEST["events"]);
-			$this->model->setOption("feature_pages", $_REQUEST["pages"]);
-			$this->model->setOption("feature_blog", $_REQUEST["blog"]);
+			$rv = array (
+				$this->model->setOption("feature_members", $_REQUEST["members"]),
+				$this->model->setOption("feature_mailing_list", $_REQUEST["mailing_list"]),
+				$this->model->setOption("feature_events", $_REQUEST["events"]),
+				$this->model->setOption("feature_pages", $_REQUEST["pages"]),
+				$this->model->setOption("feature_blog", $_REQUEST["blog"])
+			);
 			$this->engine->setMessage($this->model->getMessage());
+			if (!in_array(false, $rv)) { $this->engine->assign("autoRefresh", true); }
 		}
 		
 		// build a form
@@ -56,8 +59,9 @@ class ConfigController extends \BaseController implements \iController {
 	
 		// check for actions
 		if (reqSet("action") == "update") {
-			$this->model->setOption("group_name", $_REQUEST["group_name"]);
+			$rv = $this->model->setOption("group_name", $_REQUEST["group_name"]);
 			$this->engine->setMessage($this->model->getMessage());
+			if ($rv) { $this->engine->assign("autoRefresh", true); }
 		}
 		
 		// build a form
@@ -76,8 +80,9 @@ class ConfigController extends \BaseController implements \iController {
 	
 		// check for actions
 		if (reqSet("action") == "update") {
-			$this->model->setOption("language", $_REQUEST["language"]);
+			$rv = $this->model->setOption("language", $_REQUEST["language"]);
 			$this->engine->setMessage($this->model->getMessage());
+			if ($rv) { $this->engine->assign("autoRefresh", true); }
 		}
 		
 		// get a list of languages
@@ -111,9 +116,10 @@ class ConfigController extends \BaseController implements \iController {
 			$member->setAdminStyle(reqSet("style"));
 			$membersModel->save($member);
 			
-			$auth->setAdminStyle(reqSet("style"));
+			$rv = $auth->setAdminStyle(reqSet("style"));
 			
 			$this->engine->setMessage($this->model->getMessage());
+			if ($rv) { $this->engine->assign("autoRefresh", true); }
 		
 		}
 		

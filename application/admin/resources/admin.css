@@ -180,6 +180,29 @@ ol.submenu li a:hover, ol.submenu li a:active, ol.submenu li.active a:link, ol.s
 	background: #FFFFFF;
 }
 
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: url("images/overlay.png");
+}
+
+.overlay div#applyingChanges {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -90px;
+	margin-top: -30px;
+	text-align: center;
+	color: #FFFFFF;
+}
+
+.overlay div#applyingChanges img {
+	margin-bottom: 10px;
+}
+
 .right {
 	text-align: right;
 }

@@ -1,6 +1,9 @@
 {extends file="standard.tpl"}
 
 {block name=head}
+	{if isset($autoRefresh)}
+	<meta http-equiv="refresh" content="3" />
+	{/if}
 	{block name=innerhead}{/block}
 {/block}
 
@@ -13,4 +16,13 @@
 	</ol>
 	
 	{block name=innerbody}{/block}
+	
+	{if isset($autoRefresh)}
+	<div class="overlay">
+		<div id="applyingChanges">
+			<img src="/admin/resources/images/loader2.gif" alt="Loading" /><br />
+			{$lang_applying_changes}...
+		</div>
+	</div>
+	{/if}
 {/block}

@@ -147,9 +147,11 @@ class Authorisation extends Singleton {
 	 * Set the admin style
 	 *
 	 * @param int $value AdminStyle
+	 * @return boolean Success
 	 */
 	public function setAdminStyle ($value) {
 		$_SESSION["sp_admin_style"] = intval($value);
+		return true;
 	}
 
 }
