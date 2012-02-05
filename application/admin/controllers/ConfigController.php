@@ -23,6 +23,35 @@ class ConfigController extends \BaseController implements \iController {
 	
 	}
 	
+	public function features () {
+	
+		// check for actions
+		if (reqSet("action") == "update") {
+			$this->model->setOption("feature_members", $_REQUEST["members"]);
+			$this->model->setOption("feature_mailing_list", $_REQUEST["mailing_list"]);
+			$this->model->setOption("feature_events", $_REQUEST["events"]);
+			$this->model->setOption("feature_pages", $_REQUEST["pages"]);
+			$this->model->setOption("feature_blog", $_REQUEST["blog"]);
+			$this->engine->setMessage($this->model->getMessage());
+		}
+		
+		// build a form
+		$form = new \FormBuilder();
+		$toggle = array ("on" => "On", "off" => "Off");
+		$form->addSelect("members", LANG_MEMBERS, $toggle, \Configuration::get("feature_members"));
+		$form->addSelect("mailing_list", LANG_MAILING_LIST, $toggle, \Configuration::get("feature_mailing_list"));
+		$form->addSelect("events", LANG_EVENTS, $toggle, \Configuration::get("feature_events"));
+		$form->addSelect("pages", LANG_PAGES, $toggle, \Configuration::get("feature_pages"));
+		$form->addSelect("blog", LANG_BLOG, $toggle, \Configuration::get("feature_blog"));
+		$form->addHidden("action", "update");
+		$form->addSubmit();
+		
+		// output the page
+		$this->engine->assign("form", $form->build());
+		$this->engine->display("config/features.tpl");
+	
+	}
+	
 	public function index () {
 	
 		// check for actions

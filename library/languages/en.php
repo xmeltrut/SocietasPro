@@ -39,6 +39,7 @@ $language_strings = array (
 	"export_as_csv" => "Export as CSV",
 	"fail" => "Fail",
 	"failed" => "Failed",
+	"features" => "Features",
 	"field" => "Field",
 	"fields" => "Fields",
 	"file" => "File",
