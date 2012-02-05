@@ -46,6 +46,7 @@ $language_strings = array (
 	"file" => "File",
 	"forename" => "Forename",
 	"group" => "Group",
+	"groups" => "Groups",
 	"high_contrast" => "High Contrast",
 	"home" => "Home",
 	"id" => "ID",

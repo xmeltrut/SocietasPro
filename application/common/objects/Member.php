@@ -4,7 +4,7 @@
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
- * @subpackage Admin
+ * @subpackage Common
  */
 
 class Member extends BaseObject {

@@ -13,6 +13,7 @@ class MembersController extends \BaseController implements \iController {
 
 	private $model;
 	private $fieldsModel;
+	private $groupsModel;
 	
 	function __construct () {
 	
@@ -22,9 +23,13 @@ class MembersController extends \BaseController implements \iController {
 		require_once("models/MembersModel.php");
 		$this->model = new \MembersModel();
 		
-		// create a members field model
+		// create a members fields model
 		require_once("models/MembersFieldsModel.php");
 		$this->fieldsModel = new \MembersFieldsModel();
+		
+		// create a members groups model
+		require_once("models/MembersGroupsModel.php");
+		$this->groupsModel = new \MembersGroupsModel();
 	
 	}
 	
@@ -61,6 +66,24 @@ class MembersController extends \BaseController implements \iController {
 		$this->engine->display("members/createfield.tpl");
 	
 	}
+	
+	/**
+	 * Create a new members group
+	 */
+	public function creategroup () {
+	
+		// check for actions
+		if (reqSet("action") == "create") {
+			$this->groupsModel->write($_REQUEST);
+			$this->engine->setMessage($this->groupsModel->getMessage());
+		}
+		
+		// output the page
+		$this->engine->assign("form", $this->groupsForm("create"));
+		$this->engine->display("members/creategroup.tpl");
+	
+	}
+
 	
 	/**
 	 * Export as CSV
@@ -160,23 +183,22 @@ class MembersController extends \BaseController implements \iController {
 	}
 	
 	/**
-	 * Form for members fields
-	 *
-	 * @param string $action Form variable
-	 * @param array $data Default values
+	 * Edit a members groups
 	 */
-	private function fieldsForm ($action, $data = array()) {
+	public function editgroup () {
 	
-		$form = new \FormBuilder();
-		$form->addInput("name", LANG_NAME, arrSet($data, "fieldName"));
-		$form->addSelect("type", LANG_TYPE, $this->fieldsModel->getTypes(), arrSet($data, "fieldType"));
-		$form->addTextArea("options", LANG_OPTIONS, arrSet($data, "fieldOptions"));
-		$form->addHidden("id", arrSet($data, "fieldID"));
-		$form->addHidden("action", $action);
-		$form->addSubmit();
-		$form->setDefaultElement("name");
+		// check for actions
+		if (reqSet("action") == "edit") {
+			$this->groupsModel->write($_REQUEST, \FrontController::getParam(0));
+			$this->engine->setMessage($this->groupsModel->getMessage());
+		}
 		
-		return $form->build();
+		// output page
+		$group = $this->groupsModel->getById(\FrontController::getParam(0));
+		if ($group === false) { throw new \HttpErrorException(404); }
+		
+		$this->engine->assign("form", $this->groupsForm("edit", $group->getAllData()));
+		$this->engine->display("members/editgroup.tpl");
 	
 	}
 	
@@ -201,6 +223,70 @@ class MembersController extends \BaseController implements \iController {
 		$fields = $this->fieldsModel->get();
 		$this->engine->assign("fields", $fields);
 		$this->engine->display("members/fields.tpl");
+	
+	}
+	
+	/**
+	 * Form for members fields
+	 *
+	 * @param string $action Form variable
+	 * @param array $data Default values
+	 */
+	private function fieldsForm ($action, $data = array()) {
+	
+		$form = new \FormBuilder();
+		$form->addInput("name", LANG_NAME, arrSet($data, "fieldName"));
+		$form->addSelect("type", LANG_TYPE, $this->fieldsModel->getTypes(), arrSet($data, "fieldType"));
+		$form->addTextArea("options", LANG_OPTIONS, arrSet($data, "fieldOptions"));
+		$form->addHidden("id", arrSet($data, "fieldID"));
+		$form->addHidden("action", $action);
+		$form->addSubmit();
+		$form->setDefaultElement("name");
+		
+		return $form->build();
+	
+	}
+	
+	/**
+	 * Groups
+	 */
+	public function groups () {
+	
+		// check for actions
+		if (reqSet("action") == "mass") {
+			if ($info = $this->determineMassAction()) {
+				switch ($info["action"]) {
+					case "delete":
+						$this->groupsModel->deleteById($info["ids"], 25);
+						break;
+				}
+			}
+			$this->engine->setMessage($this->groupsModel->getMessage());
+		}
+		
+		// output the page
+		$groups = $this->groupsModel->get();
+		$this->engine->assign("groups", $groups);
+		$this->engine->display("members/groups.tpl");
+	
+	}
+	
+	/**
+	 * Form for members groups
+	 *
+	 * @param string $action Form variable
+	 * @param array $data Default values
+	 */
+	private function groupsForm ($action, $data = array()) {
+	
+		$form = new \FormBuilder();
+		$form->addInput("name", LANG_NAME, arrSet($data, "groupName"));
+		$form->addHidden("id", arrSet($data, "fieldID"));
+		$form->addHidden("action", $action);
+		$form->addSubmit();
+		$form->setDefaultElement("name");
+		
+		return $form->build();
 	
 	}
 	

@@ -1,59 +1,55 @@
 <?php
 /**
- * Locations model
+ * Members groups model
  *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Common
  */
 
-require_once("objects/location.php");
+require_once("objects/MembersGroup.php");
 
-class LocationsModel extends BaseModel implements iModel {
+class MembersGroupsModel extends BaseModel implements iModel {
 
-	protected $tableName = "locations";
+	protected $tableName = "members_groups";
 	
 	function __construct () {
 		parent::__construct();
 	}
 	
 	/**
-	 * Get a list of locations
+	 * Get members groups
 	 *
-	 * @return array Locations
+	 * @return array Fields
 	 */
 	public function get () {
 	
-		// initialise array
 		$arr = array();
 		
-		// query the database
-		$sql = "SELECT * FROM ".DB_PREFIX."locations ";
+		$sql = "SELECT * FROM ".DB_PREFIX."members_groups ";
 		$rec = $this->db->query($sql);
 		
-		// loop through records
 		while ($row = $rec->fetch()) {
-			$arr[] = new Location($row);
+			$arr[] = new MembersGroup($row);
 		}
 		
-		// return results
 		return $arr;
 	
 	}
 	
 	/**
-	 * Get a specific location
+	 * Get a specific group
 	 *
-	 * @param int $id Location ID
-	 * @return Location
+	 * @param int $id Group ID
+	 * @return MembersGroup
 	 */
 	public function getById ($id) {
 	
-		$sql = "SELECT * FROM ".DB_PREFIX."locations WHERE locationID = " . $id;
+		$sql = "SELECT * FROM ".DB_PREFIX."members_groups WHERE groupID = " . $id;
 		$rec = $this->db->query($sql);
 		
 		if ($row = $rec->fetch()) {
-			return new Location($row);
+			return new MembersGroup($row);
 		} else {
 			return false;
 		}
@@ -61,7 +57,7 @@ class LocationsModel extends BaseModel implements iModel {
 	}
 	
 	/**
-	 * Edit or create a location
+	 * Edit or create a field
 	 *
 	 * @param array $d Data
 	 * @param int $id ID or false if creating
@@ -72,16 +68,15 @@ class LocationsModel extends BaseModel implements iModel {
 		// get object
 		if ($id) {
 			$object = $this->getById($id);
-			$auditAction = 4;
+			$auditAction = 27;
 		} else {
-			$object = new Location();
-			$auditAction = 3;
+			$object = new MembersGroup();
+			$auditAction = 26;
 		}
 		
 		// make modifications
 		$writes = array (
-			$object->setName($d["name"]),
-			$object->setDescription($d["description"])
+			$object->setName($d["name"])
 		);
 		
 		if (in_array(false, $writes)) {

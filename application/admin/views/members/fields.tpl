@@ -26,7 +26,7 @@
 		</tr>
 		{foreachelse}
 		<tr>
-			<td colspan="7">{$lang_no_records_found}</td>
+			<td colspan="5">{$lang_no_records_found}</td>
 		</tr>
 		{/foreach}
 	</table>
