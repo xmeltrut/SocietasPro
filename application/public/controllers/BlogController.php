@@ -23,6 +23,27 @@ class BlogController extends \BaseController implements \iController {
 	
 	}
 	
+	public function feed () {
+	
+		// build channel variables
+		$title = \Configuration::get("group_name")." ".LANG_BLOG;
+		$description = LANG_BLOG;
+		$link = \Configuration::getUrl()."/public/blog";
+		
+		// create an rss object
+		$rss = new \RssBuilder($title, $description, $link);
+		
+		// loop through events
+		$posts = $this->model->get(1, "Published");
+		foreach ($posts as $post) {
+			$rss->addElement($post->postName, $post->postContent, $link."/post/".$post->postSlug, $post->postDate);
+		}
+		
+		// and output
+		$rss->output();
+	
+	}
+	
 	public function index () {
 	
 		// get a list of posts
