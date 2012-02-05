@@ -24,11 +24,11 @@
 			
 			<div id="navigation">
 				<a {if $controller == "default"}class="active"{/if} href="{$root}admin">{$lang_home}</a>
-				<a {if $controller == "members"}class="active"{/if} href="{$root}admin/members">{$lang_members}</a>
-				<a {if $controller == "mailinglist"}class="active"{/if} href="{$root}admin/mailinglist">{$lang_mailing_list}</a>
-				<a {if $controller == "events"}class="active"{/if} href="{$root}admin/events">{$lang_events}</a>
-				<a {if $controller == "pages"}class="active"{/if} href="{$root}admin/pages">{$lang_pages}</a>
-				<a {if $controller == "blog"}class="active"{/if} href="{$root}admin/blog">{$lang_blog}</a>
+				{if $toggleMembers == "on"}<a {if $controller == "members"}class="active"{/if} href="{$root}admin/members">{$lang_members}</a>{/if}
+				{if $toggleMailingList == "on"}<a {if $controller == "mailinglist"}class="active"{/if} href="{$root}admin/mailinglist">{$lang_mailing_list}</a>{/if}
+				{if $toggleEvents == "on"}<a {if $controller == "events"}class="active"{/if} href="{$root}admin/events">{$lang_events}</a>{/if}
+				{if $togglePages == "on"}<a {if $controller == "pages"}class="active"{/if} href="{$root}admin/pages">{$lang_pages}</a>{/if}
+				{if $toggleBlog == "on"}<a {if $controller == "blog"}class="active"{/if} href="{$root}admin/blog">{$lang_blog}</a>{/if}
 				<a {if $controller == "config"}class="active"{/if} href="{$root}admin/config">{$lang_configuration}</a>
 				<a {if $controller == "reporting"}class="active"{/if} href="{$root}admin/reporting">{$lang_reporting}</a>
 			</div>

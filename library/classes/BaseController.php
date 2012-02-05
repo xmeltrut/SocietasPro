@@ -22,6 +22,13 @@ abstract class BaseController {
 	function __construct () {
 	
 		$this->engine = new TemplateEngine();
+		
+		// modules on and off
+		$this->engine->assign("toggleMembers", Configuration::get("feature_members"));
+		$this->engine->assign("toggleMailingList", Configuration::get("feature_mailing_list"));
+		$this->engine->assign("toggleEvents", Configuration::get("feature_events"));
+		$this->engine->assign("togglePages", Configuration::get("feature_pages"));
+		$this->engine->assign("toggleBlog", Configuration::get("feature_blog"));
 	
 	}
 	
