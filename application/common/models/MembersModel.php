@@ -226,7 +226,8 @@ class MembersModel extends BaseModel implements iModel {
 	
 		return array (
 			1 => LANG_MEMBER,
-			2 => LANG_ADMINISTRATOR
+			2 => LANG_MANAGER,
+			3 => LANG_ADMINISTRATOR
 		);
 	
 	}

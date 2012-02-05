@@ -57,6 +57,7 @@ $language_strings = array (
 	"logout" => "Logout",
 	"mailing_list" => "Mailing List",
 	"manage" => "Manage",
+	"manager" => "Manager",
 	"member" => "Member",
 	"members" => "Members",
 	"move_down" => "Move Down",

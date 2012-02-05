@@ -74,7 +74,7 @@ function install ($groupName, $language, $email, $password, &$msg) {
 	
 	// create a user
 	$sql = "INSERT INTO ".DB_PREFIX."members (memberEmail, memberPassword, memberPrivileges)
-			VALUES (?, ?, 2)";
+			VALUES (?, ?, 3)";
 	$sth = $db->prepare($sql);
 	$sth->execute(array($email, $pass));
 	

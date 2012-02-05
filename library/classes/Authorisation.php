@@ -110,8 +110,8 @@ class Authorisation extends Singleton {
 			
 			if ($this->encodePassword($password) == $row["memberPassword"]) {
 			
-				// check they are an administrator
-				if ($row["memberPrivileges"] == 2) {
+				// check they are a manager or admin
+				if ($row["memberPrivileges"] >= 2) {
 			
 					// successfully logged in
 					$success = true;
