@@ -10,7 +10,8 @@
 // check for config file
 $configPath = ROOT_DIR."../personalisation/config.php";
 if (!file_exists($configPath)) {
-	die("Unable to locate your config.php file. Please create this before continuing.");
+	echo("Unable to locate your config.php file. Please create this before continuing.");
+	exit(1);
 }
 
 // include files
