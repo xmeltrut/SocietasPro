@@ -32,8 +32,9 @@ class DatabaseException extends Exception {
 			$msg = "FATAL DATABASE ERROR<br />
 					SQL: " . $sql . "<br />
 					Message: " . $db->getError() . "<br />
-					Code: " . $db->getErrorNumber();
+					Code: " . $db->getErrorNumber() . "<br /><br />";
 			print $msg;
+			debug_print_backtrace();
 			exit(1);
 		
 		} else {
