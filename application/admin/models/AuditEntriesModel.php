@@ -154,7 +154,7 @@ class AuditEntriesModel extends BaseModel {
 				?,
 				NOW(),
 				?,
-				?'
+				?
 				)";
 		$sth = $this->db->prepare($sql);
 		return $sth->execute(array($actionID, $memberID, $oldData, $newData));
