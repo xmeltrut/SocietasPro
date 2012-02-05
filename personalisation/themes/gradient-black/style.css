@@ -386,3 +386,7 @@ img.aligncenter {
 #footer a {
 	color: #576475;
 }
+
+.floatright {
+	float: right;
+}

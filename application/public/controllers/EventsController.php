@@ -111,6 +111,27 @@ class EventsController extends \BaseController implements \iController {
 	
 	}
 	
+	public function feed () {
+	
+		// build channel variables
+		$title = \Configuration::get("group_name")." ".LANG_EVENTS;
+		$description = LANG_EVENTS;
+		$link = \Configuration::getUrl()."/public/events";
+		
+		// create an rss object
+		$rss = new \RssBuilder($title, $description, $link);
+		
+		// loop through events
+		$events = $this->model->get();
+		foreach ($events as $event) {
+			$rss->addElement($event->eventName, $event->eventDescription, $link."/".$event->eventID, $event->eventDate);
+		}
+		
+		// and output
+		$rss->output();
+	
+	}
+	
 	public function index () {
 	
 		// get events

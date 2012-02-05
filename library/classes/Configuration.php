@@ -46,9 +46,9 @@ class Configuration extends Singleton {
 	 */
 	public static function getUrl () {
 	
-		$protocol = ($_SERVER["HTTPS"]) ? "https" : "http";
+		$protocol = (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"]) ? "https" : "http";
 		$server = $_SERVER["SERVER_NAME"];
-		return $protocol.":".$server;
+		return $protocol."://".$server;
 	
 	}
 	

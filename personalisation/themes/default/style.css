@@ -130,3 +130,7 @@ font-size: 13px;
 
 .footerleft { float: left; }
 .footerright { float: right; }
+
+.floatright {
+	float: right;
+}
