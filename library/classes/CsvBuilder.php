@@ -42,13 +42,18 @@ class CsvBuilder {
 	
 	/**
 	 * Output the CSV file
+	 *
+	 * @param boolean $setHeaders Set the headers
 	 */
-	public function output () {
+	public function output ($setHeaders = true) {
 	
-		header("Content-type: application/csv");
-		header("Content-Disposition: attachment; filename=".$this->filename.".csv");
-		header("Pragma: no-cache");
-		header("Expires: 0");
+		if ($setHeaders) {
+			header("Content-type: application/csv");
+			header("Content-Disposition: attachment; filename=".$this->filename.".csv");
+			header("Pragma: no-cache");
+			header("Expires: 0");
+		}
+		
 		print $this->output;
 	
 	}

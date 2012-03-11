@@ -9,22 +9,21 @@
  * @todo Finish this
  */
 
-class CsvBuilderTests extends PHPUnit_Framework_TestCase {
+class CsvBuilderTest extends PHPUnit_Framework_TestCase {
 
-	private $object;
+	protected $object;
+	protected $sampleData;
 	
-	public function setUp () {
+	protected function setUp () {
 		$this->object = new CsvBuilder("test");
+		$this->sampleData = array("a", "b", "c");
 	}
 	
 	/**
 	 * Test the constructor
 	 */
 	public function testConstruct () {
-	
-		
 		$this->assertInstanceOf("CsvBuilder", $this->object);
-	
 	}
 	
 	/**
@@ -33,11 +32,18 @@ class CsvBuilderTests extends PHPUnit_Framework_TestCase {
 	 * @depends testConstruct
 	 */
 	public function testAddRow () {
-	
-		$arr = array("a", "b", "c");
-		$result = $this->object->addRow($arr);
+		$result = $this->object->addRow($this->sampleData);
 		$this->assertTrue($result);
-	
 	}
+	
+	/**
+	 * Test output
+	 *
+	 * @depends testAddRow
+	 */
+	/*public function testOutput () {
+		$this->expectOutputString(implode(",", $this->sampleData));
+		$this->object->output(false);
+	}*/
 
 }
