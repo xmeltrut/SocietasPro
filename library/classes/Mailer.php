@@ -21,7 +21,7 @@ class Mailer {
 	 * @return boolean Success
 	 */
 	public function addRecipient ($value) {
-		if (is_string($value)) {
+		if (is_string($value) && preg_match("/(.+)@([a-z0-9-]+).([a-z\.]+)/i", $value)) {
 			$this->recipients[] = $value;
 			return true;
 		} else {

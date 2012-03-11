@@ -39,6 +39,7 @@ class RssBuilder {
 	 * @param string $description Description
 	 * @param string $link Link
 	 * @param string $date PubDate
+	 * @return boolean Success
 	 */
 	public function addElement ($title, $description, $link, $date) {
 	
@@ -55,6 +56,8 @@ class RssBuilder {
 			"link" => $link,
 			"pubDate" => date("r", strtotime($date))
 		);
+		
+		return true;
 	
 	}
 	

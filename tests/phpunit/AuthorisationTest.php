@@ -5,19 +5,24 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package UnitTests
  * @subpackage Library
+ *
+ * @todo Finish this
  */
 
 class AuthorisationTest extends PHPUnit_Framework_TestCase {
 
-	private $object;
+	protected $object;
 	
-	public function setUp () {
-		//require_once("../../library/classes/Authorisation.php");
-		//$this->object = Authorisation::getInstance();
+	protected function setUp () {
+		$this->object = Authorisation::getInstance();
+	}
+	
+	public function testConstruct () {
+		$this->assertInstanceOf("Authorisation", $this->object);
 	}
 	
 	public function testIsLoggedIn () {
-		//$value = $this->object->isLoggedIn();
+		$value = $this->object->isLoggedIn();
 		$this->assertFalse($value);
 	}
 

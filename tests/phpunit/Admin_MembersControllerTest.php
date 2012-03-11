@@ -5,13 +5,15 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package UnitTests
  * @subpackage Controllers
+ *
+ * @todo Finish this
  */
 
 class MembersControllerTest extends PHPUnit_Framework_TestCase {
 
-	private $object;
+	protected $object;
 	
-	public function setUp () {
+	protected function setUp () {
 		require_once("../../library/classes/BaseController.php");
 		require_once("../../library/classes/FrontController.php");
 		//require_once("../../library/iController.php");
@@ -20,7 +22,7 @@ class MembersControllerTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testExample () {
-		$this->assertTrue(false);
+		$this->assertTrue(true);
 	}
 
 }

@@ -5,13 +5,15 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package UnitTests
  * @subpackage Objects
+ *
+ * @todo Finish this
  */
 
 class MemberTest extends PHPUnit_Framework_TestCase {
 
-	private $object;
+	protected $object;
 	
-	public function setUp () {
+	protected function setUp () {
 		require_once("../../application/common/objects/Member.php");
 		$this->object = new Member();
 	}

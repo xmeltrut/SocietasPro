@@ -10,7 +10,7 @@
 class RemoteRequest {
 
 	private $url;
-	private $params;
+	private $params = array();
 	private $response;
 	
 	/**
