@@ -12,7 +12,15 @@ require("../../library/bootstrap.php");
 
 // autoload function
 function autoloadForTest($className) {
-	require("../../library/templates/{$className}.php");
+	$filePath = "../../library/classes/{$className}.php";
+	if (file_exists($filePath)) {
+		require($filePath);
+	/*} else {
+		print("Unable to locate $className\n");
+		$e = new Exception;
+		var_dump($e->getTraceAsString());
+		exit(1);*/
+	}
 }
 
 // register autoload function

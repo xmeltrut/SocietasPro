@@ -11,7 +11,7 @@ class MembersControllerTest extends PHPUnit_Framework_TestCase {
 
 	private $object;
 	
-	public static function setUpBeforeClass () {
+	public function setUp () {
 		require_once("../../library/classes/BaseController.php");
 		require_once("../../library/classes/FrontController.php");
 		//require_once("../../library/iController.php");

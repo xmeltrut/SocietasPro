@@ -11,8 +11,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase {
 
 	private $object;
 	
-	public static function setUpBeforeClass () {
-		require_once("../../library/classesFormBuilder.php");
+	public function setUp () {
 		$this->object = new FormBuilder();
 	}
 

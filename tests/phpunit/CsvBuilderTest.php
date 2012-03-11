@@ -11,12 +11,16 @@ class CsvBuilderTests extends PHPUnit_Framework_TestCase {
 
 	private $object;
 	
+	public function setUp () {
+		$this->object = new CsvBuilder("test");
+	}
+	
 	/**
 	 * Test the constructor
 	 */
 	public function testConstruct () {
 	
-		$this->object = new CsvBuilder("test");
+		
 		$this->assertInstanceOf("CsvBuilder", $this->object);
 	
 	}
