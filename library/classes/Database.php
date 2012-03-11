@@ -30,8 +30,7 @@ class Database extends Singleton {
 			self::$instance = new $className;
 			
 			try {
-				self::$connection = new PdoWrapper("mysql:host=".DB_HOST.";dbname=".DB_NAME,DB_USER,DB_PASS);
-				//self::$connection = new PdoWrapper("sqlite:/tmp/societaspro.sq3");
+				self::$connection = new PdoWrapper(DB_TYPE.":host=".DB_HOST.";dbname=".DB_NAME,DB_USER,DB_PASS);
 				self::$connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 			} catch (PDOException $e) {
 				throw new GeneralException($e->getMessage());

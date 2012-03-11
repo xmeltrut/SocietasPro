@@ -408,6 +408,7 @@ class MembersController extends \BaseController implements \iController {
 	 */
 	private function standardForm ($action, $data = array()) {
 	
+		// add standard form elements
 		$form = new \FormBuilder();
 		$form->addInput("email", LANG_EMAIL, arrSet($data, "memberEmail"));
 		$form->addInput("forename", LANG_FORENAME, arrSet($data, "memberForename"));
@@ -417,6 +418,15 @@ class MembersController extends \BaseController implements \iController {
 		$form->addTextArea("address", LANG_ADDRESS, arrSet($data, "memberAddress"));
 		$form->addTextArea("notes", LANG_NOTES, arrSet($data, "memberNotes"));
 		
+		// add groups
+		$groups = $this->groupsModel->get();
+		for ($i = 0; $i < count($groups); $i++) {
+			$group = $groups[$i];
+			$form->addCheckbox("groups", LANG_GROUPS, $group->groupName, "123");
+			$form->addCheckbox("groups", "", "Name of element", "123");
+		}
+		
+		// add custom fields
 		$fields = $this->fieldsModel->get();
 		foreach ($fields as $field) {
 			$fieldID = "custom".$field->fieldID;
@@ -432,6 +442,7 @@ class MembersController extends \BaseController implements \iController {
 			}
 		}
 		
+		// finish form
 		$form->addHidden("id", arrSet($data, "memberID"));
 		$form->addHidden("action", $action);
 		$form->addSubmit();

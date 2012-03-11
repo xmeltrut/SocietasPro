@@ -40,6 +40,26 @@ class FormBuilder {
 	}
 	
 	/**
+	 * Add a checkbox
+	 *
+	 * @param string $name Name to give the element
+	 * @param string $label Text for label
+	 * @param string $description Text next to element
+	 * @param string $value Value of element
+	 * @param boolena $default Checked by default
+	 */
+	public function addCheckbox ($name, $label, $description, $value, $default = false) {
+	
+		$checked = ($default) ? 'checked="checked"' : '';
+		$label = ($label == "") ? "&nbsp;" : $label;
+		
+		$code = '<label class="noclick">'.$label.'</label>
+				<input type="checkbox" name="'.$name.'" id="'.$name.'" value="'.$name.'" $checked /> '.$description;
+		$this->appendRow($code);
+	
+	}
+	
+	/**
 	 * Add a date/time selector.
 	 *
 	 * @param string $name Name of the element

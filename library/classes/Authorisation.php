@@ -28,8 +28,8 @@ class Authorisation extends Singleton {
 	 * @return int AdminStyle
 	 */
 	public function getAdminStyle () {
-		if (isset($_SESSION["sp_admin_style"])) {
-			return intval($_SESSION["sp_admin_style"]);
+		if (SessionManager::get("sp_admin_style")) {
+			return intval(SessionManager::get("sp_admin_style"));
 		} else {
 			return 0;
 		}
@@ -41,8 +41,8 @@ class Authorisation extends Singleton {
 	 * @return int ID
 	 */
 	public function getID () {
-		if (isset($_SESSION["sp_user_id"])) {
-			return intval($_SESSION["sp_user_id"]);
+		if (SessionManager::get("sp_user_id")) {
+			return intval(SessionManager::get("sp_user_id"));
 		} else {
 			return 0;
 		}
@@ -50,16 +50,11 @@ class Authorisation extends Singleton {
 	
 	/**
 	 * Singleton
-	 *
-	 * @param boolean $withSession Sometimes, we may just want functionality
 	 */
-	public static function getInstance ($withSession = true) {
+	public static function getInstance () {
 		if (!isset(self::$instance)) {
 			$className = __CLASS__;
 			self::$instance = new $className;
-			if ($withSession) {
-				session_start();
-			}
 		}
 		return self::$instance;
 	}
@@ -71,8 +66,8 @@ class Authorisation extends Singleton {
 	 */
 	public function isLoggedIn () {
 	
-		if (isset($_SESSION["sp_logged_in"])) {
-			if ($_SESSION["sp_logged_in"] == "true") {
+		if (SessionManager::get("sp_logged_in")) {
+			if (SessionManager::get("sp_logged_in") == "true") {
 				return true;
 			}
 		}
@@ -124,9 +119,9 @@ class Authorisation extends Singleton {
 		
 		// check for success
 		if ($success) {
-			$_SESSION["sp_logged_in"] = "true";
-			$_SESSION["sp_user_id"] = $row["memberID"];
-			$_SESSION["sp_admin_style"] = $row["memberAdminStyle"];
+			SessionManager::set("sp_logged_in", "true");
+			SessionManager::set("sp_user_id", $row["memberID"]);
+			SessionManager::set("sp_admin_style", $row["memberAdminStyle"]);
 			return true;
 		} else {
 			$msg = "There was no match for the username and password.";
@@ -139,7 +134,7 @@ class Authorisation extends Singleton {
 	 * Log a user out
 	 */
 	public function logout () {
-		$_SESSION["sp_logged_in"] = "false";
+		SessionManager::set("sp_logged_in", "false");
 		session_destroy();
 	}
 	
@@ -150,7 +145,7 @@ class Authorisation extends Singleton {
 	 * @return boolean Success
 	 */
 	public function setAdminStyle ($value) {
-		$_SESSION["sp_admin_style"] = intval($value);
+		SessionManager::set("sp_admin_style", intval($value));
 		return true;
 	}
 

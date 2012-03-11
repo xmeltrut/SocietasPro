@@ -69,7 +69,7 @@ function install ($groupName, $language, $email, $password, &$msg) {
 	$sth->execute(array($language, "language"));
 	
 	// encode user's password
-	$auth = Authorisation::getInstance(false);
+	$auth = Authorisation::getInstance();
 	$pass = $auth->encodePassword($password);
 	
 	// create a user

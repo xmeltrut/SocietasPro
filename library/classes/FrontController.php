@@ -150,13 +150,16 @@ class FrontController extends Singleton {
 	 */
 	private function parseVariables () {
 	
+		// requested uri
+		$requestedUri = isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : "/";
+		
 		// get the requested URI
 		if (ROOT == "/") {
 			// mod_rewrite
-			$url = $_SERVER["REQUEST_URI"];
+			$url = $requestedUri;
 		} else {
 			// we're not using mod_rewrite
-			$url = str_replace(ROOT, "", $_SERVER["REQUEST_URI"]);
+			$url = str_replace(ROOT, "", $requestedUri);
 		}
 		
 		// remove any querystring

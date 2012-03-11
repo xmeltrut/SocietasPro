@@ -7,8 +7,6 @@
  * @subpackage Core
  */
 
-require("classes/TemplateEngine.php");
-
 abstract class BaseController {
 
 	/**

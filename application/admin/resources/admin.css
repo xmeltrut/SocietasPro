@@ -90,6 +90,10 @@ label {
 	cursor: pointer;
 }
 
+label.noclick {
+	cursor: auto;
+}
+
 .message {
 	margin-top: 10px;
 	padding: 1em;
