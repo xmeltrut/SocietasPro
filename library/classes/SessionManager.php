@@ -4,13 +4,6 @@
  * we can isolate the functions for testing, or if we want to
  * store session information in a different manner.
  *
- * It is implemented in a "singleton-like" pattern, where you can
- * only have one instance, but that is created automatically
- * when you call one of it's functions.
- *
- * This needs refactoring into a proper singleton, so we can allow
- * people ot instance it without actually using session cookies.
- *
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Core
@@ -21,19 +14,37 @@ class SessionManager extends Singleton {
 	private static $instance;
 	
 	/**
+	 * Whether or not to use persistent data
+	 */
+	private static $persistent;
+	
+	/**
+	 * If we are not using persistent data, we will store the session
+	 * data in here
+	 */
+	private $data;
+	
+	/**
 	 * Get a session variable
 	 *
 	 * @param string $key Session variable key
 	 * @return mixed Value
 	 */
-	public static function get ($key) {
+	public function get ($key) {
 	
-		self::getInstance();
-		
-		if (isset($_SESSION[$key])) {
-			return $_SESSION[$key];
+		if (self::$persistent) {
+			if (isset($_SESSION[$key])) {
+				return $_SESSION[$key];
+			} else {
+				return false;
+			}
 		} else {
-			return false;
+			if (isset($this->data[$key])) {
+				return $this->data[$key];
+			} else {
+				return false;
+			}
+
 		}
 	
 	}
@@ -41,15 +52,21 @@ class SessionManager extends Singleton {
 	/**
 	 * Singleton
 	 *
-	 * @return boolean Success
+	 * @param boolean $persistent Use persistence or not
 	 */
-	private static function getInstance () {
+	public static function getInstance ($persistent = true) {
 		if (!isset(self::$instance)) {
 			$className = __CLASS__;
 			self::$instance = new $className;
-			session_start();
+			
+			if ($persistent) {
+				self::$persistent = true;
+				session_start();
+			} else {
+				self::$persistent = false;
+			}
 		}
-		return true;
+		return self::$instance;
 	}
 	
 	/**
@@ -59,11 +76,14 @@ class SessionManager extends Singleton {
 	 * @param mixed $value Value
 	 * @return boolean Success
 	 */
-	public static function set ($key, $value) {
+	public function set ($key, $value) {
 	
-		self::getInstance();
+		if (self::$persistent) {
+			$_SESSION[$key] = $value;
+		} else {
+			$this->data[$key] = $value;
+		}
 		
-		$_SESSION[$key] = $value;
 		return true;
 	
 	}

@@ -29,5 +29,5 @@ foreach ($includePaths as $path) {
 }
 
 // start the session
-session_start();
+SessionManager::getInstance(false);
 

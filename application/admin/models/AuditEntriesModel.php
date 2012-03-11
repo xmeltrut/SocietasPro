@@ -144,7 +144,8 @@ class AuditEntriesModel extends BaseModel {
 	public function insert ($actionID, $oldData = "", $newData = "") {
 	
 		// grab the user ID
-		$memberID = intval(SessionManager::get("sp_user_id"));
+		$session = SessionManager::getInstance();
+		$memberID = intval($session->get("sp_user_id"));
 		
 		// insert into database
 		$sql = "INSERT INTO ".DB_PREFIX."audit_entries (
