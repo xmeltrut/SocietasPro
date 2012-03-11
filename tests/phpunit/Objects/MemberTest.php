@@ -5,8 +5,6 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package UnitTests
  * @subpackage Objects
- *
- * @todo Finish this
  */
 
 class MemberTest extends PHPUnit_Framework_TestCase {

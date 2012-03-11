@@ -35,15 +35,32 @@ class UnitTestScanner extends FileScanner implements iScanner {
 			
 			// find class definitions
 			if (preg_match('/^class ([a-z]+)([a-z \\\]*)\{/i', $code, $matches)) {
+			
 				$filename = $matches[1]."Test.php";
 				if ($namespace != "") {
 					$filename = ucfirst($namespace)."_".$filename;
 				}
-				$path = "../phpunit/".$filename;
-				if (!file_exists($path)) {
+				
+				$directories = array (
+					"Controllers",
+					"Core",
+					"Library",
+					"Models",
+					"Objects"
+				);
+				
+				$testExists = false;
+				
+				foreach ($directories as $directory) {
+					if (file_exists("../phpunit/".$directory."/".$filename)) {
+						$testExists = true;
+					}
+				}
+				
+				if ($testExists === false) {
 					$this->log(LEVEL_NOTICE, "Unit test missing (".$filename.")", $line, $code);
 				}
-			} else {
+			
 			}
 		
 		}

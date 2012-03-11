@@ -86,7 +86,10 @@ class ErrorLogsModel extends BaseModel {
 			?
 			)";
 		$sth = $this->db->prepare($sql);
-		return $sth->execute(array($code, $_SERVER["REQUEST_URI"], $details, $sql));;
+		
+		$uri = isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : "";
+		
+		return $sth->execute(array($code, $uri, $details, $sql));;
 	}
 
 }
