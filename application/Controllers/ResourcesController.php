@@ -5,13 +5,15 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
+ *
+ * @todo Do we use this? Does it work?
  */
 
 namespace \SocietasPro\Controllers;
 
 use SocietasPro\BaseController;
 
-class ResourcesController extends BaseController implements \iController {
+class ResourcesController extends BaseController {
 
 	function __construct () {
 		parent::__construct();

@@ -5,11 +5,15 @@
  * @author Chris Worfolk <chris@societaspro.org>
  * @package SocietasPro
  * @subpackage Admin
+ *
+ * @todo Actually look at this class
  */
 
-namespace \SocietasPro\Controllers;
+namespace Controllers;
 
-class ErrorController extends \BaseController implements \iController {
+
+
+class ErrorController extends BaseController {
 
 	function __construct () {
 		parent::__construct();

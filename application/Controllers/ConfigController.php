@@ -11,13 +11,12 @@ namespace Controllers;
 
 use Model;
 use Framework\Abstracts\BaseController;
-use Framework\Interfaces\iController;
 use Framework\Forms\FormBuilder;
 use Framework\Core\Configuration;
 use Framework\Security\Authorisation;
 use Framework\Language\Language;
 
-class ConfigController extends BaseController implements iController {
+class ConfigController extends BaseController {
 
 	private $model;
 	

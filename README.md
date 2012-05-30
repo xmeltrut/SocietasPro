@@ -41,3 +41,4 @@ To do list
 * Make use of cache folder and templates_c
 * Update .gitignore file
 * Do something with Scanner
+* Check throwing of Exceptions

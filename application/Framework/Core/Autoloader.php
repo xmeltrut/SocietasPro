@@ -32,8 +32,8 @@ class Autoloader {
 			if (file_exists($path)) {
 				require_once($path);
 			} else {
-				echo("<strong>CLASS MISSING!</strong>");
-				debug_print_backtrace();
+				//echo("<strong>CLASS MISSING!</strong>");
+				//debug_print_backtrace();
 			}
 		
 		} else {

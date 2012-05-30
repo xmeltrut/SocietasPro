@@ -10,13 +10,12 @@
 namespace Controllers;
 
 use Framework\Abstracts\BaseController;
-use Framework\Interfaces\iController;
 use Framework\Database\Database;
 use Framework\Utilities\RemoteRequest;
 use Framework\Core\Kernel;
 use Framework\Twitter\TwitterTimeline;
 
-class DefaultController extends BaseController implements iController {
+class DefaultController extends BaseController {
 
 	function __construct () {
 		parent::__construct();

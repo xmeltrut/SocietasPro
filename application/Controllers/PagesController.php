@@ -11,12 +11,11 @@ namespace Controllers;
 
 use Model;
 use Framework\Abstracts\BaseController;
-use Framework\Interfaces\iController;
 use Framework\Utilities\ArrayUtilities;
 use Framework\Http\FrontController;
 use Framework\Forms\FormBuilder;
 
-class PagesController extends BaseController implements iController {
+class PagesController extends BaseControlle {
 
 	private $model;
 	

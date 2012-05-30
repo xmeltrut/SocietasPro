@@ -13,7 +13,6 @@ use Model\MembersModel;
 use Model\MembersFieldsModel;
 use Model\MembersGroupsModel;
 use Framework\Abstracts\BaseController;
-use Framework\Interfaces\iController;
 use Framework\Http\Request;
 use Framework\Http\FrontController;
 use Framework\Utilities\Pagination;
@@ -24,7 +23,7 @@ use Framework\Language\Language;
 use Framework\Wizards\ImportMembersWizard;
 use Framework\Logging\AuditLogger;
 
-class MembersController extends BaseController implements iController {
+class MembersController extends BaseController {
 
 	private $model;
 	private $fieldsModel;

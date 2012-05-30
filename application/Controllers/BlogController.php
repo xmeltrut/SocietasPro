@@ -11,13 +11,12 @@ namespace Controllers;
 
 use Model\BlogPostsModel;
 use Framework\Abstracts\BaseController;
-use Framework\Interfaces\iController;
 use Framework\Utilities\Pagination;
 use Framework\Utilities\ArrayUtilities;
 use Framework\Http\FrontController;
 use Framework\Forms\FormBuilder;
 
-class BlogController extends BaseController implements iController {
+class BlogController extends BaseController {
 
 	private $model;
 	

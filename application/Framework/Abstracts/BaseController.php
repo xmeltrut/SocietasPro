@@ -11,8 +11,9 @@ namespace Framework\Abstracts;
 
 use Framework\Http\TemplateEngine;
 use Framework\Core\Configuration;
+use Framework\Interfaces\iController;
 
-abstract class BaseController {
+abstract class BaseController implements iController {
 
 	/**
 	 * Instance variable to hold template engine object.
