@@ -15,6 +15,7 @@ use Framework\Interfaces\iController;
 use Framework\Utilities\CsvBuilder;
 use Framework\Forms\FormBuilder;
 use Framework\Wizards\ImportSubscribersWizard;
+use Framework\Logging\AuditTrail;
 
 class MailinglistController extends BaseController implements iController {
 
@@ -50,7 +51,7 @@ class MailinglistController extends BaseController implements iController {
 		}
 		
 		// log as an action in the audit trail
-		auditTrail(13);
+		AuditTrail::log(13);
 		
 		// output the result
 		$csv->output();

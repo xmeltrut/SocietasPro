@@ -13,6 +13,8 @@
 
 namespace Framework\Wizards;
 
+use Model;
+
 class ImportSubscribersWizard {
 
 	/**
@@ -32,8 +34,7 @@ class ImportSubscribersWizard {
 		$subscribers = explode(";", $data);
 		
 		// create a subscribers model
-		require_once("models/SubscribersModel.php");
-		$subscribersModel = new SubscribersModel();
+		$subscribersModel = new Model\SubscribersModel();
 		
 		// loop through entries
 		$successCount = 0;

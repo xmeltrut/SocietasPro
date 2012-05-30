@@ -11,6 +11,7 @@ namespace Model;
 
 use Framework\Abstracts\BaseModel;
 use Framework\Interfaces\iModel;
+use Framework\Logging\AuditTrail;
 
 class MembersFieldsModel extends BaseModel implements iModel {
 
@@ -128,7 +129,7 @@ class MembersFieldsModel extends BaseModel implements iModel {
 		
 		if ($object->hasChanged()) {
 			if ($this->save($object)) {
-				auditTrail($auditAction, $object->original(), $object);
+				AuditTrail::log($auditAction, $object->original(), $object);
 				$this->setMessage(LANG_SUCCESS);
 				return true;
 			}

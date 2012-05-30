@@ -35,7 +35,7 @@ class EventsModel extends BaseModel implements iModel {
 		
 		if ($this->save($event)) {
 			$newData = json_encode(array("eventID" => $this->db->lastInsertId()));
-			auditTrail(15, $event->original(), $newData);
+			AuditTrail::log(15, $event->original(), $newData);
 			$this->setMessage(LANG_SUCCESS);
 			return true;
 		} else {

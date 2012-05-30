@@ -15,13 +15,14 @@ use Model\MembersGroupsModel;
 use Framework\Abstracts\BaseController;
 use Framework\Interfaces\iController;
 use Framework\Http\Request;
+use Framework\Http\FrontController;
 use Framework\Utilities\Pagination;
 use Framework\Utilities\ArrayUtilities;
 use Framework\Forms\FormBuilder;
-use Framework\Http\FrontController;
 use Framework\Core\TmpGateway;
 use Framework\Language\Language;
 use Framework\Wizards\ImportMembersWizard;
+use Framework\Logging\AuditLogger;
 
 class MembersController extends BaseController implements iController {
 
@@ -142,7 +143,7 @@ class MembersController extends BaseController implements iController {
 		}
 		
 		// log as an action in the audit trail
-		auditTrail(12);
+		AuditTrail::log(12);
 		
 		// output the result
 		$csv->output();
@@ -203,7 +204,7 @@ class MembersController extends BaseController implements iController {
 	
 		// check for actions
 		if ($request->set("action") == "edit") {
-			$this->groupsModel->write($_REQUEST, \FrontController::getParam(0));
+			$this->groupsModel->write($_REQUEST, FrontController::getParam(0));
 			$this->engine->setMessage($this->groupsModel->getMessage());
 		}
 		

@@ -10,6 +10,7 @@
 namespace Framework\Abstracts;
 
 use Framework\Database\Database;
+use Framework\Logging\AuditTrail;
 
 abstract class BaseModel {
 
@@ -80,7 +81,7 @@ abstract class BaseModel {
 					
 					// log to audit trail
 					if ($auditAction) {
-						auditTrail($auditAction, json_encode($row));
+						AuditTrail::log($auditAction, json_encode($row));
 					}
 				
 				}

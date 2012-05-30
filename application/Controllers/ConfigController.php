@@ -9,7 +9,7 @@
 
 namespace Controllers;
 
-use Model\ConfigModel;
+use Model;
 use Framework\Abstracts\BaseController;
 use Framework\Interfaces\iController;
 use Framework\Forms\FormBuilder;
@@ -26,7 +26,7 @@ class ConfigController extends BaseController implements iController {
 		parent::__construct();
 		
 		// create a model
-		$this->model = new ConfigModel();
+		$this->model = new Model\ConfigModel();
 	
 	}
 	
@@ -116,7 +116,7 @@ class ConfigController extends BaseController implements iController {
 		// check for actions
 		if ($request->set("action") == "update") {
 		
-			$membersModel = new \MembersModel();
+			$membersModel = new Model\MembersModel();
 			
 			$member = $membersModel->getById($auth->getID());
 			$member->setAdminStyle($request->set("style"));

@@ -20,7 +20,7 @@
 	{if isset($autoRefresh)}
 	<div class="overlay">
 		<div id="applyingChanges">
-			<img src="/admin/resources/images/loader2.gif" alt="Loading" /><br />
+			<img src="application/Resources/images/loader2.gif" alt="Loading" /><br />
 			{$lang_applying_changes}...
 		</div>
 	</div>

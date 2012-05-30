@@ -15,6 +15,7 @@ namespace Model;
 
 use Framework\Abstracts\BaseModel;
 use Framework\Logging\AuditTrail;
+use Framework\Core\Configuration;
 
 class ConfigModel extends BaseModel {
 

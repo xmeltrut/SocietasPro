@@ -11,6 +11,7 @@ namespace Model;
 
 use Framework\Abstracts\BaseModel;
 use Framework\Interfaces\iModel;
+use Framework\Logging\AuditTrail;
 
 class PagesModel extends BaseModel implements iModel {
 
@@ -33,7 +34,7 @@ class PagesModel extends BaseModel implements iModel {
 		
 		if ($this->save($page)) {
 			$newData = json_encode(array("pageID" => $this->db->lastInsertId()));
-			auditTrail(16, $page->original(), $newData);
+			AuditTrail::log(16, $page->original(), $newData);
 			$this->setMessage(LANG_SUCCESS);
 			return true;
 		} else {
@@ -446,7 +447,7 @@ class PagesModel extends BaseModel implements iModel {
 		
 		if ($object->hasChanged()) {
 			if ($this->save($object)) {
-				auditTrail($auditAction, $object->original(), $object);
+				AuditTrail::log($auditAction, $object->original(), $object);
 				$this->setMessage(LANG_SUCCESS);
 				return true;
 			}

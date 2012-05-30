@@ -79,7 +79,7 @@ class SubscribersModel extends BaseModel implements iModel {
 			$sql = "DELETE FROM ".DB_PREFIX."subscribers WHERE subscriberEmail = ? ";
 			$sth = $this->db->prepare($sql);
 			if ($sth->execute(array($email))) {
-				auditTrail(22, $subscriber);
+				AuditTrail::log(22, $subscriber);
 				$this->setMessage(LANG_SUCCESS);
 				return true;
 			} else {

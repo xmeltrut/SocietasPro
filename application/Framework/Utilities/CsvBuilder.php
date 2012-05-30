@@ -7,6 +7,8 @@
  * @subpackage Utilities
  */
 
+namespace Framework\utilities;
+
 class CsvBuilder {
 
 	private $output = "";

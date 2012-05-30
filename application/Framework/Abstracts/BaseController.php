@@ -52,7 +52,7 @@ abstract class BaseController {
 		// do we have a match?
 		if (count($matches)) {
 		
-			$values = explode("_", $matches[0]);
+			$values = explode("_", $matches[1]);
 			return array ( "action" => $values[0], "ids" => intval($values[1]) );
 		
 		} else {
