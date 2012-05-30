@@ -1,0 +1,239 @@
+a:link, a:visited {
+	color: #0000FF;
+	text-decoration: underline;
+}
+
+a:hover, a:active {
+	color: #3399FF;
+	text-decoration: underline;
+}
+
+body {
+	font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+}
+
+.clear {
+	clear: both;
+}
+
+form ol {
+	padding: 0;
+}
+
+form ol li {
+	margin-bottom: 0.5em;
+	list-style-type: none;
+}
+
+form ol li input[type=text].stdRow, form ol li input[type=password].stdRow {
+	width: 30em;
+}
+
+form ol li label {
+	width: 10em;
+	float: left;
+}
+
+form ol li textarea.stdRow {
+	width: 30em;
+	height: 5em;
+}
+
+form ol li textarea.visualEditor {
+	width: 45em;
+	height: 30em;
+}
+
+h1 {
+	min-height: 40px;
+	margin: 0 0 5px 20px;
+	padding-left: 50px;
+	background: url("../images/logo.png") center left no-repeat;
+	cursor: default;
+}
+
+h2 {
+	margin: 0.5em 0;
+}
+
+#header {
+	color: #333333;
+}
+
+#header hr {
+	display: none;
+}
+
+#header ul {
+	float: right;
+	margin: 19px 0 0 0;
+	padding: 0;
+}
+
+#header ul li {
+	float: left;
+	list-style-type: none;
+	padding-right: 1.5em;
+}
+
+#header ul li a:link, #header ul li a:visited {
+	color: #333333;
+	text-decoration: none;
+}
+
+#header ul li a:hover, #header ul li a:active {
+	color: #3399FF;
+	text-decoration: none;
+}
+
+label {
+	cursor: pointer;
+}
+
+label.noclick {
+	cursor: auto;
+}
+
+.message {
+	margin-top: 10px;
+	padding: 1em;
+	border-radius: 5px;
+	font-size: 80%;
+}
+
+#message {
+	background: #99CC66;
+}
+
+#messageInstallDir {
+	background: #CC3333;
+	color: #FFFFFF;
+}
+
+.message hr {
+	display: none;
+}
+
+.message ul {
+	margin: 0;
+	padding-left: 1.5em;
+}
+
+#navigation {
+	height: 50px;
+	line-height: 50px;
+	padding-left: 1em;
+	border: #CCCCCC 1px solid;
+	border-radius: 5px;
+	background-image: url("../images/navigationbg.png");
+	background-position: center left;
+	background-repeat: repeat-x;
+}
+
+#navigation a {
+	display: block;
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	padding: 0 0.7em;
+}
+
+#navigation a.active {
+	background-image: url("../images/highlightbg.png");
+}
+
+#navigation a:link, #navigation a:visited {
+	color: #333333;
+	text-decoration: none;
+}
+
+#navigation a:hover, #navigation a:active {
+	color: #000000;
+	text-decoration: none;
+	background-image: url("../images/highlightbg.png");
+}
+
+ol.submenu {
+	height: 2em;
+	margin-top: 10px;
+	padding: 0;
+	font-size: 80%;
+}
+
+ol.submenu li {
+	float: left;
+	padding: 2px 5px 2px 0;
+	list-style-type: none;
+}
+
+ol.submenu li a {
+	padding: 2px 5px;
+	background: #EEEEEE;
+	border: #CCCCCC 1px solid;
+	border-radius: 4px;
+}
+
+ol.submenu li a:link, ol.submenu li a:visited {
+	color: #333333;
+	text-decoration: none;
+}
+
+ol.submenu li a:hover, ol.submenu li a:active, ol.submenu li.active a:link, ol.submenu li.active a:visited {
+	color: #333333;
+	text-decoration: none;
+	background: #FFFFFF;
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: url("../images/overlay.png");
+}
+
+.overlay div#applyingChanges {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -90px;
+	margin-top: -30px;
+	text-align: center;
+	color: #FFFFFF;
+}
+
+.overlay div#applyingChanges img {
+	margin-bottom: 10px;
+}
+
+.right {
+	text-align: right;
+}
+
+table {
+	margin-bottom: 0.2em;
+	background: #EEEEEE;
+	border: #CCCCCC 1px solid;
+	border-radius: 5px;
+	border-spacing: 3px;
+}
+
+table td {
+	padding: 5px;
+	background: #FFFFFF;
+	border: #CCCCCC 1px solid;
+}
+
+table td.pagingRow {
+	background-image: url("../images/navigationbg.png");
+}
+
+table th {
+	padding: 5px;
+	background-image: url("../images/navigationbg.png");
+	background-position: top left;
+	background-repeat: repeat-x;
+	border: #CCCCCC 1px solid;
+	color: #333333;
+}
