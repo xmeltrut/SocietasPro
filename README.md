@@ -42,3 +42,4 @@ To do list
 * Update .gitignore file
 * Do something with Scanner
 * Check throwing of Exceptions
+* JSLint integration
