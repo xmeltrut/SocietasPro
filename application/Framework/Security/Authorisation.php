@@ -105,12 +105,12 @@ class Authorisation extends Singleton {
 		$success = false;
 		
 		// create a database connection
-		$db = Database::getInstance();
+		$database = Database::getInstance();
 		
 		// select the user
 		$sql = "SELECT * FROM ".DB_PREFIX."members
 				WHERE memberEmail = ? ";
-		$rec = $db->prepare($sql);
+		$rec = $database->prepare($sql);
 		$rec->execute(array($email));
 		
 		if ($rec->rowCount() > 0) {

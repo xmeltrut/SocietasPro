@@ -27,11 +27,11 @@ class ReportingController extends Controller {
 	public function auditlogs () {
 	
 		// get a database instance
-		$db = Database::getInstance();
+		$database = Database::getInstance();
 		
 		// get a list of actions
 		$sql = "SELECT * FROM ".DB_PREFIX."audit_actions ORDER BY actionName ASC ";
-		$rec = $db->query($sql);
+		$rec = $database->query($sql);
 		
 		$actions = array();
 		
@@ -43,7 +43,7 @@ class ReportingController extends Controller {
 		$sql = "SELECT * FROM ".DB_PREFIX."members
 				WHERE memberPrivileges > 1
 				ORDER BY memberSurname ASC, memberForename ASC ";
-		$rec = $db->query($sql);
+		$rec = $database->query($sql);
 		
 		$members = array();
 		

@@ -63,11 +63,11 @@ class Configuration extends Singleton {
 	private static function initialise () {
 	
 		// create a database object
-		$db = Database::getInstance();
+		$database = Database::getInstance();
 		
 		// query for all config options
 		$sql = "SELECT * FROM ".DB_PREFIX."config ";
-		$rec = $db->query($sql);
+		$rec = $database->query($sql);
 		
 		// loop through results
 		self::$data = array();
