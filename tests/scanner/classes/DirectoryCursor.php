@@ -56,15 +56,11 @@ class DirectoryCursor {
 	
 		// add top level directories
 		$this->directoriesToScan = array (
-			"../../application",
-			"../../library"
+			"../../application"
 		);
 		
 		// excluded directories
-		$excludedDirectories = array (
-			"../../library/htmlpurifier",
-			"../../library/smarty"
-		);
+		$excludedDirectories = array ();
 		
 		// scan all directories
 		while ($dir = $this->getNextDirectory()) {

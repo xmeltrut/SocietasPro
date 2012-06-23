@@ -18,7 +18,7 @@ $scanner = new DirectoryCursor();
 $messages = $scanner->scan();
 
 // create a report
-require("../../library/smarty/Smarty.class.php");
+require("../../vendors/smarty/Smarty.class.php");
 $template = new Smarty();
 $template->assign("messages", $messages);
 $template->display("views/report.tpl");
