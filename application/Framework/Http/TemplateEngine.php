@@ -27,18 +27,12 @@ class TemplateEngine extends \Smarty {
 	
 		parent::__construct();
 		
+		// set compilation directory
+		$this->setCompileDir("./personalisation/cache/smarty");
+		
 		// force recompile when developing
 		if (MODE == "DEBUG") {
 			$this->force_compile = true;
-		} else {
-			$tmp = new TmpGateway();
-			if ($tmp->getPath()) {
-				$this->compile_dir = $tmp->getPath()."/cache/smarty";
-			} else {
-				// @todo This is a tempory solution
-				// @todo This doesn't work anyway
-				$this->compile_dir = "cache/smarty";
-			}
 		}
 		
 		// get the module

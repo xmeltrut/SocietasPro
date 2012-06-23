@@ -21,6 +21,7 @@ $checks = array (
 	"Curl",
 	"MagicQuotes",
 	"TmpDir",
+	"CacheDir",
 	"IncludePath",
 	"SplAutoloadRegister"
 );

@@ -73,6 +73,29 @@ class SystemTest {
 	}
 	
 	/**
+	 * Check if the cache directory is writable
+	 *
+	 * @return array Data
+	 */
+	private function checkCacheDir () {
+	
+		if (is_writable("./personalisation/cache")) {
+			$data = array (
+				"r" => self::STATUS_PASS,
+				"i" => "Writable"
+			);
+		} else {
+			$data = array (
+				"r" => self::STATUS_WARNING,
+				"i" => "Not writable"
+			);
+		}
+		
+		return $data;
+	
+	}
+	
+	/**
 	 * Check cURL is installed
 	 *
 	 * @return array Data
