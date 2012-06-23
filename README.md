@@ -32,10 +32,3 @@ PHP Mess Detector
 PHP Copy & Paste Detector
 
 	phpcpd ./application
-
-To do list
-----------
-
-* Do something with Scanner
-* Check throwing of Exceptions
-* JSLint integration
