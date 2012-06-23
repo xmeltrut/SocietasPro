@@ -36,7 +36,6 @@ PHP Copy & Paste Detector
 To do list
 ----------
 
-* Reduce directories in Framework
 * Re-work framework accordingly
 * Make use of cache folder and templates_c
 * Update .gitignore file
