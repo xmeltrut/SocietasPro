@@ -9,11 +9,12 @@
  * @todo Do we use this? Does it work?
  */
 
-namespace \SocietasPro\Controllers;
+namespace Controllers;
 
-use SocietasPro\BaseController;
+use Framework\Core\Controller;
+use Framework\Http\FrontController;
 
-class ResourcesController extends BaseController {
+class ResourcesController extends Controller {
 
 	function __construct () {
 		parent::__construct();
@@ -25,7 +26,7 @@ class ResourcesController extends BaseController {
 	public function images () {
 	
 		// build the image path
-		$image = \FrontController::getParam(0);
+		$image = FrontController::getParam(0);
 		$imagePath = "../application/admin/resources/images/".$image;
 		
 		if (file_exists($imagePath)) {

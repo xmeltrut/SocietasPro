@@ -10,13 +10,13 @@
 namespace Controllers;
 
 use Model;
-use Framework\Abstracts\BaseController;
+use Framework\Core\Controller;
 use Framework\Utilities\CsvBuilder;
 use Framework\Forms\FormBuilder;
 use Framework\Wizards\ImportSubscribersWizard;
 use Framework\Logging\AuditTrail;
 
-class MailinglistController extends BaseController {
+class MailinglistController extends Controller {
 
 	function __construct () {
 	

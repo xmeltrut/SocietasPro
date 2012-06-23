@@ -11,13 +11,13 @@ namespace Controllers;
 
 use Model\EventsModel;
 use Model\LocationsModel;
-use Framework\Abstracts\BaseController;
+use Framework\Core\Controller;
 use Framework\Utilities\Pagination;
 use Framework\Utilities\ArrayUtilities;
 use Framework\Forms\FormBuilder;
 use Framework\Http\FrontController;
 
-class EventsController extends BaseController {
+class EventsController extends Controller {
 
 	private $model;
 	private $locationsModel;

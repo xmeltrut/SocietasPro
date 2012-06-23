@@ -9,7 +9,7 @@
 
 namespace Framework\Database;
 
-use Framework\Abstracts\Singleton;
+use Framework\Core\Singleton;
 
 class Database extends Singleton {
 

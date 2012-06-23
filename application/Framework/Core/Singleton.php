@@ -7,7 +7,7 @@
  * @subpackage Core
  */
 
-namespace Framework\Abstracts;
+namespace Framework\Core;
 
 abstract class Singleton {
 

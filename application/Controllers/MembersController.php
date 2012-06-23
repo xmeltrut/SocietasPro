@@ -12,7 +12,7 @@ namespace Controllers;
 use Model\MembersModel;
 use Model\MembersFieldsModel;
 use Model\MembersGroupsModel;
-use Framework\Abstracts\BaseController;
+use Framework\Core\Controller;
 use Framework\Http\Request;
 use Framework\Http\FrontController;
 use Framework\Utilities\Pagination;
@@ -23,7 +23,7 @@ use Framework\Language\Language;
 use Framework\Wizards\ImportMembersWizard;
 use Framework\Logging\AuditLogger;
 
-class MembersController extends BaseController {
+class MembersController extends Controller {
 
 	private $model;
 	private $fieldsModel;

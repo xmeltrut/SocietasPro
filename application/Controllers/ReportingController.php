@@ -10,12 +10,12 @@
 namespace Controllers;
 
 use Model;
-use Framework\Abstracts\BaseController;
+use Framework\Core\Controller;
 use Framework\Database\Database;
 use Framework\Utilities\Pagination;
 use Framework\Http\FrontController;
 
-class ReportingController extends BaseController {
+class ReportingController extends Controller {
 
 	function __construct () {
 		parent::__construct();

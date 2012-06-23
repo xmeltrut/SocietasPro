@@ -14,7 +14,7 @@
 
 namespace Framework\Language;
 
-use Framework\Abstracts\Singleton;
+use Framework\Core\Singleton;
 use Framework\Utilities\FileUtilities;
 use Framework\Core\Configuration;
 

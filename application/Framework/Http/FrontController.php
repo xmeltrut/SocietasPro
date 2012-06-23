@@ -11,7 +11,7 @@
 
 namespace Framework\Http;
 
-use Framework\Abstracts\Singleton;
+use Framework\Core\Singleton;
 use Framework\Security\Authorisation;
 
 class FrontController extends Singleton {

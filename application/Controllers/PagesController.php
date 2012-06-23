@@ -10,12 +10,12 @@
 namespace Controllers;
 
 use Model;
-use Framework\Abstracts\BaseController;
+use Framework\Core\Controller;
 use Framework\Utilities\ArrayUtilities;
 use Framework\Http\FrontController;
 use Framework\Forms\FormBuilder;
 
-class PagesController extends BaseControlle {
+class PagesController extends Controller {
 
 	private $model;
 	

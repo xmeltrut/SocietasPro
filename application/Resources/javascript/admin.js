@@ -12,7 +12,7 @@
  *
  * @return boolean Confirmed
  */
-function areYouSure () {
+function areYouSure() {
 	return confirm("{$lang_are_you_sure}");
 }
 
@@ -22,7 +22,7 @@ function areYouSure () {
  * @param string str Name of the element
  * @return string Slug
  */
-function generateSlug (str) {
+function generateSlug(str) {
 
 	// basic replacement
 	str = str.toLowerCase();
@@ -42,8 +42,8 @@ function generateSlug (str) {
 /**
  * Tick or untick all the checkboxes
  */
-function toggleAllCheckboxes () {
-	if ($("#toggleCheckbox").attr("checked") == undefined) {
+function toggleAllCheckboxes() {
+	if ($("#toggleCheckbox").attr("checked") === undefined) {
 		$("input[name='ids[]']").attr("checked", false);
 	} else {
 		$("input[name='ids[]']").attr("checked", true);

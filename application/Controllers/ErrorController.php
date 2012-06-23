@@ -11,9 +11,10 @@
 
 namespace Controllers;
 
+use Framework\Core\Controller;
+use Framework\Language\Language;
 
-
-class ErrorController extends BaseController {
+class ErrorController extends Controller {
 
 	function __construct () {
 		parent::__construct();
@@ -31,8 +32,8 @@ class ErrorController extends BaseController {
 	 */
 	public function notFound () {
 	
-		$this->engine->assign("title", \Language::getContent("page_not_found"));
-		$this->engine->assign("content", \Language::getContent("page_not_found_body"));
+		$this->engine->assign("title", Language::getContent("page_not_found"));
+		$this->engine->assign("content", Language::getContent("page_not_found_body"));
 		$this->engine->display("errors/404.tpl");
 	
 	}
@@ -42,8 +43,8 @@ class ErrorController extends BaseController {
 	 */
 	public function serverError () {
 	
-		$this->engine->assign("title", \Language::getContent("server_error"));
-		$this->engine->assign("content", \Language::getContent("server_error_body"));
+		$this->engine->assign("title", Language::getContent("server_error"));
+		$this->engine->assign("content", Language::getContent("server_error_body"));
 		$this->engine->display("errors/500.tpl");
 	
 	}

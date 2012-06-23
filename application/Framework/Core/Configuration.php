@@ -12,7 +12,7 @@
 
 namespace Framework\Core;
 
-use Framework\Abstracts\Singleton;
+use Framework\Core\Singleton;
 use Framework\Database\Database;
 
 class Configuration extends Singleton {

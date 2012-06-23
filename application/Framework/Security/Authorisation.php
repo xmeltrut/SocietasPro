@@ -11,7 +11,7 @@
 
 namespace Framework\Security;
 
-use Framework\Abstracts\Singleton;
+use Framework\Core\Singleton;
 use Framework\Http\SessionManager;
 use Framework\Database\Database;
 

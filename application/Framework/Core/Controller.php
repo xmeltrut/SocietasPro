@@ -7,13 +7,13 @@
  * @subpackage Core
  */
 
-namespace Framework\Abstracts;
+namespace Framework\Core;
 
 use Framework\Http\TemplateEngine;
 use Framework\Core\Configuration;
 use Framework\Interfaces\iController;
 
-abstract class BaseController implements iController {
+abstract class Controller implements iController {
 
 	/**
 	 * Instance variable to hold template engine object.

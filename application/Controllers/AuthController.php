@@ -10,13 +10,12 @@
 namespace Controllers;
 
 use Model;
-use Framework\Abstracts\BaseController;
-use Framework\Interfaces\iController;
+use Framework\Core\Controller;
 use Framework\Security\Authorisation;
 use Framework\Language\Language;
 use Framework\Mailer\Mailer;
 
-class AuthController extends BaseController implements iController {
+class AuthController extends Controller {
 
 	/**
 	 * Default page
