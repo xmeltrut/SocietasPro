@@ -16,13 +16,17 @@ if (!file_exists($configPath)) {
 }
 require($configPath);
 
-require_once("application/Framework/Core/Autoloader.php");
+require("application/Framework/Core/Autoloader.php");
 spl_autoload_register("\Framework\Core\Autoloader::load");
 
 // include function libraries
 require("application/Functions/General.php");
 require("application/Functions/Strings.php");
 
+// include Doctrine setup
+require("vendors/Doctrine/ORM/Tools/Setup.php");
+
+// set root directory
 define("ROOT_DIR", "./");
 
 // create a front controller

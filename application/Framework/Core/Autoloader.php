@@ -3,6 +3,9 @@
  * Autoloader
  *
  * @author Chris Worfolk <chris@societasrpo.org>
+ *
+ * @todo This should use vendors/ as a fallback, not an additional check
+ * @todo Implement proper checking of directories
  */
 
 namespace Framework\Core;
@@ -27,20 +30,28 @@ class Autoloader {
 		
 		if (count($namespace) > 1) {
 		
+			// check application directory
 			$path = "application/".str_replace("\\", "/", $class) . ".php";
-			//echo($path."<br />");
+			
 			if (file_exists($path)) {
 				require_once($path);
 			} else {
 				//echo("<strong>CLASS MISSING!</strong>");
 				//debug_print_backtrace();
 			}
+			
+			// check vendors directory
+			$path = "vendors/".str_replace("\\", "/", $class) . ".php";
+			
+			if (file_exists($path)) {
+				require_once($path);
+			}
 		
 		} else {
 		
 			foreach (self::$directories as $directory) {
 				$path = $directory . "/" . $class . ".php";
-				//echo("Checking $path<br />");
+				
 				if (file_exists($path)) {
 					require_once($path);
 				}

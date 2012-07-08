@@ -17,6 +17,8 @@ use Framework\Utilities\ArrayUtilities;
 use Framework\Forms\FormBuilder;
 use Framework\Http\FrontController;
 
+use Framework\Database\EntityManager;
+
 class EventsController extends Controller {
 
 	private $model;
@@ -135,7 +137,12 @@ class EventsController extends Controller {
 		// gather page variables
 		$pageNum = Pagination::pageNum(\Framework\Http\FrontController::getParam(0));
 		$totalPages = Pagination::totalPages($this->model->count());
-		$events = $this->model->get($pageNum);
+		
+		// @todo Needs to implement pagination
+		//$events = $this->model->get($pageNum);
+		
+		$em = EntityManager::getInstance();
+		$events = $em->getRepository("Entities\Event")->findBy(array());
 		
 		// output the page
 		$this->engine->assign("events", $events);
